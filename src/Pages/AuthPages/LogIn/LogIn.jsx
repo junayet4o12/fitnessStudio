@@ -103,7 +103,7 @@ const LogIn = () => {
                 <div className="divider text-gray-500">Or login with</div>
                 <GoogleSignIn></GoogleSignIn>
                 <div className="flex justify-center items-center gap-2">
-                  <p className="dark:text-white my-4 flex justify-center font-sans text-sm font-light leading-normal text-inherit antialiased">
+                  <p className="text-gray-800 font-medium my-4 flex justify-center font-sans text-sm  leading-normal text-inherit antialiased">
                     {"Don't have an account?"}
                   </p>
                   <Link
