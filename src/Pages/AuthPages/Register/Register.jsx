@@ -125,7 +125,7 @@ const Register = () => {
         </div>
         <div>
           <img
-            className="w-[700px]"
+            className="w-[701px]"
             src="https://i.ibb.co/2Yp0RdD/Sign-up-pana.png"
             alt=""
           />
