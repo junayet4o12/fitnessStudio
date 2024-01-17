@@ -3,6 +3,7 @@
 import Banner from "../../Components/Banner/Banner";
 import HowItWorks from "../../Components/HowItWorks/HowItWorks";
 import Star from "../../Components/StarFeatures/Star";
+import Testimonials from "../../Components/Testimonials/Testimonials";
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <Banner></Banner>
             <Star></Star>
             <HowItWorks></HowItWorks>
+            <Testimonials></Testimonials>
         </div>
     );
 };
