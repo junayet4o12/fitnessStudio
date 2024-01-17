@@ -5,11 +5,13 @@ import MainLayout from "../MainLayout/MainLayout";
 import LogIn from "../Pages/AuthPages/LogIn/LogIn";
 import Register from "../Pages/AuthPages/Register/Register";
 import Home from "../Pages/Home/Home";
+import Error from "../Pages/Error/Error";
 
 const MyRouts = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
