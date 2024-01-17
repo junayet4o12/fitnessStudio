@@ -103,7 +103,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-40">
+    <Navbar className="mx-auto max-w-screen-xl px-6 py-3 bg-white sticky top-0 z-20 ">
       <div className="flex lg:items-center justify-between text-blue-gray-900 text-black">
         <Typography
           as="a"
