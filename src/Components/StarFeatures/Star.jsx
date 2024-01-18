@@ -1,20 +1,26 @@
 import { FaRegStar } from "react-icons/fa";
+import { FaRunning } from "react-icons/fa";
+import { GiProgression } from "react-icons/gi";
+import { IoMdTimer } from "react-icons/io";
+import { CgGym } from "react-icons/cg";
 import Title from "../Title/TItle";
 const Star = () => {
-  const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
+  // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
+
+  const cardStyle = ' w-[280px] text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer'
   return (
-    <div>
+    <div className="my-[100px] ">
       <section className="">
         <Title title={'Our Features'}></Title>
-        <div className="container px-8 py-8 mx-auto">
+        <div className=" px-8 py-8 mx-auto">
           
 
-          <div className="flex flex-wrap justify-center items-center gap-8 my-14 ">
+          <div className=" w-full flex flex-col lg:flex-row justify-evenly items-center gap-8 my-[50px]">
 
-            <div className="-mt-6 ">
+            <div className=" ">
               <div className={`${cardStyle} hover:translate-y-4 `}>
                 <div>
-                  <FaRegStar className="text-8xl text-center text-white"></FaRegStar>
+                  <FaRunning className="text-8xl text-center text-white"></FaRunning>
                 </div>
 
                 <div className="mt-2">
@@ -25,9 +31,9 @@ const Star = () => {
               </div>
             </div>
 
-            <div className={`${cardStyle} hover:-translate-y-4 `}>
+            <div className={`${cardStyle} hover:-translate-y-4 lg:mb-[-150px]  `}>
               <div>
-                <FaRegStar className="text-8xl text-center text-white"></FaRegStar>
+                <GiProgression className="text-8xl text-center text-white"></GiProgression>
               </div>
 
               <div className="mt-2">
@@ -37,10 +43,10 @@ const Star = () => {
               </div>
             </div>
 
-            <div className="-mt-6 ">
+            <div className="">
               <div className={`${cardStyle} hover:translate-y-4 `}>
                 <div>
-                  <FaRegStar className="text-8xl text-center text-white"></FaRegStar>
+                  <IoMdTimer className="text-8xl text-center text-white"></IoMdTimer>
                 </div>
 
                 <div className="mt-2">
@@ -51,9 +57,9 @@ const Star = () => {
               </div>
             </div>
 
-            <div className={`${cardStyle} hover:-translate-y-4 `}>
+            <div className={`${cardStyle} hover:-translate-y-4 lg:mb-[-150px]`}>
               <div>
-                <FaRegStar className="text-8xl text-center text-white"></FaRegStar>
+                <CgGym className="text-8xl text-center text-white"></CgGym>
               </div>
 
               <div className="mt-2">
