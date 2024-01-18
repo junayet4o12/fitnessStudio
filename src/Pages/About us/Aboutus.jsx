@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import Container from "../../Components/Container/Container"
 import FAQ from "../../Components/FAQ/FAQ"
 import OurTeam from "../../Components/OurTeam/OurTeam"
 import StoryBenhind from "../../Components/StoryBehind/StoryBenhind"
@@ -7,7 +8,8 @@ import AboutIntro from "../../Components/AboutIntro/AboutIntro"
 
 const Aboutus = () => {
   return (
-    <div className="mt-[50px] p-[10px]" >
+    <Container>
+    <div className="mt-[50px]" >
       <Helmet>
         <title>About us - FitnessStudio</title>
       </Helmet>
@@ -17,6 +19,7 @@ const Aboutus = () => {
       <OurTeam/>
       <FAQ/>
     </div>
+    </Container>
   )
 }
 
