@@ -8,6 +8,7 @@ import {
 import { PiListBulletsFill } from "react-icons/pi";
 import { IoCloseSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
+import Container from "../../Components/Container/Container";
 
 function NavList() {
   return (
@@ -115,7 +116,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className="mx-auto  max-w-screen-xl px-6 py-3 bg-white sticky top-0 z-20 ">
+    <Navbar className="mx-auto px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
       <div className="flex lg:items-center justify-between text-blue-gray-900 text-black">
         <Typography
           as="a"

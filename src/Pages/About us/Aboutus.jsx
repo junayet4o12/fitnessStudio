@@ -3,10 +3,12 @@ import missionpic from "../../assets/images/missionpic.png"
 import visionImg from "../../assets/images/visionImg.png"
 import devImg from "../../assets/images/Developer.png"
 import { Helmet } from 'react-helmet-async'
+import Container from "../../Components/Container/Container"
 
 const Aboutus = () => {
   return (
-    <div className="mt-[50px] p-[10px]" >
+    <Container>
+    <div className="mt-[50px]" >
       <Helmet>
         <title>About us - FitnessStudio</title>
       </Helmet>
@@ -60,11 +62,11 @@ const Aboutus = () => {
           </p>
         </div>
       </div>
-        <div className="ourTeam my-[50px]">
+        <div className="ourTeam my-[50px] ">
           <div className="member flex flex-col justify-center gap-2 items-center">
             <h1 className="text-center text-3xl font-bold  ">Our Team</h1>
             <div className='bg-[#ff4704] h-[4px] w-[90%] lg:w-[20%] rounded-lg'></div>
-            <div className="flex flex-col md:flex-row flex-wrap gap-5 justify-evenly items-center">
+            <div className="flex flex-col md:flex-row flex-wrap gap-5 justify-between items-center w-full">
               <div className="my-[20px] border-4 border-white hover:border-[#FF4804] hover:ease-out duration-[0.5s] flex flex-col items-center shadow-xl w-[90%] lg:w-[30%] rounded-md cursor-pointer p-[20px]">
                 <img className="h-[100px] object-cover" src={devImg} alt="devImg"/>
                 <h1 className="font-[500] text-xl">Jobayer Ahmed Sajid</h1>
@@ -98,7 +100,7 @@ const Aboutus = () => {
             </div>
           </div>
         </div>
-      <div className="faq flex flex-col gap-2 justify-center items-center lg:mx-[25px]">
+      <div className="faq flex flex-col gap-2 justify-center items-center lg:mb-10">
         <h1 className="specialFont text-5xl font-bold">F.A.Q</h1>
         <div className='bg-[#ff4704] h-[5px] w-[50%] lg:w-[15%] rounded-lg'></div>
         <div className="my-[25px] flex lg:gap-2 flex-col md:flex-row">
@@ -171,6 +173,7 @@ const Aboutus = () => {
         </div>
       </div>
     </div>
+    </Container>
   )
 }
 
