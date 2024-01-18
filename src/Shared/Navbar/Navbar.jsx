@@ -116,7 +116,8 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className="mx-auto px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+    <Navbar className="rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+      <Container>
       <div className="flex lg:items-center justify-between text-blue-gray-900 text-black">
         <Typography
           as="a"
@@ -143,6 +144,7 @@ export function NavbarSimple() {
           )}
         </IconButton>
       </div>
+      </Container>
       <Collapse open={openNav} className="w-fit">
         <NavList />
       </Collapse>
