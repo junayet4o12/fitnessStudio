@@ -1,4 +1,3 @@
-import { FaRegStar } from "react-icons/fa";
 import { FaRunning } from "react-icons/fa";
 import { GiProgression } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
