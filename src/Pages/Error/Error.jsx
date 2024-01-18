@@ -4,6 +4,7 @@ import page404 from '../../assets/images/error/404.svg'
 import manhalf1 from '../../assets/images/error/manfalf1.svg'
 import manhalf2 from '../../assets/images/error/manhalf2.svg'
 import './Error.css'
+import { Helmet } from 'react-helmet-async';
 
 const Error = () => {
     const error = useRouteError();
@@ -16,6 +17,9 @@ const Error = () => {
 const returnBtn = `btn  errorBtn  text-white font-bold`
     return (
         <div id="error-page" className="flex flex-col lg:flex-row justify-center items-center gap-5 bg-blue-50 min-h-screen pb-7">
+            <Helmet>
+                <title>Page Not Found</title>
+            </Helmet>
 
             <div className=" items-center relative">
                 <img className="w-[270px] sm:w-[400px] md:w-[500px]" src={page404} alt="" />

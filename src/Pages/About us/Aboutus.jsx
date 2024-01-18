@@ -1,12 +1,15 @@
-import React from 'react'
 import aboutIntro from "../../assets/images/aboutIntro.png"
 import missionpic from "../../assets/images/missionpic.png"
 import visionImg from "../../assets/images/visionImg.png"
 import devImg from "../../assets/images/Developer.png"
+import { Helmet } from 'react-helmet-async'
 
 const Aboutus = () => {
   return (
     <div className="mt-[50px] p-[10px]" >
+      <Helmet>
+        <title>About us - FitnessStudio</title>
+      </Helmet>
       <div className="intro lg:flex justify-evenly items-center">
         <div className="lg:w-[50%]">
         <h1 className=" text-2xl lg:text-5xl font-bold my-[15px] ">About <span className="text-[#ff4704]" >FitnessStudio</span></h1>
