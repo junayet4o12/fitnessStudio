@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
   const [disable, setDisable] = useState(true);
@@ -17,6 +18,9 @@ const LogIn = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Login - Fitness Studio</title>
+    </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
           <img
