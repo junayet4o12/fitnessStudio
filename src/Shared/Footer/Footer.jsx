@@ -19,9 +19,9 @@ const Footer = () => {
                 </div>
                 <div className="mt-8">
                     <h1 className="md:text-lg lg:text-3xl font-bold lg:mb-2">Pages</h1>
-                    <p><Link to='/' className="lg:text-lg lg:font-semibold underline hover:text-blue-600">Home</Link></p>
-                    <p><Link to='/aboutUs' className="lg:text-lg lg:font-semibold underline hover:text-blue-600">About Us</Link></p>
-                    <p><Link to='/contact' className="lg:text-lg lg:font-semibold underline hover:text-blue-600">Contact</Link></p>
+                    <p><Link to='/' className="lg:text-lg lg:font-semibold underline hover:text-primary">Home</Link></p>
+                    <p><Link to='/aboutUs' className="lg:text-lg lg:font-semibold underline hover:text-primary">About Us</Link></p>
+                    <p><Link to='/contact' className="lg:text-lg lg:font-semibold underline hover:text-primary">Contact</Link></p>
                 </div>
                 <div className="mt-8">
                     <h1 className="md:text-lg lg:text-3xl font-bold mb-2">Address</h1>

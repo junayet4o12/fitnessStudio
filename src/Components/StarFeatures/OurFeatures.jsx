@@ -1,20 +1,17 @@
-import { FaRegStar } from "react-icons/fa";
 import { FaRunning } from "react-icons/fa";
 import { GiProgression } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
 import { CgGym } from "react-icons/cg";
 import Title from "../Title/TItle";
-const Star = () => {
+const OurFeatures = () => {
   // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
 
   const cardStyle = ' w-[280px] text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer'
   return (
-    <div className="my-[100px] ">
+    <div className="my-[50px] ">
       <section className="">
         <Title title={'Our Features'}></Title>
         <div className=" px-8 py-8 mx-auto">
-          
-
           <div className=" w-full flex flex-col lg:flex-row justify-evenly items-center gap-8 my-[50px]">
 
             <div className=" ">
@@ -75,4 +72,4 @@ const Star = () => {
   );
 };
 
-export default Star;
+export default OurFeatures;
