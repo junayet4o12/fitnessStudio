@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const {
@@ -16,7 +17,10 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-10 lg:my-10">
+    <Helmet>
+      <title>Register - Fitness Studio</title>
+    </Helmet>
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
           <div className="w-full md:w-[700px] lg:w-[400px] mb-10 lg:mb-0 px-5 lg:px-0">
             <div className="w-full">
