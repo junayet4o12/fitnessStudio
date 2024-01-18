@@ -56,7 +56,7 @@ const Aboutus = () => {
           <h1 className="text-xl pb-[15px] lg:text-4xl font-bold"> Story Behind the Platform</h1>
           <div className='bg-[white] h-[4px] w-[90%] lg:w-[25%] rounded-lg'></div>
           <p className="font-[500] pt-[15px]">
-          Our platform's journey began with a shared passion for promoting well-being and a belief in the transformative power of fitness. A group of health enthusiasts, including certified trainers and technology experts, came together with a vision to create a space that goes beyond traditional fitness platforms. Driven by a desire to make personalized and effective fitness accessible to all, they combined their expertise to develop a platform that embraces innovation and community support. The platform evolved from a simple idea into a dynamic space where individuals, regardless of their fitness levels, could find tailored guidance, motivating workouts, and a supportive community. The story of our platform is one of collaboration, dedication, and a commitment to empower individuals on their unique journeys toward healthier and happier lives.
+          Our platform's journey began with a shared passion for promoting well-being and a belief in the transformative power of fitness. A group of health enthusiasts, including certified trainers and technology experts, came together with a vision to create a space that goes beyond traditional fitness platforms. Driven by a desire to make personalized and effective fitness accessible to all, they combined their expertise to develop a platform that embraces innovation and community support. The platform evolved from a simple idea into a dynamic space where individuals, regardless of their fitness levels, could find tailored guidance, motivating workouts, and a supportive community. The story of our platform is one of collaboration, dedication, and a commitment to empower individuals on their unique journeys toward healthier and happier lives. 
           </p>
         </div>
       </div>
@@ -101,68 +101,68 @@ const Aboutus = () => {
       <div className="faq flex flex-col gap-2 justify-center items-center lg:mx-[25px]">
         <h1 className="specialFont text-5xl font-bold">F.A.Q</h1>
         <div className='bg-[#ff4704] h-[5px] w-[50%] lg:w-[15%] rounded-lg'></div>
-        <div className="my-[25px] flex flex-col md:flex-row">
+        <div className="my-[25px] flex lg:gap-2 flex-col md:flex-row">
         <div className="faq-1">
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     How do I get started on the platform?
     </div>
-    <div className="collapse-content"> 
-      <p>To begin your fitness journey with us, simply sign up for an account on our platform. Once registered, you can explore our diverse range of workouts, programs, and resources tailored to your fitness goals.</p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>To begin your fitness journey with us, simply sign up for an account on our platform. Once registered, you can explore our diverse range of workouts, programs, and resources tailored to your fitness goals.</p>
     </div>
           </div>
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     Are the workouts suitable for all fitness levels?
     </div>
-    <div className="collapse-content"> 
-      <p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>
         Absolutely! Our platform caters to individuals of all fitness levels, from beginners to advanced. Our programs are designed to be adaptable, allowing you to progress at your own pace and choose workouts that match your current fitness capabilities.
       </p>
     </div>
           </div>
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     What kind of support can I expect from the platform?
     </div>
-    <div className="collapse-content"> 
-      <p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>
       We are committed to providing comprehensive support. Our platform offers expert guidance through certified trainers, community forums for interaction and motivation, and regular updates to keep you informed and engaged on your fitness journey.
       </p>
     </div>
           </div>
         </div>
         <div className="faq-2">
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     Can I access the platform on different devices?
     </div>
-    <div className="collapse-content"> 
-      <p>Yes, our platform is designed to be accessible on various devices, including smartphones, tablets, and computers. This flexibility ensures that you can engage with your workouts and community from anywhere at any time.</p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>Yes, our platform is designed to be accessible on various devices, including smartphones, tablets, and computers. This flexibility ensures that you can engage with your workouts and community from anywhere at any time.</p>
     </div>
           </div>
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     Is there a personalized workout plan available?
     </div>
-    <div className="collapse-content"> 
-      <p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>
       Absolutely! We understand that everyone's fitness journey is unique. Our platform offers personalized workout plans based on your fitness goals, preferences, and progress. This tailored approach ensures that you get the most out of your fitness experience.
       </p>
     </div>
           </div>
-          <div className="collapse border-2 bg-[#ff4704] text-white">
+          <div className="collapse border-2 bg-[#ff4704] my-[8px] text-white">
     <input type="radio" name="my-accordion-1" /> 
     <div className="collapse-title text-xl font-medium">
     What sets your platform apart from other fitness apps?
     </div>
-    <div className="collapse-content"> 
-      <p>
+    <div className="collapse-content bg-gray-800"> 
+      <p className='p-[15px]'>
       Our platform distinguishes itself through a combination of innovative workout programs, certified trainers, and a supportive community. We focus not only on physical fitness but also on overall well-being, aiming to create a holistic and empowering experience for our users.
       </p>
     </div>
