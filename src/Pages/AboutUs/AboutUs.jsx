@@ -6,7 +6,7 @@ import StoryBenhind from "../../Components/StoryBehind/StoryBenhind"
 import MissionVission from "../../Components/MissionVission/MissionVission"
 import AboutIntro from "../../Components/AboutIntro/AboutIntro"
 
-const Aboutus = () => {
+const AboutUs = () => {
   return (
     <Container>
     <div className="mt-[50px]" >
@@ -23,4 +23,4 @@ const Aboutus = () => {
   )
 }
 
-export default Aboutus
+export default AboutUs;
