@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router";
 import signupImg from "../../assets/images/Allura - Freelancing.png";
 import trackingImg from "../../assets/images/Fitz - Morning Routine (1).png";
+import achiveGoalImf from '../../assets/images/Pebble People - Trophy.png'
 import Title from "../Title/TItle";
 import Container from "../Container/Container";
 
@@ -51,13 +52,14 @@ const HowItWorks = () => {
               Effortlessly monitor your progress, set goals, and witness your
               fitness journey unfold. Our user-friendly interface makes it easy
               to log and track every workout, providing the motivation you need
-              to achieve your wellness goals.{" "}
+              to achieve your wellness goals.
             </p>
           </div>
         </div>
+        {/* Achive Goal  */}
         <div className="flex flex-col md:flex-row  justify-between items-center gap-7">
           <div className="w-full md:w-[50%]">
-            <img className="md:w-full mx-auto" src={signupImg} alt="" />
+            <img className=" mx-auto" src={achiveGoalImf} alt="" />
           </div>
           <div className={`${textSideStyle}`}>
             <h2 className="text-4xl font-semibold">Achive Goal</h2>
