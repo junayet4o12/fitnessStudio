@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/a11y';
 import { EffectCube } from 'swiper/modules';
-import Title from '../Title/TItle';
+import Title from '../Title/Title';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 const Testimonials = () => {
