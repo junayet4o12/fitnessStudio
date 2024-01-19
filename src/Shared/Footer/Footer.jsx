@@ -72,7 +72,7 @@ const Footer = () => {
             </p>
             <p>
               <Link
-                to="/aboutUs"
+                to="/about_us"
                 className="lg:text-lg lg:font-semibold underline hover:text-blue-600">
                 About Us
               </Link>
