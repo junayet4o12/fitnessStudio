@@ -8,10 +8,10 @@ const OurFeatures = () => {
   // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
 
   const cardStyle =
-    " w-[280px] text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer";
+    "   mx-auto min-w-[250px] xs:min-w-[300px]  sm:min-w-[400px] lg:w-[200px] subxl:w-[250px]  lg:min-w-[200px] subxl:min-w-[250px]  text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer";
   return (
     <Container>
-      <div className="mt-[50px] mb-[120px]">
+      <div className="mt-[50px] mb-[120px] p-4">
         <section className="">
           <Title title={"Our Features"}></Title>
             <div className="flex flex-col lg:flex-row justify-between items-center gap-8 my-[50px]">

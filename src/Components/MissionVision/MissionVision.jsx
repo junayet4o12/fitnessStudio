@@ -1,8 +1,8 @@
-import React from 'react'
+// import React from 'react'
 import missionpic from "../../assets/images/missionpic.png"
 import visionImg from "../../assets/images/visionImg.png"
 
-const MissionVission = () => {
+const MissionVision = () => {
   return (
     <div>
         <div className="mission and vision section my-[50px]">
@@ -41,4 +41,4 @@ const MissionVission = () => {
   )
 }
 
-export default MissionVission
+export default MissionVision

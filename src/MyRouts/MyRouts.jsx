@@ -5,8 +5,8 @@ import MainLayout from "../MainLayout/MainLayout";
 import LogIn from "../Pages/AuthPages/LogIn/LogIn";
 import Register from "../Pages/AuthPages/Register/Register";
 import Home from "../Pages/Home/Home";
-import Aboutus from "../Pages/About us/Aboutus";
 import Error from "../Pages/Error/Error";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 const MyRouts = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/about_us",
-        element: <Aboutus/>
+        element: <AboutUs></AboutUs>
       },
       {
         path: "/services",
