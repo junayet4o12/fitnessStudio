@@ -4,7 +4,7 @@ import { IoMdTimer } from "react-icons/io";
 import { CgGym } from "react-icons/cg";
 import Title from "../Title/TItle";
 import Container from "../Container/Container";
-const Star = () => {
+const OurFeatures = () => {
   // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
 
   const cardStyle =
@@ -75,4 +75,4 @@ const Star = () => {
   );
 };
 
-export default Star;
+export default OurFeatures;

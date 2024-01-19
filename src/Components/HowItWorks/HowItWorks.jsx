@@ -16,7 +16,7 @@ const HowItWorks = () => {
   };
   return (
     <Container>
-      <div className=" my-10">
+      <div className=" my-10 p-5 sm:p-7">
         <Title title={"How it works"}></Title>
         {/* signup  */}
         <div className="flex flex-col md:flex-row  justify-between items-center gap-7">

@@ -24,11 +24,11 @@ const Testimonials = () => {
     if (isLoading) {
         return ''
     }
-    console.log(testimonials);
+    // console.log(testimonials);
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
-            return '<span class="' + className + '">'  + '</span>';
+            return '<span class="' + className + '">' + '</span>';
         },
     };
     const formDate = (numericDate) => {
@@ -61,9 +61,9 @@ const Testimonials = () => {
                     }}
 
                 >
-
+                    {/* feedback data mapping */}
                     {
-                        testimonials.map(item => <SwiperSlide key={item._id}>
+                        testimonials?.map(item => <SwiperSlide key={item._id}>
                             <div className='mx-5'>
                                 <div className='py-3 pr-5 border-2 border-primary rounded-lg  sm:h-[230px]  overflow-hidden max-w-[350px] mx-auto'>
                                     <div className='flex gap-x-5 mb-3 pl-5'>
@@ -82,10 +82,6 @@ const Testimonials = () => {
 
                         </SwiperSlide>)
                     }
-
-
-
-
                 </Swiper>
             </div>
         </div>
