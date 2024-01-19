@@ -28,7 +28,7 @@ const Testimonials = () => {
     const pagination = {
         clickable: true,
         renderBullet: function (index, className) {
-            return '<span class="' + className + '">'  + '</span>';
+            return '<span class="' + className + '">' + '</span>';
         },
     };
     const formDate = (numericDate) => {
@@ -61,7 +61,7 @@ const Testimonials = () => {
                     }}
 
                 >
-
+                    {/* feedback data mapping */}
                     {
                         testimonials?.map(item => <SwiperSlide key={item._id}>
                             <div className='mx-5'>
