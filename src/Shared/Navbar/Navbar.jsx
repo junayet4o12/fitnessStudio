@@ -45,7 +45,7 @@ function NavList() {
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
           <NavLink
-            to="/aboutUs"
+            to="/about_us"
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-xl font-bold"
