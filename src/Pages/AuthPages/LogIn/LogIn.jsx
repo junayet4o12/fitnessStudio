@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const LogIn = () => {
+  const [err, seterr] = useState()
   const [disable, setDisable] = useState(true);
+  const { loginUser } = useAuth()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -13,14 +18,29 @@ const LogIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const email = data?.email;
+    const password = data?.password;
+    loginUser(email, password)
+      .then(res => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged in successfully!!",
+          timer: 1500
+        });
+        console.log(res);
+        navigate('/')
+      })
+      .catch(err => {
+        console.log(err)
+        seterr(err?.message)
+      })
   };
 
   return (
     <>
-    <Helmet>
-      <title>Login - Fitness Studio</title>
-    </Helmet>
+      <Helmet>
+        <title>Login - Fitness Studio</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
           <img
@@ -101,11 +121,14 @@ const LogIn = () => {
                     data-ripple-light="true">
                     Log In
                   </button>
+                  <p className='text-red-500 text-sm font-semibold'>{err}</p>
                 </div>
               </form>
               <div>
                 <div className="divider text-gray-500">Or login with</div>
-                <GoogleSignIn></GoogleSignIn>
+
+                <GoogleSignIn ></GoogleSignIn>
+
                 <div className="flex justify-center items-center gap-2">
                   <p className="text-gray-800 font-medium my-4 flex justify-center font-sans text-sm  leading-normal text-inherit antialiased">
                     {"Don't have an account?"}

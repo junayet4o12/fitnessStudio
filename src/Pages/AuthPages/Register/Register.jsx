@@ -1,25 +1,80 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import useAuth from "../../../Hooks/useAuth";
+import { updateProfile } from "@firebase/auth";
+import auth from "../../../firebase/firebase.config";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const [err, seterr] = useState()
+  const { createUser } = useAuth()
+  const navigate = useNavigate()
   const {
     register,
+    
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const name = data?.name;
+    const email = data?.email;
+    const password = data?.password;
+    createUser(email, password)
+      .then(res => {
+        console.log(res.user);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          // photoURL: imgurl
+
+        })
+          .then(() => {
+            console.log('user progile info updated');
+            // const userInfo = {
+            //   name: data.name,
+            //   email: data.email,
+            //   image: imgurl
+
+
+            // }
+            // axiosPublic.post('/users', userInfo)
+            //   .then(res => {
+            //     if (res.data.insertedId) {
+            //       Swal.fire({
+            //         icon: "success",
+            //         title: "User Created Successfully",
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //       });
+
+            //     }
+            //   })
+            Swal.fire({
+              icon: "success",
+              title: "Logged in successfully!!",
+              timer: 1500
+            });
+            navigate('/')
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+        seterr(err?.message)
+      })
   };
 
   return (
     <>
-    <Helmet>
-      <title>Register - Fitness Studio</title>
-    </Helmet>
+      <Helmet>
+        <title>Register - Fitness Studio</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
           <div className="w-full md:w-[700px] lg:w-[400px] mb-10 lg:mb-0 px-5 lg:px-0">
@@ -108,6 +163,7 @@ const Register = () => {
                     data-ripple-light="true">
                     Register
                   </button>
+                  <p className='text-red-500 text-sm font-semibold'>{err}</p>
                 </div>
               </form>
               <div>
