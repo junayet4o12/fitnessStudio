@@ -8,7 +8,7 @@ const MissionVision = () => {
         <div className="mission and vision section my-[50px]">
           <div className="flex flex-col items-center">
            <h1 className="font-bold text-3xl">Our Mission
-           <spna className="specialFont text-[#ff4704]"> & </spna>
+           <span className="specialFont text-[#ff4704]"> & </span>
            Vision</h1>
            <div className='bg-[#ff4704] h-[4px] w-[90%] lg:w-[25%] rounded-lg'></div>
           </div>
