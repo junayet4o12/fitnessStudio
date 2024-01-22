@@ -13,6 +13,7 @@ import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 
 function NavList() {
+  const { user } = useAuth()
   return (
     <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
       <Typography
@@ -86,7 +87,7 @@ function NavList() {
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Login
         </a> */}
-        <div className="relative group tracking-[1px] w-fit">
+        {!user && <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
           <NavLink
             to="/login"
@@ -97,7 +98,7 @@ function NavList() {
             }>
             Login
           </NavLink>
-        </div>
+        </div>}
       </Typography>
     </ul>
   );
