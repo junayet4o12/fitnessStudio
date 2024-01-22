@@ -8,7 +8,7 @@ import { IoIosArrowDown } from "react-icons/io";
 const NavProfile = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
-    const { user,logOut } = useAuth()
+    const { user,logOut } = useAuth();
     const profileMenuItems = [
         {
             label: "My Profile",
