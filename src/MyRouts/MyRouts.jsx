@@ -38,33 +38,34 @@ const MyRouts = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>,
       },
-      {
-        path: '/dashboard',
-        element: <div>This is dashboard</div>,
-        children: [
-          {
-            path: 'profile',
-            element: <div>this is profile</div>
-          },
-          {
-            path: 'bmi_calculator',
-            element: <div>this is bmi calculator</div>
-          },
-          {
-            path: 'set_goal',
-            element: <div>goal nai. sob offside</div>
-          },
-          {
-            path: 'tracking_progress',
-            element: <div>this is tracking progress</div>
-          },
-          {
-            path: 'connected_app',
-            element: <div>this is connected App</div>
-          }
-        ]
-      },
+
     ],
+  },
+  {
+    path: '/dashboard',
+    element: <div>This is dashboard</div>,
+    children: [
+      {
+        path: 'profile',
+        element: <div>this is profile</div>
+      },
+      {
+        path: 'bmi_calculator',
+        element: <div>this is bmi calculator</div>
+      },
+      {
+        path: 'set_goal',
+        element: <div>goal nai. sob offside</div>
+      },
+      {
+        path: 'tracking_progress',
+        element: <div>this is tracking progress</div>
+      },
+      {
+        path: 'connected_app',
+        element: <div>this is connected App</div>
+      }
+    ]
   },
 ]);
 
