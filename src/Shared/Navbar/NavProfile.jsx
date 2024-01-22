@@ -48,7 +48,7 @@ const NavProfile = () => {
                             variant="circular"
                             size="sm"
                             alt="tania andrew"
-                            className="border border-gray-900 w-12 h-12 p-0.5 rounded-full"
+                            className="border border-gray-900 w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full"
                             src={user?.photoURL}
                         />
                         <span

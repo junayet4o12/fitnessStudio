@@ -120,18 +120,18 @@ export function NavbarSimple() {
   return (
     <Navbar className="rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
 
-      <div className="flex lg:items-center justify-between text-blue-gray-900 text-black ">
+      <div className="flex items-center justify-between text-blue-gray-900 text-black ">
         <Typography
           as="a"
           href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5">
-          <h1 className="text-2xl font-bold md:text-4xl md:font-extrabold">
+          <h1 className="text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
             Fitness
-            <span className="text-primary text-3xl md:text-5xl">Studio</span>
+            <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
           </h1>
         </Typography>
-        <div className="flex gap-10">
+        <div className="flex gap-7 xs:gap-10">
           <div className="hidden lg:block">
             <NavList />
           </div>
