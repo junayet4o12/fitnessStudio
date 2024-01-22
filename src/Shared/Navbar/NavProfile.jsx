@@ -5,34 +5,37 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineDashboard } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 const NavProfile = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
-    const { user,logOut } = useAuth();
+    const { user, logOut } = useAuth()
+    const navigate = useNavigate()
     const profileMenuItems = [
         {
             label: "My Profile",
-            icon: <CgProfile></CgProfile>,
+            icon: <CgProfile/>,
         },
         {
-            label: "Edit Profile",
-            icon: <FaUserEdit></FaUserEdit>,
+            label: "Dashboard",
+            icon: <MdOutlineDashboard/>,
         },
         {
             label: "Sign Out",
-            icon: <LiaSignOutAltSolid></LiaSignOutAltSolid>,
+            icon: <LiaSignOutAltSolid/>,
         },
     ];
     const handleAction = (input) => {
-           if(input==='My Profile'){
-           console.log(input);
-           }
-           else if(input==='Edit Profile'){
-            console.log(input);
-           }
-           else if(input==='Sign Out'){
+        if (input === 'My Profile') {
+            navigate('/dashboard/profile')
+        }
+        else if (input === 'Dashboard') {
+            navigate('/dashboard')
+        }
+        else if (input === 'Sign Out') {
             logOut()
-           }
+        }
         closeMenu()
     }
     return (
@@ -48,28 +51,33 @@ const NavProfile = () => {
                             variant="circular"
                             size="sm"
                             alt="tania andrew"
-                            className="border border-gray-900 w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full"
+                            className={`border ${isMenuOpen && 'border-primary'} w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
                             src={user?.photoURL}
                         />
                         <span
-                            className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+                            className={`h-3 w-3 text-primary transition-transform ${isMenuOpen ? "rotate-180" : ""
                                 }`}
-                        ><IoIosArrowDown/></span>
+                        ><IoIosArrowDown /></span>
                     </Button>
                 </MenuHandler>
-                <MenuList className="p-1 z-20">
+                <MenuList className="p-1 px-3 z-20">
+                    <div className='border-2 border-primary w-max rounded-full p-[2px] mx-auto mt-1'>
+                        <img className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                    </div>
+                    <div>
+                        <p className='text-sm font-semibold text-center'>{user?.displayName}</p>
+                    </div>
+                    <hr className='border-primary my-1 border-[1.3px]' />
                     {profileMenuItems.map(({ label, icon }, key) => {
                         const isLastItem = key === profileMenuItems.length - 1;
                         return (
                             <MenuItem
                                 key={label}
-                                onClick={()=>handleAction(label)}
-                                className={`flex items-center gap-2 rounded ${isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                    : ""
-                                    }`}
+                                onClick={() => handleAction(label)}
+                                className={`flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 }`}
                             >
-                               <p className='w-10 h-10 flex justify-center items-center text-xl text-primary'>{icon}</p>
+
+                                <p className='w-8 h-8 flex justify-center items-center text-xl text-primary'>{icon}</p>
                                 <Typography
                                     as="span"
                                     variant="small"
