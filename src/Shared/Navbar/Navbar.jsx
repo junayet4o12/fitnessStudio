@@ -146,7 +146,9 @@ export function NavbarSimple() {
               <PiListBulletsFill className="h-6 w-8" strokeWidth={2} />
             )}
           </IconButton>
-          {user && <NavProfile />}
+          <span className="lg:mt-[-7px]">
+            {user && <NavProfile />}
+          </span>
         </div>
 
       </div>
