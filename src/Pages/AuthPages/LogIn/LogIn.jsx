@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const LogIn = () => {
   const [err, seterr] = useState()
@@ -22,11 +23,7 @@ const LogIn = () => {
     const password = data?.password;
     loginUser(email, password)
       .then(res => {
-        Swal.fire({
-          icon: "success",
-          title: "Logged in successfully!!",
-          timer: 1500
-        });
+        toast.success("Logged in successfully")
         console.log(res);
         navigate('/')
       })
