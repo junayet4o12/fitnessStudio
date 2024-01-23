@@ -10,17 +10,16 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/a11y';
 import { EffectCube } from 'swiper/modules';
 import Title from '../Title/TItle';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fatchFeedback } from '../../Redux/FeedbackSlice/FeedbackSlice';
 const Testimonials = () => {
-    const axiosPublic = useAxiosPublic()
-    const { data: testimonials = [], isLoading } = useQuery({
-        queryKey: ['testimonials'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/feedback')
-            return res?.data
-        }
-    })
+    const dispatch = useDispatch()
+    const {isLoading,  error, feedback} = useSelector(state=> state.feedback)
+    useEffect(()=> {
+        dispatch(fatchFeedback())
+    },[dispatch])
+    console.log(feedback, error, isLoading);
     if (isLoading) {
         return ''
     }
@@ -63,7 +62,7 @@ const Testimonials = () => {
                 >
                     {/* feedback data mapping */}
                     {
-                        testimonials?.map(item => <SwiperSlide key={item._id}>
+                        feedback?.map(item => <SwiperSlide key={item._id}>
                             <div className='mx-5'>
                                 <div className='py-3 pr-5 border-2 border-primary rounded-lg  sm:h-[230px]  overflow-hidden max-w-[350px] mx-auto'>
                                     <div className='flex gap-x-5 mb-3 pl-5'>
