@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="mt-12">
             <img
               className="h-24 w-32 md:h-36 md:w-44 lg:h-44 lg:w-52"
-              src="../../../src/assets/images/WhatsApp_Image_2024-01-15_at_22.22.44_f2a3d1eb-removebg-preview.png"
+              src="/WhatsApp_Image_2024-01-15_at_22.22.44_f2a3d1eb-removebg-preview.png"
               alt=""
             />
           </div>
@@ -72,7 +72,7 @@ const Footer = () => {
             </p>
             <p>
               <Link
-                to="/aboutUs"
+                to="/about_us"
                 className="lg:text-lg lg:font-semibold underline hover:text-blue-600">
                 About Us
               </Link>

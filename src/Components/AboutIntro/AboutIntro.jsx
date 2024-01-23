@@ -1,5 +1,5 @@
 import aboutIntro from "../../assets/images/aboutIntro.png"
-import React from 'react'
+
 
 const AboutIntro = () => {
   return (

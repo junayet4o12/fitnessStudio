@@ -9,7 +9,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/a11y';
 import { EffectCube } from 'swiper/modules';
-import Title from '../Title/TItle';
+import Title from '../Title/Title';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fatchFeedback } from '../../Redux/FeedbackSlice/FeedbackSlice';

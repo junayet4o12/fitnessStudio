@@ -31,7 +31,7 @@ const Dashboard = () => {
                     <li><NavLink to='/dashboard/addProducts'><FaCalculator /> BMI Calculator</NavLink></li>
                     <li><NavLink to='/dashboard/myProducts'><AiFillClockCircle /> Set goals</NavLink></li>
                     <li><NavLink to='/dashboard/myProducts'><GiProgression /> Tracking Progress</NavLink></li>
-                    <li><NavLink to='/dashboard/myProducts'><BiSolidMessageSquareAdd /> Connected app</NavLink></li>
+                    <li><NavLink to='/dashboard/connect_app'><BiSolidMessageSquareAdd /> Connected app</NavLink></li>
 
                     <div className="divider"></div>
                     {/* main layout navlink */}

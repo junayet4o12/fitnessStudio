@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import signupImg from "../../assets/images/Allura - Freelancing.png";
 import trackingImg from "../../assets/images/Fitz - Morning Routine (1).png";
 import achiveGoalImf from '../../assets/images/Pebble People - Trophy.png'
-import Title from "../Title/TItle";
 import Container from "../Container/Container";
+import Title from "../Title/Title";
 
 const HowItWorks = () => {
   const buttonStyle =
