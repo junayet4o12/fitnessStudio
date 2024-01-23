@@ -8,6 +8,7 @@ import Home from "../Pages/Home/Home";
 import Error from "../Pages/Error/Error";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import ConnectApp from "../Pages/ConnectApp/ConnectApp";
 
 const MyRouts = createBrowserRouter([
   {
@@ -62,8 +63,8 @@ const MyRouts = createBrowserRouter([
         element: <div>this is tracking progress</div>
       },
       {
-        path: 'connected_app',
-        element: <div>this is connected App</div>
+        path: 'connect_app',
+        element: <ConnectApp></ConnectApp>
       }
     ]
   },
