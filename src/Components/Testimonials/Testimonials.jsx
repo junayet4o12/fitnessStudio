@@ -10,11 +10,9 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/a11y';
 import { EffectCube } from 'swiper/modules';
 import Title from '../Title/TItle';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fatchFeedback } from '../../Redux/FeedbackSlice/feedbackSlice';
+import { fatchFeedback } from '../../Redux/FeedbackSlice/FeedbackSlice';
 const Testimonials = () => {
     const dispatch = useDispatch()
     const {isLoading,  error, feedback} = useSelector(state=> state.feedback)
