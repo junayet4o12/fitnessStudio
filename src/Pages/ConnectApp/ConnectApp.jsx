@@ -1,5 +1,4 @@
 import Title from "../../Components/Title/Title";
-import Footer from "../../Shared/Footer/Footer";
 
 const ConnectApp = () => {
     const LinkStyle =
@@ -52,7 +51,6 @@ const ConnectApp = () => {
                 </div>
 
             </div>
-            <Footer></Footer>
         </div>
     );
 };

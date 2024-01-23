@@ -31,7 +31,7 @@ const NavProfile = () => {
             navigate('/dashboard/profile')
         }
         else if (input === 'Dashboard') {
-            navigate('/dashboard')
+            navigate('/dashboard/profile')
         }
         else if (input === 'Sign Out') {
             logOut()
