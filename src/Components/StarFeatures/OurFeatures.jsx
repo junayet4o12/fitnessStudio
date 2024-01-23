@@ -2,7 +2,7 @@ import { FaRunning } from "react-icons/fa";
 import { GiProgression } from "react-icons/gi";
 import { IoMdTimer } from "react-icons/io";
 import { CgGym } from "react-icons/cg";
-import Title from "../Title/TItle";
+import Title from "../Title/Title";
 import Container from "../Container/Container";
 const OurFeatures = () => {
   // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'

@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 
 const GoogleSignIn = () => {
@@ -21,11 +22,7 @@ const GoogleSignIn = () => {
         axiosPublic.post('/users', userInfo)
           .then(res => {
             console.log(res?.data);
-            Swal.fire({
-              icon: "success",
-              title: "Logged in successfully!!",
-              timer: 1500
-            });
+            toast.success("Logged in successfully")
             navigate('/')
           })
 

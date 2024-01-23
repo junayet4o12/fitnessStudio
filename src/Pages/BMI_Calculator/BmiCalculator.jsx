@@ -1,9 +1,19 @@
 import React from 'react'
+import BMIBanner from '../../Components/BMIBanner/BMIBanner'
+import { Helmet } from 'react-helmet-async'
+import BMImeaning from '../../Components/BMImeaning/BMImeaning'
+import LimitationOfBMI from '../../Components/LimitationOfBMI/LimitationOfBMI'
 
 const BmiCalculator = () => {
+  
   return (
-    <div>
-      <h1>BMI calculator</h1>
+    <div className='p-[10px]'>
+  <Helmet>
+    <title>BMI Calculator - FitnessStudion</title>
+  </Helmet>
+      <BMIBanner/>
+      <BMImeaning/>
+      <LimitationOfBMI/>
     </div>
   )
 }
