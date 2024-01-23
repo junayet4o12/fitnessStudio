@@ -9,7 +9,7 @@ import MissionVision from '../../Components/MissionVision/MissionVision'
 const AboutUs = () => {
   return (
     <Container>
-    <div className="mt-[50px]" >
+    <div className="mt-[50px] p-[10px]" >
       <Helmet>
         <title>About us - FitnessStudio</title>
       </Helmet>
