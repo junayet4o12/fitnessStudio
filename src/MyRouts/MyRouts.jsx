@@ -8,7 +8,11 @@ import Home from "../Pages/Home/Home";
 import Error from "../Pages/Error/Error";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+<<<<<<< HEAD
 import ConnectApp from "../Pages/ConnectApp/ConnectApp";
+=======
+import Profile from "../Components/Profile/Profile";
+>>>>>>> 4bc57ae9665d295aea2f426d46db4a7d6d3b5c60
 
 const MyRouts = createBrowserRouter([
   {
@@ -48,7 +52,7 @@ const MyRouts = createBrowserRouter([
     children: [
       {
         path: 'profile',
-        element: <div>this is profile</div>
+        element: <Profile></Profile>
       },
       {
         path: 'bmi_calculator',
