@@ -24,7 +24,7 @@ const Dashboard = () => {
     return (
         <div className="flex">
             {/* dashboard side content */}
-            <div className="w-60 min-h-screen bg-primary hidden">
+            <div className="w-60 min-h-screen bg-primary">
                 <ul className="menu p-4">
 
                     <li><NavLink to='/dashboard/profile'><FaUserAlt></FaUserAlt> My Profile</NavLink></li>
