@@ -8,19 +8,32 @@ import useAuth from "../../../Hooks/useAuth";
 import { updateProfile } from "@firebase/auth";
 import auth from "../../../firebase/firebase.config";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import axios from "axios";
 
 const Register = () => {
   const [err, seterr] = useState()
   const { createUser } = useAuth()
   const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic()
+  const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
+  const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`
   const {
     register,
-    
+
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
+    const image = { image: data?.image[0] }
+
+    const res = await axios.post(imgHostingApi, image, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+    const imgurl = res?.data?.data?.display_url
     const name = data?.name;
     const email = data?.email;
     const password = data?.password;
@@ -29,30 +42,30 @@ const Register = () => {
         console.log(res.user);
         updateProfile(auth.currentUser, {
           displayName: name,
-          // photoURL: imgurl
+          photoURL: imgurl
 
         })
           .then(() => {
             console.log('user progile info updated');
-            // const userInfo = {
-            //   name: data.name,
-            //   email: data.email,
-            //   image: imgurl
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              image: imgurl
 
 
-            // }
-            // axiosPublic.post('/users', userInfo)
-            //   .then(res => {
-            //     if (res.data.insertedId) {
-            //       Swal.fire({
-            //         icon: "success",
-            //         title: "User Created Successfully",
-            //         showConfirmButton: false,
-            //         timer: 1500
-            //       });
+            }
+            axiosPublic.post('/users', userInfo)
+              .then(res => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    icon: "success",
+                    title: "User Created Successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
 
-            //     }
-            //   })
+                }
+              })
             Swal.fire({
               icon: "success",
               title: "Logged in successfully!!",
