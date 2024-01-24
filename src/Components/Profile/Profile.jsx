@@ -5,6 +5,8 @@ import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import { useForm } from 'react-hook-form';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { updateProfile } from '@firebase/auth';
+import auth from '../../firebase/firebase.config';
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -20,8 +22,8 @@ const Profile = () => {
     if (isLoading) {
         return ''
     }
-    const inputFieldStyle = ` ${edit && 'input input-error'}  w-full bg-white p-3 border-[1.5px] border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = `   w-full bg-white p-3 border-[1.5px] border-primary rounded font-semibold  text-black z-10`
+    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px]'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px]'}   w-full bg-white p-3  border-primary rounded font-semibold  text-black z-10`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
     const handleCancel = () => {
         reset()
@@ -29,6 +31,7 @@ const Profile = () => {
     }
     const onSubmit = (data) => {
         setageerr('')
+        const name = data?.name;
         const birthDay = data?.birthDay;
         const weight = parseFloat(data?.weight);
         const feet = data?.feet;
@@ -43,28 +46,37 @@ const Profile = () => {
             setageerr('Make sure Your age is more than 5')
             return
         }
-        const personalData = {
-            birthDay,
-            weight,
-            height,
-            gender
-        }
-        axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
-        .then(res=> {
-            console.log(res?.data);
-            if(res?.data.modifiedCount>0){
-                Swal.fire({
-                    icon: "success",
-                    title: "Updated data successfully",
-                    timer: 1500
-                  });
-                  setedit(false)
-            }
+        updateProfile(auth.currentUser, {
+            displayName: name
         })
-        .catch(err=> {
-            console.log(err?.message);
-        })
-        console.log(personalData);
+            .then(res => {
+                console.log(res);
+                const personalData = {
+                    name,
+                    birthDay,
+                    weight,
+                    height,
+                    gender
+                }
+                axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
+                    .then(res => {
+                        console.log(res?.data);
+                        if (res?.data.modifiedCount > 0) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Updated data successfully",
+                                timer: 1500
+                            });
+                            setedit(false)
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err?.message);
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return (
         <div className='p-4'>
@@ -80,7 +92,9 @@ const Profile = () => {
                         <div>
                             <label className='font-bold flex gap-0'>Name <span className='text-primary text-lg'>*</span></label>
                             <input
-                                disabled
+                                required
+                                disabled={!edit}
+                                {...register("name")}
                                 className={`${selectFieldFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
                         </div>
                         {/* date of birth  */}
@@ -120,7 +134,7 @@ const Profile = () => {
                                             required: true, min: { value: 2, message: "Feet must be minimum 2" },
                                             max: { value: 7, message: "Feet Maximum be  maximum 7 feet " }
                                         })}
-                                        className={`${inputFieldStyle}`} placeholder='Feet' defaultValue={Math.floor(userDetails?.height /12) || 'Not Given'} />
+                                        className={`${inputFieldStyle}`} placeholder='Feet' defaultValue={Math.floor(userDetails?.height / 12) || 'Not Given'} />
                                     {errors.feet && <span className="text-sm font-bold text-red-500">{errors.feet.message}</span>}
                                 </div>
                                 <div>
@@ -133,7 +147,7 @@ const Profile = () => {
                                             required: true,
                                             max: { value: 11, message: "Inch must be Maximum 11 inch " }
                                         })}
-                                        className={`${inputFieldStyle}`} placeholder='Inch' defaultValue={userDetails?.height%12 || 'Not Given'} />
+                                        className={`${inputFieldStyle}`} placeholder='Inch' defaultValue={userDetails?.height ? (userDetails?.height % 12) : 'Not Given'} />
                                     {errors.inch && <span className="text-sm font-bold text-red-500">{errors.inch.message}</span>}
                                 </div>
                             </div>
@@ -156,7 +170,7 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-
+                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-4 bg-white absolute bottom-4 right-1 `}></div>
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5`}>

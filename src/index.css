@@ -2,6 +2,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -18,3 +20,6 @@ body {
 .with-shadow {
     text-shadow: 2px 2px 4px rgba(227, 91, 91, 0.5);
   }
+.bmiNumber{
+    font-family: 'Poppins', sans-serif;
+}
