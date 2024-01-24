@@ -78,14 +78,31 @@ const Profile = () => {
                 console.log(err);
             })
     }
+    const infoStyle = 'flex flex-wrap gap-2 justify-between border-l-2 border-b-2 border-primary px-2 rounded shadow-lg hover:shadow-2xl cursor-pointer'
+    const BMI = (userDetails.weight / Math.pow(userDetails.height / 39.37, 2)).toFixed(2)
+    const age = Math.floor((new Date() - new Date(userDetails.birthDay))/31556952000)
+    
     return (
         <div className='p-4'>
-            <div className='flex justify-center items-center py-7 flex-col gap-3'>
+            <div className='w-full max-w-[450px] mx-auto flex  flex-col sm:flex-row justify-center items-center sm:justify-start   py-7  gap-3   p-4 bg-red-500/10 rounded my-5 shadow-2xl '>
                 <img className='w-32 h-32 rounded-full' src={userDetails?.image} alt="" />
-
+                <div className='text-sm font-medium w-full space-y-4'>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>Connected With</span>
+                        <span className='text-base'>0 Friend</span>
+                    </p>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>My Age</span>
+                        <span className=' text-base '>{age} Year</span>
+                    </p>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>My BMI</span>
+                        <span className=' text-base'>{BMI} kg/m<sup>2</sup></span>
+                    </p>
+                </div>
             </div>
             <div>
-                <div className='w-full max-w-[450px] bg-red-500/10 mx-auto p-5 pt-12 rounded relative'>
+                <div className='w-full max-w-[450px] bg-red-500/10 mx-auto p-5 pt-12 rounded relative shadow-lg'>
                     <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
                     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                         {/* name  */}
@@ -95,7 +112,7 @@ const Profile = () => {
                                 required
                                 disabled={!edit}
                                 {...register("name")}
-                                className={`${selectFieldFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
+                                className={`${inputFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
                         </div>
                         {/* date of birth  */}
                         <div>
