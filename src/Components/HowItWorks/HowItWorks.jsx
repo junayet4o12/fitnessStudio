@@ -10,7 +10,7 @@ import useAuth from "../../Hooks/useAuth";
 const HowItWorks = () => {
   const { user } = useAuth()
   const buttonStyle =
-    "p-2 xs:p-2.5 transition-all duration-500 w-max font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
+    "p-2.5  px-10 transition-all duration-500 w-max font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
   const textSideStyle = "flex flex-col gap-7  w-full md:w-[50%] max-w-[550px]";
   const navigate = useNavigate();
   const handleLogin = () => {
