@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Title from "../../Components/Title/Title";
 
 const Activity = () => {
@@ -14,11 +15,12 @@ const Activity = () => {
             <span className="text-primary">Activity</span> Goals
           </h1>
           <p className="text-base text-gray-600 font-medium mt-5">{`Embark on a transformative journey toward a more active and fulfilling life with our guide, "Active Living Revolution." Whether you're a fitness enthusiast or just starting your wellness adventure, this resource is your go-to companion for setting and achieving meaningful activity goals.`}</p>
-
-          <button
-            className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-5`}>
-            Create Goal
-          </button>
+          <Link to="create_goal">
+            <button
+              className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-5`}>
+              Create Goal
+            </button>
+          </Link>
         </div>
         <div className="flex-1">
           <img

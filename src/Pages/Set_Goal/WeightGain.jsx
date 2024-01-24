@@ -36,7 +36,7 @@ const WeightGain = () => {
               <div>
                 <select
                   {...register("gain")}
-                  className="border rounded-md w-60 h-[51px] px-2 focus:border-primary">
+                  className="select select-error w-48 ">
                   <option value="Gain Weight">Gain Weight</option>
                   <option value="Lose Weight">Lose Weight</option>
                   <option value="Maintain Weight">Maintain Weight</option>
@@ -44,7 +44,7 @@ const WeightGain = () => {
               </div>
               <button
                 className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black `}>
-                Gain
+                Manage
               </button>
             </div>
           </form>

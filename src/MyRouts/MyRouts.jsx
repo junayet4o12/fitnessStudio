@@ -13,6 +13,7 @@ import Profile from "../Components/Profile/Profile";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
+import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 
 const MyRouts = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "connect_app",
         element: <ConnectApp></ConnectApp>,
+      },
+      {
+        path: "set_goal/create_goal",
+        element: <CreateGoal></CreateGoal>,
       },
     ],
   },
