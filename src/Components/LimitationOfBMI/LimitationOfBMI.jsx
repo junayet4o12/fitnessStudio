@@ -6,7 +6,7 @@ import raceIcon from "../../assets/images/icon-race.svg"
 
 function LimitationOfBMI() {
   return (
-    <div className='mx-auto flex flex-col md:flex-row justify-end'>
+    <div className='mx-auto flex flex-col lg:flex-row justify-end'>
       <div className="md:p-[100px]">
             <h1 className="text-3xl md:text-4xl font-bold pb-[25px]">Limitations of BMI</h1>
             <p>
@@ -21,7 +21,7 @@ function LimitationOfBMI() {
                 </div>
                 <p>The development and body fat composition of girls and boys vary with age. Consequently, a child's age and gender are considered when evaluating their BMI.</p>
             </div>
-            <div className="flex flex-col md:flex-row gap-5 md:ml-[-20%] md:mr-[5%]">
+            <div className="flex flex-col md:flex-row gap-5 lg:ml-[-20%] lg:mr-[5%]">
                 <div className="flex flex-col justify-center rounded-[25px] shadow-2xl p-[25px] md:w-[40%] md:mt-[5%] min-h-[250px]">
                     <div className="flex items-center text-xl font-bold mb-[20px] gap-2">
                     <img src={ageIcon} />
@@ -37,7 +37,7 @@ function LimitationOfBMI() {
                     <p>BMI may misclassify muscular individuals as overweight or obese, as it doesn't differentiate muscle from fat.</p>
                 </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-5 md:ml-[-45%] md:mr-[15%]">
+            <div className="flex flex-col md:flex-row gap-5 lg:ml-[-45%] lg:mr-[15%]">
                 <div className="flex flex-col justify-center rounded-[25px] shadow-2xl p-[25px] md:w-[40%] md:mt-[5%] min-h-[250px]">
                     <div className="flex items-center text-xl font-bold mb-[20px] gap-2">
                     <img src={pregnancyIcon} />
