@@ -10,6 +10,7 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ConnectApp from "../Pages/ConnectApp/ConnectApp";
 import Profile from "../Components/Profile/Profile";
+import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 
 const MyRouts = createBrowserRouter([
@@ -62,7 +63,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: 'tracking_progress',
-        element: <div>this is tracking progress</div>
+        element: <TrackProgress/>
       },
       {
         path: 'connect_app',
