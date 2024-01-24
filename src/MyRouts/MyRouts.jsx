@@ -7,6 +7,10 @@ import Register from "../Pages/AuthPages/Register/Register";
 import Home from "../Pages/Home/Home";
 import Error from "../Pages/Error/Error";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import ConnectApp from "../Pages/ConnectApp/ConnectApp";
+import Profile from "../Components/Profile/Profile";
+import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 
 const MyRouts = createBrowserRouter([
   {
@@ -38,16 +42,15 @@ const MyRouts = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>,
       },
-
     ],
   },
   {
     path: '/dashboard',
-    element: <div>This is dashboard</div>,
+    element: <Dashboard />,
     children: [
       {
         path: 'profile',
-        element: <div>this is profile</div>
+        element: <Profile></Profile>
       },
       {
         path: 'bmi_calculator',
@@ -59,11 +62,11 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: 'tracking_progress',
-        element: <div>this is tracking progress</div>
+        element: <TrackProgress/>
       },
       {
-        path: 'connected_app',
-        element: <div>this is connected App</div>
+        path: 'connect_app',
+        element: <ConnectApp></ConnectApp>
       }
     ]
   },

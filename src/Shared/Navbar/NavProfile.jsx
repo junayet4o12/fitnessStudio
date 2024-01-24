@@ -31,7 +31,7 @@ const NavProfile = () => {
             navigate('/dashboard/profile')
         }
         else if (input === 'Dashboard') {
-            navigate('/dashboard')
+            navigate('/dashboard/profile')
         }
         else if (input === 'Sign Out') {
             logOut()
@@ -54,10 +54,7 @@ const NavProfile = () => {
                             className={`border ${isMenuOpen && 'border-primary'} w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
                             src={user?.photoURL}
                         />
-                        <span
-                            className={`h-3 w-3 text-primary transition-transform ${isMenuOpen ? "rotate-180" : ""
-                                }`}
-                        ><IoIosArrowDown /></span>
+                       
                     </Button>
                 </MenuHandler>
                 <MenuList className="p-1 px-3 z-20">

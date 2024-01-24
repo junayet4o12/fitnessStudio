@@ -4,6 +4,7 @@ import { IoFootstepsOutline } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
 import { GiNightSleep } from "react-icons/gi";
 import HeartRate from "./HeartRate";
+import ChartProgress from "./ChartProgress";
 
 const TrackProgress = () => {
   const cardStyle =
@@ -74,7 +75,9 @@ const TrackProgress = () => {
         <HeartRate />
       </div>
 
-      <div className="w-1/2 border border-blue-500"></div>
+      <div className="w-1/2 border border-blue-500">
+        <ChartProgress/>
+      </div>
      
     </div>
   );
