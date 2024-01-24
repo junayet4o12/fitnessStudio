@@ -4,14 +4,12 @@ import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../../Hooks/useAuth";
-import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
 const LogIn = () => {
-  const [err, seterr] = useState()
   const [disable, setDisable] = useState(true);
-  const { loginUser } = useAuth()
-  const navigate = useNavigate()
+  const { loginUser } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,18 +17,19 @@ const LogIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    const toastId = toast.loading("Logging...");
     const email = data?.email;
     const password = data?.password;
     loginUser(email, password)
-      .then(res => {
-        toast.success("Logged in successfully")
+      .then((res) => {
+        toast.success("Logged in successfully", { id: toastId });
         console.log(res);
-        navigate('/')
+        navigate("/");
       })
-      .catch(err => {
-        console.log(err)
-        seterr(err?.message)
-      })
+      .catch((error) => {
+        console.log(error)
+        toast.error(error.code , { id: toastId });
+      });
   };
 
   return (
@@ -118,13 +117,12 @@ const LogIn = () => {
                     data-ripple-light="true">
                     Log In
                   </button>
-                  <p className='text-red-500 text-sm font-semibold'>{err}</p>
                 </div>
               </form>
               <div>
                 <div className="divider text-gray-500">Or login with</div>
 
-                <GoogleSignIn ></GoogleSignIn>
+                <GoogleSignIn></GoogleSignIn>
 
                 <div className="flex justify-center items-center gap-2">
                   <p className="text-gray-800 font-medium my-4 flex justify-center font-sans text-sm  leading-normal text-inherit antialiased">
