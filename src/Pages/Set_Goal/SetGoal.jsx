@@ -4,7 +4,7 @@ import WeightGain from "./WeightGain";
 
 const SetGoal = () => {
   return (
-    <div className="mt-10 mb-20">
+    <div className="my-10 md:my-0 md:mt-10 md:mb-20">
       <ExercisePlan></ExercisePlan>
       <WeightGain></WeightGain>
       <Activity></Activity>

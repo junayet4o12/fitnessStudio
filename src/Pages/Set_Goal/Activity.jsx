@@ -6,11 +6,11 @@ const Activity = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className="px-4 lg:px-10  lg:mt-10">
+    <div className="pr-4 md:px-5 lg:px-10  lg:mt-10">
       <Title title="Activity"></Title>
-      <div className="flex items-center justify-between gap-10 mt-5">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 mt-5">
         <div className="flex-1">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
             Set and Achieve Your Ultimate{" "}
             <span className="text-primary">Activity</span> Goals
           </h1>
@@ -25,7 +25,7 @@ const Activity = () => {
         <div className="flex-1">
           <img
             src="https://i.ibb.co/Gvk1bjP/Screenshot-414.png"
-            className="w-[800px] rounded-lg shadow-2xl"
+            className="w-full lg:w-[800px] rounded-lg shadow-2xl"
             alt=""
           />
         </div>

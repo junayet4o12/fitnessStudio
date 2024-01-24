@@ -10,10 +10,10 @@ const CreateGoal = () => {
   };
 
   return (
-    <div className="px-4 lg:px-10 flex items-center justify-center h-full">
-      <div className="flex items-center justify-center gap-20">
+    <div className="pr-4 md:px-5 lg:px-10 md:flex md:items-center md:justify-center h-full">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-5 md:gap-10 lg:gap-20">
         <div>
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
             <span className="text-primary">ACHIEVE</span> YOUR BEST
           </h1>
           <p className="text-base text-gray-600 font-medium mt-2">
@@ -27,7 +27,7 @@ const CreateGoal = () => {
                 </h1>
                 <select
                   {...register("Activity")}
-                  className="select select-error w-96">
+                  className="select select-error w-full md:w-96">
                   <option value="Any">Any</option>
                   <option value="Run">Run</option>
                   <option value="Walk">Walk</option>
@@ -40,7 +40,7 @@ const CreateGoal = () => {
                 </h1>
                 <select
                   {...register("Goal_Type")}
-                  className="select select-error w-96">
+                  className="select select-error w-full md:w-96">
                   <option value="Workouts">Workouts</option>
                   <option value="Distance">Distance</option>
                   <option value="Duration">Duration</option>
@@ -54,7 +54,7 @@ const CreateGoal = () => {
                   type="number"
                   {...register("Goal_Target")}
                   defaultValue={1}
-                  className="input input-bordered input-error w-96"
+                  className="input input-bordered input-error w-full md:w-96"
                 />
               </div>
               <div>
@@ -63,7 +63,7 @@ const CreateGoal = () => {
                 </h1>
                 <select
                   {...register("Start")}
-                  className="select select-error w-96">
+                  className="select select-error w-full md:w-96">
                   <option value="This Week">This Week</option>
                   <option value="Next Week">Next Week</option>
                 </select>
@@ -71,7 +71,7 @@ const CreateGoal = () => {
             </div>
             <button
               type="submit"
-              className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-8`}>
+              className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-8 mb-10 lg:mb-0`}>
               Create Goal
             </button>
           </form>
@@ -79,7 +79,7 @@ const CreateGoal = () => {
         <div>
           <img
             src="https://i.ibb.co/bQrRftP/Screenshot-416-removebg-preview.png"
-            className="w-[700px] "
+            className="w-[700px] mt-5 md:mt-0"
             alt=""
           />
         </div>

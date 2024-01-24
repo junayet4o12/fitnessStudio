@@ -11,18 +11,18 @@ const WeightGain = () => {
   };
 
   return (
-    <div className="px-4 lg:px-10  lg:mt-10">
+    <div className="pr-4 md:px-5 lg:px-10  lg:mt-10">
       <Title title="Manage Weight"></Title>
-      <div className="flex items-center justify-between gap-10 mt-5">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-10 mt-5">
         <div className="flex-1">
           <img
             src="https://i.ibb.co/F3jMfNG/Screenshot-411.png"
-            className="w-[800px] rounded-lg shadow-2xl"
+            className="w-full lg:w-[800px] rounded-lg shadow-2xl"
             alt=""
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
             Your Comprehensive Guide to{" "}
             <span className="text-primary">Building</span> a Stronger You
           </h1>
@@ -36,7 +36,7 @@ const WeightGain = () => {
               <div>
                 <select
                   {...register("gain")}
-                  className="select select-error w-48 ">
+                  className="select select-error w-40 md:w-48 ">
                   <option value="Gain Weight">Gain Weight</option>
                   <option value="Lose Weight">Lose Weight</option>
                   <option value="Maintain Weight">Maintain Weight</option>

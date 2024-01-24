@@ -5,11 +5,11 @@ const ExercisePlan = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className="px-4 lg:px-10">
+    <div className="pr-4 md:px-5 lg:px-10">
       <Title title="Exercise Plan"></Title>
-      <div className="flex items-center justify-between gap-10 mt-5">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 mt-5">
         <div className="flex-1">
-          <h1 className="text-5xl font-bold">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
             The Transformative Power of{" "}
             <span className="text-primary">Walking</span> for a Healthier You
           </h1>
@@ -23,7 +23,7 @@ const ExercisePlan = () => {
         <div className="flex-1">
           <img
             src="https://i.ibb.co/GF06LsC/Screenshot-413.png"
-            className="w-[800px] rounded-lg shadow-2xl"
+            className="w-full lg:w-[800px] rounded-lg shadow-2xl"
             alt=""
           />
         </div>
