@@ -15,9 +15,16 @@ const WeightGain = () => {
   };
 
   return (
-    <div className="px-4 lg:px-10 ">
+    <div className="px-4 lg:px-10  lg:mt-10">
       <Title title="Weight Gain"></Title>
-      <div className="flex items-center justify-between gap-10">
+      <div className="flex items-center justify-between gap-10 mt-5">
+        <div className="flex-1">
+          <img
+            src="https://i.ibb.co/F3jMfNG/Screenshot-411.png"
+            className="w-[800px] rounded-lg shadow-2xl"
+            alt=""
+          />
+        </div>
         <div className="flex-1">
           <h1 className="text-5xl font-bold">
             Your Comprehensive Guide to{" "}
@@ -49,13 +56,6 @@ const WeightGain = () => {
               </span>
             )}
           </form>
-        </div>
-        <div className="flex-1">
-          <img
-            src="https://i.ibb.co/F3jMfNG/Screenshot-411.png"
-            className="w-[800px] rounded-lg shadow-2xl"
-            alt=""
-          />
         </div>
       </div>
     </div>
