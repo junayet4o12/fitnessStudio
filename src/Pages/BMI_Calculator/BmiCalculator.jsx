@@ -7,7 +7,7 @@ import LimitationOfBMI from '../../Components/LimitationOfBMI/LimitationOfBMI'
 const BmiCalculator = () => {
   
   return (
-    <div className='p-[10px]'>
+    <div className='p-[10px] mb-[100px]'>
   <Helmet>
     <title>BMI Calculator - FitnessStudion</title>
   </Helmet>
