@@ -5,6 +5,8 @@ import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import { useForm } from 'react-hook-form';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { updateProfile } from '@firebase/auth';
+import auth from '../../firebase/firebase.config';
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -20,8 +22,8 @@ const Profile = () => {
     if (isLoading) {
         return ''
     }
-    const inputFieldStyle = ` ${edit && 'input input-error'}  w-full bg-white p-3 border-[1.5px] border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = `   w-full bg-white p-3 border-[1.5px] border-primary rounded font-semibold  text-black z-10`
+    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px]'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px]'}   w-full bg-white p-3  border-primary rounded font-semibold  text-black z-10`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
     const handleCancel = () => {
         reset()
@@ -29,6 +31,7 @@ const Profile = () => {
     }
     const onSubmit = (data) => {
         setageerr('')
+        const name = data?.name;
         const birthDay = data?.birthDay;
         const weight = parseFloat(data?.weight);
         const feet = data?.feet;
@@ -43,45 +46,73 @@ const Profile = () => {
             setageerr('Make sure Your age is more than 5')
             return
         }
-        const personalData = {
-            birthDay,
-            weight,
-            height,
-            gender
-        }
-        axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
-        .then(res=> {
-            console.log(res?.data);
-            if(res?.data.modifiedCount>0){
-                Swal.fire({
-                    icon: "success",
-                    title: "Updated data successfully",
-                    timer: 1500
-                  });
-                  setedit(false)
-            }
+        updateProfile(auth.currentUser, {
+            displayName: name
         })
-        .catch(err=> {
-            console.log(err?.message);
-        })
-        console.log(personalData);
+            .then(res => {
+                console.log(res);
+                const personalData = {
+                    name,
+                    birthDay,
+                    weight,
+                    height,
+                    gender
+                }
+                axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
+                    .then(res => {
+                        console.log(res?.data);
+                        if (res?.data.modifiedCount > 0) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Updated data successfully",
+                                timer: 1500
+                            });
+                            setedit(false)
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err?.message);
+                    })
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
+    const infoStyle = 'flex flex-wrap gap-2 justify-between border-l-2 border-b-2 border-primary px-2 rounded shadow-lg hover:shadow-2xl cursor-pointer'
+    const BMI = (userDetails.weight / Math.pow(userDetails.height / 39.37, 2)).toFixed(2)
+    const age = Math.floor((new Date() - new Date(userDetails.birthDay))/31556952000)
+    
     return (
         <div className='p-4'>
-            <div className='flex justify-center items-center py-7 flex-col gap-3'>
+            <div className='w-full max-w-[450px] mx-auto flex  flex-col sm:flex-row justify-center items-center sm:justify-start   py-7  gap-3   p-4 bg-red-500/10 rounded my-5 shadow-2xl '>
                 <img className='w-32 h-32 rounded-full' src={userDetails?.image} alt="" />
-
+                <div className='text-sm font-medium w-full space-y-4'>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>Connected With</span>
+                        <span className='text-base'>0 Friend</span>
+                    </p>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>My Age</span>
+                        <span className=' text-base '>{age} Year</span>
+                    </p>
+                    <p className={infoStyle}>
+                        <span className='font-bold text-primary'>My BMI</span>
+                        <span className=' text-base'>{BMI} kg/m<sup>2</sup></span>
+                    </p>
+                </div>
             </div>
             <div>
-                <div className='w-full max-w-[450px] bg-red-500/10 mx-auto p-5 pt-12 rounded relative'>
+                <div className='w-full max-w-[450px] bg-red-500/10 mx-auto p-5 pt-12 rounded relative shadow-lg'>
                     <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
                     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                         {/* name  */}
                         <div>
                             <label className='font-bold flex gap-0'>Name <span className='text-primary text-lg'>*</span></label>
                             <input
-                                disabled
-                                className={`${selectFieldFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
+                                required
+                                disabled={!edit}
+                                {...register("name")}
+                                className={`${inputFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
                         </div>
                         {/* date of birth  */}
                         <div>
@@ -120,7 +151,7 @@ const Profile = () => {
                                             required: true, min: { value: 2, message: "Feet must be minimum 2" },
                                             max: { value: 7, message: "Feet Maximum be  maximum 7 feet " }
                                         })}
-                                        className={`${inputFieldStyle}`} placeholder='Feet' defaultValue={Math.floor(userDetails?.height /12) || 'Not Given'} />
+                                        className={`${inputFieldStyle}`} placeholder='Feet' defaultValue={Math.floor(userDetails?.height / 12) || 'Not Given'} />
                                     {errors.feet && <span className="text-sm font-bold text-red-500">{errors.feet.message}</span>}
                                 </div>
                                 <div>
@@ -133,7 +164,7 @@ const Profile = () => {
                                             required: true,
                                             max: { value: 11, message: "Inch must be Maximum 11 inch " }
                                         })}
-                                        className={`${inputFieldStyle}`} placeholder='Inch' defaultValue={userDetails?.height%12 || 'Not Given'} />
+                                        className={`${inputFieldStyle}`} placeholder='Inch' defaultValue={userDetails?.height ? (userDetails?.height % 12) : 'Not Given'} />
                                     {errors.inch && <span className="text-sm font-bold text-red-500">{errors.inch.message}</span>}
                                 </div>
                             </div>
@@ -156,7 +187,7 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-
+                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-4 bg-white absolute bottom-4 right-1 `}></div>
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5`}>

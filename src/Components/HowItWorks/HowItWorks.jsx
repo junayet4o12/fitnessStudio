@@ -5,10 +5,12 @@ import trackingImg from "../../assets/images/Fitz - Morning Routine (1).png";
 import achiveGoalImf from '../../assets/images/Pebble People - Trophy.png'
 import Container from "../Container/Container";
 import Title from "../Title/Title";
+import useAuth from "../../Hooks/useAuth";
 
 const HowItWorks = () => {
+  const { user } = useAuth()
   const buttonStyle =
-    "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
+    "p-2.5  px-10 transition-all duration-500 w-max font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
   const textSideStyle = "flex flex-col gap-7  w-full md:w-[50%] max-w-[550px]";
   const navigate = useNavigate();
   const handleLogin = () => {
@@ -31,11 +33,13 @@ const HowItWorks = () => {
               discounts. Elevate your well-being – Sign up today for a
               healthier, happier you!
             </p>
-            <button
-              onClick={handleLogin}
-              className={`${buttonStyle} bg-[#ff470436] hover:bg-[#ff4704]  border-[#ff4704] hover:border-transparent`}>
-              Log in
-            </button>
+            {
+              user ? <h2 className="text-xl font-semibold"><span className="text-primary font-extrabold ">Awesome !!</span> You have already logged in.</h2> : <button
+                onClick={handleLogin}
+                className={`${buttonStyle} bg-[#ff470436] hover:bg-[#ff4704]  border-[#ff4704] hover:border-transparent`}>
+                Log in
+              </button>
+            }
           </div>
         </div>
 

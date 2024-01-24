@@ -118,9 +118,9 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className="rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+    <Navbar className=" rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
 
-      <div className="flex items-center justify-between text-blue-gray-900 text-black ">
+      <div className="lg:container mx-auto flex items-center justify-between text-blue-gray-900 text-black ">
         <Typography
           as="a"
           href="#"

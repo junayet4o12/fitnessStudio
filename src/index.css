@@ -17,6 +17,9 @@ body {
     font-family: 'Playfair Display', serif;
 } 
 
-.bmiNumber{  
+.with-shadow {
+    text-shadow: 2px 2px 4px rgba(227, 91, 91, 0.5);
+  }
+.bmiNumber{
     font-family: 'Poppins', sans-serif;
 }
