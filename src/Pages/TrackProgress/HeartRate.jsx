@@ -23,7 +23,7 @@ const HeartRate = () => {
   };
 
   return (
-    <div className="flex flex-row justify-around gap-2">
+    <div className="flex flex-col lg:flex-row justify-around gap-2">
       <div className="w 1/2 flex flex-col space-y-6">
         <div className="mt-6">
           <div className="card  border-2 border-primary mb-2">
@@ -53,7 +53,7 @@ const HeartRate = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 ">
+      <div className="lg:w-1/2 ">
         <div className={`${cardStyle}`}>
           <div className="mb-2 flex justify-center items-center space-x-1">
             <SlFire className="text-primary text-2xl" />
