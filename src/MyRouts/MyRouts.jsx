@@ -12,6 +12,7 @@ import ConnectApp from "../Pages/ConnectApp/ConnectApp";
 import Profile from "../Components/Profile/Profile";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 const MyRouts = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/contact_us",
-        element: <div>This is Contact Us</div>,
+        element: <ContactUs />,
       },
       {
         path: "/register",
