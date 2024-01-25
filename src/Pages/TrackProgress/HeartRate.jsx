@@ -19,11 +19,12 @@ const HeartRate = () => {
     text: {
       fill: "#FF4804",
       fontSize: "10px",
+      fontFamily: 'Poppins',
     },
   };
 
   return (
-    <div className="flex flex-row justify-around gap-2">
+    <div className="flex flex-col lg:flex-row justify-around gap-2">
       <div className="w 1/2 flex flex-col space-y-6">
         <div className="mt-6">
           <div className="card  border-2 border-primary mb-2">
@@ -33,7 +34,7 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Heart Rate</p>
-                <span className="text-xl font-semibold">89 bmp</span>
+                <span className="text-xl font-semibold bmiNumber">89 bmp</span>
               </div>
             </div>
           </div>
@@ -47,13 +48,13 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Water</p>
-                <span className="text-xl font-semibold">2.4 litre</span>
+                <span className="text-xl font-semibold bmiNumber">2.4 litre</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-1/2 ">
+      <div className="lg:w-1/2 ">
         <div className={`${cardStyle}`}>
           <div className="mb-2 flex justify-center items-center space-x-1">
             <SlFire className="text-primary text-2xl" />

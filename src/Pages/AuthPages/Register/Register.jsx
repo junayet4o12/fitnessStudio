@@ -18,7 +18,6 @@ const Register = () => {
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
   const {
     register,
-
     handleSubmit,
     formState: { errors },
   } = useForm();
