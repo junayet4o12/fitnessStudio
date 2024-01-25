@@ -14,6 +14,7 @@ import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
 import CreateGoal from "../Pages/Set_Goal/CreateGoal";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 const MyRouts = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/contact_us",
-        element: <div>This is Contact Us</div>,
+        element: <ContactUs />,
       },
       {
         path: "/register",
