@@ -1,10 +1,21 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../../Hooks/useAuth";
+import { updateProfile } from "@firebase/auth";
+import auth from "../../../firebase/firebase.config";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const { createUser } = useAuth();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
+  const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
   const {
     register,
     handleSubmit,
@@ -12,14 +23,54 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const toastId = toast.loading("Registering...");
+    const image = { image: data?.image[0] };
+
+    const res = await axios.post(imgHostingApi, image, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    const imgurl = res?.data?.data?.display_url;
+    const name = data?.name;
+    const email = data?.email;
+    const password = data?.password;
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: imgurl,
+        })
+          .then(() => {
+            console.log("user progile info updated");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              image: imgurl,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log(res?.data?.insertedId);
+              }
+            });
+            toast.success("Register Successfully !", { id: toastId });
+            navigate("/");
+          })
+          .catch((err) => {
+            toast.error(err?.code, { id: toastId });
+          });
+      })
+      .catch((err) => {
+        toast.error(err?.message, { id: toastId });
+      });
   };
 
   return (
     <>
-    <Helmet>
-      <title>Register - Fitness Studio</title>
-    </Helmet>
+      <Helmet>
+        <title>Register - Fitness Studio</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
           <div className="w-full md:w-[700px] lg:w-[400px] mb-10 lg:mb-0 px-5 lg:px-0">
