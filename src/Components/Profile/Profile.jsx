@@ -7,6 +7,8 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from '@material-tailwind/react';
+import HealthSuggetionsModal from './HealthSuggetionsModal';
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -14,6 +16,8 @@ const Profile = () => {
     const { isLoading, error, user: userDetails } = useSelector(state => state.user)
     const [edit, setedit] = useState(false)
     const [ageerr, setageerr] = useState('')
+    const [openBMIModal, setOpenBMIModal] = useState(false);
+    const [openAgeModal, setOpenAgeModal] = useState(false);
     const { register, handleSubmit, watch, reset, formState: { errors }, } = useForm()
     const axiosPublic = useAxiosPublic()
     useEffect(() => {
@@ -80,6 +84,80 @@ const Profile = () => {
     }
     const infoStyle = 'flex flex-wrap gap-2 justify-between border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-orange-100 transition-all duration-500 hover:bg-white hover:border-red-600 hover:border-l-[10px] active:scale-90'
     const BMI = (userDetails.weight / Math.pow(userDetails.height / 39.37, 2)).toFixed(2)
+
+    let BMIsuggetions = '';
+    if (BMI < 18.5) {
+        BMIsuggetions = <>
+            <DialogHeader>Underweight</DialogHeader>
+            <DialogBody>
+                <ul className='list-decimal p-5'>
+                    <li>Increase caloric intake with nutrient-dense foods.</li>
+                    <li>Include healthy fats, proteins, and carbohydrates in meals.</li>
+                    <li>Strength training exercises to build muscle mass.</li>
+                </ul>
+
+            </DialogBody>
+        </>
+    }
+    else if (BMI >= 18.5 && BMI <= 24.9) {
+        BMIsuggetions = <>
+            <DialogHeader>Normal Weight</DialogHeader>
+            <DialogBody>
+                <p>1. Maintain balanced nutrition with whole foods.</p>
+                <p>2. Engage in regular aerobic exercise (150 minutes per week).</p>
+                <p>3. Monitor portion sizes and avoid excessive calorie intake.</p>
+
+            </DialogBody>
+        </>
+    }
+    else if (BMI >= 25 && BMI <= 29.9) {
+        BMIsuggetions = <>
+            <DialogHeader>Overweight</DialogHeader>
+            <DialogBody>
+                <p>1. Adopt a balanced diet emphasizing fruits, vegetables, and lean proteins.</p>
+                <p>2. Increase physical activity (150 to 300 minutes of moderate-intensity exercise per week).</p>
+                <p>3. Focus on gradual weight loss through sustainable habits.</p>
+
+            </DialogBody>
+        </>
+    }
+    else if (BMI >= 30 && BMI <= 34.9) {
+        BMIsuggetions = <>
+            <DialogHeader>Obese Class I</DialogHeader>
+            <DialogBody>
+                <p>1. Consult with professionals for a personalized weight loss plan.</p>
+                <p>2. Combine balanced diet with increased physical activity.</p>
+                <p>3. Include both aerobic exercise and strength training.</p>
+
+            </DialogBody>
+        </>
+    }
+    else if (BMI >= 35 && BMI <= 39.9) {
+        BMIsuggetions = <>
+            <DialogHeader>Obese Class II</DialogHeader>
+            <DialogBody>
+                <p>1. Seek comprehensive weight management guidance.</p>
+                <p>2. Gradual, sustainable weight loss with behavioral interventions.</p>
+                <p>3. Consider professional support for lifestyle changes.</p>
+
+            </DialogBody>
+        </>
+    }
+    else if (BMI >= 40) {
+        BMIsuggetions = <>
+            <DialogHeader>Obese Class III</DialogHeader>
+            <DialogBody>
+                <p>1. Immediate medical attention and intervention.</p>
+                <p>2. Work with a healthcare team for a supervised weight loss plan.</p>
+                <p>3. Bariatric surgery might be considered in extreme cases.</p>
+
+            </DialogBody>
+        </>
+    }
+
+    console.log(BMIsuggetions);
+
+
     const age = Math.floor((new Date() - new Date(userDetails.birthDay)) / 31556952000)
     const bmrForMale = 88.362 + (13.397 * userDetails.weight) + (4.799 * (userDetails?.height * 2.54)) - (5.677 * parseInt(age))
     // 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) – (5.677 x age in years)
@@ -90,22 +168,26 @@ const Profile = () => {
     console.log(isNaN(myBMR));
     return (
         <div className='p-4'>
-            <div className='w-full max-w-[450px] mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-start sm:justify-start   py-7  gap-3   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
+            <div className='w-full max-w-[500px] mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-start sm:justify-start   py-7  gap-3   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
                 <div className='w-32 h-32 min-w-32 min-h-32 p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
                     <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
+
                 </div>
                 <div className='text-sm font-medium w-[90%] space-y-3'>
+
                     <p className={infoStyle}>
                         <span className='font-bold text-primary'>Connected With</span>
                         <span className='text-base'>0 Friend</span>
                     </p>
-                    <p className={infoStyle}>
+                    <p onClick={() => setOpenAgeModal(true)} className={infoStyle}>
                         <span className='font-bold text-primary'>My Age</span>
                         <span className=' text-base '>{age ? `${age} Year` : 'Update Data'} </span>
                     </p>
-                    <p className={infoStyle}>
+                    <p onClick={() => setOpenBMIModal(true)} className={infoStyle}>
                         <span className='font-bold text-primary'>My BMI</span>
-                        <span className=' text-base'>{!isNaN(BMI) ? `${BMI} kg/m` : 'Update Data'}  {!isNaN(BMI) ? <sup> 2</sup> : ''}</span>
+                        <span className=' text-base'>{!isNaN(BMI) ? `${BMI} kg/m` : 'Update Data'}  {!isNaN(BMI) ? <sup> 2</sup> : ''}
+                            <span className='ml-2 text-base font-bold'>^</span>
+                        </span>
                     </p>
                     <p className={infoStyle}>
                         <span className='font-bold text-primary'>My BMR</span>
@@ -116,7 +198,7 @@ const Profile = () => {
                 </div>
             </div>
             <div>
-                <div className='w-full max-w-[450px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
+                <div className='w-full max-w-[500px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
                     <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
                     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                         {/* name  */}
@@ -214,7 +296,8 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-
+           <HealthSuggetionsModal open={openBMIModal} setOpen={setOpenBMIModal} suggetions={BMIsuggetions}></HealthSuggetionsModal>
+           <HealthSuggetionsModal open={openAgeModal} setOpen={setOpenAgeModal} suggetions={BMIsuggetions}></HealthSuggetionsModal>
         </div>
     );
 };

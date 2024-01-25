@@ -4,7 +4,7 @@ import singleUserReducer from "../SingleUserSlice/singleUserSlice";
 const store = configureStore({
     reducer: {
         feedback: feedbackReducer,
-        user: singleUserReducer
+        user: singleUserReducer,
     }
 })
 export default store;

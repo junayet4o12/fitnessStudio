@@ -10,6 +10,7 @@ const Banner = () => {
     const handleLogin = () => {
         navigate('/login')
     }
+    
     return (
         <div>
             <div className='w-full min-h-[300px] max-h-screen overflow-hidden  relative'>
