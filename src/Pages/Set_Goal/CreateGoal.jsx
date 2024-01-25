@@ -1,12 +1,32 @@
 import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const CreateGoal = () => {
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const buttonStyle =
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[160px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
-  const { register, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const toastId = toast.loading("Goal Creating...");
+    const goalInfo = {
+      user_name: user?.displayName,
+      user_email: user?.email,
+      user_image: user?.photoURL,
+      activity: data?.Activity,
+      goal_Target: data?.Goal_Target,
+      goal_Type: data?.Goal_Type,
+      start: data?.Start,
+    };
+    axiosPublic.post("user_goal", goalInfo).then((res) => {
+      if (res?.data?.insertedId) {
+        reset();
+        toast.success("Goal Created Successfully!", { id: toastId });
+      }
+    });
   };
 
   return (
