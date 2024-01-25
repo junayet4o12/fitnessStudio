@@ -302,13 +302,18 @@ const Profile = () => {
     return (
         <div className='p-4'>
 
-            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-evenly items-center sm:items-start sm:justify-start   py-7  gap-3   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
-                <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
+            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7  gap-5   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
+                <div className='flex flex-col justify-center items-center'>
+                    <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
-                    <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
+                        <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
+                    </div>
+                    <div>
+                        <button onClick={() => setOpenSuggetionsModal(true)} className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704] my-4`}>Personal Suggetions</button>
+                    </div>
                 </div>
                 <div className='w-full'>
-                    <div className='text-sm font-medium w-[90%] lg:w-[80%]  grid grid-cols-2 md:grid-cols-2 gap-2 my-auto'>
+                    <div className='text-sm font-medium w-[100%] lg:w-[80%]  grid grid-cols-2 md:grid-cols-2 gap-2 my-auto'>
                         <p className={infoStyle}>
                             <span className='font-bold text-primary'>Connected With</span>
                             <span className='text-base'>0 Friend</span>
@@ -328,9 +333,7 @@ const Profile = () => {
                             </span>
                         </p>
                     </div>
-                    <div>
-                        <button onClick={() => setOpenSuggetionsModal(true)} className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704] my-4`}>Personal Suggetions</button>
-                    </div>
+
                 </div>
             </div>
             <div>

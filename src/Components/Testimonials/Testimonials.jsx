@@ -14,7 +14,6 @@ import Title from '../Title/Title';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fatchFeedback } from '../../Redux/FeedbackSlice/FeedbackSlice';
-import Container from '../Container/Container';
 const Testimonials = () => {
     const dispatch = useDispatch()
     const { isLoading, error, feedback } = useSelector(state => state.feedback)
