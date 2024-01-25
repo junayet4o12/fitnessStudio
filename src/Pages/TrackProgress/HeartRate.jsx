@@ -19,6 +19,7 @@ const HeartRate = () => {
     text: {
       fill: "#FF4804",
       fontSize: "10px",
+      fontFamily: 'Poppins',
     },
   };
 
@@ -33,7 +34,7 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Heart Rate</p>
-                <span className="text-xl font-semibold">89 bmp</span>
+                <span className="text-xl font-semibold bmiNumber">89 bmp</span>
               </div>
             </div>
           </div>
@@ -47,7 +48,7 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Water</p>
-                <span className="text-xl font-semibold">2.4 litre</span>
+                <span className="text-xl font-semibold bmiNumber">2.4 litre</span>
               </div>
             </div>
           </div>

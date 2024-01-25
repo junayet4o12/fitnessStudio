@@ -18,15 +18,15 @@ const TrackProgress = () => {
     text: {
       fill: "#FF4804",
       fontSize: "20px",
+      fontFamily: 'Poppins',
     },
   };
 
   return (
-    <div className="container mx-auto px-2 flex flex-col lg:flex-row">
-      <div className="lg:w-1/2  border border-blue-500">
-        <div className="flex flex-col lg:flex-row justify-around gap-2">
-          <div className="lg:w-1/2 ">
-
+    <div className="container mx-auto px-2 flex my-[100px]">
+      <div className="w-1/2  border border-blue-500">
+        <div className="flex flex-row justify-around gap-2">
+          <div className="w-1/2 ">
             <div className={`${cardStyle}`}>
               <div className="mb-2 flex justify-center items-center space-x-1">
                 <IoFootstepsOutline  className="text-primary text-2xl "/>
@@ -51,7 +51,7 @@ const TrackProgress = () => {
                   </div>
                   <div>
                     <p className="text-xl font-semibold">Distance</p>
-                    <span className="text-xl font-semibold">
+                    <span className="text-xl font-semibold bmiNumber">
                       6.4 kilometers
                     </span>
                   </div>
@@ -67,7 +67,7 @@ const TrackProgress = () => {
                   </div>
                   <div>
                     <p className="text-xl font-semibold">Sleep</p>
-                    <span className="text-xl font-semibold">8.4 Hours</span>
+                    <span className="text-xl font-semibold bmiNumber">8.4 Hours</span>
                   </div>
                 </div>
               </div>
