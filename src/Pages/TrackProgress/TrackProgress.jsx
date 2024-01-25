@@ -8,7 +8,7 @@ import ChartProgress from "./ChartProgress";
 
 const TrackProgress = () => {
   const cardStyle =
-    "mx-auto my-2 px-5 text-center border-2 border-primary flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+    "mx-auto my-2 px-5 text-center bg-emerald-50 flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
   const percentage = 3056;
   const totalPercentage = (percentage / 10000) * 100;
   const progressBarStyles = {
@@ -23,12 +23,12 @@ const TrackProgress = () => {
 
   return (
     <div className="container mx-auto px-2 flex flex-col lg:flex-row">
-      <div className="lg:w-1/2  border border-blue-500">
-        <div className="flex flex-col lg:flex-row justify-around gap-2">
+      <div className="lg:w-1/2">
+        <div className="flex flex-col lg:flex-row justify-around gap-2 ">
           <div className="lg:w-1/2 ">
 
             <div className={`${cardStyle}`}>
-              <div className="mb-2 flex justify-center items-center space-x-1">
+              <div className="mb-2 flex justify-center items-center space-x-1 ">
                 <IoFootstepsOutline  className="text-primary text-2xl "/>
                 <h3 className="text-lg font-medium text-gray-700">Steps</h3>
               </div>
@@ -44,7 +44,7 @@ const TrackProgress = () => {
           </div>
           <div className=" lg:w-1/2 flex flex-col space-y-6">
             <div className="mt-6">
-              <div className="card  border-2 border-primary mb-2">
+              <div className="card bg-orange-50 mb-2">
                 <div className="card-body flex flex-row justify-center items-center">
                   <div className="card-actions justify-start">
                     <FaCarSide className="text-primary text-2xl" />
@@ -60,7 +60,7 @@ const TrackProgress = () => {
             </div>
 
             <div className="">
-              <div className="card  border-2 border-primary mb-1">
+              <div className="card bg-sky-50 mb-1">
                 <div className="card-body flex flex-row justify-center items-center">
                   <div className="card-actions justify-start">
                     <GiNightSleep className="text-primary text-2xl" />
@@ -77,7 +77,7 @@ const TrackProgress = () => {
         <HeartRate />
       </div>
 
-      <div className="lg:w-1/2 border border-blue-500">
+      <div className="lg:w-1/2 ">
         <ChartProgress/>
       </div>
      

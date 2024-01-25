@@ -1,4 +1,3 @@
-
 import {
   XAxis,
   YAxis,
@@ -56,43 +55,43 @@ const ChartProgress = () => {
   ];
   const data2 = [
     {
-      name: 'S',
+      name: "S",
       uv: 4000,
       cal: 2500,
       amt: 2400,
     },
     {
-      name: 'M',
+      name: "M",
       uv: 3000,
       cal: 2100,
       amt: 2210,
     },
     {
-      name: 'T',
+      name: "T",
       uv: 2000,
       cal: 1800,
       amt: 2290,
     },
     {
-      name: 'W',
+      name: "W",
       uv: 2780,
       cal: 2100,
       amt: 2000,
     },
     {
-      name: 'T',
+      name: "T",
       uv: 1890,
       cal: 2400,
       amt: 2181,
     },
     {
-      name: 'F',
+      name: "F",
       uv: 2390,
       cal: 1500,
       amt: 2500,
     },
     {
-      name: 'S',
+      name: "S",
       uv: 2800,
       cal: 2200,
       amt: 2100,
@@ -132,26 +131,25 @@ const ChartProgress = () => {
       <h2 className="text-2xl my-2 font-bold">Calories Burned</h2>
 
       <ResponsiveContainer width="100%" height={200}>
-  <AreaChart
-    width={500}
-    height={200}
-    data={data2}
-    margin={{
-      top: 10,
-      right: 30,
-      left: 0,
-      bottom: 0,
-    }}
-  >
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="name" />
-    <YAxis />
-    <Tooltip />
-    <Area type="monotone" dataKey="cal" stroke="#8884d8" fill="#8884d8" />
-    {/* Use dataKey="cal" instead of dataKey="pv" */}
-  </AreaChart>
-</ResponsiveContainer>
-
+        <AreaChart
+          width={500}
+          height={200}
+          data={data2}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Area type="monotone" dataKey="cal" stroke="#8884d8" fill="#8884d8" />
+          {/* Use dataKey="cal" instead of dataKey="pv" */}
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 };
