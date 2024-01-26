@@ -15,6 +15,7 @@ import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
 import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import PrivateRoute from "./PrivateRoute";
 
 const MyRouts = createBrowserRouter([
   {
@@ -30,10 +31,7 @@ const MyRouts = createBrowserRouter([
         path: "/about_us",
         element: <AboutUs></AboutUs>,
       },
-      {
-        path: "/services",
-        element: <div>This is Services</div>,
-      },
+     
       {
         path: "/contact_us",
         element: <ContactUs />,
@@ -50,31 +48,31 @@ const MyRouts = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element:<PrivateRoute><Dashboard /></PrivateRoute> ,
     children: [
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element:<PrivateRoute><Profile></Profile></PrivateRoute> ,
       },
       {
         path: "bmi_calculator",
-        element: <BmiCalculator />,
+        element: <PrivateRoute><BmiCalculator /></PrivateRoute>,
       },
       {
         path: "set_goal",
-        element: <SetGoal></SetGoal>,
+        element:<PrivateRoute><SetGoal></SetGoal></PrivateRoute> ,
       },
       {
         path: "tracking_progress",
-        element: <TrackProgress />,
+        element: <PrivateRoute><TrackProgress /></PrivateRoute>,
       },
       {
         path: "connect_app",
-        element: <ConnectApp></ConnectApp>,
+        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>,
       },
       {
         path: "set_goal/create_goal",
-        element: <CreateGoal></CreateGoal>,
+        element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute> ,
       },
     ],
   },
