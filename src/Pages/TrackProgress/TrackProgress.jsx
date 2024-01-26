@@ -8,7 +8,7 @@ import ChartProgress from "./ChartProgress";
 
 const TrackProgress = () => {
   const cardStyle =
-    "mx-auto my-2 px-5 text-center bg-emerald-50 flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+    "mx-auto my-2 px-5 text-center bg-emerald-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
   const percentage = 3056;
   const totalPercentage = (percentage / 10000) * 100;
   const progressBarStyles = {
@@ -23,7 +23,7 @@ const TrackProgress = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mt-4">
+      <div className="flex flex-col justify-center items-center mt-4 px-4">
         <h2 className="font-bold text-3xl md:text-left md:text-5xl">
           Daily <span className="text-primary">Activity</span>
         </h2>
@@ -55,7 +55,7 @@ const TrackProgress = () => {
             <div className=" lg:w-1/2 flex flex-col space-y-6">
               <div className="mt-6">
                 <div className="card bg-orange-50 mb-2">
-                  <div className="card-body flex flex-row justify-center items-center">
+                  <div className="card-body flex flex-row justify-center bmiNumber items-center">
                     <div className="card-actions justify-start">
                       <FaCarSide className="text-primary text-2xl" />
                     </div>
@@ -71,8 +71,8 @@ const TrackProgress = () => {
 
               <div className="">
                 <div className="card bg-sky-50 mb-1">
-                  <div className="card-body flex flex-row justify-center items-center">
-                    <div className="card-actions justify-start">
+                  <div className="card-body flex flex-row bmiNumber justify-center items-center">
+                    <div className="card-actions justify-start ">
                       <GiNightSleep className="text-primary text-2xl" />
                     </div>
                     <div className="">
