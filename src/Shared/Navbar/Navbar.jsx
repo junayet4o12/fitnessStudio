@@ -10,6 +10,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
+import { CgGym } from "react-icons/cg";
 
 function NavList() {
   const { user } = useAuth()
@@ -126,8 +127,8 @@ export function NavbarSimple() {
           href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5">
-          <h1 className="text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
-            Fitness
+          <h1 className="flex items-center text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
+            <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
             <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
           </h1>
         </Typography>
