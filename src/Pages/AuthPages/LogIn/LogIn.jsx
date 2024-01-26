@@ -25,6 +25,7 @@ const LogIn = () => {
       .then((res) => {
         toast.success("Logged in successfully", { id: toastId });
         console.log(res);
+       
         navigate(location?.state? location?.state : '/')
       })
       .catch((error) => {
