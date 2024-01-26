@@ -14,6 +14,8 @@ const Profile = () => {
     const dispatch = useDispatch()
     const { user } = useAuth()
     const { isLoading, user: userDetails } = useSelector(state => state.user)
+    const data = useSelector(state=> state)
+    console.log(data);
     const [edit, setedit] = useState(false)
     const [ageerr, setageerr] = useState('')
     const [openSuggetionsModal, setOpenSuggetionsModal] = useState(false);
@@ -25,8 +27,9 @@ const Profile = () => {
     if (isLoading) {
         return ''
     }
-    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px]'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px]'}   w-full bg-white p-3  border-primary rounded font-semibold  text-black z-10`
+
+    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px] cursor-not-allowed'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px] cursor-not-allowed'}   w-full  bg-white h-[50px]  border-primary rounded font-semibold  text-black`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
     const handleCancel = () => {
         reset()
@@ -61,7 +64,7 @@ const Profile = () => {
                     height,
                     gender
                 }
-                axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
+                axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
                         console.log(res?.data);
                         if (res?.data.modifiedCount > 0) {
@@ -275,7 +278,7 @@ const Profile = () => {
     let bmrInstruction = <>
         <DialogHeader className='py-3 text-xl'>Maintaining calory According to BMR.</DialogHeader>
         <DialogBody className='py-0'>
-            <ul className='list-disc px-5 text-sm space-y-2'>
+            <ul className='list-disc px-5 text-sm space-y-2 '>
                 <li>If you are  <strong>Sedentary (Little to no exercise)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.2))} calories</strong> in a day</li>
                 <li>If you are  <strong>Lightly Active (Light exercise/sports 1-3 days/week)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.375))} calories</strong> in a day</li>
                 <li>If you are  <strong>Moderately Active (Moderate exercise/sports 3-5 days/week)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.55))} calories</strong> in a day</li>
@@ -302,7 +305,7 @@ const Profile = () => {
     return (
         <div className='p-4'>
 
-            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7  gap-5   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
+            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7  gap-5   p-4 bg-orange-200 rounded my-5 shadow-2xl bmiNumber'>
                 <div className='flex flex-col justify-center items-center'>
                     <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
@@ -422,7 +425,7 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-4 bg-white absolute bottom-4 right-1 `}></div>
+                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-7 bg-white absolute bottom-3 right-1 `}></div>
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5`}>

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -10,6 +10,7 @@ const LogIn = () => {
   const [disable, setDisable] = useState(true);
   const { loginUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
   const {
     register,
     handleSubmit,
@@ -24,7 +25,8 @@ const LogIn = () => {
       .then((res) => {
         toast.success("Logged in successfully", { id: toastId });
         console.log(res);
-        navigate("/");
+       
+        navigate(location?.state? location?.state : '/')
       })
       .catch((error) => {
         console.log(error)

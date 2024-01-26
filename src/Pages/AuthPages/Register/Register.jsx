@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 const Register = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
   const axiosPublic = useAxiosPublic();
   const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
@@ -55,7 +56,8 @@ const Register = () => {
               }
             });
             toast.success("Register Successfully !", { id: toastId });
-            navigate("/");
+           
+            navigate(location?.state? location?.state : '/')
           })
           .catch((err) => {
             toast.error(err?.code, { id: toastId });
