@@ -7,7 +7,7 @@ import { SlFire } from "react-icons/sl";
 
 const HeartRate = () => {
   const cardStyle =
-    "mx-auto my-2 px-5 text-center bg-teal-50 flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+    "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
   const percentage = 1962;
 
   const totalPercentage = (percentage / 2800) * 100;
@@ -25,10 +25,10 @@ const HeartRate = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
-      <div className="w 1/2 flex flex-col space-y-6">
+      <div className="lg:w-1/2 flex flex-col space-y-6">
         <div className="mt-6">
-          <div className="card bg-sky-50 mb-2">
-            <div className="card-body flex flex-row justify-center items-center">
+          <div className="card bg-sky-50 mb-2 ">
+            <div className="card-body flex flex-row bmiNumber justify-center items-center">
               <div className="card-actions justify-start">
                 <FaHeartbeat className="text-primary text-2xl with-shadow" />
               </div>
@@ -42,7 +42,7 @@ const HeartRate = () => {
 
         <div className="">
           <div className="card bg-orange-50  mb-1">
-            <div className="card-body flex flex-row justify-center items-center">
+            <div className="card-body flex flex-row bmiNumber justify-center items-center">
               <div className="card-actions justify-start">
                 <GiNightSleep className="text-primary text-2xl" />
               </div>
