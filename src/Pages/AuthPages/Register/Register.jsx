@@ -56,6 +56,7 @@ const Register = () => {
               }
             });
             toast.success("Register Successfully !", { id: toastId });
+           
             navigate(location?.state? location?.state : '/')
           })
           .catch((err) => {
