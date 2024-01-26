@@ -29,12 +29,12 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/about_us",
-        element: <AboutUs></AboutUs>,
+        element: <PrivateRoute><AboutUs></AboutUs></PrivateRoute>,
       },
      
       {
         path: "/contact_us",
-        element: <ContactUs />,
+        element: <PrivateRoute><ContactUs></ContactUs></PrivateRoute>,
       },
       {
         path: "/register",

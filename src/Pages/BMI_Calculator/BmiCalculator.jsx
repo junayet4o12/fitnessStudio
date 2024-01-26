@@ -1,4 +1,3 @@
-import React from 'react'
 import BMIBanner from '../../Components/BMIBanner/BMIBanner'
 import { Helmet } from 'react-helmet-async'
 import BMImeaning from '../../Components/BMImeaning/BMImeaning'
@@ -9,7 +8,7 @@ const BmiCalculator = () => {
   return (
     <div className='p-[10px] mb-[100px]'>
   <Helmet>
-    <title>BMI Calculator - FitnessStudion</title>
+    <title>BMI Calculator - FitnessStudio</title>
   </Helmet>
       <BMIBanner/>
       <BMImeaning/>

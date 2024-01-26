@@ -5,7 +5,7 @@ import { FaCarSide } from "react-icons/fa";
 import { GiNightSleep } from "react-icons/gi";
 import HeartRate from "./HeartRate";
 import ChartProgress from "./ChartProgress";
-
+import {Helmet} from 'react-helmet-async'
 const TrackProgress = () => {
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-emerald-50 flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
@@ -23,12 +23,15 @@ const TrackProgress = () => {
 
   return (
     <div>
+       <Helmet>
+        <title>Tracking Progress - FitnessStudio</title>
+      </Helmet>
       <div className="flex flex-col justify-center items-center mt-4">
         <h2 className="font-bold text-3xl md:text-left md:text-5xl">
           Daily <span className="text-primary">Activity</span>
         </h2>
         <p className="font-medium text-xl mt-2">
-          Here are your Daily Activities. Check out the exciting things you've
+          Here are your Daily Activities. Check out the exciting things you have
           <br />
           accomplished today and plan for more success tomorrow.
         </p>
