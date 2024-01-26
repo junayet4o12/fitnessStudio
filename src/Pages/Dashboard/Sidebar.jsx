@@ -28,7 +28,7 @@ const Sidebar = () => {
             {/* Sidebar logo or Title */}
             <div className="p-4">
                 <h1 className="flex text-2xl gap-1 font-bold bg-primary shadow-lg shadow-gray-500 p-1 rounded-md">
-                    <CgGym className="text-3xl" /> Fitness
+                    <CgGym className="text-3xl text-white" /> Fitness
                     <span className="text-white">Studio</span>
                 </h1>
             </div>
