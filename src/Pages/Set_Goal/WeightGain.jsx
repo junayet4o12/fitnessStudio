@@ -11,7 +11,7 @@ const WeightGain = () => {
   };
 
   return (
-    <div className="pr-4 md:px-5 lg:px-10  lg:mt-10">
+    <div>
       <Title title="Manage Weight"></Title>
       <div className="flex flex-col lg:flex-row items-center justify-between gap-10 mt-5">
         <div className="flex-1">
