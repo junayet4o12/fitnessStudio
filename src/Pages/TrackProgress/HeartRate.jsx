@@ -25,7 +25,7 @@ const HeartRate = () => {
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
-      <div className="w-1/2 flex flex-col space-y-6">
+      <div className="lg:w-1/2 flex flex-col space-y-6">
         <div className="mt-6">
           <div className="card bg-sky-50 mb-2 ">
             <div className="card-body flex flex-row bmiNumber justify-center items-center">
