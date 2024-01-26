@@ -6,7 +6,7 @@ import { CgGym } from "react-icons/cg";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
-
+import {Helmet} from 'react-helmet-async'
 const DashboardNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -18,6 +18,9 @@ const DashboardNavbar = () => {
     return (
         <div className="md:hidden p-4 shadow-xl sticky top-0 z-30 rounded-bl-md rounded-br-md bg-white opacity-90">
             <div className="flex items-center justify-between">
+            <Helmet>
+        <title>Dashboard - FitnessStudio</title>
+      </Helmet>
                 <h1 className="flex text-2xl font-extrabold">
                     <CgGym className="text-3xl text-primary mr-1" /> Fitness
                     <span className="text-primary text-[31px]">Studio</span>
