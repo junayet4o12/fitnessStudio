@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CreateGoal = () => {
   const { user } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure()
   const buttonStyle =
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[160px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
   const { register, reset, handleSubmit } = useForm();
@@ -21,7 +21,7 @@ const CreateGoal = () => {
       goal_Type: data?.Goal_Type,
       start: data?.Start,
     };
-    axiosPublic.post("user_goal", goalInfo).then((res) => {
+    axiosSecure.post("user_goal", goalInfo).then((res) => {
       if (res?.data?.insertedId) {
         reset();
         toast.success("Goal Created Successfully!", { id: toastId });
@@ -30,7 +30,7 @@ const CreateGoal = () => {
   };
 
   return (
-    <div className="pr-4 md:px-5 lg:px-10 md:flex md:items-center md:justify-center h-full">
+    <div className="md:flex md:items-center md:justify-center h-full">
       <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-5 md:gap-10 lg:gap-20">
         <div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">

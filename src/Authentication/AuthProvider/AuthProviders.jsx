@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import PropTypes from 'prop-types'
@@ -42,6 +40,11 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
+        axiosPublic.post('/jwt', userInfo)
+        .then(res =>{
+          console.log(res.data)
+        
+        });
         console.log(userInfo);
       }
 

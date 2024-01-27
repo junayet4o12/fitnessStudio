@@ -64,7 +64,7 @@ const Profile = () => {
                     height,
                     gender
                 }
-                axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
+                axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
                         console.log(res?.data);
                         if (res?.data.modifiedCount > 0) {
