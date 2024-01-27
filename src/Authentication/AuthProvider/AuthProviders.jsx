@@ -25,8 +25,11 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, pass);
   };
-  const logOut = () => {
+  const logOut =async () => {
+
     setLoading(true);
+    await axiosPublic.post('/logout')
+    
     return signOut(auth);
   };
   const googleProvider = new GoogleAuthProvider();
