@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
+import useAuth from "../../Hooks/useAuth";
 
+import { Helmet } from 'react-helmet-async'
 const DashboardNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useAuth()
 
     // navbar icon toggle
     const toggleNavbar = () => {
@@ -18,10 +21,20 @@ const DashboardNavbar = () => {
     return (
         <div className="md:hidden p-4 shadow-xl sticky top-0 z-30 rounded-bl-md rounded-br-md bg-white opacity-90">
             <div className="flex items-center justify-between">
-                <h1 className="flex text-2xl font-extrabold">
-                    <CgGym className="text-3xl text-primary mr-1" /> Fitness
-                    <span className="text-primary text-[31px]">Studio</span>
-                </h1>
+                <Helmet>
+                    <title>Dashboard - FitnessStudio</title>
+                </Helmet>
+                <Link to={'/'}>
+                    <h1 className="flex text-2xl font-extrabold">
+                        <CgGym className="text-3xl text-primary mr-1" /> Fitness
+                        <span className="text-primary text-[31px]">Studio</span>
+                    </h1>
+                </Link>
+                <div className="avatar online">
+                    <div className="w-10 rounded-full">
+                        <img src={user?.photoURL} />
+                    </div>
+                </div>
                 <button onClick={toggleNavbar} className="text-primary text-xl md:hidden">
                     {isOpen ? <FaTimes /> : <FaBars />}
                 </button>

@@ -1,7 +1,7 @@
-// import React from 'react';
-
 import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import PropTypes from 'prop-types'
+
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -40,6 +40,11 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
+        // axiosPublic.post('/jwt', userInfo)
+        // .then(res =>{
+        //   console.log(res.data)
+        
+        // });
         console.log(userInfo);
       }
 
@@ -62,5 +67,8 @@ const AuthProviders = ({ children }) => {
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
+AuthProviders.propTypes ={
+  children: PropTypes.node.isRequired
+}
 
 export default AuthProviders;

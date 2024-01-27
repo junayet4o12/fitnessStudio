@@ -6,7 +6,7 @@ const Activity = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className="pr-4 md:px-5 lg:px-10  lg:mt-10">
+    <div>
       <Title title="Activity"></Title>
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-10 mt-5">
         <div className="flex-1">

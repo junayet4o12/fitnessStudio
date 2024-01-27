@@ -96,7 +96,7 @@ const Footer = () => {
             </p>
             <p className="flex gap-1 items-center mt-2">
               <PiPhoneCallBold className="text-3xl"></PiPhoneCallBold>
-              <span className="text-sm md:text-base lg:text-lg">
+              <span className="text-sm md:text-base lg:text-lg bmiNumber">
                 +880: 1454256543
               </span>
             </p>
