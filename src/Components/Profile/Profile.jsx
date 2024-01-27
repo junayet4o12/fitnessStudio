@@ -14,9 +14,9 @@ const Profile = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const { isLoading, user: userDetails } = useSelector(state => state.user)
-    const [edit, setedit] = useState(false)
+    const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
-    const [myPersonalInfo, setMypersonalInfo] = useState({})
+    const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
 
     // style Variable start
@@ -37,7 +37,7 @@ const Profile = () => {
         const bmrForFemale = 447.593 + ((9.247 * userDetails?.weight) + (3.098 * (userDetails?.height * 2.54))) - (4.330 * parseInt(age))
 
         const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
-        setMypersonalInfo({ myBMI, age, myBMR })
+        setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
     if (isLoading) {
         return ''
@@ -47,7 +47,7 @@ const Profile = () => {
 
     const handleCancel = () => {
         reset()
-        setedit(false)
+        setEdit(false)
     }
     const onSubmit = (data) => {
         setAgeErr('')
@@ -58,8 +58,8 @@ const Profile = () => {
         const inch = data?.inch;
         const gender = data?.gender;
         const height = feet * 12 + parseFloat(inch);
-        const isperfectAge = new Date() - new Date(birthDay);
-        const ageInYears = Math.floor(isperfectAge / 31556952000);
+        const isPerfectAge = new Date() - new Date(birthDay);
+        const ageInYears = Math.floor(isPerfectAge / 31556952000);
         console.log(ageInYears);
 
         if (ageInYears < 5) {
@@ -87,7 +87,7 @@ const Profile = () => {
                                 title: "Updated data successfully",
                                 timer: 1500
                             });
-                            setedit(false)
+                            setEdit(false)
                         }
                     })
                     .catch(err => {
@@ -199,7 +199,7 @@ const Profile = () => {
                         </div>
                     </form>
                     <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setedit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
+                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
                     </div>
                 </div>
             </div>

@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import useBMIsuggetions from './useBMIsuggetions';
-import useAgeSuggetions from './useAgeSuggetions';
-import useBMRSuggetions from './useBMRSuggetions';
+import { useState } from 'react';
+import useBMISuggestions from './useBMISuggestions';
+import useAgeSuggestions from './useAgeSuggestions';
+import useBMRSuggestions from './useBMRSuggestions';
 import { DialogHeader } from '@material-tailwind/react';
-import HealthSuggetionsModal from './HealthSuggetionsModal';
+import HealthSuggestionsModal from './HealthSuggestionsModal';
+import PropTypes from 'prop-types'
+
 
 const ProfileMain = ({ image, age, myBMI, myBMR }) => {
-    const [openSuggetionsModal, setOpenSuggetionsModal] = useState(false);
-    const BMISuggestions = useBMIsuggetions(myBMI);
-    const AgeSuggetions = useAgeSuggetions(age);
-    const BMRSuggetions = useBMRSuggetions(myBMR)
+    const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
+    const BMISuggestions = useBMISuggestions(myBMI);
+    const ageSuggestions = useAgeSuggestions(age);
+    const BMRSuggestions = useBMRSuggestions(myBMR)
     const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-orange-100 transition-all duration-500 hover:bg-white hover:border-red-600 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center'
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
 
-    const suggetions = (age && myBMI && myBMR) ? <>
-        {AgeSuggetions}
+    const suggestions = (age && myBMI && myBMR) ? <>
+        {ageSuggestions}
         <hr className='w-[90%] mx-auto mt-3 border-[1.3px]' />
         {BMISuggestions}
         <hr className='w-[90%] mx-auto mt-3 border-[1.3px]' />
-        {BMRSuggetions}
+        {BMRSuggestions}
     </> : <>
         <DialogHeader >Please Update Your Personal Data!!!</DialogHeader>
     </>
@@ -31,7 +33,7 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
                         <img className='w-full h-full rounded-full' src={image} alt="" />
                     </div>
                     <div>
-                        <button onClick={() => setOpenSuggetionsModal(true)} className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704] my-4`}>Personal Suggetions</button>
+                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704] my-4`}>Personal Suggestions</button>
                     </div>
                 </div>
                 <div className='w-full'>
@@ -58,9 +60,15 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
 
                 </div>
             </div>
-            <HealthSuggetionsModal open={openSuggetionsModal} setOpen={setOpenSuggetionsModal} suggetions={suggetions}></HealthSuggetionsModal>
+            <HealthSuggestionsModal open={openSuggestionsModal} setOpen={setOpenSuggestionsModal} suggestions={suggestions}></HealthSuggestionsModal>
         </div>
     );
 };
+ProfileMain.propTypes ={
+    image: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
+    myBMI: PropTypes.number.isRequired,
+    myBMR: PropTypes.number.isRequired
 
+}
 export default ProfileMain;

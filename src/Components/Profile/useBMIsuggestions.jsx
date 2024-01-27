@@ -1,8 +1,8 @@
 import { DialogBody, DialogHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
-const useBMIsuggetions = (BMI) => {
-    const [BMIsuggetions, setBMISuggestions] = useState('')
+const useBMISuggestions = (BMI) => {
+    const [BMIsuggestions, setBMISuggestions] = useState('')
     useEffect(() => {
         if (BMI < 18.5) {
             setBMISuggestions(
@@ -85,7 +85,7 @@ const useBMIsuggetions = (BMI) => {
         }
     }, [BMI]);
 
-    return BMIsuggetions;
+    return BMIsuggestions;
 };
 
-export default useBMIsuggetions;
+export default useBMISuggestions;

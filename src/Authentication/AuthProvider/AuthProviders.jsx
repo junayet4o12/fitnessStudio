@@ -15,23 +15,23 @@ import auth from "../../firebase/firebase.config";
 export const AuthContext = createContext(null);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setloading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
 
   const createUser = (email, pass) => {
     return createUserWithEmailAndPassword(auth, email, pass);
   };
   const loginUser = (email, pass) => {
-    setloading(true);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, pass);
   };
   const logOut = () => {
-    setloading(true);
+    setLoading(true);
     return signOut(auth);
   };
   const googleProvider = new GoogleAuthProvider();
   const googleLogIn = () => {
-    setloading(true);
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -40,15 +40,15 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
-        // axiosPublic.post('/jwt', userInfo)
-        // .then(res =>{
-        //   console.log(res.data)
+        axiosPublic.post('/jwt', userInfo)
+        .then(res =>{
+          console.log(res.data)
         
-        // });
+        });
         console.log(userInfo);
       }
 
-      setloading(false);
+      setLoading(false);
     });
     return () => {
       return unsubscribe();
