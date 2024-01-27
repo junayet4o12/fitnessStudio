@@ -40,11 +40,11 @@ const AuthProviders = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
-        axiosPublic.post('/jwt', userInfo)
-        .then(res =>{
-          console.log(res.data)
+        // axiosPublic.post('/jwt', userInfo)
+        // .then(res =>{
+        //   console.log(res.data)
         
-        });
+        // });
         console.log(userInfo);
       }
 
