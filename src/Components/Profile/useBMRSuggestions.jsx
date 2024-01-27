@@ -3,11 +3,11 @@
 import { DialogBody, DialogHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
-const useBMRSuggetions = (myBMR) => {
-    const [BMRsuggetions, setBMRsuggetions] = useState('')
+const useBMRSuggestions = (myBMR) => {
+    const [BMRSuggestions, setBMRSuggestions] = useState('')
 
     useEffect(() => {
-        setBMRsuggetions(<>
+        setBMRSuggestions(<>
             <DialogHeader className='py-3 text-xl'>Maintaining calory According to BMR.</DialogHeader>
             <DialogBody className='py-0'>
                 <ul className='list-disc px-5 text-sm space-y-2 '>
@@ -22,7 +22,8 @@ const useBMRSuggetions = (myBMR) => {
             </DialogBody>
         </>)
     }, [myBMR])
-    return BMRsuggetions;
+    return BMRSuggestions;
 };
 
-export default useBMRSuggetions;
+export default useBMRSuggestions;
+

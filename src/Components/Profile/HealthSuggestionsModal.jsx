@@ -1,7 +1,8 @@
 import { Button, Dialog, DialogFooter } from '@material-tailwind/react';
-import ModalBG from '../../assets/images/fitnessModalPic.jpg'
 import ModalBG2 from '../../assets/images/fitnessModalPic2.jpg'
-const HealthSuggetionsModal = ({ open, setOpen, suggetions }) => {
+import PropTypes from 'prop-types'
+
+const HealthSuggestionsModal = ({ open, setOpen, suggestions }) => {
     return (
         <div>
             <Dialog
@@ -15,7 +16,7 @@ const HealthSuggetionsModal = ({ open, setOpen, suggetions }) => {
                                 onClick={() => setOpen(false)} className='transition-all  px-2 duration-100 text-xl font-bold text-white sticky hover:text-gray-200  active:scale-90 active:text-gray-300'>X</button>
                         </div>
                         <div className='mt-[-20px]'>
-                            {suggetions}
+                            {suggestions}
                         </div>
                         <DialogFooter>
                             <Button
@@ -37,4 +38,9 @@ const HealthSuggetionsModal = ({ open, setOpen, suggetions }) => {
     );
 };
 
-export default HealthSuggetionsModal;
+HealthSuggestionsModal.propTypes = {
+    open: PropTypes.bool.isRequired,
+    setOpen: PropTypes.func.isRequired,
+    suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  };
+export default HealthSuggestionsModal;
