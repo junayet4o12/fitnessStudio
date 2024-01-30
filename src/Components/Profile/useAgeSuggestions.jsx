@@ -103,7 +103,7 @@ const useAgeSuggestions = (age) => {
             </>)
         }
     }, [age])
-    return useAgeSuggestions;
+    return ageSuggestions;
 
 };
 

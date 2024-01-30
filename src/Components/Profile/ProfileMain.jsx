@@ -64,11 +64,11 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
         </div>
     );
 };
-ProfileMain.propTypes ={
-    image: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired,
-    myBMI: PropTypes.number.isRequired,
-    myBMR: PropTypes.number.isRequired
+// ProfileMain.propTypes ={
+//     image: PropTypes.string.isRequired,
+//     age: PropTypes.number.isRequired,
+//     myBMI: PropTypes.number.isRequired,
+//     myBMR: PropTypes.number.isRequired
 
-}
+// }
 export default ProfileMain;

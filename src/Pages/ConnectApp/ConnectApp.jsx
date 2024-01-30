@@ -1,5 +1,6 @@
 import Title from "../../Components/Title/Title";
 import {Helmet} from 'react-helmet-async'
+import Strava from "./Strava";
 const ConnectApp = () => {
     const LinkStyle =
         "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
@@ -45,13 +46,9 @@ const ConnectApp = () => {
                     </div>
                     <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
                 </div>
-                <div id="connect_app" className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-                    <div className="items-center flex gap-4">
-                        <img src="https://i.ibb.co/W2p5GP6/api-clients-182-1-10-0-90660.png" className='h-8' alt="" />
-                        <p className="">MapMyWalk</p>
-                    </div>
-                    <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
-                </div>
+                
+                    <Strava></Strava>
+                
 
             </div>
         </div>

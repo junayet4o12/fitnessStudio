@@ -8,11 +8,12 @@ import Swal from 'sweetalert2';
 import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Profile = () => {
     const dispatch = useDispatch()
     const { user } = useAuth()
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosSecure()
     const { isLoading, user: userDetails } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
