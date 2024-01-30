@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const BlogCards = ({blogs}) => {
   return (
@@ -7,7 +8,9 @@ const BlogCards = ({blogs}) => {
             <div className='shadow-xl rounded-md' key={blog.id}>
                     <img src={blog.BlogImg} className='w-full object-cover h-[200px] rounded-md' />
                 <div className='p-[20px] flex flex-col gap-3'>
-                    <h1 className='font-bold text-xl text-primary'>{blog.Blogname}</h1>
+                    <Link to={`/blogs/${blog.id}`}>
+                        <h1 className='font-bold text-xl text-primary'>{blog.Blogname}</h1>
+                    </Link>
                     <p>{blog.Blog.slice(0,100)}...</p>
                 </div>
                     <div className='w-[100%] h-[2px] bg-secondary'></div>
