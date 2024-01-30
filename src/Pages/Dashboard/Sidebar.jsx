@@ -4,11 +4,11 @@ import toast from "react-hot-toast";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
-import { FaHome, FaPhoneAlt, FaUserAlt } from "react-icons/fa";
+import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
-
+import { FaPenNib } from "react-icons/fa";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -53,6 +53,15 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
+                        <NavLink to="/dashboard/BlogFrom"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaPenNib  /> Write a Blog
+                        </NavLink>
+                    </li>
+        <li>
           <NavLink
             to="/dashboard/set_goal"
             className={({ isActive, isPending }) =>
@@ -89,7 +98,12 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink to="/about_us">
-            <FaBookAtlas /> About Us
+            <FaUsers /> About Us
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/blogs">
+            <FaBookAtlas /> Blogs
           </NavLink>
         </li>
         <li>

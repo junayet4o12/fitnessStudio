@@ -6,6 +6,7 @@ import { CgGym } from "react-icons/cg";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
+import { FaPenNib } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 
 import { Helmet } from 'react-helmet-async'
@@ -30,14 +31,16 @@ const DashboardNavbar = () => {
                         <span className="text-primary text-[31px]">Studio</span>
                     </h1>
                 </Link>
-                <div className="avatar online">
-                    <div className="w-10 rounded-full">
-                        <img src={user?.photoURL} />
+                <div className="flex gap-2">
+                    <div className="avatar online">
+                        <div className="w-8 rounded-full">
+                            <img src={user?.photoURL} />
+                        </div>
                     </div>
+                    <button onClick={toggleNavbar} className="text-primary text-xl md:hidden">
+                        {isOpen ? <FaTimes /> : <FaBars />}
+                    </button>
                 </div>
-                <button onClick={toggleNavbar} className="text-primary text-xl md:hidden">
-                    {isOpen ? <FaTimes /> : <FaBars />}
-                </button>
             </div>
             {/* Responsive Navbar for small device */}
             {/* {isOpen && ( */}
@@ -62,6 +65,15 @@ const DashboardNavbar = () => {
                             }
                         >
                             <FaCalculator /> BMI Calculator
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/BlogFrom"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaPenNib  /> Write a Blog
                         </NavLink>
                     </li>
                     <li>
