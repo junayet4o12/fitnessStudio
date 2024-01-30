@@ -15,6 +15,7 @@ import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
 import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 
 const MyRouts = createBrowserRouter([
@@ -29,7 +30,19 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/about_us",
+<<<<<<< HEAD
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogpage/>
+      },
+      {
+        path: "/services",
+        element: <div>This is Services</div>,
+=======
         element: <PrivateRoute><AboutUs></AboutUs></PrivateRoute>,
+>>>>>>> 055827165a8fa45d7929df31a992c660b84f6815
       },
      
       {
