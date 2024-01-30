@@ -30,7 +30,6 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/about_us",
-<<<<<<< HEAD
         element: <AboutUs></AboutUs>,
       },
       {
@@ -40,9 +39,6 @@ const MyRouts = createBrowserRouter([
       {
         path: "/services",
         element: <div>This is Services</div>,
-=======
-        element: <PrivateRoute><AboutUs></AboutUs></PrivateRoute>,
->>>>>>> 055827165a8fa45d7929df31a992c660b84f6815
       },
      
       {

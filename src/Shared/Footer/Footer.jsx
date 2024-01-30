@@ -66,21 +66,28 @@ const Footer = () => {
             <p>
               <Link
                 to="/"
-                className="lg:text-lg lg:font-semibold underline hover:text-blue-600">
+                className="lg:text-lg lg:font-semibold underline hover:text-primary">
                 Home
               </Link>
             </p>
             <p>
               <Link
                 to="/about_us"
-                className="lg:text-lg lg:font-semibold underline hover:text-blue-600">
+                className="lg:text-lg lg:font-semibold underline hover:text-primary">
                 About Us
               </Link>
             </p>
             <p>
               <Link
+                to="/blogs"
+                className="lg:text-lg lg:font-semibold underline hover:text-primary">
+                Blogs
+              </Link>
+            </p>
+            <p>
+              <Link
                 to="/contact"
-                className="lg:text-lg lg:font-semibold underline hover:text-blue-600">
+                className="lg:text-lg lg:font-semibold underline hover:text-primary">
                 Contact
               </Link>
             </p>
