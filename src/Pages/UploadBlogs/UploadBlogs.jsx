@@ -9,7 +9,8 @@ const UploadBlogs = () => {
         </Helmet>
         <div className='flex flex-col items-center gap-[20px]'>
             <h1 className='text-center text-2xl font-bold'>Write a blog</h1>
-            <div className='bg-primary w-[70%] h-[5px] rounded-box'></div>
+            <div className='bg-primary w-[60%] md:w-[20%] h-[5px] rounded-box'></div>
+            <p className='text-xl text-secondary font-[500]'>Ready to inspire others on their fitness journey? Let's make your voice heard</p>
         </div>
       <form className='my-[50px] flex flex-col gap-3'>
         <div className='flex flex-col gap-[20px] items-start w-full'>
