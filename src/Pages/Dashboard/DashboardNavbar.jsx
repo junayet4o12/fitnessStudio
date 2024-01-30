@@ -30,14 +30,16 @@ const DashboardNavbar = () => {
                         <span className="text-primary text-[31px]">Studio</span>
                     </h1>
                 </Link>
-                <div className="avatar online">
-                    <div className="w-10 rounded-full">
-                        <img src={user?.photoURL} />
+                <div className="flex gap-2">
+                    <div className="avatar online">
+                        <div className="w-8 rounded-full">
+                            <img src={user?.photoURL} />
+                        </div>
                     </div>
+                    <button onClick={toggleNavbar} className="text-primary text-xl md:hidden">
+                        {isOpen ? <FaTimes /> : <FaBars />}
+                    </button>
                 </div>
-                <button onClick={toggleNavbar} className="text-primary text-xl md:hidden">
-                    {isOpen ? <FaTimes /> : <FaBars />}
-                </button>
             </div>
             {/* Responsive Navbar for small device */}
             {/* {isOpen && ( */}

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
-import { FaHome, FaPhoneAlt, FaUserAlt } from "react-icons/fa";
+import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
@@ -89,7 +89,12 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink to="/about_us">
-            <FaBookAtlas /> About Us
+            <FaUsers /> About Us
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/blogs">
+            <FaBookAtlas /> Blogs
           </NavLink>
         </li>
         <li>
