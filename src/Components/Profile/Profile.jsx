@@ -7,30 +7,50 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
+import ProfileMain from './ProfileMain';
 
 const Profile = () => {
     const dispatch = useDispatch()
     const { user } = useAuth()
-    const { isLoading, error, user: userDetails } = useSelector(state => state.user)
-    const [edit, setedit] = useState(false)
-    const [ageerr, setageerr] = useState('')
-    const { register, handleSubmit, watch, reset, formState: { errors }, } = useForm()
     const axiosPublic = useAxiosPublic()
+    const { isLoading, user: userDetails } = useSelector(state => state.user)
+    const [edit, setEdit] = useState(false)
+    const [ageErr, setAgeErr] = useState('')
+    const [myPersonalInfo, setMyPersonalInfo] = useState({})
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
+
+    // style Variable start
+
+    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px] cursor-not-allowed'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px] cursor-not-allowed'}   w-full  bg-white h-[50px]  border-primary rounded font-semibold  text-black`
+    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
+
+    // style Variable end
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user, edit])
+    useEffect(() => {
+        const myBMI = (userDetails.weight / Math.pow(userDetails.height / 39.37, 2)).toFixed(2)
+        const age = userDetails.birthDay && Math.floor((new Date() - new Date(userDetails.birthDay)) / 31556952000)
+
+        const bmrForMale = 88.362 + (13.397 * userDetails.weight) + (4.799 * (userDetails?.height * 2.54)) - (5.677 * parseInt(age))
+        const bmrForFemale = 447.593 + ((9.247 * userDetails?.weight) + (3.098 * (userDetails?.height * 2.54))) - (4.330 * parseInt(age))
+
+        const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
+        setMyPersonalInfo({ myBMI, age, myBMR })
+    }, [userDetails])
     if (isLoading) {
         return ''
     }
-    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px]'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px]'}   w-full bg-white p-3  border-primary rounded font-semibold  text-black z-10`
-    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
+
+    const { age, myBMI, myBMR } = myPersonalInfo;
+
     const handleCancel = () => {
         reset()
-        setedit(false)
+        setEdit(false)
     }
     const onSubmit = (data) => {
-        setageerr('')
+        setAgeErr('')
         const name = data?.name;
         const birthDay = data?.birthDay;
         const weight = parseFloat(data?.weight);
@@ -38,12 +58,12 @@ const Profile = () => {
         const inch = data?.inch;
         const gender = data?.gender;
         const height = feet * 12 + parseFloat(inch);
-        const isperfectAge = new Date() - new Date(birthDay);
-        const ageInYears = Math.floor(isperfectAge / 31556952000);
+        const isPerfectAge = new Date() - new Date(birthDay);
+        const ageInYears = Math.floor(isPerfectAge / 31556952000);
         console.log(ageInYears);
 
         if (ageInYears < 5) {
-            setageerr('Make sure Your age is more than 5')
+            setAgeErr('Make sure Your age is more than 5')
             return
         }
         updateProfile(auth.currentUser, {
@@ -58,7 +78,7 @@ const Profile = () => {
                     height,
                     gender
                 }
-                axiosPublic.put(`/upade_user_data/${user?.email}`, personalData)
+                axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
                         console.log(res?.data);
                         if (res?.data.modifiedCount > 0) {
@@ -67,7 +87,7 @@ const Profile = () => {
                                 title: "Updated data successfully",
                                 timer: 1500
                             });
-                            setedit(false)
+                            setEdit(false)
                         }
                     })
                     .catch(err => {
@@ -78,72 +98,14 @@ const Profile = () => {
                 console.log(err);
             })
     }
-    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-orange-100 transition-all duration-500 hover:bg-white hover:border-red-600 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center'
-    
-    const BMI = (userDetails.weight / Math.pow(userDetails.height / 39.37, 2)).toFixed(2)
-    const age = Math.floor((new Date() - new Date(userDetails.birthDay)) / 31556952000)
-    const bmrForMale = 88.362 + (13.397 * userDetails.weight) + (4.799 * (userDetails?.height * 2.54)) - (5.677 * parseInt(age))
-    // 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) – (5.677 x age in years)
-    const bmrForFemale = 447.593 + ((9.247 * userDetails?.weight) + (3.098 * (userDetails?.height * 2.54))) - (4.330 * parseInt(age))
-    // 447.593+(9.247×70)+(3.098×(70×2.54))−(4.330×22)
-    // 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) – (4.330 x age in years)
-    const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
-    console.log(isNaN(myBMR));
+
+
+
     return (
         <div className='p-4'>
-            {/* <div className='profile-Status-Section w-full max-w-[450px] mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-start sm:justify-start   py-7  gap-3   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
-                <div className='w-32 h-32 min-w-32 min-h-32 p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
-                    <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
-                </div>
-                <div className='text-sm font-medium w-[90%] space-y-3'>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>Connected With</span>
-                        <span className='text-base'>0 Friend</span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My Age</span>
-                        <span className=' text-base '>{age ? `${age} Year` : 'Update Data'} </span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My BMI</span>
-                        <span className=' text-base'>{!isNaN(BMI) ? `${BMI} kg/m` : 'Update Data'}  {!isNaN(BMI) ? <sup> 2</sup> : ''}</span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My BMR</span>
-                        <span className=' text-base'>
-                            {!isNaN(myBMR) ? `${myBMR} Cal/Day` : 'Update Data'}
-                        </span>
-                    </p>
-                </div>
-            </div> */}
-            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-evenly items-center sm:items-start sm:justify-start   py-7  gap-3   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
-                <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
-                lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
-                    <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
-                </div>
-                <div className='text-sm font-medium w-[90%] lg:w-[80%]  grid grid-cols-2 md:grid-cols-2 gap-2 my-auto'>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>Connected With</span>
-                        <span className='text-base'>0 Friend</span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My Age</span>
-                        <span className=' text-base '>{age ? `${age} Year` : 'Update Data'} </span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My BMI</span>
-                        <span className=' text-base'>{!isNaN(BMI) ? `${BMI} kg/m` : 'Update Data'}  {!isNaN(BMI) ? <sup> 2</sup> : ''}</span>
-                    </p>
-                    <p className={infoStyle}>
-                        <span className='font-bold text-primary'>My BMR</span>
-                        <span className=' text-base'>
-                            {!isNaN(myBMR) ? `${myBMR} Cal/Day` : 'Update Data'}
-                        </span>
-                    </p>
-                </div>
-            </div>
+            <ProfileMain image={userDetails?.image} age={age} myBMI={myBMI} myBMR={myBMR}></ProfileMain>
             <div>
-                <div className='w-full max-w-[450px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
+                <div className='w-full max-w-[500px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
                     <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
                     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                         {/* name  */}
@@ -164,7 +126,7 @@ const Profile = () => {
                                 {...register("birthDay")}
                                 type={edit ? 'date' : 'text'}
                                 className={`${inputFieldStyle} `} placeholder='Date of Birth' defaultValue={userDetails?.birthDay || 'Not Given'} />
-                            <span className="text-sm font-bold text-red-500">{ageerr}</span>
+                            <span className="text-sm font-bold text-red-500">{ageErr}</span>
                         </div>
                         {/* weight  */}
                         <div>
@@ -228,7 +190,7 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-4 bg-white absolute bottom-4 right-1 `}></div>
+                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-7 bg-white absolute bottom-3 right-1 `}></div>
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5`}>
@@ -237,11 +199,10 @@ const Profile = () => {
                         </div>
                     </form>
                     <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setedit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
+                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

@@ -1,11 +1,14 @@
 import Title from "../../Components/Title/Title";
-
+import {Helmet} from 'react-helmet-async'
 const ConnectApp = () => {
     const LinkStyle =
         "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
 
     return (
         <div >
+             <Helmet>
+        <title>Connected-App - FitnessStudio</title>
+      </Helmet>
 
             <Title title={"Seamless Connection"}></Title>
 
