@@ -19,6 +19,7 @@ import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
+import FitbitTerms from "../Components/Terms & Conditions/FitbitTerms";
 
 const MyRouts = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const MyRouts = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>,
       },
+      {
+        path:'/permission',
+        element:<FitbitTerms></FitbitTerms>
+      }
     ],
   },
   {
