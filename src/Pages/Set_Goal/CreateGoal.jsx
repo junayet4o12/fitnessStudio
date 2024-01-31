@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CreateGoal = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const buttonStyle =
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[160px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
   const { register, reset, handleSubmit } = useForm();
@@ -30,7 +30,7 @@ const CreateGoal = () => {
   };
 
   return (
-    <div className="md:flex md:items-center md:justify-center h-full">
+    <div className="md:flex md:items-center md:justify-center min-h-screen">
       <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-5 md:gap-10 lg:gap-20">
         <div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
