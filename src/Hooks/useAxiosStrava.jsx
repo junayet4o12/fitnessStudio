@@ -10,5 +10,5 @@ const axiosStrava = axios.create({
 const useAxiosStrava = () => {
     return axiosStrava
 };
-
+ 
 export default useAxiosStrava;
