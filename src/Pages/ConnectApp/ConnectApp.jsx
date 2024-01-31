@@ -1,5 +1,5 @@
 import Title from "../../Components/Title/Title";
-import {Helmet} from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import Strava from "./Strava";
 const ConnectApp = () => {
     const LinkStyle =
@@ -7,9 +7,9 @@ const ConnectApp = () => {
 
     return (
         <div >
-             <Helmet>
-        <title>Connected-App - FitnessStudio</title>
-      </Helmet>
+            <Helmet>
+                <title>Connected-App - FitnessStudio</title>
+            </Helmet>
 
             <Title title={"Seamless Connection"}></Title>
 
@@ -46,9 +46,15 @@ const ConnectApp = () => {
                     </div>
                     <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
                 </div>
-                
-                    <Strava></Strava>
-                
+
+
+
+                <Strava></Strava>
+
+
+
+
+
 
             </div>
         </div>
