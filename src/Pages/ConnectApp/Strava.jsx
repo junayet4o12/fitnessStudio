@@ -11,6 +11,7 @@ const Strava = () => {
     const [exchangeCode, setExchangeCode] = useState('')
     const [isRegister, setIsRegister] = useState(localStorage.getItem('stravaKey'))
     const axiosStrava = useAxiosStrava()
+    const axiosStravaFetch = useAxiosStravaFetch()
     const handleAuthorize = async () => {
         if (exchangeCode) {
             console.log('already done', exchangeCode);
@@ -51,22 +52,37 @@ const Strava = () => {
                     .catch(err => {
                         console.log(err?.message);
                     })
-            } 
+            }
         }
         else {
             console.log('eroi');
         }
     }, []);
    
-    
+    // const handleGetData = () => {
+    //     console.log('hello', localStorage.getItem('stravaKey'));
+    //     axiosStravaFetch.get('/athlete/activities', {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('stravaKey')}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }) 
+    //     .then(res=> {
+    //         console.log(res?.data);
+    //     })
+    //     .catch(err=> {
+    //         console.log(err?.message);
+    //         localStorage.removeItem('stravaKey')
+    //     })
+    // }
     return (
 
         <div id="connect_app" className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-            <div className="items-center flex gap-4">
+            <div className="items-center flex gap-4 ">
                 <img src={stravaImg} className='h-8 rounded' alt="" />
                 <p className="">Strava</p>
             </div>
-            <button disabled={isRegister} onClick={handleAuthorize} className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">{isRegister ? 'Connected' : 'Connect'}</button>
+            <button disabled={isRegister} onClick={handleAuthorize} className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300 ml-auto">{isRegister ? 'Connected' : 'Connect'}</button>
             <br />
 
         </div>
