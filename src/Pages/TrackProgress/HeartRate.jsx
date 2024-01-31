@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import { GiNightSleep } from "react-icons/gi";
-import { CircularProgressbar,  } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 // import { IoFootstepsOutline } from "react-icons/io5";
-import {  FaHeartbeat } from "react-icons/fa";
+import { FaHeartbeat } from "react-icons/fa";
 import { SlFire } from "react-icons/sl";
 
-const HeartRate = () => {
+const HeartRate = ({ heartRateData }) => {
+  console.log(heartRateData);
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
-  const percentage = 1962;
 
+  const percentage = heartRateData?.percentage || 0;
   const totalPercentage = (percentage / 2800) * 100;
 
   const progressBarStyles = {
@@ -19,7 +21,7 @@ const HeartRate = () => {
     text: {
       fill: "#FF4804",
       fontSize: "10px",
-      fontFamily: 'Poppins',
+      fontFamily: "Poppins",
     },
   };
 
@@ -34,7 +36,7 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Heart Rate</p>
-                <span className="text-xl font-semibold bmiNumber">89 bmp</span>
+               <span className="text-xl font-semibold bmiNumber">{heartRateData?.bpm} bpm</span>
               </div>
             </div>
           </div>
@@ -48,7 +50,7 @@ const HeartRate = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">Water</p>
-                <span className="text-xl font-semibold bmiNumber">2.4 litre</span>
+                <span className="text-xl font-semibold bmiNumber">{heartRateData?.waterConsumed} litre</span>
               </div>
             </div>
           </div>
