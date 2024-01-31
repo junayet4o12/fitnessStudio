@@ -34,16 +34,16 @@ const BlogSlider = ({blogs}) => {
         {
             blogs.map(blog=>
                 <div
-                key={blog.id}
+                key={blog?._id}
                 style={{
-                    backgroundImage: `url(${blog.BlogImg})`,
+                    backgroundImage: `url(${blog.blogImg})`,
                     backgroundPosition:"center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover"
             }}
                 className="h-[250px] md:h-[350px] mb-[25px] md:mb-[50px] flex flex-col items-start justify-end object-contain ">
                     {/* <img src={blog.BlogImg}/> */}
-                    <h1 className="text-xl md:text-5xl font-bold text-white bg-primary w-full bg-opacity-[0.8] p-[10px]">{blog.Blogname}</h1>
+                    <h1 className="text-xl md:text-5xl font-bold text-white bg-primary w-full bg-opacity-[0.8] p-[10px]">{blog.blogName}</h1>
                 </div>
             )
         }
