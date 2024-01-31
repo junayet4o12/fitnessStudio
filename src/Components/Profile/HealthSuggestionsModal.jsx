@@ -38,9 +38,9 @@ const HealthSuggestionsModal = ({ open, setOpen, suggestions }) => {
     );
 };
 
-HealthSuggestionsModal.propTypes = {
-    open: PropTypes.bool.isRequired,
-    setOpen: PropTypes.func.isRequired,
-    suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
+// HealthSuggestionsModal.propTypes = {
+//     open: PropTypes.bool.isRequired,
+//     setOpen: PropTypes.func.isRequired,
+//     suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
+//   };
 export default HealthSuggestionsModal;
