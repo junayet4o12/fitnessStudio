@@ -15,7 +15,10 @@ import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
 import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 import ContactUs from "../Pages/ContactUs/ContactUs";
+import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
+import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
+import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
 
 const MyRouts = createBrowserRouter([
   {
@@ -29,7 +32,19 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/about_us",
-        element: <PrivateRoute><AboutUs></AboutUs></PrivateRoute>,
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogpage/>,
+      },
+      {
+        path: "/blogs/:id",
+        element: <DynamicBlogpage/>,
+      },
+      {
+        path: "/services",
+        element: <div>This is Services</div>,
       },
      
       {
@@ -48,7 +63,7 @@ const MyRouts = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element:<PrivateRoute><Dashboard /></PrivateRoute> ,
+    element:<Dashboard /> ,
     children: [
       {
         path: "profile",
@@ -57,6 +72,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "bmi_calculator",
         element: <PrivateRoute><BmiCalculator /></PrivateRoute>,
+      },
+      {
+        path: "BlogFrom",
+        element: <UploadBlogs />,
       },
       {
         path: "set_goal",
