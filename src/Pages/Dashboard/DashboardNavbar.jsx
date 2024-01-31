@@ -6,6 +6,7 @@ import { CgGym } from "react-icons/cg";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
+import { FaPenNib } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 
 import { Helmet } from 'react-helmet-async'
@@ -64,6 +65,15 @@ const DashboardNavbar = () => {
                             }
                         >
                             <FaCalculator /> BMI Calculator
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/BlogFrom"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaPenNib  /> Write a Blog
                         </NavLink>
                     </li>
                     <li>
