@@ -69,7 +69,7 @@ const UpdateBlogs = ({ blog, refetch }) => {
                             <div className="label">
                                 <span className="label-text text-lg font-semibold">Blog Image:</span>
                             </div>
-                            <textarea name="blogDes" type="text" defaultValue={blogDes} className="textarea textarea-error textarea-lg p-2 text-sm w-full" ></textarea>
+                            <textarea name="blogDes" type="text" defaultValue={blogDes} className="textarea textarea-error textarea-lg p-2 text-sm w-full min-h-[150px] max-h-[150px]" ></textarea>
                         </label>
                         <button 
                         className="px-5 py-2 mt-2 text-sm flex gap-2 uppercase bg-primary rounded-lg text-white font-semibold hover:shadow-xl hover:shadow-gray-400 transition duration-700 ease-in-out">Update
