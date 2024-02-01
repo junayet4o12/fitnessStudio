@@ -19,6 +19,7 @@ import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
+import MyBlogs from "../Components/MyBlogs/MyBlogs";
 
 const MyRouts = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "set_goal/create_goal",
         element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute> ,
+      },
+      {
+        path: "my_blogs",
+        element: <PrivateRoute><MyBlogs /></PrivateRoute> ,
       },
     ],
   },
