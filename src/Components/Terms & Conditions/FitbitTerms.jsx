@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 const FitbitTerms = () => {
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [exchangeCode, setExchangeCode] = useState('')
-    const [accessToken,setAccessToken] = useState('')
     const axiosFitbitAccess = useAxiosFitbitAccess()
     const navigate = useNavigate()
 
@@ -28,7 +27,6 @@ const FitbitTerms = () => {
                     const token = res.data.accessToken.access_token
                     console.log(token)
                     localStorage.setItem('Authorization', token)
-                    setAccessToken(token)
                     navigate('/dashboard/connect_app')
                 })
         }
