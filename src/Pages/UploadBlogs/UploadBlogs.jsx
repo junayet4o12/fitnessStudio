@@ -64,44 +64,45 @@ const UploadBlogs = () => {
             <div className='flex flex-col items-center gap-[20px]'>
                 <h1 className='text-center text-2xl font-bold'>Write a blog</h1>
                 <div className='bg-primary w-[60%] md:w-[20%] h-[5px] rounded-box'></div>
-                <p className='text-xl text-secondary font-[500]'>Ready to inspire others on their fitness journey? Let's make your voice heard</p>
+                <p className='text-md md:text-xl text-secondary font-[500] text-center'>Ready to inspire others on their fitness journey? Let's make your voice heard</p>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className='my-[50px] flex flex-col gap-3'>
-                <div className='flex flex-col gap-[20px] items-start w-full'>
-                    <label htmlFor='blogName'
+            <form onSubmit={handleSubmit(onSubmit)} className='border-2 border-secondary my-[50px] flex flex-col gap-3 bg-opacity-70 rounded-xl formStyle'>
+            <div className='flex flex-col gap-[20px] items-start w-full'>
+                    {/* <label htmlFor='blogName'
+                        className='font-bold text-xl'>
+                        Blog name:
+                    </label> */}
+                    <input
+                        {...register("blogname", { required: true })}
+                        className='border-b-[3px] border-secondary rounded-t-xl outline-none w-full p-[10px]'
+                        type="text" name="blogname" placeholder='Blog name' id="blogname" />
+                </div>
+            <div className='flex flex-col gap-[20px] items-start w-full'>
+                    {/* <label htmlFor='blogName'
                         className='font-bold text-xl'>
                         Blog Image:
-                    </label>
+                    </label> */}
                     <input
                         {...register("img", { required: true })}
                         className='border-b-[3px] border-secondary outline-none w-full p-[10px]'
                         type="file" name="img" placeholder='blog name' id="img" />
                 </div>
+                
                 <div className='flex flex-col gap-[20px] items-start w-full'>
-                    <label htmlFor='blogName'
-                        className='font-bold text-xl'>
-                        Blog name:
-                    </label>
-                    <input
-                        {...register("blogname", { required: true })}
-                        className='border-b-[3px] border-secondary outline-none w-full p-[10px]'
-                        type="text" name="blogname" placeholder='blog name' id="blogname" />
-                </div>
-                <div className='flex flex-col gap-[20px] items-start w-full'>
-                    <label htmlFor='blogName'
+                    {/* <label htmlFor='blogName'
                         className='font-bold text-xl'>
                         Blog:
-                    </label>
+                    </label> */}
                     <textarea
                         {...register("blog", { required: true })}
                         required
-                        className='border-b-[3px] border-secondary outline-none w-full p-[10px] min-h-[250px] h-[250px] max-h-[250px]'
+                        className=' outline-none w-full p-[10px] min-h-[250px] h-[250px] max-h-[250px]'
                         type="text" name="blog" placeholder='Whats on your mind?' id="blog" />
                 </div>
                 <button
-                    className='bg-primary text-white font-[600] p-[10px] text-xl rounded-md'
+                    className='bg-secondary text-white font-[600] p-[10px] text-xl rounded-md'
                     type='submit'>
-                    Submit
+                    Publish
                 </button>
             </form>
         </div>
