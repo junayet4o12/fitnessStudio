@@ -36,9 +36,9 @@ const BlogCards = ({blogs}) => {
       </div>
     <div className='hidden md:flex flex-col w-[25%]'>
         <h1 className='border-l-2 border-secondary pl-[5px] font-[500] text-xl'>Latest Blogs:</h1>
-        <div className='flex flex-col gap-4 my-[25px]'>
+        <div className='flex flex-col gap-4 my-[25px]'> 
             {
-                blogs.map((blog)=>
+                blogs.map((blog)=> 
                 <div key={blog._id} className='w-full flex gap-5 items-center shadow-lg rounded-md'>
                     <img className='h-[100px] w-[45%] object-contain' src={blog.blogImg} alt="" />
                     <Link to={`/blogs/${blog._id}`}>
