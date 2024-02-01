@@ -5,12 +5,13 @@ import { FaCarSide } from "react-icons/fa";
 import { GiNightSleep } from "react-icons/gi";
 import HeartRate from "./HeartRate";
 import ChartProgress from "./ChartProgress";
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from "react-helmet-async";
+// import { useEffect } from "react";
+import { useGetTrackProQuery } from "./api/baseApi";
 const TrackProgress = () => {
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-emerald-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
-  const percentage = 3056;
-  const totalPercentage = (percentage / 10000) * 100;
+
   const progressBarStyles = {
     path: {
       stroke: "#FF4804",
@@ -20,6 +21,22 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
+  const { data: track, isLoading } = useGetTrackProQuery();
+  if (isLoading) {
+    return <p className="">loading</p>;
+  }
+  // console.log(track);
+
+  const dailyActivities = track[0]?.trackProgress.dailyActivities;
+  const heartRateData = track[0]?.trackProgress.heartRate;
+  const { weightTracking, caloriesBurned } = track[0]?.trackProgress || {};
+  console.log(weightTracking, caloriesBurned);
+
+ 
+  const percentage =dailyActivities?.steps.percentage ;
+  console.log(percentage);
+  const totalPercentage = (percentage / 10000) * 100;
+  console.log(totalPercentage);
 
   return (
     <div>
@@ -32,7 +49,8 @@ const TrackProgress = () => {
             Daily <span className="text-primary">Activity</span>
           </h2>
           <p className="font-medium text-xl mt-2">
-            Here are your Daily Activities. Check out the exciting things you have
+            Here are your Daily Activities. Check out the exciting things you
+            have
             <br />
             accomplished today and plan for more success tomorrow.
           </p>
@@ -45,10 +63,12 @@ const TrackProgress = () => {
                 <div className={`${cardStyle}`}>
                   <div className="mb-2 flex justify-center items-center space-x-1 ">
                     <IoFootstepsOutline className="text-primary text-2xl " />
-                    <h3 className="text-lg font-medium text-gray-700">Steps</h3>
+                    <h3 className="text-lg font-medium text-gray-700">
+                      {dailyActivities?.steps.name}
+                    </h3>
                   </div>
                   <div>
-                    <CircularProgressbar
+                  <CircularProgressbar
                       styles={progressBarStyles}
                       value={totalPercentage}
                       text={`${totalPercentage.toFixed(1)}%`}
@@ -64,9 +84,12 @@ const TrackProgress = () => {
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
                       <div>
-                        <p className="text-xl font-semibold">Distance</p>
+                        <p className="text-xl font-semibold">
+                          {dailyActivities.distance.name}
+                        </p>
                         <span className="text-xl font-semibold">
-                          6.4 kilometers
+                          {dailyActivities.distance.value}{" "}
+                          {dailyActivities.distance.unit}
                         </span>
                       </div>
                     </div>
@@ -80,24 +103,32 @@ const TrackProgress = () => {
                         <GiNightSleep className="text-primary text-2xl" />
                       </div>
                       <div className="">
-                        <p className="text-xl font-semibold">Sleep</p>
-                        <span className="text-xl font-semibold">8.4 Hours</span>
+                        <p className="text-xl font-semibold">
+                          {dailyActivities.sleep.name}
+                        </p>
+                        <span className="text-xl font-semibold">
+                          {dailyActivities.sleep.value}{" "}
+                          {dailyActivities.sleep.unit}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <HeartRate />
+            <HeartRate heartRateData={heartRateData} />
           </div>
 
           <div className="lg:w-1/2 ">
-            <ChartProgress />
+            <ChartProgress
+              weightTracking={weightTracking}
+              caloriesBurned={caloriesBurned}
+            />
           </div>
         </div>
       </div>
-      </div>
-      );
+    </div>
+  );
 };
 
-      export default TrackProgress;
+export default TrackProgress;

@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
 import FitbitTerms from "../Components/Terms & Conditions/FitbitTerms";
+import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
 
 const MyRouts = createBrowserRouter([
   {
@@ -92,7 +93,11 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "connect_app",
-        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>,
+        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>
+      },
+      {
+        path:"strava_connect",
+        element: <StravaCondition></StravaCondition>
       },
       {
         path: "set_goal/create_goal",
