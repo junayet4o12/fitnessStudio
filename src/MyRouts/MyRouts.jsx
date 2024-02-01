@@ -17,6 +17,9 @@ import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
+import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
+import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
+import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
 
 const MyRouts = createBrowserRouter([
   {
@@ -34,7 +37,11 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/blogs",
-        element: <Blogpage/>
+        element: <Blogpage/>,
+      },
+      {
+        path: "/blogs/:id",
+        element: <DynamicBlogpage/>,
       },
       {
         path: "/services",
@@ -57,7 +64,7 @@ const MyRouts = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element:<PrivateRoute><Dashboard /></PrivateRoute> ,
+    element:<Dashboard /> ,
     children: [
       {
         path: "profile",
@@ -66,6 +73,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "bmi_calculator",
         element: <PrivateRoute><BmiCalculator /></PrivateRoute>,
+      },
+      {
+        path: "BlogFrom",
+        element: <UploadBlogs />,
       },
       {
         path: "set_goal",
@@ -77,7 +88,11 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "connect_app",
-        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>,
+        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>
+      },
+      {
+        path:"strava_connect",
+        element: <StravaCondition></StravaCondition>
       },
       {
         path: "set_goal/create_goal",

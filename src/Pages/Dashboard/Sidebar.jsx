@@ -8,7 +8,7 @@ import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
-
+import { FaPenNib } from "react-icons/fa";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -52,6 +52,15 @@ const Sidebar = () => {
             <FaCalculator /> BMI Calculator
           </NavLink>
         </li>
+        <li>
+                        <NavLink to="/dashboard/BlogFrom"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaPenNib  /> Write a Blog
+                        </NavLink>
+                    </li>
         <li>
           <NavLink
             to="/dashboard/set_goal"
