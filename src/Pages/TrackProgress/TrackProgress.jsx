@@ -32,7 +32,7 @@ const TrackProgress = () => {
   const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
   const heartRateData = track[0]?.trackProgress?.heartRate || {};
   const { weightTracking, caloriesBurned } = track[0]?.trackProgress || {};
-  console.log(weightTracking, caloriesBurned);
+  // console.log(weightTracking, caloriesBurned);
 
   const percentage = dailyActivities?.steps.percentage;
 
