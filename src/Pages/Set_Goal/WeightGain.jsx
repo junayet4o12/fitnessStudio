@@ -22,7 +22,7 @@ const WeightGain = () => {
             <span className="text-primary">Building</span> a Stronger You
           </h1>
           <p className="text-base text-gray-600 font-medium mt-5">{`Are you tired of struggling to put on weight? Whether you're looking to gain muscle mass, overcome a medical condition, or simply achieve a more robust physique, our guide has got you covered! "Unlocking Healthy Weight Gain" is your go-to resource for understanding the principles of effective weight gain without compromising your health.`}</p>
-          <Link to="manage_weight">
+          <Link>
             <button
               className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-5`}>
               Manage

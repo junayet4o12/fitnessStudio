@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const axiosFitbitAuthorize = axios.create({
-    baseURL: 'http://localhost:5000', 
-    // baseURL: 'http://localhost:5000', 
+    baseURL: 'https://fitnessstudio-bacend.vercel.app', 
     headers: {
       'Content-Type': 'application/json',
     },

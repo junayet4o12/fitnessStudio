@@ -41,7 +41,7 @@ const Strava = () => {
 
                 console.log('Received authorization code:', code);
                 setExchangeCode(code)
-                axiosStrava.post('http://localhost:5000/callbackstrava', { exchangeCode: code })
+                axiosStrava.post('https://fitnessstudio-bacend.vercel.app/callbackstrava', { exchangeCode: code })
                     .then(res => {
                         console.log(res.data.accessToken)
                         const token = res.data.accessToken
