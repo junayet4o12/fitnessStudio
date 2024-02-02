@@ -41,7 +41,7 @@ const Strava = () => {
 
                 console.log('Received authorization code:', code);
                 setExchangeCode(code)
-                axiosStrava.post('https://fitnessstudio-backend-h3geanesv-jubayer-ahmed-sajid.vercel.app/callbackstrava', { exchangeCode: code })
+                axiosStrava.post('https://fitnessstudio-backend-m0iftt2di-jubayer-ahmed-sajid.vercel.app/callbackstrava', { exchangeCode: code })
                     .then(res => {
                         console.log(res.data.accessToken)
                         const token = res.data.accessToken
