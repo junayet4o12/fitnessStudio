@@ -9,7 +9,7 @@ const DynamicBlogpage = () => {
   const [blog, setblog] = useState([])
   console.log(param);
   useEffect(()=>{
-    axiosPublic(`single_blog/${param}`)
+    axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
   },[])
   
