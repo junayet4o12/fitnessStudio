@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
 
-const DynamicBlogpage = () => {
-  const param = useParams().id
+const DynamicBlogpage2 = () => {
+  const param = useParams().newId
   const axiosPublic = useAxiosPublic()
   const [blog, setblog] = useState([])
   console.log(param);
@@ -39,4 +39,4 @@ console.log(blog);
   )
 }
 
-export default DynamicBlogpage
+export default DynamicBlogpage2
