@@ -29,6 +29,7 @@ const Strava = () => {
     //         localStorage.removeItem('stravaKey')
     //     })
     // }
+    
     const handleNavigate = () => {
         navigate('/dashboard/strava_connect')
     }
