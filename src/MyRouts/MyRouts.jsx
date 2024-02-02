@@ -19,7 +19,6 @@ import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
-import ManageWeight from "../Pages/Set_Goal/ManageWeight";
 import FitbitTerms from "../Components/Terms & Conditions/FitbitTerms";
 import MyBlogs from "../Components/MyBlogs/MyBlogs";
 import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
@@ -118,10 +117,6 @@ const MyRouts = createBrowserRouter([
       {
         path: "set_goal/create_goal",
         element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute> ,
-      },
-      {
-        path: "set_goal/manage_weight",
-        element: <PrivateRoute><ManageWeight></ManageWeight></PrivateRoute> ,
       },
       {
         path: "my_blogs",
