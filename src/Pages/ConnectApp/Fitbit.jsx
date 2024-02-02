@@ -1,18 +1,31 @@
 import { useNavigate } from "react-router-dom"
 import useAxiosFitbitAuthorize from "../../Hooks/useAxiosFitbitAuthorize"
 import { jwtDecode } from "jwt-decode"
+import { useEffect, useState } from "react"
 
 const Fitbit = () => {
     const navigate = useNavigate()
     const axiosFitbitAuthorize = useAxiosFitbitAuthorize()
-    const handleAuthorize =async()=>
-           {
-            const response =await axiosFitbitAuthorize.get('/authorizeFitbit')
-           const authUrl = response.data.auth
-            navigate(`//${authUrl}`)       
+    const [decoded, setDecoded] = useState('')
+
+    useEffect(()=>{
+        if (localStorage.getItem('Authorization')) {
+
+            const decodedToken = jwtDecode(localStorage.getItem('Authorization'));
+            setDecoded(decodedToken)
+        }
+    },[])
+    const handleAuthorize = async () => {
+
+        
+      
+     
+            const response = await axiosFitbitAuthorize.get('/authorizeFitbit')
+            const authUrl = response.data.auth
+            navigate(`//${authUrl}`)
+        
     }
-    const decodedToken = jwtDecode(localStorage.getItem('Authorization'));
-    console.log(decodedToken)
+
 
     return (
         <div className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
@@ -22,7 +35,7 @@ const Fitbit = () => {
             </div>
 
             {
-                decodedToken.iss === 'Fitbit' ? <button disabled  className="p-2 lg:p-3 text-sm lg:text-md rounded-md  bg-base-200 text-gray-300">Connected</button> : <button  onClick={handleAuthorize} className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
+                decoded?.iss === 'Fitbit' ? <button disabled className="p-2 lg:p-3 text-sm lg:text-md rounded-md  bg-base-200 text-gray-300">Connected</button> : <button onClick={handleAuthorize} className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
             }
 
         </div>
