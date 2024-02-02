@@ -11,7 +11,7 @@ const MyBlogs = () => {
 
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/my_blogs?email=${user?.email}`)
+    //     fetch(`https://fitnessstudio-backend-h3geanesv-jubayer-ahmed-sajid.vercel.app/my_blogs?email=${user?.email}`)
     //         .then(res => res.json())
     //         .then(data => setMyBlogs(data))
     // }, [user?.email])

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://fitnessstudio-backend-h3geanesv-jubayer-ahmed-sajid.vercel.app',
   withCredentials: true, // Send cookies with requests
 });
 

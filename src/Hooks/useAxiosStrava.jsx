@@ -2,7 +2,7 @@ import axios from "axios";
 
 // import React from 'react';
 const axiosStrava = axios.create({
-    baseURL: 'http://localhost:5000', 
+    baseURL: 'https://fitnessstudio-backend-h3geanesv-jubayer-ahmed-sajid.vercel.app', 
     headers: {
       'Content-Type': 'application/json',
     },
