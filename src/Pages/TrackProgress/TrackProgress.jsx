@@ -61,7 +61,7 @@ const TrackProgress = () => {
                     <CircularProgressbar
                       styles={progressBarStyles}
                       value="12"
-                      text=""
+                      text="rtyhrtyhr"
                     />
                   </div>
                 </div>
