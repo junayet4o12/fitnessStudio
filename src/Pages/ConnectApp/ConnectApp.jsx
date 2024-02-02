@@ -1,9 +1,19 @@
 import Title from "../../Components/Title/Title";
 import { Helmet } from 'react-helmet-async'
+import Fitbit from "./Fitbit";
+import Suunto from "./Suunto";
+import useAxiosFitbitFetch from "../../Hooks/useAxiosFitbitFetch";
 import Strava from "./Strava/Strava";
 const ConnectApp = () => {
     const LinkStyle =
         "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
+    const axiosFitbitFetch = useAxiosFitbitFetch()
+
+    const handleFetchData = async () => {
+        const response = await axiosFitbitFetch.get('1/user/-/activities.json?activityId=90013&manualCalories=300')
+        console.log(response.data)
+
+    }
 
     return (
         <div >
@@ -32,23 +42,9 @@ const ConnectApp = () => {
 
             <h2 className="lg:text-4xl text-xl font-semibold lg:ml-16 ml-4 mt-24">Connect Apps</h2>
             <div className="flex gap-4 lg:gap-8 flex-col items-center lg:ml-12 ml-4 mt-8 mb-12 lg:mt-12">
-                <div className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-                    <div className="items-center flex gap-4">
-                        <img src="https://i.ibb.co/HBnFfJ9/62a896ebda9e7313e0262a77.png" className='h-8' alt="" />
-                        <p className="">Fitbit</p>
-                    </div>
-                    <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
-                </div>
-                <div className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-                    <div className="items-center flex gap-4">
-                        <img src="https://i.ibb.co/pRbvZDm/suunto.png" className='h-8' alt="" />
-                        <p className="">Suunto</p>
-                    </div>
-                    <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
-                </div>
 
-
-
+                <Fitbit></Fitbit>
+                <Suunto></Suunto>
                 <Strava></Strava>
 
 
@@ -57,6 +53,13 @@ const ConnectApp = () => {
 
 
             </div>
+
+
+            <button className="btn-primary p-4 text-xl text-center" onClick={handleFetchData}> Get activity summery</button>
+
+
+
+
         </div>
     );
 };
