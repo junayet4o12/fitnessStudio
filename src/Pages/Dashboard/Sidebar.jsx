@@ -5,10 +5,12 @@ import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
 import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
-import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
+import { FaBookAtlas, FaBookMedical, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
 import { FaPenNib } from "react-icons/fa";
+import "./Sidebar.css"
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
@@ -24,7 +26,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-60 max-h-screen bg-gradient-to-r from-secondary to-primary hidden md:block sticky top-0">
+    <div className="scroolBar w-60 max-h-screen bg-gradient-to-r from-secondary to-primary hidden md:block sticky top-0 overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       {/* Sidebar logo or Title */}
       <div className="p-4">
         <h1 className="flex text-2xl gap-1 font-bold bg-primary shadow-lg shadow-gray-500 p-1 rounded-md">
@@ -53,14 +55,14 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-                        <NavLink to="/dashboard/BlogFrom"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-                            }
-                        >
-                            <FaPenNib  /> Write a Blog
-                        </NavLink>
-                    </li>
+          <NavLink to="/dashboard/BlogFrom"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+            }
+          >
+            <FaPenNib /> Write a Blog
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to="/dashboard/set_goal"
@@ -86,6 +88,15 @@ const Sidebar = () => {
               isPending ? "pending" : isActive ? "bg-primary text-white" : ""
             }>
             <BiSolidMessageSquareAdd /> Connected app
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/dashboard/my_blogs"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+            }>
+            <FaBookMedical /> My Blogs
           </NavLink>
         </li>
         <div className="divider"></div>

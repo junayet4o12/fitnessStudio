@@ -1,14 +1,14 @@
 import axios from "axios";
 
 // import React from 'react';
-const axiosStrava = axios.create({
+const axiosFitbitAccess = axios.create({
     baseURL: 'http://localhost:5000', 
     headers: {
       'Content-Type': 'application/json',
     },
   });
-const useAxiosStrava = () => {
-    return axiosStrava
+const useAxiosFitbitAccess = () => {
+    return axiosFitbitAccess
 };
- 
-export default useAxiosStrava;
+
+export default useAxiosFitbitAccess;

@@ -3,15 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import stravaImg from '../../assets/images/strava.jpeg'
 import useAxiosStrava from '../../Hooks/useAxiosStrava';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import useAxiosStravaFetch from '../../Hooks/useAxiosStravaFetch';
+
 
 const Strava = () => {
     const navigate = useNavigate()
     const [exchangeCode, setExchangeCode] = useState('')
     const [isRegister, setIsRegister] = useState(localStorage.getItem('stravaKey'))
     const axiosStrava = useAxiosStrava()
-    const axiosStravaFetch = useAxiosStravaFetch()
+    
     const handleAuthorize = async () => {
         if (exchangeCode) {
             console.log('already done', exchangeCode);
@@ -57,7 +56,7 @@ const Strava = () => {
         else {
             console.log('eroi');
         }
-    }, []);
+    }, [exchangeCode,axiosStrava]);
    
     // const handleGetData = () => {
     //     console.log('hello', localStorage.getItem('stravaKey'));

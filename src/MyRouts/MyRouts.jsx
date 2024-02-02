@@ -20,6 +20,11 @@ import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
 import ManageWeight from "../Pages/Set_Goal/ManageWeight";
+import FitbitTerms from "../Components/Terms & Conditions/FitbitTerms";
+import MyBlogs from "../Components/MyBlogs/MyBlogs";
+import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
+import UsersBlog from "../Pages/UsersBlog/UsersBlog";
+import DynamicBlogpage2 from "../Pages/DynamicBlogpage/DynamicBlogpage2";
 
 const MyRouts = createBrowserRouter([
   {
@@ -44,6 +49,18 @@ const MyRouts = createBrowserRouter([
         element: <DynamicBlogpage/>,
       },
       {
+        path: "/blogs/:email",
+        element: <UsersBlog/>,
+      },
+      {
+        path: "/blogs/:id/:email",
+        element: <UsersBlog/>,
+      },
+      {
+        path: "/blogs/:id/:email/:newId",
+        element: <DynamicBlogpage2/>,
+      },
+      {
         path: "/services",
         element: <div>This is Services</div>,
       },
@@ -60,6 +77,10 @@ const MyRouts = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>,
       },
+      {
+        path:'/permission',
+        element:<FitbitTerms></FitbitTerms>
+      }
     ],
   },
   {
@@ -88,7 +109,11 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "connect_app",
-        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>,
+        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>
+      },
+      {
+        path:"strava_connect",
+        element: <StravaCondition></StravaCondition>
       },
       {
         path: "set_goal/create_goal",
@@ -97,6 +122,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "set_goal/manage_weight",
         element: <PrivateRoute><ManageWeight></ManageWeight></PrivateRoute> ,
+      },
+      {
+        path: "my_blogs",
+        element: <PrivateRoute><MyBlogs /></PrivateRoute> ,
       },
     ],
   },
