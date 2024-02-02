@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 const ChartProgress = ({ weightTracking, caloriesBurned }) => {
-  
+
   const data1 = weightTracking || [];
   const data2 = caloriesBurned || [];
 
@@ -63,7 +63,7 @@ const ChartProgress = ({ weightTracking, caloriesBurned }) => {
           <YAxis />
           <Tooltip />
           <Area type="monotone" dataKey="cal" stroke="#8884d8" fill="#8884d8" />
-          {/* Use dataKey="cal" instead of dataKey="pv" */}
+       
         </AreaChart>
       </ResponsiveContainer>
     </div>
@@ -71,3 +71,5 @@ const ChartProgress = ({ weightTracking, caloriesBurned }) => {
 };
 
 export default ChartProgress;
+
+// jkhsdfoghluiserghperuoig

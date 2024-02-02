@@ -25,6 +25,8 @@ const HeartRate = ({ heartRateData }) => {
     },
   };
 
+  
+
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
       <div className="lg:w-1/2 flex flex-col space-y-6">
