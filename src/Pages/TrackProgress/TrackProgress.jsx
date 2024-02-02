@@ -30,6 +30,20 @@ const TrackProgress = () => {
   }
   console.log("track from hook", track);
 
+  // console.log(track);
+
+  const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
+  const heartRateData = track[0]?.trackProgress?.heartRate || {};
+  const { weightTracking, caloriesBurned } = track[0]?.trackProgress || {};
+  console.log(weightTracking, caloriesBurned);
+
+  const percentage = dailyActivities?.steps.percentage;
+  console.log(percentage);
+  const totalPercentage = (percentage / 10000) * 100;
+  console.log(totalPercentage);
+
+
+
   return (
     <div>
       <Helmet>
@@ -55,13 +69,15 @@ const TrackProgress = () => {
                 <div className={`${cardStyle}`}>
                   <div className="mb-2 flex justify-center items-center space-x-1 ">
                     <IoFootstepsOutline className="text-primary text-2xl " />
-                    <h3 className="text-lg font-medium text-gray-700"></h3>
+                    <h3 className="text-lg font-medium text-gray-700">
+                      {dailyActivities?.steps.name}
+                    </h3>
                   </div>
                   <div>
                     <CircularProgressbar
                       styles={progressBarStyles}
-                      value="12"
-                      text="rtyhrtyhr"
+                      value={totalPercentage}
+                      text={`${totalPercentage.toFixed(1)}%`}
                     />
                   </div>
                 </div>
@@ -74,8 +90,13 @@ const TrackProgress = () => {
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
                       <div>
-                        <p className="text-xl font-semibold"></p>
-                        <span className="text-xl font-semibold"></span>
+                        <p className="text-xl font-semibold">
+                          {dailyActivities.distance.name}
+                        </p>
+                        <span className="text-xl font-semibold">
+                          {dailyActivities.distance.value}{" "}
+                          {dailyActivities.distance.unit}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -88,19 +109,27 @@ const TrackProgress = () => {
                         <GiNightSleep className="text-primary text-2xl" />
                       </div>
                       <div className="">
-                        <p className="text-xl font-semibold"></p>
-                        <span className="text-xl font-semibold"></span>
+                        <p className="text-xl font-semibold">
+                          {dailyActivities.sleep.name}
+                        </p>
+                        <span className="text-xl font-semibold">
+                          {dailyActivities.sleep.value}{" "}
+                          {dailyActivities.sleep.unit}
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <HeartRate />
+            <HeartRate heartRateData={heartRateData} />
           </div>
 
           <div className="lg:w-1/2 ">
-            <ChartProgress />
+            <ChartProgress
+              weightTracking={weightTracking}
+              caloriesBurned={caloriesBurned}
+            />
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import TandCImg from '../../../assets/images/TermAndCondition.jpg'
 import ConnectStravaModal from './ConnectStravaModal';
 import useAxiosStrava from '../../../Hooks/useAxiosStrava';
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 const StravaCondition = () => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
@@ -30,6 +31,7 @@ const StravaCondition = () => {
                         console.log(res.data.accessToken)
                         const token = res.data.accessToken
                         localStorage.setItem('stravaKey', token)
+                        toast.success("Strava Connected Successfully !");
                         navigate('/dashboard/connect_app')
                     })
                     .catch(err => {
