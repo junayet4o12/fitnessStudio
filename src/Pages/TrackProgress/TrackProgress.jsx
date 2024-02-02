@@ -28,9 +28,6 @@ const TrackProgress = () => {
   if (isLoading) {
     return <p className="">loading</p>;
   }
-  console.log("track from hook", track);
-
-  // console.log(track);
 
   const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
   const heartRateData = track[0]?.trackProgress?.heartRate || {};
@@ -38,11 +35,8 @@ const TrackProgress = () => {
   console.log(weightTracking, caloriesBurned);
 
   const percentage = dailyActivities?.steps.percentage;
-  console.log(percentage);
+
   const totalPercentage = (percentage / 10000) * 100;
-  console.log(totalPercentage);
-
-
 
   return (
     <div>
