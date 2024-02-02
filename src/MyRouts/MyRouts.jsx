@@ -19,7 +19,10 @@ import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
+import MyBlogs from "../Components/MyBlogs/MyBlogs";
 import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
+import UsersBlog from "../Pages/UsersBlog/UsersBlog";
+import DynamicBlogpage2 from "../Pages/DynamicBlogpage/DynamicBlogpage2";
 
 const MyRouts = createBrowserRouter([
   {
@@ -42,6 +45,18 @@ const MyRouts = createBrowserRouter([
       {
         path: "/blogs/:id",
         element: <DynamicBlogpage/>,
+      },
+      {
+        path: "/blogs/:email",
+        element: <UsersBlog/>,
+      },
+      {
+        path: "/blogs/:id/:email",
+        element: <UsersBlog/>,
+      },
+      {
+        path: "/blogs/:id/:email/:newId",
+        element: <DynamicBlogpage2/>,
       },
       {
         path: "/services",
@@ -97,6 +112,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "set_goal/create_goal",
         element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute> ,
+      },
+      {
+        path: "my_blogs",
+        element: <PrivateRoute><MyBlogs /></PrivateRoute> ,
       },
     ],
   },
