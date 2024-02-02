@@ -2,7 +2,7 @@ import axios from "axios";
 
 // import React from 'react';
 const axiosFitbitAccess = axios.create({
-    baseURL: 'https://fitnessstudio-bacend.vercel.app', 
+    baseURL: 'http://localhost:5000', 
     headers: {
       'Content-Type': 'application/json',
     },
