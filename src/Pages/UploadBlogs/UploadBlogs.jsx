@@ -20,7 +20,7 @@ const UploadBlogs = () => {
 
     const onSubmit = async (data) => {
         // console.log(data);
-        const toastId = toast.loading("Registering...");
+        const toastId = toast.loading("Publishing...");
         const image = { image: data?.img[0] };
         try {
 
@@ -43,7 +43,7 @@ const UploadBlogs = () => {
                     console.log(res?.data);
                     if (res?.data?.insertedId) {
                         reset()
-                        toast.success("Register Successfully !", { id: toastId });
+                        toast.success("Published Successfully !", { id: toastId });
                     }
                 })
                 .catch((err) => {

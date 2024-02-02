@@ -25,7 +25,7 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
         <DialogHeader >Please Update Your Personal Data!!!</DialogHeader>
     </>
     return (
-        <div>
+        <div className='max-w-7xl mx-auto'>
             <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7  gap-5   p-4 bg-orange-200 rounded my-5 shadow-2xl '>
                 <div className='flex flex-col justify-center items-center'>
                     <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
