@@ -7,13 +7,19 @@ const DynamicBlogpage = () => {
   const param = useParams().id
   const axiosPublic = useAxiosPublic()
   const [blog, setblog] = useState([])
+  const [myblog, setmyblog] = useState([])
   console.log(param);
   useEffect(()=>{
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
   },[])
+
+  useEffect(()=>{
+    axiosPublic(`/my_blogs/${blog.userEmail}`)
+    .then(data=> setmyblog(data.data))
+  },[blog])
+
   
-console.log(blog);
   return (
     <div className='p-[10px] flex flex-col justify-around lg:flex-row my-[50px]'>
       <Helmet>
@@ -24,15 +30,15 @@ console.log(blog);
       <div  className='flex gap-2 items-center my-[25px] bg-primary rounded-md'>
         <h1 className='text-2xl font-[600] w-fit bg-white'>{blog.blogName} &nbsp;</h1>
       </div>
-      <p>
-        {blog.blogDes}
-      </p>
+      <div dangerouslySetInnerHTML={{__html: `${blog.blogDes}`}}>
+      </div>
       </div>
       <div className='mt-[50px] lg:mt-[0px] lg:w-[25%] md:sticky top-[25%] rounded-md p-[20px] text-white flex flex-col items-center bg-primary bg-opacity-50 h-fit gap-3'>
         <img className='rounded-full' draggable src={blog.userImg}/>
         <Link to={`/blogs/${param}/${blog.userEmail}`}>
         <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
+        <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
       </div>
     </div>
