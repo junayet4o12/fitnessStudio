@@ -6,6 +6,8 @@ const BlogCards = ({ blogs }) => {
     return (
         // <div className='grid grid-cols-1 md:grid-cols-4 gap-4 p-[10px]'>
         <div className='flex flex-col md:flex-row items-start p-[10px]'>
+            {
+                blogs === undefined ? <h1>I am Ohee</h1>:
             <div className='flex flex-col md:w-[70%] gap-6 p-[10px]'>
                 {blogs.map((blog) =>
                     <div className='flex flex-col md:flex-row shadow-xl rounded-md justify-between' key={blog?._id}>
@@ -17,7 +19,7 @@ const BlogCards = ({ blogs }) => {
                                 <Link to={`/blogs/${blog._id}`}>
                                     <h1 className='font-bold text-xl text-primary'>{blog.blogName}</h1>
                                 </Link>
-                                <p>{blog.blogDes.slice(0, 350)}...</p>
+                                <div dangerouslySetInnerHTML={{__html: `${blog.blogDes.slice(0-350)}`}}></div>
                             </div>
                             <div>
                                 <div className='w-[100%] h-[2px] bg-secondary'></div>
@@ -35,13 +37,14 @@ const BlogCards = ({ blogs }) => {
                     </div>
                 )}
             </div>
+            }
             <div className='hidden md:flex flex-col w-[25%]'>
                 <h1 className='border-l-2 border-secondary pl-[5px] font-[500] text-xl'>Latest Blogs:</h1>
                 <div className='flex flex-col gap-4 my-[25px]'>
                     {
                         blogs?.reverse()?.slice(0,3)?.map((blog) =>
                             <div key={blog._id} className='w-full flex gap-5 items-center shadow-lg rounded-md'>
-                                <img className='h-[100px] w-[45%] object-contain' src={blog.blogImg} alt="" />
+                                <img className='h-[100%] w-[45%] object-contain' src={blog.blogImg} alt="" />
                                 <Link to={`/blogs/${blog._id}`}>
                                     <h1 className='font-bold text-md text-primary'>{blog.blogName}</h1>
                                 </Link>

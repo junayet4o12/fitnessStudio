@@ -9,7 +9,7 @@ const DynamicBlogpage2 = () => {
   const [blog, setblog] = useState([])
   console.log(param);
   useEffect(()=>{
-    axiosPublic(`single_blog/${param}`)
+    axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
   },[])
   
@@ -24,9 +24,8 @@ console.log(blog);
       <div  className='flex gap-2 items-center my-[25px] bg-primary rounded-md'>
         <h1 className='text-2xl font-[600] w-fit bg-white'>{blog.blogName} &nbsp;</h1>
       </div>
-      <p>
-        {blog.blogDes}
-      </p>
+      <div dangerouslySetInnerHTML={{__html: `${blog.blogDes}`}}>
+      </div>
       </div>
       <div className='mt-[50px] lg:mt-[0px] lg:w-[25%] md:sticky top-[25%] rounded-md p-[20px] text-white flex flex-col items-center bg-primary bg-opacity-50 h-fit gap-3'>
         <img className='rounded-full' draggable src={blog.userImg}/>
