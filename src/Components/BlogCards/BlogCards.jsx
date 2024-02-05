@@ -42,7 +42,7 @@ const BlogCards = ({ blogs }) => {
                 <h1 className='border-l-2 border-secondary pl-[5px] font-[500] text-xl'>Latest Blogs:</h1>
                 <div className='flex flex-col gap-4 my-[25px]'>
                     {
-                        blogs?.reverse()?.slice(0,3)?.map((blog) =>
+                        blogs?.reverse()?.slice(0,5)?.map((blog) =>
                             <div key={blog._id} className='w-full flex gap-5 items-center shadow-lg rounded-md'>
                                 <img className='h-[100%] w-[45%] object-contain' src={blog.blogImg} alt="" />
                                 <Link to={`/blogs/${blog._id}`}>
