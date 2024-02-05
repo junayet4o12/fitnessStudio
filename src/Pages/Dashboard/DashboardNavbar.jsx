@@ -4,7 +4,7 @@ import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
 import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
-import { FaCalculator } from "react-icons/fa6";
+import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { FaPenNib } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
@@ -101,6 +101,15 @@ const DashboardNavbar = () => {
                             }
                         >
                             <BiSolidMessageSquareAdd /> Connected app
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/my_blogs"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaBookAtlas /> My Blogs
                         </NavLink>
                     </li>
                 </ul>

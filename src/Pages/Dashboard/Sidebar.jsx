@@ -8,7 +8,7 @@ import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaBookMedical, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
-import { FaPenNib } from "react-icons/fa";
+import { FaPenNib,FaStrava } from "react-icons/fa";
 import "./Sidebar.css"
 
 const Sidebar = () => {
@@ -79,6 +79,15 @@ const Sidebar = () => {
               isPending ? "pending" : isActive ? "bg-primary text-white" : ""
             }>
             <GiProgression /> Tracking Progress
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/dashboard/strava_activities"
+            className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+            }>
+            <FaStrava /> Strava Activities
           </NavLink>
         </li>
         <li>

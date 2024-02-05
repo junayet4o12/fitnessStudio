@@ -8,4 +8,4 @@ const useAxiosStravaFetch = () => {
     return axiosStravaFetch;
 };
 
-export default useAxiosStravaFetch;
+export default useAxiosStravaFetch;  

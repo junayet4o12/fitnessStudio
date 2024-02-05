@@ -5,9 +5,9 @@ import HeartRate from "./HeartRate";
 import ChartProgress from "./ChartProgress";
 import { Helmet } from "react-helmet-async";
 
-import { useGetTrackProQuery } from "./api/baseApi";
 import { IoFootstepsOutline } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
+import { useGetTrackProQuery } from "./api/baseApi";
 
 const TrackProgress = () => {
   const cardStyle =
@@ -24,14 +24,14 @@ const TrackProgress = () => {
   };
 
   const { data: track, isLoading } = useGetTrackProQuery();
-  console.log( "dgh", track);
+  console.log("dgh", track);
 
   if (isLoading) {
     return <p className="">loading</p>;
   }
-  if (!track || track.length === 0) {
-    return <p className="">No data available</p>;
-  }
+  // if (!track || track.length === 0) {
+  //   return <p className="">No data available</p>;
+  // }
 
   const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
   const heartRateData = track[0]?.trackProgress?.heartRate || {};

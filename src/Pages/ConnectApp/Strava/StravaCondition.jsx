@@ -7,6 +7,7 @@ import ConnectStravaModal from './ConnectStravaModal';
 import useAxiosStrava from '../../../Hooks/useAxiosStrava';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { backendUrl } from '../../../BackendUrl/backendUrl';
 const StravaCondition = () => {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
@@ -26,7 +27,7 @@ const StravaCondition = () => {
 
                 console.log('Received authorization code:', code);
                 setExchangeCode(code)
-                axiosStrava.post('https://fitnessstudio-bacend.vercel.app/callbackstrava', { exchangeCode: code })
+                axiosStrava.post(`${backendUrl}/callbackstrava`, { exchangeCode: code })
                     .then(res => {
                         console.log(res.data.accessToken)
                         const token = res.data.accessToken
