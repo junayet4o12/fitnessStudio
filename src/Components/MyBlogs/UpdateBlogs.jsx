@@ -84,7 +84,7 @@ const UpdateBlogs = ({ blog, refetch }) => {
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text text-lg font-semibold">Blog Image:</span>
+                                <span className="label-text text-lg font-semibold">Blog Description:</span>
                             </div>
                             <textarea required name="blogDes" type="text" defaultValue={blogDes} className="textarea textarea-error textarea-lg p-2 text-sm w-full min-h-[150px] max-h-[150px]" ></textarea>
                         </label>
