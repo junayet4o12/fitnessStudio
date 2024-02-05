@@ -24,9 +24,13 @@ const TrackProgress = () => {
   };
 
   const { data: track, isLoading } = useGetTrackProQuery();
+  console.log( "dgh", track);
 
   if (isLoading) {
     return <p className="">loading</p>;
+  }
+  if (!track || track.length === 0) {
+    return <p className="">No data available</p>;
   }
 
   const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
