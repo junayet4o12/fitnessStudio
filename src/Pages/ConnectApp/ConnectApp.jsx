@@ -1,18 +1,18 @@
 import Title from "../../Components/Title/Title";
 import { Helmet } from 'react-helmet-async'
+import Fitbit from "./Fitbit";
 import Strava from "./Strava/Strava";
 const ConnectApp = () => {
     const LinkStyle =
         "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
+
 
     return (
         <div >
             <Helmet>
                 <title>Connected-App - FitnessStudio</title>
             </Helmet>
-
             <Title title={"Seamless Connection"}></Title>
-
             <div className="lg:flex-row justify-center mt-8 lg:justify-around flex flex-col-reverse gap-8 items-center lg:mx-8 mx-4 ">
                 <div className="lg:w-1/2 mb-4 text-sm">
                     <p className="mb-6">
@@ -24,38 +24,11 @@ const ConnectApp = () => {
                     </a>
                 </div>
                 <img src="https://i.ibb.co/DtCdfR3/unnamed.png" className="lg:w-1/3" alt="" />
-
             </div>
-
-
-
-
             <h2 className="lg:text-4xl text-xl font-semibold lg:ml-16 ml-4 mt-24">Connect Apps</h2>
             <div className="flex gap-4 lg:gap-8 flex-col items-center lg:ml-12 ml-4 mt-8 mb-12 lg:mt-12">
-                <div className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-                    <div className="items-center flex gap-4">
-                        <img src="https://i.ibb.co/HBnFfJ9/62a896ebda9e7313e0262a77.png" className='h-8' alt="" />
-                        <p className="">Fitbit</p>
-                    </div>
-                    <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
-                </div>
-                <div className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">
-                    <div className="items-center flex gap-4">
-                        <img src="https://i.ibb.co/pRbvZDm/suunto.png" className='h-8' alt="" />
-                        <p className="">Suunto</p>
-                    </div>
-                    <button className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300">Connect</button>
-                </div>
-
-
-
+                <Fitbit></Fitbit>
                 <Strava></Strava>
-
-
-
-
-
-
             </div>
         </div>
     );

@@ -1,14 +1,20 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from 'react-hot-toast';
+import { Editor } from '@tinymce/tinymce-react';
 
 const UploadBlogs = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
+    const [tinyData, setTinyData] = useState("what's on your mind?")
+    const handleEditorChange = (content, editor) => {
+        console.log('Content was updated:', content);
+        setTinyData(content);
+      }
     const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
     const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
     const {
@@ -20,7 +26,7 @@ const UploadBlogs = () => {
 
     const onSubmit = async (data) => {
         // console.log(data);
-        const toastId = toast.loading("Registering...");
+        const toastId = toast.loading("Publishing...");
         const image = { image: data?.img[0] };
         try {
 
@@ -34,7 +40,7 @@ const UploadBlogs = () => {
             const userName = user?.displayName;
             const userImg = user?.photoURL;
             const blogName = data?.blogname;
-            const blogDes = data?.blog;
+            const blogDes = tinyData;
             const time = (new Date()).toLocaleDateString().split('/').reverse().join('-');
             const allData = { time, userEmail, userName, userImg, blogImg, blogName, blogDes }
             console.log(allData);
@@ -43,7 +49,7 @@ const UploadBlogs = () => {
                     console.log(res?.data);
                     if (res?.data?.insertedId) {
                         reset()
-                        toast.success("Register Successfully !", { id: toastId });
+                        toast.success("Published Successfully !", { id: toastId });
                     }
                 })
                 .catch((err) => {
@@ -55,6 +61,12 @@ const UploadBlogs = () => {
         }
 
 
+    }
+
+    const haldelChange = (content, editor) =>{
+        setTinyData(content)
+        console.log(content);
+        console.log(tinyData);
     }
     return (
         <div className='p-[10px] my-[50px]'>
@@ -93,17 +105,39 @@ const UploadBlogs = () => {
                         className='font-bold text-xl'>
                         Blog:
                     </label> */}
-                    <textarea
+                    {/* <textarea
                         {...register("blog", { required: true })}
                         required
                         className=' outline-none w-full p-[10px] min-h-[250px] h-[250px] max-h-[250px]'
-                        type="text" name="blog" placeholder='Whats on your mind?' id="blog" />
+                        type="text" name="blog" placeholder='Whats on your mind?' id="blog" /> */}
+                     
+                     <Editor
+                        apiKey='ffaw0tilo4m0ex1q5nmpaa5fblipi8p51r8bnqbq3wbyf8vi'
+                        init={{
+                    height: 500,
+                    max_height:"500",
+                    width: '100%',
+                    border: "0px",
+                    //    menubar: false,
+                            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                            tinycomments_mode: 'embedded',
+                            tinycomments_author: 'Author name',
+                            // mergetags_list: [
+                            //   { value: 'First.Name', title: 'First Name' },
+                            //   { value: 'Email', title: 'Email' },
+                            // ],
+                            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                        }}
+                        value={tinyData}
+                        onEditorChange={haldelChange}/>
                 </div>
                 <button
                     className='bg-secondary text-white font-[600] p-[10px] text-xl rounded-md'
                     type='submit'>
                     Publish
                 </button>
+
             </form>
         </div>
     )

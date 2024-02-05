@@ -3,6 +3,7 @@ import { PiPhoneCallBold } from "react-icons/pi";
 import { FaFacebook } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Container from "../../Components/Container/Container";
+import moment from "moment";
 
 const Footer = () => {
   return (
@@ -112,7 +113,7 @@ const Footer = () => {
         <hr />
         <div className="footer footer-center p-4  md:text-lg text-white">
           <aside>
-            <p>Copyright © 2024 - All right reserved by FITNESS STUDIO Ltd.</p>
+            <p>{`Copyright © ${moment().format("YYYY")} - All right reserved by FITNESS STUDIO Ltd.`}</p>
           </aside>
         </div>
       </Container>

@@ -19,6 +19,7 @@ import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
 import DynamicBlogpage from "../Pages/DynamicBlogpage/DynamicBlogpage";
 import UploadBlogs from "../Pages/UploadBlogs/UploadBlogs";
+import FitbitTerms from "../Components/Terms & Conditions/FitbitTerms";
 import MyBlogs from "../Components/MyBlogs/MyBlogs";
 import StravaCondition from "../Pages/ConnectApp/Strava/StravaCondition";
 import UsersBlog from "../Pages/UsersBlog/UsersBlog";
@@ -75,6 +76,10 @@ const MyRouts = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>,
       },
+      {
+        path:'/permission',
+        element:<FitbitTerms></FitbitTerms>
+      }
     ],
   },
   {

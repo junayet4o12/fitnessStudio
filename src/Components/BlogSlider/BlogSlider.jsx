@@ -21,6 +21,9 @@ const responsive = {
 
 const BlogSlider = ({blogs}) => {
   return (
+    <>
+    {
+      blogs === undefined ? <h1>I am Ohee</h1>:
       <Carousel
         swipeable={true}
         draggable={true}
@@ -48,6 +51,8 @@ const BlogSlider = ({blogs}) => {
             )
         }
       </Carousel>
+    }
+    </>
   )
 }
 

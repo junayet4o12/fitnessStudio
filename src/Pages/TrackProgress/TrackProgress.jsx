@@ -1,13 +1,14 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { IoFootstepsOutline } from "react-icons/io5";
-import { FaCarSide } from "react-icons/fa";
 import { GiNightSleep } from "react-icons/gi";
 import HeartRate from "./HeartRate";
 import ChartProgress from "./ChartProgress";
 import { Helmet } from "react-helmet-async";
-// import { useEffect } from "react";
+
 import { useGetTrackProQuery } from "./api/baseApi";
+import { IoFootstepsOutline } from "react-icons/io5";
+import { FaCarSide } from "react-icons/fa";
+
 const TrackProgress = () => {
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-emerald-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
@@ -21,22 +22,21 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
+
   const { data: track, isLoading } = useGetTrackProQuery();
+
   if (isLoading) {
     return <p className="">loading</p>;
   }
-  // console.log(track);
 
-  const dailyActivities = track[0]?.trackProgress.dailyActivities;
-  const heartRateData = track[0]?.trackProgress.heartRate;
+  const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
+  const heartRateData = track[0]?.trackProgress?.heartRate || {};
   const { weightTracking, caloriesBurned } = track[0]?.trackProgress || {};
-  console.log(weightTracking, caloriesBurned);
+  // console.log(weightTracking, caloriesBurned);
 
- 
-  const percentage =dailyActivities?.steps.percentage ;
-  console.log(percentage);
+  const percentage = dailyActivities?.steps.percentage;
+
   const totalPercentage = (percentage / 10000) * 100;
-  console.log(totalPercentage);
 
   return (
     <div>
@@ -68,7 +68,7 @@ const TrackProgress = () => {
                     </h3>
                   </div>
                   <div>
-                  <CircularProgressbar
+                    <CircularProgressbar
                       styles={progressBarStyles}
                       value={totalPercentage}
                       text={`${totalPercentage.toFixed(1)}%`}
