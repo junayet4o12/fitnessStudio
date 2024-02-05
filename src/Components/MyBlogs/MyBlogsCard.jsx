@@ -73,5 +73,4 @@ const MyBlogsCard = ({ blog, refetch }) => {
         </div>
     );
 };
-
 export default MyBlogsCard;

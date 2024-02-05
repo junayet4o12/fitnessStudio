@@ -106,7 +106,7 @@ const Profile = () => {
         <div className='p-4'>
             <ProfileMain image={userDetails?.image} age={age} myBMI={myBMI} myBMR={myBMR}></ProfileMain>
             <div>
-                <div className='w-full max-w-[500px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
+                <div className='w-full max-w-[500px] bg-primary/20  mx-auto p-5 pt-12 rounded relative shadow-lg'>
                     <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
                     <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                         {/* name  */}
@@ -195,12 +195,12 @@ const Profile = () => {
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5`}>
-                            <button className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704]`}>Update</button>
-                            <p onClick={handleCancel} className={`${buttonStyle} active:bg-red-800  bg-red-500 hover:bg-red-700  border-transparent hover:border-red-500`}>Cancel</p>
+                            <button className={`${buttonStyle} active:bg-primary/70  bg-primary/80 hover:bg-primary  border-transparent hover:border-primary`}>Update</button>
+                            <p onClick={handleCancel} className={`${buttonStyle} active:bg-red-800  bg-red-500 hover:bg-red-700  border-transparent hover:border-red-700`}>Cancel</p>
                         </div>
                     </form>
                     <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
+                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-primary/90 text-white'>Edit</button>
                     </div>
                 </div>
             </div>
