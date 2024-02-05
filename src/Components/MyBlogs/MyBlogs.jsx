@@ -19,7 +19,7 @@ const MyBlogs = () => {
     const { data: myBlogs = [], refetch } = useQuery({
         queryKey: ['myBlogs'],
         queryFn: async () => {
-            const response = await axiosPublic.get(`/my_blogs/${user?.email}`);
+            const response = await axiosPublic.get(`/my_blogs?email=${user?.email}`);
             return response.data;
         }
     })
