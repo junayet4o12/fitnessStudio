@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
+import { backendUrl } from '../BackendUrl/backendUrl';
 
 const axiosSecure = axios.create({
-  baseURL: 'https://fitnessstudio-bacend.vercel.app',
+  baseURL: backendUrl,
   withCredentials: true, // Send cookies with requests
 });
 
