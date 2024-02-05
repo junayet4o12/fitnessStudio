@@ -68,12 +68,12 @@ const DashboardNavbar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/BlogFrom"
+                        <NavLink to="/dashboard/connect_app"
                             className={({ isActive, isPending }) =>
                                 isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                             }
                         >
-                            <FaPenNib  /> Write a Blog
+                            <BiSolidMessageSquareAdd /> Connected app
                         </NavLink>
                     </li>
                     <li>
@@ -95,12 +95,12 @@ const DashboardNavbar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/connect_app"
+                        <NavLink to="/dashboard/BlogFrom"
                             className={({ isActive, isPending }) =>
                                 isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                             }
                         >
-                            <BiSolidMessageSquareAdd /> Connected app
+                            <FaPenNib  /> Write a Blog
                         </NavLink>
                     </li>
                     <li>
