@@ -26,6 +26,7 @@ import UsersBlog from "../Pages/UsersBlog/UsersBlog";
 import DynamicBlogpage2 from "../Pages/DynamicBlogpage/DynamicBlogpage2";
 import StravaActivities from "../Components/StravaActivities/StravaActivities";
 import CompareActivity from "../Components/StravaActivities/CompareActivity";
+import SpecialRecipe from "../Pages/SpecialRecipe/SpecialRecipe";
 
 const MyRouts = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogpage />,
+      },
+      {
+        path: "/specialRecipe",
+        element: <SpecialRecipe/>
       },
       {
         path: "/blogs/:id",
