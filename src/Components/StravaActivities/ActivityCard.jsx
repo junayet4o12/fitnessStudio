@@ -19,11 +19,11 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { name, max_speed, average_speed, distance, moving_time, sport_type, start_date, type, elapsed_time, id } = activity
-    console.log(id);
+    console.log(type);
     const time = new Date(start_date);
     // const cardImg = name === 'Morning Walk' ? morningWalkImg : (name === ('Morning Run' || 'Lunch Run') ? morningRunImg : (name === 'Evening Walk' ? eveningWalkImg : eveningRunImg))
     let cardImg = '';
-    if (name === 'Morning Walk' || name === 'Lunch Walk') {
+    if (name === 'Morning Walk' || name === 'Lunch Walk' || name === 'Afternoon Walk') {
         cardImg = morningWalkImg
     } else if (name === 'Morning Run' || name === 'Lunch Run') {
         cardImg = morningRunImg
@@ -65,7 +65,7 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
                 <CardFooter className="pt-0">
                     <Button onClick={handleOpen} className='text-black bg-primary/40 hover:bg-primary/70 transition-all duration-500'>Details</Button>
 
-                    <Button onClick={() => handleCompare(id)} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{comparingCard[0]===id ? 'Comparing' : 'Compare'}</Button>
+                    <Button onClick={() => handleCompare(id)} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{comparingCard[0] === id ? 'Comparing' : 'Compare'}</Button>
                 </CardFooter>
             </Card>
             <ActivityChartModal open={open} handleOpen={handleOpen} handleClose={handleClose} activity={activity}></ActivityChartModal>
