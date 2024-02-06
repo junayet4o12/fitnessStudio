@@ -49,8 +49,8 @@ const MyBlogsCard = ({ blog, refetch }) => {
                     <img src={blog?.blogImg} alt='' className="w-full max-w-lg mx-auto" />
                 </div>
                 <h1 className="text-3xl font-bold my-2">{blog?.blogName}</h1>
-                <div className="min-h-20">
-                    {showFullDescription ? (
+                <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}` }} className="min-h-20">
+                    {/* {showFullDescription ? (
                         <span>{blog?.blogDes}</span>
                     ) : (
                         <span>{blog?.blogDes.slice(0, 150)}</span>
@@ -59,7 +59,7 @@ const MyBlogsCard = ({ blog, refetch }) => {
                         <span className="text-sm font-semibold text-primary cursor-pointer" onClick={toggleDescription}>
                             {showFullDescription ? ' See less' : ' See more...'}
                         </span>
-                    )}
+                    )} */}
                 </div>
                 <h5 className="bmiNumber">Post: {blog?.time}</h5>
                 <div className='w-[100%] h-[2px] bg-secondary'></div>
