@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
       <InfinitySpin
         visible={true}
         width="300"
-        color="orange"
+        color="#FF4804"
         ariaLabel="infinity-spin-loading"
       />
     </div>
