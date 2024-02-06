@@ -1,9 +1,29 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import morningWalkImg from '../../assets/images/stravaImg/morning-walk.jpg'
-import morningRunImg from '../../assets/images/stravaImg/morning-run.jpg'
-import eveningWalkImg from '../../assets/images/stravaImg/evening-walk.jpg'
-import eveningRunImg from '../../assets/images/stravaImg/evening-run.jpg'
+import WalkImg from '../../assets/images/stravaImg/morning-walk.jpg'
+import RunImg from '../../assets/images/stravaImg/morning-run.jpg'
+import alpineskyImg from '../../assets/images/stravaImg/alpinesky.jpg'
+import CycleridingImg from '../../assets/images/stravaImg/Cycleriding.jpg'
+import EllipticalImg from '../../assets/images/stravaImg/Elliptical.jpg'
+import golfImg from '../../assets/images/stravaImg/golf.jpg'
+import handcycleImg from '../../assets/images/stravaImg/handcycle.jpg'
+import hikingImg from '../../assets/images/stravaImg/hiking.jpg'
+import IceSkateImg from '../../assets/images/stravaImg/IceSkate.jpg'
+import KayakingImg from '../../assets/images/stravaImg/Kayaking.jpg'
+import ridingImg from '../../assets/images/stravaImg/riding.jpg'
+import RockClimbingImg from '../../assets/images/stravaImg/RockClimbing.jpg'
+import sailImg from '../../assets/images/stravaImg/sail.jpg'
+import skittingImg from '../../assets/images/stravaImg/skitting.jpg'
+import soccerImg from '../../assets/images/stravaImg/soccer.jpg'
+import stairStapperImg from '../../assets/images/stravaImg/stairStapper.jpg'
+import standuppaddlingImg from '../../assets/images/stravaImg/standuppaddling.jpg'
+import surfingImg from '../../assets/images/stravaImg/surfing.jpg'
+import swimmingImg from '../../assets/images/stravaImg/swimming.jpg'
+import VelomobileImg from '../../assets/images/stravaImg/Velomobile.jpg'
+import wheelchairImg from '../../assets/images/stravaImg/wheelchair.jpg'
+import workoutImg from '../../assets/images/stravaImg/workout.jpg'
+import yogaImg from '../../assets/images/stravaImg/yoga.jpg'
+
 import {
     Card,
     CardHeader,
@@ -13,24 +33,60 @@ import {
     Button,
 } from "@material-tailwind/react";
 import ActivityChartModal from './ActivityChartModal';
-import toast from 'react-hot-toast';
 const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { name, max_speed, average_speed, distance, moving_time, sport_type, start_date, type, elapsed_time, id } = activity
-    console.log(type);
+    // console.log(type);
     const time = new Date(start_date);
-    // const cardImg = name === 'Morning Walk' ? morningWalkImg : (name === ('Morning Run' || 'Lunch Run') ? morningRunImg : (name === 'Evening Walk' ? eveningWalkImg : eveningRunImg))
-    let cardImg = '';
-    if (name === 'Morning Walk' || name === 'Lunch Walk' || name === 'Afternoon Walk') {
-        cardImg = morningWalkImg
-    } else if (name === 'Morning Run' || name === 'Lunch Run') {
-        cardImg = morningRunImg
-    } else if (name === 'Evening Walk') {
-        cardImg = eveningWalkImg
-    } else if (name === 'Evening Run') {
-        cardImg = eveningRunImg
+    let cardImg = RunImg;
+    if (type === 'Walk') {
+        cardImg = WalkImg
+    } else if (type === 'Run') {
+        cardImg = RunImg
+    } else if (type === 'Swim') {
+        cardImg = swimmingImg
+    } else if (type === 'Soccer') {
+        cardImg = soccerImg
+    } else if (type === 'Yoga') {
+        cardImg = yogaImg
+    } else if (type === 'Golf') {
+        cardImg = golfImg
+    } else if (type === 'Hike') {
+        cardImg = hikingImg
+    } else if (type === 'Ride') {
+        cardImg = ridingImg
+    } else if (type === 'EBikeRide') {
+        cardImg = CycleridingImg
+    } else if (type === 'Velomobile') {
+        cardImg = VelomobileImg
+    } else if (type === 'Rowing' || type === 'Kayaking' || type === 'Canoeing') {
+        cardImg = KayakingImg
+    } else if (type === 'Kitesurf' || type === 'Surfing' || type === 'Windsurf') {
+        cardImg = surfingImg
+    } else if (type === 'StandUpPaddling') {
+        cardImg = standuppaddlingImg
+    } else if (type === 'Sail') {
+        cardImg = sailImg
+    } else if (type === 'AlpineSki' || type === 'BackcountrySki' || type === 'NordicSki' || type === 'Snowboard') {
+        cardImg = alpineskyImg
+    } else if (type === 'IceSkate' || type === 'Snowshoe') {
+        cardImg = IceSkateImg
+    } else if (type === 'Workout' || type === 'Crossfit' || type === 'WeightTraining') {
+        cardImg = workoutImg
+    } else if (type === 'Elliptical') {
+        cardImg = EllipticalImg
+    } else if (type === 'Handcycle') {
+        cardImg = handcycleImg
+    } else if (type === 'InlineSkate' || type === 'RollerSki' || type === 'Skateboard') {
+        cardImg = skittingImg
+    } else if (type === 'RockClimbing') {
+        cardImg = RockClimbingImg
+    } else if (type === 'StairStepper') {
+        cardImg = stairStapperImg
+    } else if (type === 'Wheelchair') {
+        cardImg = wheelchairImg
     }
     const formattedTime = time.toLocaleTimeString("en-US", {
         hour: '2-digit',
@@ -65,7 +121,7 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
                 <CardFooter className="pt-0">
                     <Button onClick={handleOpen} className='text-black bg-primary/40 hover:bg-primary/70 transition-all duration-500'>Details</Button>
 
-                    <Button onClick={() => handleCompare(id)} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{comparingCard[0] === id ? 'Comparing' : 'Compare'}</Button>
+                    <Button onClick={() => handleCompare({id, name})} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
                 </CardFooter>
             </Card>
             <ActivityChartModal open={open} handleOpen={handleOpen} handleClose={handleClose} activity={activity}></ActivityChartModal>
