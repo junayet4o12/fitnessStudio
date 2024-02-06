@@ -17,7 +17,7 @@ const Banner = () => {
         <img className="w-full  h-full min-h-[300px]" src={banner} alt="" />
         <div className="absolute bg-[#00000064]  w-full h-full  top-0"></div>
         <div className="absolute top-[100px] xs:top-[25%] sm:top-[20%] md:top-[28%] w-full">
-          <div className=" bg-[#ff470471] w-full sm:min-h-[150px] p-3 xs:p-5 xs:py-7  sm:py-10 ">
+          <div className=" bg-primary/60 w-full sm:min-h-[150px] p-3 xs:p-5 xs:py-7  sm:py-10 ">
             <h1 className=" xs:text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white text-center">
               welcome to the futuristic <br /> fitness tracking platform
             </h1>
@@ -25,7 +25,7 @@ const Banner = () => {
           <div className="flex justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7">
             <Link to={"/contact_us"}>
               <button
-                className={`${buttonStyle} bg-[#ff4704] hover:bg-[#ff470436]  border-transparent hover:border-[#ff4704] `}>
+                className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary `}>
                 Contact us
               </button>
             </Link>
@@ -34,7 +34,7 @@ const Banner = () => {
             ) : (
               <button
                 onClick={handleLogin}
-                className={`${buttonStyle} bg-[#ff470436] hover:bg-[#ff4704]  border-[#ff4704] hover:border-transparent`}>
+                className={`${buttonStyle} bg-primary/40 hover:bg-primary  border-primary hover:border-transparent`}>
                 Log in
               </button>
             )}
