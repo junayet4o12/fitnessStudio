@@ -83,13 +83,11 @@ const StravaActivities = () => {
         navigate(`/dashboard/compare_activity/${comparingCard[0]?.id}/${comparingCard[1]?.id}`)
     }
     return (
-        <div className="p-5 relative">
-
-            <Title title={'Activities In Strava'}></Title>
-            <div className={`${comparingCard.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36   bg-white/70 rounded fixed top-24 md:top-10 right-10 px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-black`}>
+        <div className="p-5 relative max-w-7xl mx-auto container">
+            <div className={`${comparingCard.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-white/70 rounded sticky top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-black`}>
                 <div className="flex  flex-col justify-center items-center w-full relative pb-1">
                     <p className="text-lg font-bold ">Compare</p>
-                    
+
                     <p className={`font-bold  text-center text-sm border-primary/70 border-t-[1.5px] border-b-[1.5px] rounded py-[2px]`}>
                         {comparingCard[0]?.name ? comparingCard[0]?.name : 'Select Another'}
                         <br />
@@ -98,14 +96,18 @@ const StravaActivities = () => {
                         {comparingCard[1]?.name ? comparingCard[1]?.name : 'Select Another'}
 
                     </p>
-                    
+
                     <button onClick={handleComparing} disabled={comparingCard.length !== 2} className="btn btn-sm bg-primary/40 rounded hover:bg-primary/60 transition-all duration-500 shadow-xl font-bold   mt-1">Compare</button>
                     <button onClick={() => setComparingCard([])} className='absolute top-[2px] right-1 font-bold active:scale-90 transition-all duration-300'>X</button>
                 </div>
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-7">
-                {data?.map(activity => <ActivityCard key={activity?.id} activity={activity} handleCompare={handleCompare} comparingCard=
-                    {comparingCard}></ActivityCard>)}
+            <div className=" mt-[-140px]">
+                <Title title={'Activities In Strava'}></Title>
+
+                <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-7 ">
+                    {data?.map(activity => <ActivityCard key={activity?.id} activity={activity} handleCompare={handleCompare} comparingCard=
+                        {comparingCard}></ActivityCard>)}
+                </div>
             </div>
 
 

@@ -40,54 +40,45 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
     const { name, max_speed, average_speed, distance, moving_time, sport_type, start_date, type, elapsed_time, id } = activity
     // console.log(type);
     const time = new Date(start_date);
-    let cardImg = RunImg;
-    if (type === 'Walk') {
-        cardImg = WalkImg
-    } else if (type === 'Run') {
-        cardImg = RunImg
-    } else if (type === 'Swim') {
-        cardImg = swimmingImg
-    } else if (type === 'Soccer') {
-        cardImg = soccerImg
-    } else if (type === 'Yoga') {
-        cardImg = yogaImg
-    } else if (type === 'Golf') {
-        cardImg = golfImg
-    } else if (type === 'Hike') {
-        cardImg = hikingImg
-    } else if (type === 'Ride') {
-        cardImg = ridingImg
-    } else if (type === 'EBikeRide') {
-        cardImg = CycleridingImg
-    } else if (type === 'Velomobile') {
-        cardImg = VelomobileImg
-    } else if (type === 'Rowing' || type === 'Kayaking' || type === 'Canoeing') {
-        cardImg = KayakingImg
-    } else if (type === 'Kitesurf' || type === 'Surfing' || type === 'Windsurf') {
-        cardImg = surfingImg
-    } else if (type === 'StandUpPaddling') {
-        cardImg = standuppaddlingImg
-    } else if (type === 'Sail') {
-        cardImg = sailImg
-    } else if (type === 'AlpineSki' || type === 'BackcountrySki' || type === 'NordicSki' || type === 'Snowboard') {
-        cardImg = alpineskyImg
-    } else if (type === 'IceSkate' || type === 'Snowshoe') {
-        cardImg = IceSkateImg
-    } else if (type === 'Workout' || type === 'Crossfit' || type === 'WeightTraining') {
-        cardImg = workoutImg
-    } else if (type === 'Elliptical') {
-        cardImg = EllipticalImg
-    } else if (type === 'Handcycle') {
-        cardImg = handcycleImg
-    } else if (type === 'InlineSkate' || type === 'RollerSki' || type === 'Skateboard') {
-        cardImg = skittingImg
-    } else if (type === 'RockClimbing') {
-        cardImg = RockClimbingImg
-    } else if (type === 'StairStepper') {
-        cardImg = stairStapperImg
-    } else if (type === 'Wheelchair') {
-        cardImg = wheelchairImg
-    }
+    const typeToImgMap = {
+        'Walk': WalkImg,
+        'Run': RunImg,
+        'Swim': swimmingImg,
+        'Soccer': soccerImg,
+        'Yoga': yogaImg,
+        'Golf': golfImg,
+        'Hike': hikingImg,
+        'Ride': ridingImg,
+        'EBikeRide': CycleridingImg,
+        'Velomobile': VelomobileImg,
+        'Rowing': KayakingImg,
+        'Kayaking': KayakingImg,
+        'Canoeing': KayakingImg,
+        'Kitesurf': surfingImg,
+        'Surfing': surfingImg,
+        'Windsurf': surfingImg,
+        'StandUpPaddling': standuppaddlingImg,
+        'Sail': sailImg,
+        'AlpineSki': alpineskyImg,
+        'BackcountrySki': alpineskyImg,
+        'NordicSki': alpineskyImg,
+        'Snowboard': alpineskyImg,
+        'IceSkate': IceSkateImg,
+        'Snowshoe': IceSkateImg,
+        'Workout': workoutImg,
+        'Crossfit': workoutImg,
+        'WeightTraining': workoutImg,
+        'Elliptical': EllipticalImg,
+        'Handcycle': handcycleImg,
+        'InlineSkate': skittingImg,
+        'RollerSki': skittingImg,
+        'Skateboard': skittingImg,
+        'RockClimbing': RockClimbingImg,
+        'StairStepper': stairStapperImg,
+        'Wheelchair': wheelchairImg
+    };
+    
+    const cardImg = typeToImgMap[type] || RunImg;
     const formattedTime = time.toLocaleTimeString("en-US", {
         hour: '2-digit',
         minute: '2-digit',
