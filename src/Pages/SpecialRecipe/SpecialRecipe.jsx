@@ -13,6 +13,7 @@ const options = {
 
 const SpecialRecipe = () => {
     const [recipe, setRecipe]= useState({})
+    const [newRecipe, setNewRecipe] = useState(true)
 
 
         useEffect(()=>{
@@ -25,7 +26,7 @@ const SpecialRecipe = () => {
             .catch(error => {
                 console.error('Error fetching data from the API:', error);
             });
-        },[])
+        },[newRecipe])
 
 
   return (
@@ -88,6 +89,9 @@ const SpecialRecipe = () => {
                    </tr>
                 </table>
             </div>
+            <button 
+            className='w-full bg-secondary bg-opacity-70 rounded-xl text-xl text-white p-[10px]'
+            onClick={()=> setNewRecipe(!newRecipe)}>New Recipe</button>
         </div>
       )
     }
