@@ -27,6 +27,7 @@ import DynamicBlogpage2 from "../Pages/DynamicBlogpage/DynamicBlogpage2";
 import StravaActivities from "../Components/StravaActivities/StravaActivities";
 import CompareActivity from "../Components/StravaActivities/CompareActivity";
 import SpecialRecipe from "../Pages/SpecialRecipe/SpecialRecipe";
+import AdminRouts from "./AdminRouts";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const axiosPublic = useAxiosPublic()
