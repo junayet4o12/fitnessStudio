@@ -9,6 +9,7 @@ import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Loading from '../Loading';
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ const Profile = () => {
         setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
     if (isLoading) {
-        return ''
+        return <Loading></Loading>
     }
 
     const { age, myBMI, myBMR } = myPersonalInfo;

@@ -8,14 +8,21 @@ import { FaHome, FaPhoneAlt, FaUserAlt, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaBookMedical, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
-import { FaPenNib,FaStrava } from "react-icons/fa";
+import { FaPenNib, FaStrava } from "react-icons/fa";
+import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
+import useAdmin from "../../Hooks/useAdmin";
+import { MdOutlineManageAccounts } from "react-icons/md";
+import Loading from "../../Components/Loading";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
-
+  const [isAdmin, isAdminPanding] = useAdmin()
   // logOut function
+  if (isAdminPanding) {
+    return <Loading></Loading>
+  }
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -45,70 +52,98 @@ const Sidebar = () => {
             <FaUserAlt /> My Profile
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/dashboard/bmi_calculator"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <FaCalculator /> BMI Calculator
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/connect_app"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <BiSolidMessageSquareAdd /> Connected app
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/set_goal"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <AiFillClockCircle /> Set goals
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/tracking_progress"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <GiProgression /> Tracking Progress
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/strava_activities"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <FaStrava /> Strava Activities
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/BlogFrom"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }
-          >
-            <FaPenNib /> Write a Blog
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/dashboard/my_blogs"
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-primary text-white" : ""
-            }>
-            <FaBookMedical /> My Blogs
-          </NavLink>
-        </li>
+        {/* admin routs  */}
+        {
+          isAdmin ? <>
+            <li>
+              <NavLink
+                to="/dashboard/manage_users"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }
+              >
+                <MdOutlineManageAccounts /> Manage Users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/manage_blogs"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <SlBookOpen /> Manage Blogs
+              </NavLink>
+            </li>
+          </> : 
+          // user Routs 
+          <>
+
+            <li>
+              <NavLink
+                to="/dashboard/bmi_calculator"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <FaCalculator /> BMI Calculator
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/connect_app"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <BiSolidMessageSquareAdd /> Connected app
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/set_goal"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <AiFillClockCircle /> Set goals
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/tracking_progress"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <GiProgression /> Tracking Progress
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/strava_activities"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <FaStrava /> Strava Activities
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/BlogFrom"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }
+              >
+                <FaPenNib /> Write a Blog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/my_blogs"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                }>
+                <FaBookMedical /> My Blogs
+              </NavLink>
+            </li>
+          </>
+        }
         <div className="divider"></div>
 
         {/* main layout navlink */}
