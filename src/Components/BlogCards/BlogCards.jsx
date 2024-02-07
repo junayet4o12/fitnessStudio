@@ -16,8 +16,6 @@ const BlogCards = ({ blogs }) => {
             .then(res => setCardblogs(res.data))
           }
 
-          console.log(setsearchInput.length);
-
     return (
         // <div className='grid grid-cols-1 md:grid-cols-4 gap-4 p-[10px]'>
         <div className={"flex flex-col md:flex-row items-start p-[10px]"}>
@@ -103,9 +101,9 @@ const BlogCards = ({ blogs }) => {
             </div>
             }
            </div>
-            <div className='hidden md:flex flex-col w-[25%]'>
+            <div className='hidden md:flex flex-col w-[25%] md:sticky top-[15%]'>
                 <h1 className='border-l-2 border-secondary pl-[5px] font-[500] text-xl'>Latest Blogs:</h1>
-                <div className='flex flex-col gap-4 my-[25px]'>
+                <div className='flex flex-col gap-4 my-[25px] '>
                     {
                         blogs?.reverse()?.slice(0,5)?.map((blog) =>
                             <div key={blog._id} className='w-full flex gap-5 items-center shadow-lg rounded-md'>

@@ -9,6 +9,7 @@ import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Loading from '../Loading';
 
 const Profile = () => {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const Profile = () => {
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-
+    console.log(userDetails);
     // style Variable start
 
     const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px] cursor-not-allowed'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
@@ -41,7 +42,7 @@ const Profile = () => {
         setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
     if (isLoading) {
-        return ''
+        return <Loading></Loading>
     }
 
     const { age, myBMI, myBMR } = myPersonalInfo;
@@ -206,7 +207,7 @@ const Profile = () => {
             </div>
         </div>
     )
-    
+
 }
 
 
