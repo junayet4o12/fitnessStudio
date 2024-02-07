@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { PiListBulletsFill } from "react-icons/pi";
 import { IoCloseSharp } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
@@ -72,7 +72,25 @@ function NavList() {
                 ? "text-primary underline underline-offset-8 text-xl font-bold"
                 : "text-xl font-bold text-gray-600"
             }>
-             Blogs
+            Blogs
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <NavLink
+            to="/specialRecipe"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary underline underline-offset-8 text-xl font-bold"
+                : "text-xl font-bold text-gray-600"
+            }>
+             Special Recipes
           </NavLink>
         </div>
       </Typography>
@@ -145,10 +163,12 @@ export function NavbarSimple() {
           href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5">
-          <h1 className="flex items-center text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
-            <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
-            <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
-          </h1>
+          <Link to={'/'} className="scroll-smooth">
+            <h1 className="flex items-center text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
+              <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
+              <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
+            </h1>
+          </Link>
         </Typography>
         <div className="flex gap-7 xs:gap-10">
           <div className="hidden lg:block">

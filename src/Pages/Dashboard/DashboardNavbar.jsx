@@ -3,8 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
-import { FaBars, FaTimes, FaUserAlt } from "react-icons/fa";
-import { FaCalculator } from "react-icons/fa6";
+import { FaBars, FaStrava, FaTimes, FaUserAlt } from "react-icons/fa";
+import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import { GiProgression } from "react-icons/gi";
 import { FaPenNib } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
@@ -48,7 +48,7 @@ const DashboardNavbar = () => {
                 className={`mt-4 transition-all duration-300 ${isOpen ? "opacity-100 max-h-screen" : "opacity-0 max-h-0 overflow-hidden"
                     }`}
             >
-                <ul className="menu p-4 font-semibold text-base">
+                <ul className="menu font-semibold text-sm">
                     <li>
                         <NavLink to="/dashboard/profile"
                             className={({ isActive, isPending }) =>
@@ -68,12 +68,12 @@ const DashboardNavbar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/BlogFrom"
+                        <NavLink to="/dashboard/connect_app"
                             className={({ isActive, isPending }) =>
                                 isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                             }
                         >
-                            <FaPenNib  /> Write a Blog
+                            <BiSolidMessageSquareAdd /> Connected app
                         </NavLink>
                     </li>
                     <li>
@@ -95,12 +95,30 @@ const DashboardNavbar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/connect_app"
+                        <NavLink
+                            to="/dashboard/strava_activities"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }>
+                            <FaStrava /> Strava Activities
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/BlogFrom"
                             className={({ isActive, isPending }) =>
                                 isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                             }
                         >
-                            <BiSolidMessageSquareAdd /> Connected app
+                            <FaPenNib /> Write a Blog
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/my_blogs"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                            }
+                        >
+                            <FaBookAtlas /> My Blogs
                         </NavLink>
                     </li>
                 </ul>

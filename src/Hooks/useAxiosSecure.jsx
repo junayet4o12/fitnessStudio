@@ -1,9 +1,14 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
+import { backendUrl } from '../BackendUrl/backendUrl';
 
 const axiosSecure = axios.create({
+<<<<<<< HEAD
   baseURL: 'http://localhost:5000',
+=======
+  baseURL: backendUrl,
+>>>>>>> d11831cf5cfc69e7a3fc886b21f1203220891ca2
   withCredentials: true, // Send cookies with requests
 });
 

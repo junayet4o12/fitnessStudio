@@ -12,4 +12,4 @@ const axiosFitbitFetch = axios.create({
 const useAxiosFitbitFetch =()=>{
     return axiosFitbitFetch
 }
-export default useAxiosFitbitFetch ;
+export default useAxiosFitbitFetch ; 
