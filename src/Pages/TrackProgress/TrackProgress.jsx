@@ -22,54 +22,6 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
-<<<<<<< HEAD
-  const track = [
-    {
-      trackProgress: {
-        dailyActivities: {
-          steps: {
-            name: "Steps",
-            percentage: 3056
-          },
-          distance: {
-            name: "Distance",
-            value: 6.4,
-            unit: "kilometers"
-          },
-          sleep: {
-            name: "Sleep",
-            value: 8.4,
-            unit: "hours"
-          }
-        },
-        heartRate: {
-          percentage: 1962,
-          bpm: 89,
-          waterConsumed: 2.4
-        },
-        weightTracking: [
-          { name: "S", wgt: 55 },
-          { name: "M", wgt: 57 },
-          { name: "T", wgt: 53 },
-          { name: "W", wgt: 49 },
-          { name: "T", wgt: 52 },
-          { name: "F", wgt: 57 },
-          { name: "S", wgt: 50 }
-        ],
-        caloriesBurned: [
-          { name: "S", cal: 2500 },
-          { name: "M", cal: 2100 },
-          { name: "T", cal: 1800 },
-          { name: "W", cal: 2100 },
-          { name: "T", cal: 2400 },
-          { name: "F", cal: 1500 },
-          { name: "S", cal: 2200 }
-        ]
-      }
-    }
-  ]
-  
-=======
 
   const { data: track, isLoading } = useGetTrackProQuery();
   console.log("dgh", track);
@@ -80,7 +32,6 @@ const TrackProgress = () => {
   // if (!track || track.length === 0) {
   //   return <p className="">No data available</p>;
   // }
->>>>>>> d11831cf5cfc69e7a3fc886b21f1203220891ca2
 
   const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
   const heartRateData = track[0]?.trackProgress?.heartRate || {};

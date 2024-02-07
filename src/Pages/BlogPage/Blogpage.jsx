@@ -9,15 +9,9 @@ const Blogpage = () => {
     const AxiosPublic = useAxiosPublic()
 
     useEffect(()=>{
-<<<<<<< HEAD
-        fetch("http://localhost:5000/blogs")
-        .then(res => res.json())
-        .then(data =>setblogs(data))
-=======
       AxiosPublic("/blogs")
         // .then(res => res.json())
         .then(data =>setblogs(data.data))
->>>>>>> d11831cf5cfc69e7a3fc886b21f1203220891ca2
     },[])
 
 
