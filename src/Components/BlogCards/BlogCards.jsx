@@ -5,7 +5,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic'
 
 const BlogCards = ({ blogs }) => {
     const [Cardblogs, setCardblogs] = useState([])
-    const [searchInput, setsearchInput] = useState()
+    const [searchInput, setsearchInput] = useState("")
     const AxiosPublic = useAxiosPublic()
 
         // search Functionality
@@ -41,7 +41,7 @@ const BlogCards = ({ blogs }) => {
                                 </form>
                             </div>
                 {blogs.map((blog) =>
-                    <div className={searchInput.length > 0 ? "hidden" :'flex flex-col md:flex-row shadow-xl rounded-md justify-between'} key={blog?._id}>
+                    <div className={searchInput.length > 1 ? "hidden" :'flex flex-col md:flex-row shadow-xl rounded-md justify-between'} key={blog?._id}>
                         <div className='md:w-[45%]'>
                             <img src={blog.blogImg} className='w-full object-cover h-[200px] md:h-[300px] rounded-md' />
                         </div>
@@ -70,7 +70,7 @@ const BlogCards = ({ blogs }) => {
             </div>
             }
             {
-                Cardblogs.length === 0 ? <h1>No, Blogs found</h1>:
+                Cardblogs.length === 0 ? <h1 className={searchInput <2 ? "hidden": "block"}>No, Blogs found</h1>:
             <div className={'flex flex-col w-full gap-6 p-[10px]'}>
                          
                 {Cardblogs.map((blog) =>
