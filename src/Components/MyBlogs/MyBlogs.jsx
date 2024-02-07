@@ -11,7 +11,7 @@ const MyBlogs = () => {
 
 
     // useEffect(() => {
-    //     fetch(`https://fitnessstudio-bacend.vercel.app/my_blogs?email=${user?.email}`)
+    //     fetch(`http://localhost:5000/my_blogs?email=${user?.email}`)
     //         .then(res => res.json())
     //         .then(data => setMyBlogs(data))
     // }, [user?.email])

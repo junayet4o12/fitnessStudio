@@ -72,4 +72,4 @@ const ChartProgress = ({ weightTracking, caloriesBurned }) => {
 
 export default ChartProgress;
 
-// jkhsdfoghluiserghperuoig
+
