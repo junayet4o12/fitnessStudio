@@ -1,0 +1,27 @@
+import { useQuery } from "@tanstack/react-query";
+
+import useAxiosSecure from "./useAxiosSecure";
+import useAuth from "./useAuth";
+import { useContext } from "react";
+import { AuthContext } from "../Authentication/AuthProvider/AuthProviders";
+import { isPending } from "@reduxjs/toolkit";
+
+const useAdmin = () => {
+    const { user } = useContext(AuthContext)
+    console.log(user);
+
+    const axiosSecure = useAxiosSecure()
+    const { data: isAdmin, isPending: isAdminPanding } = useQuery({
+        queryKey: [user?.email, 'admin'],
+        enabled: !!user?.email,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/admin/${user?.email}`);
+
+            return res?.data?.admin
+        }
+    })
+
+    return [isAdmin, isAdminPanding]
+};
+
+export default useAdmin;

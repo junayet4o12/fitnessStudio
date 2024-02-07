@@ -19,7 +19,7 @@ const Profile = () => {
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-
+    console.log(userDetails);
     // style Variable start
 
     const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px] cursor-not-allowed'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
@@ -206,7 +206,7 @@ const Profile = () => {
             </div>
         </div>
     )
-    
+
 }
 
 
