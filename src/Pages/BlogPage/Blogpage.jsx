@@ -13,6 +13,9 @@ const Blogpage = () => {
         // .then(res => res.json())
         .then(data =>setblogs(data.data))
     },[])
+
+
+
   return (
     <div className='mb-[100px]'>
         <Helmet>
@@ -20,6 +23,7 @@ const Blogpage = () => {
         </Helmet>
           <BlogSlider blogs={blogs}/>
           {/* blog cards */}
+          
           <BlogCards blogs={blogs}/>
     </div>
   )
