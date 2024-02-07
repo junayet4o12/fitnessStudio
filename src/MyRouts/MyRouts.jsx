@@ -96,15 +96,15 @@ const MyRouts = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     children: [
       {
         path: "profile",
-        element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+        element: <Profile></Profile>,
       },
       {
         path: "bmi_calculator",
-        element: <PrivateRoute><BmiCalculator /></PrivateRoute>,
+        element: <BmiCalculator />,
       },
       {
         path: "BlogFrom",
@@ -112,15 +112,15 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "set_goal",
-        element: <PrivateRoute><SetGoal></SetGoal></PrivateRoute>,
+        element: <SetGoal></SetGoal>,
       },
       {
         path: "tracking_progress",
-        element: <PrivateRoute><TrackProgress /></PrivateRoute>,
+        element: <TrackProgress />,
       },
       {
         path: "connect_app",
-        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>
+        element: <ConnectApp></ConnectApp>
       },
       {
         path: "strava_connect",
@@ -136,11 +136,20 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "set_goal/create_goal",
-        element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute>,
+        element: <CreateGoal></CreateGoal>,
       },
       {
         path: "my_blogs",
-        element: <PrivateRoute><MyBlogs /></PrivateRoute>,
+        element: <MyBlogs />,
+      },
+      // admin routs 
+      {
+        path: "manage_users",
+        element: <AdminRouts><div>manage users bro</div></AdminRouts>,
+      },
+      {
+        path: "manage_blogs",
+        element: <AdminRouts><div>manage blogs bro</div></AdminRouts>,
       },
     ],
   },
