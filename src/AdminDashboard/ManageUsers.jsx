@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { MdDeleteForever } from "react-icons/md";
-import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
@@ -19,15 +18,15 @@ const ManageUsers = () => {
     })
 
     // make admin
-    const handleMakeAdmin = user => {
-        axiosPublic.patch(`/users/admin/${user._id}`)
-            .then((res) => {
-                if (res.data?.modifiedCount > 0) {
-                    refetch()
-                    toast.success(`${user?.name} Are Admin Now!`)
-                }
-            })
-    }
+    const handleMakeAdmin = async (email) => {
+        const { data } = await axiosPublic.put(`/make-admin/${email}`);
+        if (data.modifiedCount) {
+            toast.success("Updated Successfully");
+        } else {
+            toast.error("Something went wrong");
+        }
+        refetch();
+    };
 
     // user delete with confirmatin
     const handleDeleteUser = user => {
@@ -63,7 +62,7 @@ const ManageUsers = () => {
             </Helmet>
             <div className=" max-w-6xl mx-auto bmiNumber">
                 <div className="flex justify-evenly my-5 text-2xl lg:text-4xl font-semibold">
-                    <h3 style={{textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black'}}>Total Users: {users?.length}</h3>
+                    <h3 style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}>Total Users: {users?.length}</h3>
                 </div>
                 <div className="overflow-x-auto shadow-lg">
                     <table className="table">
@@ -84,10 +83,13 @@ const ManageUsers = () => {
                                         <td>{user?.name}</td>
                                         <td>{user?.email}</td>
                                         <td>
-                                            {
-                                                user?.role === 'admin' ? 'Admin' :
-                                                    <button onClick={() => handleMakeAdmin(user)} className="text-white bg-blue-500 px-1 md:px-2 py-1 rounded-lg text-base md:text-lg lg:text-3xl" title="Admin User"><FaUsers /></button>
-                                            }
+                                            <button
+                                                disabled={user.role === "Admin"}
+                                                onClick={() => handleMakeAdmin(user.email)} title="Make Admin"
+                                                className="disabled:cursor-not-allowed disabled:text-white btn py-1 px-2 rounded font-semibold bg-primary text-white hover:text-primary hover:border-primary hover:bg-white"
+                                            >
+                                                {user.role === "Admin" ? "Admin" : "Make Admin"}
+                                            </button>
                                         </td>
                                         <td>
                                             <button onClick={() => handleDeleteUser(user)} className="text-error bg-gray-200 px-1 md:px-2 py-1 rounded-lg text-base md:text-lg lg:text-3xl" title="Delete User"><MdDeleteForever /></button>
@@ -95,7 +97,6 @@ const ManageUsers = () => {
                                     </tr>
                                 )
                             }
-
                         </tbody>
                     </table>
                 </div>

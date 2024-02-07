@@ -8,7 +8,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import DataTable from "react-data-table-component";
 import { FaUsers } from "react-icons/fa6";
 
-const ManageUsers = () => {
+const ManageUsers2 = () => {
     const axiosPublic = useAxiosPublic();
 
     // Fetch users data using useQuery hook
@@ -132,4 +132,4 @@ const ManageUsers = () => {
     );
 };
 
-export default ManageUsers;
+export default ManageUsers2;
