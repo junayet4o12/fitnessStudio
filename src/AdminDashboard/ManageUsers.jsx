@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Title from '../Components/Title/Title';
+import { FaUsers } from "react-icons/fa6";
+
 const ManageUsers = () => {
 
     const axiosPublic = useAxiosPublic()
@@ -61,9 +63,9 @@ const ManageUsers = () => {
                 <title>Dashboard | AllUsers</title>
             </Helmet>
             <Title title={"User Management"} />
-            <div className="mx-auto bmiNumber md:my-8 px-2">
+            <div className="mx-auto bmiNumber md:my-8 px-4 md:px-0 lg:px-6">
                 <div className="text-2xl lg:text-4xl font-semibold py-4">
-                    <h3 style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}>Total Users: {users?.length}</h3>
+                    <h3 className="flex items-center text-black gap-2" style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}><FaUsers /> Total Users: {users?.length}</h3>
                 </div>
                 <div className="overflow-x-auto rounded-lg scroll-auto touch-auto" style={{ boxShadow: '0px 0px 20px #FF4804'}}>
                     <table className="table">

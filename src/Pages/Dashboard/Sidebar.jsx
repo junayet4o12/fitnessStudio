@@ -13,16 +13,13 @@ import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineManageAccounts } from "react-icons/md";
-import Loading from "../../Components/Loading";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
-  const [isAdmin, isAdminPanding] = useAdmin()
+  const [isAdmin] = useAdmin();
+
   // logOut function
-  if (isAdminPanding) {
-    return <Loading></Loading>
-  }
   const handleLogout = () => {
     logOut()
       .then(() => {

@@ -9,13 +9,12 @@ import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import Loading from '../Loading';
 
 const Profile = () => {
     const dispatch = useDispatch()
     const { user } = useAuth()
     const axiosPublic = useAxiosSecure()
-    const { isLoading, user: userDetails } = useSelector(state => state.user)
+    const { user: userDetails } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
@@ -41,9 +40,7 @@ const Profile = () => {
         const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
         setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    
 
     const { age, myBMI, myBMR } = myPersonalInfo;
 
