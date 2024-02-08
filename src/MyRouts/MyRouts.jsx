@@ -27,6 +27,12 @@ import DynamicBlogpage2 from "../Pages/DynamicBlogpage/DynamicBlogpage2";
 import StravaActivities from "../Components/StravaActivities/StravaActivities";
 import CompareActivity from "../Components/StravaActivities/CompareActivity";
 import SpecialRecipe from "../Pages/SpecialRecipe/SpecialRecipe";
+import AdminRouts from "./AdminRouts";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import ManageUsers from "../AdminDashboard/ManageUsers";
+import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
+
+const axiosPublic = useAxiosPublic()
 
 const MyRouts = createBrowserRouter([
   {
@@ -44,6 +50,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/blogs",
+        loader: ()=> axiosPublic("/blogcount"),
         element: <Blogpage />,
       },
       {
@@ -91,15 +98,15 @@ const MyRouts = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     children: [
       {
         path: "profile",
-        element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+        element: <Profile></Profile>,
       },
       {
         path: "bmi_calculator",
-        element: <PrivateRoute><BmiCalculator /></PrivateRoute>,
+        element: <BmiCalculator />,
       },
       {
         path: "BlogFrom",
@@ -107,15 +114,15 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "set_goal",
-        element: <PrivateRoute><SetGoal></SetGoal></PrivateRoute>,
+        element: <SetGoal></SetGoal>,
       },
       {
         path: "tracking_progress",
-        element: <PrivateRoute><TrackProgress /></PrivateRoute>,
+        element: <TrackProgress />,
       },
       {
         path: "connect_app",
-        element: <PrivateRoute><ConnectApp></ConnectApp></PrivateRoute>
+        element: <ConnectApp></ConnectApp>
       },
       {
         path: "strava_connect",
@@ -131,11 +138,20 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "set_goal/create_goal",
-        element: <PrivateRoute><CreateGoal></CreateGoal></PrivateRoute>,
+        element: <CreateGoal></CreateGoal>,
       },
       {
         path: "my_blogs",
-        element: <PrivateRoute><MyBlogs /></PrivateRoute>,
+        element: <MyBlogs />,
+      },
+      // admin routs 
+      {
+        path: "manage_users",
+        element: <AdminRouts><ManageUsers /></AdminRouts>,
+      },
+      {
+        path: "manage_blogs",
+        element: <AdminRouts><MangeBlogPage></MangeBlogPage></AdminRouts>,
       },
     ],
   },
