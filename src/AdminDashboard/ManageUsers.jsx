@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-
+import Title from '../Components/Title/Title';
 const ManageUsers = () => {
 
     const axiosPublic = useAxiosPublic()
@@ -60,14 +60,15 @@ const ManageUsers = () => {
             <Helmet>
                 <title>Dashboard | AllUsers</title>
             </Helmet>
-            <div className=" max-w-6xl mx-auto bmiNumber">
-                <div className="flex justify-evenly my-5 text-2xl lg:text-4xl font-semibold">
+            <Title title={"User Management"} />
+            <div className="mx-auto bmiNumber md:my-8 px-2">
+                <div className="text-2xl lg:text-4xl font-semibold py-4">
                     <h3 style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}>Total Users: {users?.length}</h3>
                 </div>
-                <div className="overflow-x-auto shadow-lg">
+                <div className="overflow-x-auto rounded-lg scroll-auto touch-auto" style={{ boxShadow: '0px 0px 20px #FF4804'}}>
                     <table className="table">
                         <thead className="text-[12px] md:text-md lg:text-xl text-black font-bold">
-                            <tr>
+                            <tr className="bg-secondary text-white">
                                 <th>SL</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -86,7 +87,7 @@ const ManageUsers = () => {
                                             <button
                                                 disabled={user.role === "Admin"}
                                                 onClick={() => handleMakeAdmin(user.email)} title="Make Admin"
-                                                className="disabled:cursor-not-allowed disabled:text-white btn py-1 px-2 rounded font-semibold bg-primary text-white hover:text-primary hover:border-primary hover:bg-white"
+                                                className="disabled:cursor-not-allowed disabled:text-primary disabled:bg-white text-[8px] lg:text-base px-2 py-1 rounded-md bg-primary text-white hover:text-primary hover:border-primary hover:bg-white"
                                             >
                                                 {user.role === "Admin" ? "Admin" : "Make Admin"}
                                             </button>

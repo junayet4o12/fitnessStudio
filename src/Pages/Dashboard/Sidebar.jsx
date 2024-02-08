@@ -62,7 +62,7 @@ const Sidebar = () => {
                   isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                 }
               >
-                <MdOutlineManageAccounts /> Manage Users
+                <MdOutlineManageAccounts className="text-2xl" /> Manage Users
               </NavLink>
             </li>
             <li>
