@@ -30,9 +30,18 @@ const baseApi = createApi({
     getTrackPro: builder.query({
       query: () => `/1/user/-/activities/date/${formattedDate}.json`,
     }),
+    getTrackWaterPro: builder.query({
+      query: () => `/1/user/-/foods/log/water/date/${formattedDate}.json`,
+    }),
+    getTrackSleepPro: builder.query({
+      query: () => `/1.2/user/-/sleep/date/${formattedDate}.json`,
+    }),
+    getTrackWeightPro: builder.query({
+      query: () => `/1/user/-/body/log/weight/date/${formattedDate}.json`,
+    }),
   }),
 });
 
-export const { useGetTrackProQuery } = baseApi;
+export const { useGetTrackProQuery, useGetTrackWaterProQuery, useGetTrackSleepProQuery, useGetTrackWeightProQuery } = baseApi;
 
 export default baseApi;
