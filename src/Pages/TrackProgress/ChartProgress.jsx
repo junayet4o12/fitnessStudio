@@ -1,71 +1,60 @@
 /* eslint-disable react/prop-types */
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  AreaChart,
-  Area,
-  ResponsiveContainer,
-} from "recharts";
+// import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+// import {
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   AreaChart,
+//   Area,
+//   ResponsiveContainer,
+// } from "recharts";
+// import { useGetTrackWeightProQuery } from "./api/baseApi";
 
-const ChartProgress = ({ weightTracking, caloriesBurned }) => {
+const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
+  // const data1 = weightTracking || [];
+  // const data2 = caloriesBurned;
 
-  const data1 = weightTracking || [];
-  const data2 = caloriesBurned || [];
+
+
+  // const progressBarStyles = {
+  //   path: {
+  //     stroke: "#FF4804",
+  //   },
+  //   text: {
+  //     fill: "#FF4804",
+  //     fontSize: "16px",
+  //     fontFamily: "Poppins",
+  //   },
+  // };
+
+  const data = [
+    { name: "Total Calories", uv:caloriesOut, pv: 2400, amt: 2400 },
+    { name: "Calories Burned", uv: caloriesBurned, pv: 2400, amt: 2400 },
+  ];
 
   return (
     <div className="mt-6 mx-2">
-      <h2 className="text-2xl my-2 font-bold">Weight Tracking</h2>
-      <ResponsiveContainer width="100%" height={200}>
-        <AreaChart
-          width={500}
-          height={200}
-          data={data1}
-          syncId="anyId"
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="wgt"
-            stroke="#c4564c"
-            fill="#c4564c"
-            fillOpacity={0.6}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <h2 className="text-2xl my-2 font-bold">Todays Calories</h2>
+      <BarChart width={500} height={300} data={data} style={{fontFamily: "Poppins"}}>
+        <XAxis dataKey="name" stroke="#8884d8" />
+        <YAxis />
+        <Tooltip />
+        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+        <Bar dataKey="uv" fill="#8884d8" barSize={30} />
+      </BarChart>
 
-      <h2 className="text-2xl my-2 font-bold">Calories Burned</h2>
+      {/* <h2 className="text-2xl my-2 font-bold">Calories Burned</h2> */}
 
-      <ResponsiveContainer width="100%" height={200}>
-        <AreaChart
-          width={500}
-          height={200}
-          data={data2}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Area type="monotone" dataKey="cal" stroke="#8884d8" fill="#8884d8" />
-       
-        </AreaChart>
-      </ResponsiveContainer>
+      <div className="bmiNumber mx-auto" style={{ width: 300, height: 300 }}>
+        {/* <CircularProgressbar
+          styles={progressBarStyles}
+          value={(data2 / 7730) * 100}
+          text={`${data2} kcal`}
+        /> */}
+      </div>
     </div>
   );
 };
