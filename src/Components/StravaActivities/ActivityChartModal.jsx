@@ -33,7 +33,7 @@ const ActivityChartModal = ({ handleOpen, handleClose, activity, open }) => {
             open={open}
             size={"lg"}
             handler={handleOpen}
-            className="mx-auto my-5  overflow-y-scroll  relative"
+            className="mx-auto my-5  overflow-y-scroll  relative max-h-[90%]"
         >
             <DialogHeader className=" p-5 px-20">
                 <StravaActivitiesTitle start_date={start_date} name={name}></StravaActivitiesTitle>
@@ -87,10 +87,8 @@ const ActivityChartModal = ({ handleOpen, handleClose, activity, open }) => {
             <DialogFooter className="sticky bottom-0">
 
                 <Button
-                    variant="gradient"
-                    color="green"
                     onClick={handleClose}
-                    className='text-primary bg-primary/20'
+                    className='text-primary bg-primary/40'
                 >
                     <span>Okay</span>
                 </Button>

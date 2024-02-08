@@ -17,9 +17,12 @@ import { MdOutlineManageAccounts } from "react-icons/md";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminPanding] = useAdmin();
 
   // logOut function
+  if (isAdminPanding) {
+    return ''
+  }
   const handleLogout = () => {
     logOut()
       .then(() => {

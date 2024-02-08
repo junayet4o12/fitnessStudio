@@ -17,8 +17,11 @@ import { SlBookOpen } from "react-icons/sl";
 const DashboardNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useAuth()
-    const [isAdmin] = useAdmin()
+    const [isAdmin, isAdminPanding] = useAdmin();
 
+    if (isAdminPanding) {
+        return ''
+    }
     // navbar icon toggle
     const toggleNavbar = () => {
         setIsOpen(!isOpen);

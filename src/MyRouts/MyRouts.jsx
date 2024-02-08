@@ -30,6 +30,7 @@ import SpecialRecipe from "../Pages/SpecialRecipe/SpecialRecipe";
 import AdminRouts from "./AdminRouts";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import ManageUsers from "../AdminDashboard/ManageUsers";
+import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 
 const axiosPublic = useAxiosPublic()
 
@@ -150,7 +151,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "manage_blogs",
-        element: <AdminRouts><div>manage blogs bro</div></AdminRouts>,
+        element: <AdminRouts><MangeBlogPage></MangeBlogPage></AdminRouts>,
       },
     ],
   },

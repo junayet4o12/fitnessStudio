@@ -33,13 +33,14 @@ import {
     Button,
 } from "@material-tailwind/react";
 import ActivityChartModal from './ActivityChartModal';
-const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
-    const [open, setOpen] = useState(false)
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+const ActivityCard = ({ activity,  handleGivingCompareDate, comparingCard }) => {
+    const [openActivityModal, setOpenActivityModal] = useState(false)
+    const handleOpenActivityChartModal = () => setOpenActivityModal(true);
+    const handleCloseActivityChartModal = () => setOpenActivityModal(false);
     const { name, max_speed, average_speed, distance, moving_time, sport_type, start_date, type, elapsed_time, id } = activity
     // console.log(type);
-    const time = new Date(start_date);
+
+    // for using img according to type start
     const typeToImgMap = {
         'Walk': WalkImg,
         'Run': RunImg,
@@ -77,17 +78,24 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
         'StairStepper': stairStapperImg,
         'Wheelchair': wheelchairImg
     };
-    
+
     const cardImg = typeToImgMap[type] || RunImg;
+    // for using img according to type end
+
+    // making time in string start 
+    const time = new Date(start_date);
     const formattedTime = time.toLocaleTimeString("en-US", {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit'
     });
+    const formattedDate = time.toLocaleDateString("en-US", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+    // making time in string end
+
+    // showing distance text start 
     const distanceInKm = parseFloat((distance / 1000).toFixed(2))
     const showingDistance = distanceInKm < 0.5 ? `${distance} meter` : `${distanceInKm} Kilometer`
-    const formattedDate = time.toLocaleDateString("en-US", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-
+    // showing distance text end
     return (
         <div className=''>
             <Card className="mt-6 w-72 xs:w-96 bg-primary/10 shadow-xl shadow-primary/30">
@@ -110,12 +118,12 @@ const ActivityCard = ({ activity, handleCompare, comparingCard }) => {
                     </Typography>
                 </CardBody>
                 <CardFooter className="pt-0">
-                    <Button onClick={handleOpen} className='text-black bg-primary/40 hover:bg-primary/70 transition-all duration-500'>Details</Button>
+                    <Button onClick={handleOpenActivityChartModal} className='text-black bg-primary/40 hover:bg-primary/70 transition-all duration-500'>Details</Button>
 
-                    <Button onClick={() => handleCompare({id, name})} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
+                    <Button onClick={() => handleGivingCompareDate({ id, name })} className='text-black bg-secondary/40 hover:bg-secondary/70 transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
                 </CardFooter>
             </Card>
-            <ActivityChartModal open={open} handleOpen={handleOpen} handleClose={handleClose} activity={activity}></ActivityChartModal>
+            <ActivityChartModal open={openActivityModal} handleOpen={handleOpenActivityChartModal} handleClose={handleCloseActivityChartModal} activity={activity}></ActivityChartModal>
         </div>
     );
 };
