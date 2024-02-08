@@ -21,7 +21,7 @@ const Sidebar = () => {
   const [isAdmin, isAdminPanding] = useAdmin()
   // logOut function
   if (isAdminPanding) {
-    return <Loading></Loading>
+    return ''
   }
   const handleLogout = () => {
     logOut()

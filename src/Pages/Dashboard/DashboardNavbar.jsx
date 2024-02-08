@@ -20,7 +20,7 @@ const DashboardNavbar = () => {
     const [isAdmin, isAdminPanding] = useAdmin()
     // logOut function
     if (isAdminPanding) {
-        return <Loading></Loading>
+        return ''
     }
     // navbar icon toggle
     const toggleNavbar = () => {
