@@ -13,15 +13,15 @@ import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineManageAccounts } from "react-icons/md";
-import Loading from "../../Components/Loading";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
-  const [isAdmin, isAdminPanding] = useAdmin()
+  const [isAdmin, isAdminPanding] = useAdmin();
+
   // logOut function
   if (isAdminPanding) {
-    return <Loading></Loading>
+    return ''
   }
   const handleLogout = () => {
     logOut()
@@ -62,7 +62,7 @@ const Sidebar = () => {
                   isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                 }
               >
-                <MdOutlineManageAccounts /> Manage Users
+                <MdOutlineManageAccounts className="text-2xl" /> Manage Users
               </NavLink>
             </li>
             <li>

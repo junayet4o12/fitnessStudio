@@ -8,9 +8,9 @@ const useBMRSuggestions = (myBMR) => {
 
     useEffect(() => {
         setBMRSuggestions(<>
-            <DialogHeader className='py-3 text-xl'>Maintaining calory According to BMR.</DialogHeader>
+            <DialogHeader className='py-3 text-xl text-white'>Maintaining calory According to BMR.</DialogHeader>
             <DialogBody className='py-0'>
-                <ul className='list-disc px-5 text-sm space-y-2 '>
+                <ul className='list-disc px-5 text-sm space-y-2 text-white'>
                     <li>If you are  <strong>Sedentary (Little to no exercise)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.2))} calories</strong> in a day</li>
                     <li>If you are  <strong>Lightly Active (Light exercise/sports 1-3 days/week)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.375))} calories</strong> in a day</li>
                     <li>If you are  <strong>Moderately Active (Moderate exercise/sports 3-5 days/week)</strong>, then you need to maintain <strong className='text-base'>{Math.round((myBMR * 1.55))} calories</strong> in a day</li>

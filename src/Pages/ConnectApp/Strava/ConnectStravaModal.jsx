@@ -32,11 +32,11 @@ const ConnectStravaModal = ({ open, setOpen }) => {
 
         <Dialog
             open={open}
-            size={'xl'}
-            className='w-screen mx-auto   max-h-screen min-h-screen bg-[#00000062] flex justify-center items-center   p-5'
+            size={'xxl'}
+                className=' bg-[#00000062]  flex justify-center items-center p-5 text-white'
         >
             <div className='w-full rounded max-w-[600px] overflow-y-scroll max-h-[90%] relative bg-gray-200 ' >
-                <div className='w-full max-w-[600px]   rounded shadow-xl max-h-[90%] relative text-black font-medium'>
+                <div className='w-full max-w-[600px]   rounded shadow-xl  relative text-black font-medium'>
                     <div className='text-end px-6 pt-3 sticky top-0 z-10'>
                         <button
                             onClick={() => setOpen(false)} className='transition-all  px-2 duration-100 text-xl font-bold text-gray-700 sticky hover:text-gray-900  active:scale-90 active:text-black z-10'>X</button>

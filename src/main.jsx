@@ -9,6 +9,7 @@ import AuthProviders from "./Authentication/AuthProvider/AuthProviders.jsx";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import store from "./Redux/Store/Store.jsx";
+import { ThemeProvider } from "@material-tailwind/react";
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Toaster position="top-center" reverseOrder={false} />
       <HelmetProvider>
         <AuthProviders>
+          <ThemeProvider>
           <RouterProvider router={MyRouts} />
+          </ThemeProvider>
         </AuthProviders>
       </HelmetProvider>
     </Provider>
