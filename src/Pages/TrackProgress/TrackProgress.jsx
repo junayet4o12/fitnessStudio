@@ -11,7 +11,7 @@ import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
 
 const TrackProgress = () => {
   const cardStyle =
-    "mx-auto my-2 px-5 text-center bg-emerald-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+    "mx-auto my-2 px-5 text-center bg-green-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
 
   const progressBarStyles = {
     path: {
@@ -34,7 +34,7 @@ const TrackProgress = () => {
   const caloBurned = track?.summary.caloriesOut;
 
   if (isLoading) {
-    return <p className="">loading</p>;
+    return "";
   }
 
   return (
@@ -80,15 +80,18 @@ const TrackProgress = () => {
                       <div className="card-actions justify-start">
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
+                      <div>
+                      <p className="text-xl font-semibold">Distance</p>
                       <span className="text-xl font-semibold">
                         {track?.summary?.distances[0]?.distance} miles
                       </span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="">
-                  <div className="card bg-sky-50 mb-1">
+                  <div className="card bg-blue-50 mb-1">
                     <div className="card-body flex flex-row bmiNumber justify-center items-center">
                       <div className="card-actions justify-start ">
                         <GiNightSleep className="text-primary text-2xl" />

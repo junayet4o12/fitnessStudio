@@ -22,7 +22,7 @@ const HeartRate = () => {
   };
   const { data: water, isLoading } = useGetTrackWaterProQuery();
   const { data: weight } = useGetTrackWeightProQuery();
-  console.log(" weight", weight.weight[0].weight);
+  // console.log(" weight", weight.weight[0].weight);
 
   if (isLoading) {
     return "";
@@ -34,7 +34,7 @@ const HeartRate = () => {
     <div className="flex flex-col lg:flex-row justify-around gap-2">
       <div className="lg:w-1/2 flex flex-col space-y-6">
         <div className="mt-6">
-          <div className="card bg-sky-50 mb-2 ">
+          <div className="card bg-blue-50 mb-2 ">
             <div className="card-body flex flex-row bmiNumber justify-center items-center">
               <div className="card-actions justify-start">
                 <FaWeight className="text-primary text-2xl with-shadow" />
