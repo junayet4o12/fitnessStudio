@@ -9,12 +9,14 @@ const Dashboard = () => {
       <Helmet>
         <title> Dashboard - FitnessStudio</title>
       </Helmet>
-      <div className="md:flex">
+      <div className="md:flex ">
         <DashboardNavbar />
-        <Sidebar />
+       
+          <Sidebar />
+        
 
         {/* Dashboard content */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-x-hidden">
           <ScrollRestoration />
           <Outlet />
         </div>
