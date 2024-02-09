@@ -147,6 +147,7 @@ const MyRouts = createBrowserRouter([
       // admin routs 
       {
         path: "manage_users",
+        loader: ()=> axiosPublic("/usersCount"),
         element: <AdminRouts><ManageUsers /></AdminRouts>,
       },
       {
