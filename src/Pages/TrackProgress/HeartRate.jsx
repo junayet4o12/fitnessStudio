@@ -4,7 +4,10 @@ import "react-circular-progressbar/dist/styles.css";
 import { LuGlassWater } from "react-icons/lu";
 import { FaWeight } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
-import { useGetTrackWaterProQuery, useGetTrackWeightProQuery } from "./api/baseApi";
+import {
+  useGetTrackWaterProQuery,
+  useGetTrackWeightProQuery,
+} from "./api/baseApi";
 
 const HeartRate = () => {
   const cardStyle =
@@ -22,26 +25,30 @@ const HeartRate = () => {
   };
   const { data: water, isLoading } = useGetTrackWaterProQuery();
   const { data: weight } = useGetTrackWeightProQuery();
-  console.log(" weight", weight.weight[0].weight);
+  // console.log(" weight", weight.weight[0].weight);
 
   if (isLoading) {
     return "";
   }
 
   const waterConsumed = water?.summary?.water;
+  const totalWeight = weight?.weight[0]?.weight;
+  const currentBmi = weight?.weight[0]?.bmi;
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
       <div className="lg:w-1/2 flex flex-col space-y-6">
         <div className="mt-6">
-          <div className="card bg-sky-50 mb-2 ">
+          <div className="card bg-blue-50 mb-2 ">
             <div className="card-body flex flex-row bmiNumber justify-center items-center">
               <div className="card-actions justify-start">
                 <FaWeight className="text-primary text-2xl with-shadow" />
               </div>
               <div>
                 <p className="text-xl font-semibold">Current Bmi</p>
-                <span className="text-xl font-semibold bmiNumber"> {weight?.weight[0]?.bmi}</span>
+                <span className="text-xl font-semibold bmiNumber">
+                  {weight ? `${currentBmi}` : 0}
+                </span>
               </div>
             </div>
           </div>
@@ -67,12 +74,14 @@ const HeartRate = () => {
         <div className={`${cardStyle}`}>
           <div className="mb-2 flex justify-center items-center space-x-1">
             <GiWeightLiftingUp className="text-primary text-2xl" />
-            <h3 className="text-lg font-medium text-gray-700">Current Weight</h3>
+            <h3 className="text-lg font-medium text-gray-700">
+              Current Weight
+            </h3>
           </div>
           <div>
             <CircularProgressbar
-              value={(weight?.weight[0]?.weight ) * 100}
-              text={`${weight?.weight[0]?.weight} `}
+              value={totalWeight * 100}
+              text={weight ? `${totalWeight} kg` : "0 kg"}
               strokeWidth={20}
               styles={{
                 ...progressBarStyles,
