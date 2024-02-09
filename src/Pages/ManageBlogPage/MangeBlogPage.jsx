@@ -40,9 +40,9 @@ const MangeBlogPage = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[110px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className="px-20 py-10">
+    <div className=" py-10 px-10">
       <Title title="Manage Blog"></Title>
-      <div className="bg-[#F6F6F6] p-8 md:p-10 lg:p-20 rounded-xl">
+      <div className="bg-[#F6F6F6] py-8 md:py-10  rounded-xl px-8">
         <div>
           <div className="flex justify-between">
             <h1 className="text-4xl  font-semibold">
@@ -52,7 +52,7 @@ const MangeBlogPage = () => {
           {/*  */}
           <div>
             <div className="overflow-x-auto">
-              <table className="table w-full my-10">
+              <table className="table max-w-full my-10">
                 {/* head */}
                 <thead>
                   <tr>
