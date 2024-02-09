@@ -4,9 +4,11 @@ import Footer from "../Shared/Footer/Footer";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="relative">
       <ScrollRestoration />
-      <NavbarSimple></NavbarSimple>
+      <div className="sticky top-0 z-20 overflow-x-hidden w-full">
+        <NavbarSimple></NavbarSimple>
+      </div>
       <Outlet></Outlet>
       <Footer></Footer>
     </div>
