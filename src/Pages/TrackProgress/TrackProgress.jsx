@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 
 import { IoFootstepsOutline } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
-import { useGetTrackProQuery } from "./api/baseApi";
+import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
 
 const TrackProgress = () => {
   const cardStyle =
@@ -24,23 +24,18 @@ const TrackProgress = () => {
   };
 
   const { data: track, isLoading } = useGetTrackProQuery();
-  console.log("dgh", track);
+  console.log(track);
+  const { data: sleep } = useGetTrackSleepProQuery();
+
+  const sleepDuration = sleep?.summary?.totalMinutesAsleep;
+  const totalSleep = Math.floor(sleepDuration / 60);
+  // console.log(totalSleep);
+  const caloriesOut = track?.summary.caloriesBMR;
+  const caloBurned = track?.summary.caloriesOut;
 
   if (isLoading) {
     return <p className="">loading</p>;
   }
-  // if (!track || track.length === 0) {
-  //   return <p className="">No data available</p>;
-  // }
-
-  const dailyActivities = track[0]?.trackProgress?.dailyActivities || {};
-  const heartRateData = track[0]?.trackProgress?.heartRate || {};
-  const { weightTracking, caloriesBurned } = track[0]?.trackProgress || {};
-  // console.log(weightTracking, caloriesBurned);
-
-  const percentage = dailyActivities?.steps.percentage;
-
-  const totalPercentage = (percentage / 10000) * 100;
 
   return (
     <div>
@@ -67,15 +62,13 @@ const TrackProgress = () => {
                 <div className={`${cardStyle}`}>
                   <div className="mb-2 flex justify-center items-center space-x-1 ">
                     <IoFootstepsOutline className="text-primary text-2xl " />
-                    <h3 className="text-lg font-medium text-gray-700">
-                      {dailyActivities?.steps.name}
-                    </h3>
+                    <h3 className="text-lg font-medium text-gray-700">Steps</h3>
                   </div>
                   <div>
                     <CircularProgressbar
                       styles={progressBarStyles}
-                      value={totalPercentage}
-                      text={`${totalPercentage.toFixed(1)}%`}
+                      value={(track?.summary.steps / 10000) * 100}
+                      text={track?.summary.steps}
                     />
                   </div>
                 </div>
@@ -87,15 +80,9 @@ const TrackProgress = () => {
                       <div className="card-actions justify-start">
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
-                      <div>
-                        <p className="text-xl font-semibold">
-                          {dailyActivities.distance.name}
-                        </p>
-                        <span className="text-xl font-semibold">
-                          {dailyActivities.distance.value}{" "}
-                          {dailyActivities.distance.unit}
-                        </span>
-                      </div>
+                      <span className="text-xl font-semibold">
+                        {track?.summary?.distances[0]?.distance} miles
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -107,12 +94,9 @@ const TrackProgress = () => {
                         <GiNightSleep className="text-primary text-2xl" />
                       </div>
                       <div className="">
-                        <p className="text-xl font-semibold">
-                          {dailyActivities.sleep.name}
-                        </p>
+                        <p className="text-xl font-semibold">Sleep</p>
                         <span className="text-xl font-semibold">
-                          {dailyActivities.sleep.value}{" "}
-                          {dailyActivities.sleep.unit}
+                          {totalSleep} hr
                         </span>
                       </div>
                     </div>
@@ -120,13 +104,13 @@ const TrackProgress = () => {
                 </div>
               </div>
             </div>
-            <HeartRate heartRateData={heartRateData} />
+            <HeartRate caloriesOut={caloriesOut} />
           </div>
 
           <div className="lg:w-1/2 ">
             <ChartProgress
-              weightTracking={weightTracking}
-              caloriesBurned={caloriesBurned}
+              caloriesBurned={caloBurned}
+              caloriesOut={caloriesOut}
             />
           </div>
         </div>
