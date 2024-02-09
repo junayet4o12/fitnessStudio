@@ -155,7 +155,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
 
       <div className="lg:container mx-auto flex items-center justify-between text-blue-gray-900 text-black ">
         <Typography
@@ -185,7 +185,7 @@ export function NavbarSimple() {
               <PiListBulletsFill className="h-6 w-8" strokeWidth={2} />
             )}
           </IconButton>
-          <span className="lg:mt-[-7px]">
+          <span className="mt-[-7px]">
             {user && <NavProfile />}
           </span>
         </div>
