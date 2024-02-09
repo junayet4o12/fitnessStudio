@@ -72,7 +72,7 @@ const HeartRate = () => {
           <div>
             <CircularProgressbar
               value={(weight?.weight[0]?.weight ) * 100}
-              text={`${weight?.weight[0]?.weight} `}
+              text={`${weight?.weight[0]?.weight} kg`}
               strokeWidth={20}
               styles={{
                 ...progressBarStyles,
