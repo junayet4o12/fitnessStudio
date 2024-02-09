@@ -99,6 +99,7 @@ const MyRouts = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "profile",

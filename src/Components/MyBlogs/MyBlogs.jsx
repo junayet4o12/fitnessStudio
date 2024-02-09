@@ -20,7 +20,7 @@ const MyBlogs = () => {
     const { data: myBlogs = [], refetch, isLoading: isBlogLoading } = useQuery({
         queryKey: ['myBlogs'],
         queryFn: async () => {
-            const response = await axiosPublic.get(`/my_blogs?email=${user?.email}`);
+            const response = await axiosPublic.get(`/my_blogs/${user?.email}`);
             return response.data;
         }
     })
