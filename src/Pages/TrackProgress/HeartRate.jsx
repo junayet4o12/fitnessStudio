@@ -22,7 +22,7 @@ const HeartRate = () => {
   };
   const { data: water, isLoading } = useGetTrackWaterProQuery();
   const { data: weight } = useGetTrackWeightProQuery();
-  console.log(" weight", weight.weight[0].weight);
+  console.log(" weight", weight?.weight[0]?.weight);
 
   if (isLoading) {
     return "";
