@@ -18,7 +18,7 @@ const Banner = () => {
         <div className="absolute bg-[#00000064]  w-full h-full  top-0"></div>
         <div className="absolute top-[100px] xs:top-[25%] sm:top-[20%] md:top-[28%] w-full">
           <div className=" bg-primary/60 w-full sm:min-h-[150px] p-3 xs:p-5 xs:py-7  sm:py-10 ">
-            <h1 className=" xs:text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white text-center">
+            <h1 className=" text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white text-center">
               welcome to the futuristic <br /> fitness tracking platform
             </h1>
           </div>

@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="scroolBar w-60 max-h-screen bg-gradient-to-r from-secondary to-primary hidden md:block sticky top-0 overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+    <div className="scroolBar min-w-56  max-h-screen bg-gradient-to-r from-secondary to-primary hidden md:block sticky top-0 overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       {/* Sidebar logo or Title */}
       <div className="p-4">
         <h1 className="flex text-2xl gap-1 font-bold bg-primary shadow-lg shadow-gray-500 p-1 rounded-md">
