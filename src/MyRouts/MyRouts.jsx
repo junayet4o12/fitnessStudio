@@ -31,6 +31,7 @@ import AdminRouts from "./AdminRouts";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import ManageUsers from "../AdminDashboard/ManageUsers";
 import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
+import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 
 const axiosPublic = useAxiosPublic()
 
@@ -52,6 +53,10 @@ const MyRouts = createBrowserRouter([
         path: "/blogs",
         loader: ()=> axiosPublic("/blogcount"),
         element: <Blogpage />,
+      },
+      {
+        path:"/library",
+        element :<WorkoutLibrary/>
       },
       {
         path: "/specialRecipe",

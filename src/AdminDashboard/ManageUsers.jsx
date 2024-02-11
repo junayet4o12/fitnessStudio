@@ -127,9 +127,9 @@ const ManageUsers = () => {
                     <h3 className="flex items-center text-black gap-2" style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}><FaUsers /> Total Users: {totalUsers}</h3>
                     <form
                         onSubmit={handleSubmit}
-                        className=" w-[90%] md:w-fit lg:w-fit  flex mx-auto lg:mx-[0px]">
+                        className=" w-[90%] md:w-fit lg:w-fit  flex mx-auto lg:mx-[0px] items-center">
                         <input
-                            className="text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-l-xl outline-none"
+                            className="h-[40px] md:h-[50px] text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-l-xl outline-none"
                             onChange={SearchFunction} type="text" name="name" placeholder="Search Users" id="" />
                         <button
                             className="text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-r-xl outline-none bg-primary text-white w-[70px]  md:w-[100px] h-[40px] md:h-[50px]"
