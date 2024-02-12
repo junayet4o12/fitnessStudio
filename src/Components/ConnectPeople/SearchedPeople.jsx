@@ -2,10 +2,13 @@
 import React from 'react';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAuth from '../../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing }) => {
     const axiosPublic = useAxiosPublic()
     const { user } = useAuth()
+    const navigate = useNavigate();
+
     console.log(personalInfo?._id);
     const handleFollow = () => {
         axiosPublic.put(`/following/${personalInfo?._id}`, info)
@@ -17,13 +20,16 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing }) =
                 console.log(err);
             })
     }
-    
+
     const followedByMe = info?.followed
     const follower = info?.following
     const isFollow = followedByMe ? followedByMe.find(data => data === personalInfo?._id) : ''
     const isFollower = follower ? follower.find(data => data === personalInfo?._id) : ''
     console.log(followedByMe, personalInfo?._id, isFollow);
-    if(info?._id===personalInfo?._id){
+    const handleProfile = () => {
+        navigate(`/dashboard/users_profile/${info?._id}`)
+    }
+    if (info?._id === personalInfo?._id) {
         return ''
     }
     return (
@@ -34,9 +40,9 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing }) =
             </div>
             <div>
                 {
-                    isFollow ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Following</p> : (isFollower ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follower</p>:<p onClick={handleFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follow</p>)
+                    isFollow ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Following</p> : (isFollower ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follower</p> : <p onClick={handleFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follow</p>)
                 }
-                <p className='btn btn-sm bg-gray-800 text-white border border-gray-800 hover:bg-black  hover:border-black transition-all duration-500 ml-2'>Profile</p>
+                <p onClick={handleProfile} className='btn btn-sm bg-gray-800 text-white border border-gray-800 hover:bg-black  hover:border-black transition-all duration-500 ml-2'>Profile</p>
             </div>
         </div>
     );

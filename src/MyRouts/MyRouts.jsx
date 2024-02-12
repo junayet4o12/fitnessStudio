@@ -34,6 +34,7 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
+import UserProfile from "../Components/UserProfile/UserProfile";
 
 const axiosPublic = useAxiosPublic()
 
@@ -57,8 +58,8 @@ const MyRouts = createBrowserRouter([
         element: <Blogpage />,
       },
       {
-        path:"/library",
-        element :<WorkoutLibrary/>
+        path: "/library",
+        element: <WorkoutLibrary />
       },
       {
         path: "/specialRecipe",
@@ -112,6 +113,11 @@ const MyRouts = createBrowserRouter([
         path: "profile",
         element: <Profile></Profile>,
       },
+      {
+        path: "/dashboard/users_profile/:id",
+        element: <UserProfile></UserProfile>,
+      },
+
       {
         path: "bmi_calculator",
         element: <BmiCalculator />,
