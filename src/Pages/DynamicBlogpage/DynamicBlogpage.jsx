@@ -40,6 +40,7 @@ const DynamicBlogpage = () => {
         </Link>
         <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
+        <button className="bg-primary p-[10px] text-xl text-white rounded-md">Follow Now</button>
       </div>
     </div>
   )

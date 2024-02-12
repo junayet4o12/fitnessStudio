@@ -33,6 +33,7 @@ import ManageUsers from "../AdminDashboard/ManageUsers";
 import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
+import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 
 const axiosPublic = useAxiosPublic()
 
@@ -54,6 +55,10 @@ const MyRouts = createBrowserRouter([
         path: "/blogs",
         loader: () => axiosPublic("/blogcount"),
         element: <Blogpage />,
+      },
+      {
+        path:"/library",
+        element :<WorkoutLibrary/>
       },
       {
         path: "/specialRecipe",
