@@ -6,14 +6,16 @@ import useBMRSuggestions from './useBMRSuggestions';
 import { DialogHeader } from '@material-tailwind/react';
 import HealthSuggestionsModal from './HealthSuggestionsModal';
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom';
 
 
 
-const ProfileMain = ({ image, age, myBMI, myBMR }) => {
+const ProfileMain = ({ image, age, myBMI, myBMR, userDetails }) => {
     const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
     const BMISuggestions = useBMISuggestions(myBMI);
     const ageSuggestions = useAgeSuggestions(age);
     const BMRSuggestions = useBMRSuggestions(myBMR)
+    const navigate = useNavigate()
     const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
     console.log('hello', localStorage.getItem('stravaKey'));
@@ -26,8 +28,11 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
         <hr className='w-[90%] mx-auto mt-3 border-[1.3px]' />
         {BMRSuggestions}
     </> : <>
-        <DialogHeader >Please Update Your Personal Data!!!</DialogHeader>
+        <DialogHeader className='text-white'>Please Update Your Personal Data!!!</DialogHeader>
     </>
+    const handleNavigateToConnectedPage = () => {
+        navigate('/dashboard/connected_with')
+    }
     return (
         <div className='max-w-7xl mx-auto'>
             <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7 gap-5  lg:gap-10 p-4 bg-white/60 rounded my-5 shadow-2xl px-10'>
@@ -42,9 +47,13 @@ const ProfileMain = ({ image, age, myBMI, myBMR }) => {
                 </div>
                 <div className='w-full  flex justify-center items-center'>
                     <div className=' font-medium w-[100%]   grid grid-cols-2 md:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
-                        <p className={infoStyle}>
+                        <p onClick={handleNavigateToConnectedPage} className={infoStyle}>
                             <span className='font-bold text-primary'>Connected With</span>
-                            <span className='text-sm font-bold'>0 Friend</span>
+                            <span>
+                                <span className='text-sm font-bold'>Following: {userDetails?.following?.length || '0'}</span>
+                                <br />
+                                <span className='text-sm font-bold'>Follower: {userDetails?.followed?.length || '0'}</span>
+                            </span>
                         </p>
                         <p className={infoStyle}>
                             <span className='font-bold text-primary'>My Age</span>

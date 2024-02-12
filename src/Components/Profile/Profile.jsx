@@ -102,7 +102,7 @@ const Profile = () => {
 
     return (
         <div className='p-5 lg:p-10' style={{background: `url(${pageBg})`, backgroundRepeat:'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover'}}>
-            <ProfileMain image={userDetails?.image} age={age} myBMI={myBMI} myBMR={myBMR}></ProfileMain>
+            <ProfileMain image={userDetails?.image} age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
             <div>
                 <div className='w-full  bg-white/70  mx-auto p-5 pt-12 rounded relative shadow-lg '>
 

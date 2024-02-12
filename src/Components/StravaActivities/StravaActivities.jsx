@@ -31,11 +31,6 @@ const StravaActivities = () => {
             return res.data
         }
     })
-    if (!localStorage.getItem('stravaKey')) {
-        toast.error('Please Connect Strava, First')
-        navigate('/dashboard/strava_connect')
-        return
-    }
     if (isactivityDatasLoading) {
         return <Loading></Loading>
     }

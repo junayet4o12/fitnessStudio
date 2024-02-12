@@ -31,6 +31,8 @@ import AdminRouts from "./AdminRouts";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import ManageUsers from "../AdminDashboard/ManageUsers";
 import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
+import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
+import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 
 const axiosPublic = useAxiosPublic()
 
@@ -50,12 +52,12 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/blogs",
-        loader: ()=> axiosPublic("/blogcount"),
+        loader: () => axiosPublic("/blogcount"),
         element: <Blogpage />,
       },
       {
         path: "/specialRecipe",
-        element: <SpecialRecipe/>
+        element: <SpecialRecipe />
       },
       {
         path: "/blogs/:id",
@@ -145,10 +147,18 @@ const MyRouts = createBrowserRouter([
         path: "my_blogs",
         element: <MyBlogs />,
       },
+      {
+        path: 'connect_people',
+        element: <ConnectPeople></ConnectPeople>
+      },
+      {
+        path: 'connected_with',
+        element: <ConnectedPeople></ConnectedPeople>
+      },
       // admin routs 
       {
         path: "manage_users",
-        loader: ()=> axiosPublic("/usersCount"),
+        loader: () => axiosPublic("/usersCount"),
         element: <AdminRouts><ManageUsers /></AdminRouts>,
       },
       {
