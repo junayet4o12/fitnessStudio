@@ -51,36 +51,32 @@ const MyRouts = createBrowserRouter([
       {
         path: "/blogs",
         loader: ()=> axiosPublic("/blogcount"),
-        element: <Blogpage />,
+        element: <PrivateRoute><Blogpage /></PrivateRoute>,
       },
       {
         path: "/specialRecipe",
-        element: <SpecialRecipe/>
+        element:<PrivateRoute> <SpecialRecipe/></PrivateRoute>
       },
       {
         path: "/blogs/:id",
-        element: <DynamicBlogpage />,
+        element:<PrivateRoute><DynamicBlogpage /></PrivateRoute> ,
       },
       {
         path: "/blogs/:email",
-        element: <UsersBlog />,
+        element: <PrivateRoute><UsersBlog /></PrivateRoute> ,
       },
       {
         path: "/blogs/:id/:email",
-        element: <UsersBlog />,
+        element:<PrivateRoute><UsersBlog /> </PrivateRoute> ,
       },
       {
         path: "/blogs/:id/:email/:newId",
-        element: <DynamicBlogpage2 />,
+        element:<PrivateRoute> <DynamicBlogpage2 /></PrivateRoute> ,
       },
-      {
-        path: "/services",
-        element: <div>This is Services</div>,
-      },
-
-      {
+    
+    {
         path: "/contact_us",
-        element: <PrivateRoute><ContactUs></ContactUs></PrivateRoute>,
+        element: <ContactUs></ContactUs>,
       },
       {
         path: "/register",
@@ -92,7 +88,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: '/permission',
-        element: <FitbitTerms></FitbitTerms>
+        element:<PrivateRoute><FitbitTerms></FitbitTerms></PrivateRoute> 
       }
     ],
   },
@@ -103,47 +99,47 @@ const MyRouts = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element:<PrivateRoute><Profile></Profile> </PrivateRoute> ,
       },
       {
         path: "bmi_calculator",
-        element: <BmiCalculator />,
+        element:<PrivateRoute><BmiCalculator /> </PrivateRoute>  ,
       },
       {
         path: "BlogFrom",
-        element: <UploadBlogs />,
+        element:<PrivateRoute><UploadBlogs /> </PrivateRoute>  ,
       },
       {
         path: "set_goal",
-        element: <SetGoal></SetGoal>,
+        element:<PrivateRoute>  <SetGoal></SetGoal></PrivateRoute> ,
       },
       {
         path: "tracking_progress",
-        element: <TrackProgress />,
+        element:<PrivateRoute> <TrackProgress /></PrivateRoute>  ,
       },
       {
         path: "connect_app",
-        element: <ConnectApp></ConnectApp>
+        element:<PrivateRoute> <ConnectApp></ConnectApp></PrivateRoute>  
       },
       {
         path: "strava_connect",
-        element: <StravaCondition></StravaCondition>
+        element:<PrivateRoute><StravaCondition></StravaCondition> </PrivateRoute>  
       },
       {
         path: "strava_activities",
-        element: <StravaActivities></StravaActivities>
+        element:<PrivateRoute><StravaActivities></StravaActivities> </PrivateRoute>  
       },
       {
         path: "/dashboard/compare_activity/:id1/:id2",
-        element: <CompareActivity></CompareActivity>
+        element:<PrivateRoute><CompareActivity></CompareActivity> </PrivateRoute>  
       },
       {
         path: "set_goal/create_goal",
-        element: <CreateGoal></CreateGoal>,
+        element:<PrivateRoute>  <CreateGoal></CreateGoal></PrivateRoute> ,
       },
       {
         path: "my_blogs",
-        element: <MyBlogs />,
+        element:<PrivateRoute><MyBlogs /> </PrivateRoute>  ,
       },
       // admin routs 
       {
