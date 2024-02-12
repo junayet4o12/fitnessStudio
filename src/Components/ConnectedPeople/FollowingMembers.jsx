@@ -1,7 +1,12 @@
 // import React from 'react';
 
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom';
 const FollowingMembers = ({ following, idx }) => {
+    const navigate = useNavigate();
+    const handleProfile = () => {
+        navigate(`/dashboard/users_profile/${following?._id}`)
+    }
     return (
         <motion.div
             initial={{ scale: 0.7, x: -100 }}
@@ -14,7 +19,7 @@ const FollowingMembers = ({ following, idx }) => {
                     <h2 className="text-sm font-bold">{following?.name}</h2>
                 </div>
                 <div>
-                    <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
+                    <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
                 </div>
             </div>
         </motion.div>
