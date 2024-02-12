@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 // import React from 'react';
- 
+  
 const Title = ({title}) => {
     return (
         <div className="space-y-4 py-5 px-4">
