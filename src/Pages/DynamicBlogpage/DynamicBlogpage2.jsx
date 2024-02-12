@@ -33,6 +33,7 @@ console.log(blog);
         <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
+        <button className="bg-primary p-[10px] text-xl text-white rounded-md">Follow Now</button>
       </div>
     </div>
   )

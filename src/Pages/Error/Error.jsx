@@ -6,6 +6,7 @@ import manhalf2 from '../../assets/images/error/manhalf2.svg'
 import './Error.css'
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
+import Loading from '../../Components/Loading';
 
 const Error = () => {
     const [loading, setLoading] = useState(true)
@@ -21,10 +22,8 @@ const Error = () => {
         }, 5000);
     }, [])
     if (loading) {
-        return <div className='w-screen min-h-screen flex justify-center items-center'>
+        return <Loading></Loading>
 
-            <span className="loading loading-ring loading-lg text-primary"></span>
-        </div>
     }
 
     const returnBtn = `btn  errorBtn  text-white font-bold`

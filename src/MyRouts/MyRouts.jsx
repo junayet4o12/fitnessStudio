@@ -31,6 +31,10 @@ import AdminRouts from "./AdminRouts";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import ManageUsers from "../AdminDashboard/ManageUsers";
 import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
+import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
+import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
+import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
+import UserProfile from "../Components/UserProfile/UserProfile";
 
 const axiosPublic = useAxiosPublic()
 
@@ -50,12 +54,25 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/blogs",
+<<<<<<< HEAD
         loader: ()=> axiosPublic("/blogcount"),
         element: <PrivateRoute><Blogpage /></PrivateRoute>,
+=======
+        loader: () => axiosPublic("/blogcount"),
+        element: <Blogpage />,
+>>>>>>> 1070035b5d852140e88d10352acbd7533acdeb15
+      },
+      {
+        path: "/library",
+        element: <WorkoutLibrary />
       },
       {
         path: "/specialRecipe",
+<<<<<<< HEAD
         element:<PrivateRoute> <SpecialRecipe/></PrivateRoute>
+=======
+        element: <SpecialRecipe />
+>>>>>>> 1070035b5d852140e88d10352acbd7533acdeb15
       },
       {
         path: "/blogs/:id",
@@ -102,6 +119,11 @@ const MyRouts = createBrowserRouter([
         element:<PrivateRoute><Profile></Profile> </PrivateRoute> ,
       },
       {
+        path: "/dashboard/users_profile/:id",
+        element: <UserProfile></UserProfile>,
+      },
+
+      {
         path: "bmi_calculator",
         element:<PrivateRoute><BmiCalculator /> </PrivateRoute>  ,
       },
@@ -141,10 +163,18 @@ const MyRouts = createBrowserRouter([
         path: "my_blogs",
         element:<PrivateRoute><MyBlogs /> </PrivateRoute>  ,
       },
+      {
+        path: 'connect_people',
+        element: <ConnectPeople></ConnectPeople>
+      },
+      {
+        path: 'connected_with',
+        element: <ConnectedPeople></ConnectedPeople>
+      },
       // admin routs 
       {
         path: "manage_users",
-        loader: ()=> axiosPublic("/usersCount"),
+        loader: () => axiosPublic("/usersCount"),
         element: <AdminRouts><ManageUsers /></AdminRouts>,
       },
       {
