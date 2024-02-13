@@ -1,11 +1,32 @@
+/* eslint-disable react/prop-types */
 // import React from 'react';
 
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
-const FollowingMembers = ({ following, idx }) => {
+import { RiUserUnfollowLine } from "react-icons/ri";
+
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import { useState } from 'react';
+const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic()
+    const [unFollowLoading, setUnfollowLoading] = useState(false)
     const handleProfile = () => {
         navigate(`/dashboard/users_profile/${following?._id}`)
+    }
+    const handleUnfollow = () => {
+        setUnfollowLoading(true)
+        console.log(userDetails);
+        axiosPublic.put(`/unfollowing/${userDetails?._id}`, following)
+            .then(res => {
+                console.log(res.data);
+                refetch()
+                setUnfollowLoading(false)
+            })
+            .catch(err => {
+                console.log(err);
+                setUnfollowLoading(false)
+            })
     }
     return (
         <motion.div
@@ -18,8 +39,9 @@ const FollowingMembers = ({ following, idx }) => {
                     <img className='h-9 w-9 rounded-full' src={following?.image} alt="" />
                     <h2 className="text-sm font-bold">{following?.name}</h2>
                 </div>
-                <div>
+                <div className='flex items-center gap-2'>
                     <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
+                    {unFollowLoading ? <p className=' text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full'><span className="loading loading-spinner loading-sm"></span></p> : <p onClick={handleUnfollow} title='unfollow him' className=' cursor-pointer text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><RiUserUnfollowLine /></p>}
                 </div>
             </div>
         </motion.div>
