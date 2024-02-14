@@ -20,6 +20,8 @@ const SetGoal = () => {
       <div>
         <Title title="Select Goal Category"></Title>
         <div className="grid lg:grid-cols-3 gap-8">
+
+          {/* Manage weight card */}
           <div className={`shadow-md relative bg-black rounded-lg}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
@@ -30,13 +32,15 @@ const SetGoal = () => {
             </div>
             <div className="flex items-center justify-center">
               <button
-                className={`text-white mx-4 hover:text-blue-60 px-3 py-2 rounded-lg mt-2 bg-primary font-bold absolute -bottom-0 ${isHovered ? 'z-10 transform transition-transform duration-500 -translate-y-2' : '-z-20'}`}
+                className={`text-white mx-4 hover:text-blue-60 px-3 py-2 rounded-lg mt-2 bg-primary absolute -bottom-0 ${isHovered ? 'z-10 transform transition-transform duration-500 -translate-y-2' : '-z-20'}`}
               >
-                Set goal
+                Set Goal
               </button>
             </div>
 
           </div>
+          {/* Strength training card */}
+
           <div className={`shadow-md relative bg-black rounded-lg}`}
             onMouseEnter={() => setIsHoveredStrength(true)}
             onMouseLeave={() => setIsHoveredStrength(false)}>
@@ -54,6 +58,8 @@ const SetGoal = () => {
             </div>
 
           </div>
+          {/* Endurance training card */}
+
           <div className={`shadow-md relative bg-black rounded-lg}`}
             onMouseEnter={() => setIsHoveredEndurance(true)}
             onMouseLeave={() => setIsHoveredEndurance(false)}>
