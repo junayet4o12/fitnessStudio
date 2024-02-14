@@ -37,12 +37,13 @@ const UploadBlogs = () => {
             })
             const blogImg = res?.data?.data?.display_url;
             const userEmail = user?.email;
+            const userId = user?._id;
             const userName = user?.displayName;
             const userImg = user?.photoURL;
             const blogName = data?.blogname;
             const blogDes = tinyData;
             const time = (new Date()).toLocaleDateString().split('/').reverse().join('-');
-            const allData = { time, userEmail, userName, userImg, blogImg, blogName, blogDes }
+            const allData = { time, userEmail,userId, userName, userImg, blogImg, blogName, blogDes }
             console.log(allData);
             axiosPublic.post('/post_blog', allData)
                 .then(res => {
