@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div className="relative">
       <ScrollRestoration />
-      <div className="sticky top-0 z-20 overflow-x-hidden w-full">
+      <div className="sticky top-0 z-40 overflow-x-hidden w-full">
         <NavbarSimple></NavbarSimple>
       </div>
       <Outlet></Outlet>

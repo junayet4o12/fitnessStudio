@@ -14,6 +14,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 const NavProfile = () => {
@@ -31,16 +32,23 @@ const NavProfile = () => {
       icon: <MdOutlineDashboard />,
     },
     {
+      label:'Connected With',
+      icon: <MdOutlineConnectWithoutContact/>
+    },
+    {
       label: "Sign Out",
       icon: <LiaSignOutAltSolid />,
     },
+    
   ];
   const handleAction = (input) => {
     if (input === "My Profile") {
       navigate("/dashboard/profile");
     } else if (input === "Dashboard") {
       navigate("/dashboard/profile");
-    } else if (input === "Sign Out") {
+    } else if(input ==='Connected With'){
+      navigate("/dashboard/connected_with")
+    }else if (input === "Sign Out") {
       const toastId = toast.loading("Logged Outing...");
       logOut()
         .then(() => {
