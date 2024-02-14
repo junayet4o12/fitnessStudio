@@ -15,6 +15,7 @@ const ConnectPeople = () => {
     const [searchedName, setSearchedName] = useState("");
     const [people, setPeople] = useState([])
     const [loading, setLoading] = useState(false)
+    const [followBtnLoading, setFollowBtnLoading] = useState(false)
     const [following, setFollowing] = useState(1)
     const { user: userDetails } = useSelector(state => state.user)
     useEffect(() => {
@@ -22,19 +23,21 @@ const ConnectPeople = () => {
     }, [dispatch, user])
     console.log(userDetails);
     useEffect(() => {
+        setFollowBtnLoading(true)
         axiosPublic.get(`/search_people/${searchedName === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : searchedName}`)
             .then(res => {
                 console.log(res?.data);
                 setPeople(res?.data)
-                setLoading(false)
+                setFollowBtnLoading(false)
             })
             .catch(err => {
                 console.log(err?.message);
-                setLoading(false)
+                setFollowBtnLoading(false)
             })
     }, [following])
     const onChange = (e) => {
         e.preventDefault()
+        setFollowBtnLoading(true)
         setSearchedName(e.target.value)
         setLoading(true)
         axiosPublic.get(`/search_people/${e.target.value === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : e.target.value}`)
@@ -42,24 +45,27 @@ const ConnectPeople = () => {
                 console.log(res?.data);
                 setPeople(res?.data)
                 setLoading(false)
+                setFollowBtnLoading(false)
             })
             .catch(err => {
                 console.log(err?.message);
                 setLoading(false)
+                setFollowBtnLoading(false)
             })
 
     };
     const handleSubmit = (e) => {
         e.preventDefault()
+        setFollowBtnLoading(true)
         axiosPublic.get(`/search_people/${searchedName === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : searchedName}`)
             .then(res => {
                 console.log(res?.data);
                 setPeople(res?.data)
-                setLoading(false)
+                setFollowBtnLoading(false)
             })
             .catch(err => {
                 console.log(err?.message);
-                setLoading(false)
+                setFollowBtnLoading(false)
             })
     }
     return (
@@ -89,7 +95,7 @@ const ConnectPeople = () => {
                 <div>
 
                     {
-                        people?.map(one => <SearchedPeople key={one?._id} info={one} personalInfo={userDetails} followingSearch={following} setFollowing={setFollowing}></SearchedPeople>)
+                        people?.map(one => <SearchedPeople key={one?._id} info={one} personalInfo={userDetails} followingSearch={following} setFollowing={setFollowing} followBtnLoading={followBtnLoading}></SearchedPeople>)
                     }
                 </div>
             </form>

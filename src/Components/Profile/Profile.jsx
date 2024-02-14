@@ -9,12 +9,13 @@ import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg';
+import Loading from '../Loading';
 
 const Profile = () => {
     const dispatch = useDispatch()
     const { user } = useAuth()
     const axiosPublic = useAxiosSecure()
-    const { user: userDetails } = useSelector(state => state.user)
+    const { user: userDetails, isLoading } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
@@ -40,8 +41,10 @@ const Profile = () => {
         const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
         setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
-    
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
@@ -56,10 +59,11 @@ const Profile = () => {
         const feet = data?.feet;
         const inch = data?.inch;
         const gender = data?.gender;
+        const bio = data?.bio
         const height = feet * 12 + parseFloat(inch);
         const isPerfectAge = new Date() - new Date(birthDay);
         const ageInYears = Math.floor(isPerfectAge / 31556952000);
-        console.log(ageInYears);
+        console.log(bio);
 
         if (ageInYears < 5) {
             setAgeErr('Make sure Your age is more than 5')
@@ -75,7 +79,8 @@ const Profile = () => {
                     birthDay,
                     weight,
                     height,
-                    gender
+                    gender,
+                    bio
                 }
                 axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
@@ -101,8 +106,8 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10' style={{background: `url(${pageBg})`, backgroundRepeat:'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover'}}>
-            <ProfileMain  age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
+        <div className='p-5 lg:p-10' style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
+            <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
             <div>
                 <div className='w-full  bg-white/70  mx-auto p-5 pt-12 rounded relative shadow-lg '>
 
@@ -191,7 +196,17 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-                            
+
+                        </div>
+                        {/* bio  */}
+                        <div className='sm:col-span-2'>
+                            <label className='font-bold flex gap-0'>Bio <span className='text-primary text-lg'>*</span></label>
+                            <textarea
+                                // required
+                                disabled={!edit}
+                                {...register("bio")}
+                                type='text'
+                                className={`${inputFieldStyle} h-[150px] md:h-[130px]`} placeholder='Your bio' defaultValue={userDetails?.bio ? userDetails?.bio : 'Not Given'} ></textarea>
                         </div>
                         {/* action  */}
                         <div className={`${!edit && 'hidden'} flex gap-5 sm:col-span-2`}>

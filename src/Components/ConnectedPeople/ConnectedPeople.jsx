@@ -14,15 +14,15 @@ import FollowedMembers from "./FollowedMembers";
 import FollowingMembers from "./FollowingMembers";
 
 const ConnectedPeople = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const axiosPublic = useAxiosPublic()
     const { user } = useAuth()
     const [isActive, setIsActive] = useState(true)
-    // const { user: userDetails } = useSelector(state => state.user)
-    // useEffect(() => {
-    //     dispatch(fetchSingleUser(user?.email))
-    // }, [dispatch, user])
-    const { data, isLoading: isPeopleListLoading } = useQuery({
+    const { user: userDetails } = useSelector(state => state.user)
+    useEffect(() => {
+        dispatch(fetchSingleUser(user?.email))
+    }, [dispatch, user])
+    const { data, isLoading: isPeopleListLoading, refetch } = useQuery({
         queryKey: [user],
         queryFn: async () => {
             const res = await axiosPublic.get(`/get_following_and_follower/${user?.email}`)
@@ -53,7 +53,7 @@ const ConnectedPeople = () => {
                  <h2 className="text-xl font-bold text-center pt-4 px-3 pb-1 w-max border-b-2 border-primary mx-auto">You are following</h2>
                 
                  {
-                 (data.followingMembers).map((following,idx)=> <FollowingMembers key={following?._id} following={following} idx={idx}></FollowingMembers>)
+                 (data.followingMembers).map((following,idx)=> <FollowingMembers key={following?._id} following={following} idx={idx} userDetails={userDetails} refetch={refetch}></FollowingMembers>)
                  }
             </div>
         </div>
