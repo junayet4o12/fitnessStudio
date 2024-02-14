@@ -54,13 +54,8 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/blogs",
-<<<<<<< HEAD
         loader: ()=> axiosPublic("/blogcount"),
         element: <PrivateRoute><Blogpage /></PrivateRoute>,
-=======
-        loader: () => axiosPublic("/blogcount"),
-        element: <Blogpage />,
->>>>>>> 1070035b5d852140e88d10352acbd7533acdeb15
       },
       {
         path: "/library",
@@ -68,11 +63,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/specialRecipe",
-<<<<<<< HEAD
         element:<PrivateRoute> <SpecialRecipe/></PrivateRoute>
-=======
-        element: <SpecialRecipe />
->>>>>>> 1070035b5d852140e88d10352acbd7533acdeb15
       },
       {
         path: "/blogs/:id",
