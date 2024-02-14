@@ -1,48 +1,153 @@
 // import React from 'react';
-import { useNavigate } from "react-router";
-import banner from "../../assets/images/dumbbells-floor-gym-ai-generative.jpg";
-import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import imgOne from '../../assets/images/fitnessModalPic.jpg'
+import sliderImg1 from '../../assets/images/BannerSlider/slider1.jpg'
+import sliderImg2 from '../../assets/images/BannerSlider/slider2.jpg'
+import sliderImg3 from '../../assets/images/BannerSlider/slider3.jpg'
+import sliderImg4 from '../../assets/images/BannerSlider/slider4.jpg'
+import bg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg'
+
+import { motion } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-creative';
+
+// import required modules
+import { EffectCreative, Navigation, Scrollbar, A11y, EffectCube, Autoplay, Pagination } from 'swiper/modules';
+import { TypeAnimation } from 'react-type-animation';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 const Banner = () => {
-  const { user } = useAuth();
-  const buttonStyle =
-    "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
-  const navigate = useNavigate();
-  const handleLogin = () => {
-    navigate("/login");
-  };
-  return (
-    <div>
-      <div className="w-full min-h-[300px] max-h-screen overflow-hidden  relative">
-        <img className="w-full  h-full min-h-[300px]" src={banner} alt="" />
-        <div className="absolute bg-[#00000064]  w-full h-full  top-0"></div>
-        <div className="absolute top-[100px] xs:top-[25%] sm:top-[20%] md:top-[28%] w-full">
-          <div className=" bg-primary/60 w-full sm:min-h-[150px] p-3 xs:p-5 xs:py-7  sm:py-10 ">
-            <h1 className=" text-xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white text-center">
-              welcome to the futuristic <br /> fitness tracking platform
-            </h1>
-          </div>
-          <div className="flex justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7">
-            <Link to={"/contact_us"}>
-              <button
-                className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary `}>
-                Contact us
-              </button>
-            </Link>
-            {user ? (
-              ""
-            ) : (
-              <button
-                onClick={handleLogin}
-                className={`${buttonStyle} bg-primary/40 hover:bg-primary  border-primary hover:border-transparent`}>
-                Log in
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    const { user } = useAuth();
+    const buttonStyle =
+        "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
+
+    const navigate = useNavigate();
+    const handleLogin = () => {
+        navigate("/login");
+    };
+    // bg-gradient-to-l from-orange-500 to-orange-900
+    const swiperTextStyle = 'w-full min-h-screen p-14     flex justify-center items-center uppercase bg-white/10'
+    return (
+        <div className='relative'>
+            <div className="grid grid-cols-1 md:grid-cols-7  max-h-screen min-h-screen overflow-hidden bg-black">
+                <div className=' hidden md:block   text-5xl font-bold  md:col-span-3 relative text-white' style={{ background: `url(${bg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+                    <div className='absolute w-full h-full bg-black/50'></div>
+                    <Swiper
+                        modules={[EffectCreative, Navigation, Scrollbar, A11y, Autoplay, Pagination]}
+                        className="mySwiper"
+                        speed={1000}
+                        autoplay={{
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        }}
+                    >
+                        <SwiperSlide>
+                            <div className={swiperTextStyle}>
+                                <h2 >Time to put fitness First</h2>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2 >Get Your Body in Shap</h2>
+                        </div></SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2>Reach your goals</h2>
+                        </div></SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2 >Achieve your dreams</h2>
+                        </div></SwiperSlide>
+
+                    </Swiper>
+
+                </div>
+                <div className='overflow-hidden md:col-span-4 relative'>
+                    <Swiper
+                        grabCursor={true}
+                        effect={'creative'}
+                        creativeEffect={{
+                            prev: {
+                                shadow: true,
+                                translate: [0, 0, -500],
+                            },
+                            next: {
+                                translate: ['100%', 0, 0],
+                            },
+                        }}
+                        modules={[EffectCreative, Navigation, Scrollbar, A11y, EffectCube, Autoplay, Pagination]}
+                        className="mySwiper"
+                        speed={1000}
+                        autoplay={{
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        }}
+                    >
+                        <SwiperSlide><img className='min-h-screen object-cover' src={sliderImg1} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-screen object-cover' src={sliderImg2} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-screen object-cover' src={sliderImg3} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-screen object-cover' src={sliderImg4} alt="" /></SwiperSlide>
+
+                    </Swiper>
+                    <div className="hidden md:flex justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7 absolute bottom-0 z-20 w-full h-full bg-black/30">
+                        <Link to={"/contact_us"}>
+                            <button
+                                className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary mt-14`}>
+                                Contact us
+                            </button>
+                        </Link>
+                        {user ? (
+                            ""
+                        ) : (
+                            <button
+                                onClick={handleLogin}
+                                className={`${buttonStyle} bg-primary/40 hover:bg-primary  border-primary hover:border-transparent mt-14`}>
+                                Log in
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+            </div>
+            <span className={`text-3xl sm:text-5xl uppercase font-bold min-w-full min-h-[100%] bg-black/50 absolute top-0  md:hidden z-20 flex items-center p-20 text-white `}>
+                <span className='mb-10'>
+                    <TypeAnimation
+                        sequence={[
+                            'Time to put fitness First...',
+                            5000,
+                            'Get Your Body in Shap...',
+                            5000,
+                            'Reach your goals...',
+                            5000,
+                            'Achieve your dreams...',
+                            5000
+                        ]}
+                        wrapper="span"
+                        speed={250}
+                        style={{ display: 'inline-block' }}
+                        repeat={Infinity}
+                    />
+                </span>
+            </span>
+            <div className="flex md:hidden justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7 absolute bottom-0 z-20 w-full  h-3/4">
+                <Link to={"/contact_us"}>
+                    <button
+                        className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary `}>
+                        Contact us
+                    </button>
+                </Link>
+                {user ? (
+                    ""
+                ) : (
+                    <button
+                        onClick={handleLogin}
+                        className={`${buttonStyle} bg-primary/40 hover:bg-primary  border-primary hover:border-transparent`}>
+                        Log in
+                    </button>
+                )}
+            </div>
+        </div >
+    );
 };
 
 export default Banner;
