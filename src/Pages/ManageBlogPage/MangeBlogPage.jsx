@@ -40,13 +40,13 @@ const MangeBlogPage = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[110px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className="px-20 py-10">
+    <div className="lg:px-20 lg:pb-20 lg:pt-10">
       <Title title="Manage Blog"></Title>
-      <div className="bg-[#F6F6F6] p-8 md:p-10 lg:p-20 rounded-xl">
+      <div className="bg-[#F6F6F6] p-8 md:p-10 lg:p-20 md:mt-10 rounded-xl">
         <div>
           <div className="flex justify-between">
-            <h1 className="text-4xl  font-semibold">
-              Total Blogs: {allBlogs?.length}
+            <h1 className="text-4xl font-bold underline underline-offset-8">
+              Total Blogs: <span className="font-sans">{allBlogs?.length}</span>
             </h1>
           </div>
           {/*  */}
@@ -75,7 +75,9 @@ const MangeBlogPage = () => {
                         </div>
                       </th>
                       <td className="text-gray-500">
-                        {blog?.blogName?.slice(0, 30)} ...
+                        <div className="tooltip" data-tip={blog?.blogName}>
+                          {blog?.blogName?.slice(0, 30)} ...
+                        </div>
                       </td>
                       <td className="text-gray-500">{blog?.userName}</td>
                       <td className="text-gray-500 ">{blog?.userEmail}</td>
