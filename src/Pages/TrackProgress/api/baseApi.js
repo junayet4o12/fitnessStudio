@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 const originalDate = new Date();
 const formattedDate = `${originalDate.getFullYear()}-${(
   originalDate.getMonth() + 1
@@ -25,23 +24,34 @@ const baseApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["activities", "water", "sleep", "weight"],
 
   endpoints: (builder) => ({
     getTrackPro: builder.query({
       query: () => `/1/user/-/activities/date/${formattedDate}.json`,
+      providesTags: ["activities"],
     }),
     getTrackWaterPro: builder.query({
       query: () => `/1/user/-/foods/log/water/date/${formattedDate}.json`,
+      providesTags: ["water"],
     }),
     getTrackSleepPro: builder.query({
       query: () => `/1.2/user/-/sleep/date/${formattedDate}.json`,
+      providesTags: ["sleep"],
     }),
     getTrackWeightPro: builder.query({
       query: () => `/1/user/-/body/log/weight/date/${formattedDate}.json`,
+      providesTags: ["weight"],
     }),
+    
   }),
 });
 
-export const { useGetTrackProQuery, useGetTrackWaterProQuery, useGetTrackSleepProQuery, useGetTrackWeightProQuery } = baseApi;
+export const {
+  useGetTrackProQuery,
+  useGetTrackSleepProQuery,
+  useGetTrackWaterProQuery,
+  useGetTrackWeightProQuery,
+} = baseApi;
 
 export default baseApi;

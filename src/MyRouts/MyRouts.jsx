@@ -10,7 +10,7 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ConnectApp from "../Pages/ConnectApp/ConnectApp";
 import Profile from "../Components/Profile/Profile";
-import TrackProgress from "../Pages/TrackProgress/TrackProgress";
+
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
 import CreateGoal from "../Pages/Set_Goal/CreateGoal";
@@ -35,6 +35,7 @@ import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 
 const axiosPublic = useAxiosPublic()
 
