@@ -5,7 +5,7 @@ import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
 import { FaBars, FaStrava, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
-import { GiProgression } from "react-icons/gi";
+import {  GiProgression } from "react-icons/gi";
 import { FaPenNib } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 
@@ -118,12 +118,21 @@ const DashboardNavbar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/tracking_progress"
+                                    <NavLink to="/dashboard/goal_tracking"
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                                         }
                                     >
-                                        <GiProgression /> Tracking Progress
+                                        <AiFillClockCircle /> Goal Tracking
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/daily_activity"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                    >
+                                        <GiProgression /> Daily Activities
                                     </NavLink>
                                 </li>
                                 <li>
