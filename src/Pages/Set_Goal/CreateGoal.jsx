@@ -171,7 +171,8 @@ const CreateGoal = () => {
             </div>
             <button
               type="submit"
-              className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-8 mb-10 lg:mb-0`}>
+              className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-8 mb-10 lg:mb-0`}
+            >
               Create Goal
             </button>
           </form>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 // import {
@@ -11,24 +11,24 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 //   Area,
 //   ResponsiveContainer,
 // } from "recharts";
-// import { useGetTrackWeightProQuery } from "./api/baseApi";
+
 
 const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
   // const data1 = weightTracking || [];
-  // const data2 = caloriesBurned;
+  const data2 = caloriesBurned;
 
 
 
-  // const progressBarStyles = {
-  //   path: {
-  //     stroke: "#FF4804",
-  //   },
-  //   text: {
-  //     fill: "#FF4804",
-  //     fontSize: "16px",
-  //     fontFamily: "Poppins",
-  //   },
-  // };
+  const progressBarStyles = {
+    path: {
+      stroke: "#FF4804",
+    },
+    text: {
+      fill: "#FF4804",
+      fontSize: "16px",
+      fontFamily: "Poppins",
+    },
+  };
 
   const data = [
     { name: "Total Calories", uv:caloriesOut, pv: 2400, amt: 2400 },
@@ -49,11 +49,11 @@ const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
       {/* <h2 className="text-2xl my-2 font-bold">Calories Burned</h2> */}
 
       <div className="bmiNumber mx-auto" style={{ width: 300, height: 300 }}>
-        {/* <CircularProgressbar
+        <CircularProgressbar
           styles={progressBarStyles}
           value={(data2 / 7730) * 100}
           text={`${data2} kcal`}
-        /> */}
+        />
       </div>
     </div>
   );
@@ -61,4 +61,4 @@ const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
 
 export default ChartProgress;
 
-// jkhsdfoghluiserghperuoig
+

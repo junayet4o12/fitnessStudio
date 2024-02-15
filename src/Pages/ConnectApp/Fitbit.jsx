@@ -37,7 +37,7 @@ const Fitbit = () => {
       {decoded?.iss === "Fitbit" ? (
         <button
           disabled
-          className="p-2 lg:p-3 text-sm lg:text-md rounded-md  bg-base-200 text-gray-300"
+          className="p-2 lg:p-3 text-sm lg:text-md rounded-md shadow-md bg-base-300"
         >
           Connected
         </button>

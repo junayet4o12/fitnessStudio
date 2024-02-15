@@ -4,10 +4,8 @@ import "react-circular-progressbar/dist/styles.css";
 import { LuGlassWater } from "react-icons/lu";
 import { FaWeight } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
-import {
-  useGetTrackWaterProQuery,
-  useGetTrackWeightProQuery,
-} from "./api/baseApi";
+import { useGetTrackWaterProQuery, useGetTrackWeightProQuery } from "./api/baseApi";
+
 
 const HeartRate = () => {
   const cardStyle =
@@ -25,15 +23,15 @@ const HeartRate = () => {
   };
   const { data: water, isLoading } = useGetTrackWaterProQuery();
   const { data: weight } = useGetTrackWeightProQuery();
-  // console.log(" weight", weight.weight[0].weight);
+  console.log(" weight", weight);
 
   if (isLoading) {
     return "";
   }
 
   const waterConsumed = water?.summary?.water;
-  const totalWeight = weight?.weight[0]?.weight;
-  const currentBmi = weight?.weight[0]?.bmi;
+  const totalWeight = weight?.weight[0]?.weight || 0;
+  const currentBmi = weight?.weight[0]?.bmi || 0;
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
