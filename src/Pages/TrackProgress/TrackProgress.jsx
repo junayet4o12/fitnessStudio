@@ -7,6 +7,9 @@ import { Helmet } from "react-helmet-async";
 
 import { IoFootstepsOutline } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
+
+// import { useGetUserGoalQuery } from "./api/baseApiGoal";
+// import useAuth from "../../Hooks/useAuth";
 import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
 
 const TrackProgress = () => {
@@ -22,14 +25,34 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
+  console.log(progressBarStyles);
+
+  // const originalDate = new Date();
+  // const formattedDate = `${originalDate.getFullYear()}-${(
+  //   originalDate.getMonth() + 1
+  // )
+  //   .toString()
+  //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
+
+  // const { user } = useAuth();
+  // const { data: userGoals } = useGetUserGoalQuery();
+  // const goals = userGoals?.filter(
+  //   (userGoal) =>
+  //     userGoal?.user_email === user?.email && userGoal?.date === formattedDate
+  // );
+
+  // console.log(goals);
+  // // console.log(goals?.[0]?._id);
 
   const { data: track, isLoading } = useGetTrackProQuery();
-  console.log(track);
+  console.log("tracking", track);
+  // // console.log(track);
   const { data: sleep } = useGetTrackSleepProQuery();
+  console.log("sleeping", sleep);
 
   const sleepDuration = sleep?.summary?.totalMinutesAsleep;
   const totalSleep = Math.floor(sleepDuration / 60);
-  // console.log(totalSleep);
+  // // console.log(totalSleep);
   const caloriesOut = track?.summary.caloriesBMR;
   const caloBurned = track?.summary.caloriesOut;
 
@@ -67,8 +90,8 @@ const TrackProgress = () => {
                   <div>
                     <CircularProgressbar
                       styles={progressBarStyles}
-                      value={(track?.summary.steps / 10000) * 100}
-                      text={track?.summary.steps}
+                      value={(track?.summary?.steps / 10000 ) * 100}
+                      text={track?.summary?.steps}
                     />
                   </div>
                 </div>
@@ -81,10 +104,10 @@ const TrackProgress = () => {
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
                       <div>
-                      <p className="text-xl font-semibold">Distance</p>
-                      <span className="text-xl font-semibold">
-                        {track?.summary?.distances[0]?.distance} miles
-                      </span>
+                        <p className="text-xl font-semibold">Distance</p>
+                        <span className="text-xl font-semibold">
+                          {track?.summary?.distances[0]?.distance} miles
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -117,9 +140,23 @@ const TrackProgress = () => {
             />
           </div>
         </div>
+
       </div>
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default TrackProgress;
+
+
+// const originalDate = new Date();
+// const setFormattedDate = `${originalDate.getFullYear()}-${(
+//   originalDate.getMonth() + 1
+// )
+//   .toString()
+//   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
+// console.log(setFormattedDate);
+=======
+export default TrackProgress;
+>>>>>>> 576b51db015aadbe9dfebe7a4dfe07aeacbaf218

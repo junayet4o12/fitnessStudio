@@ -7,9 +7,9 @@ const store = configureStore({
   reducer: {
     feedback: feedbackReducer,
     user: singleUserReducer,
-    [baseApi.reducerPath]: baseApi.reducer, 
+    [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
-}); 
+});
 export default store;
