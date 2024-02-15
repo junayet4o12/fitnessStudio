@@ -115,11 +115,20 @@ const Sidebar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/tracking_progress"
+                  to="/dashboard/goal_tracking"
                   className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                   }>
-                  <GiProgression /> Tracking Progress
+                  <BiSolidMessageSquareAdd /> Goal Tracking
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/daily_activity"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  }>
+                  <GiProgression /> Daily Activities
                 </NavLink>
               </li>
               <li>

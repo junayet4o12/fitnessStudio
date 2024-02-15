@@ -90,7 +90,7 @@ const TrackProgress = () => {
                   <div>
                     <CircularProgressbar
                       styles={progressBarStyles}
-                      value={(track?.summary?.steps / 10000 ) * 100}
+                      value={(track?.summary?.steps / 10000) * 100}
                       text={track?.summary?.steps}
                     />
                   </div>
@@ -140,15 +140,10 @@ const TrackProgress = () => {
             />
           </div>
         </div>
-
       </div>
     </div>
   );
 };
-
-<<<<<<< HEAD
-export default TrackProgress;
-
 
 // const originalDate = new Date();
 // const setFormattedDate = `${originalDate.getFullYear()}-${(
@@ -157,6 +152,5 @@ export default TrackProgress;
 //   .toString()
 //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
 // console.log(setFormattedDate);
-=======
+
 export default TrackProgress;
->>>>>>> 576b51db015aadbe9dfebe7a4dfe07aeacbaf218
