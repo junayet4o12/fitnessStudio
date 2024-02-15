@@ -59,7 +59,7 @@ const Sidebar = () => {
               <NavLink
                 to="/dashboard/manage_users"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "from-primary/80 to-primary/40 text-white" : ""
+                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                 }
               >
                 <MdOutlineManageAccounts className="text-2xl" /> Manage Users
