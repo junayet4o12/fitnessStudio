@@ -66,7 +66,8 @@ const StrengthTraining = () => {
                     goalWeight:  data.goalWeight,
                     timeline:  data.timeline,
                     targetLift: targetLiftselectedValue,
-                    currentLiftingExperience: currentLiftselectedValue
+                    currentLiftingExperience: currentLiftselectedValue,
+                    tracking_goal: "Strength Training"
                 };
                 console.log(goalInfo)
                 axiosSecure.post("user_goal", goalInfo).then((res) => {

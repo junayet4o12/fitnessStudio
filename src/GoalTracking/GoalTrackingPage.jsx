@@ -1,8 +1,11 @@
+import Title from "../Components/Title/Title";
+import EnduranceTracking from "./EnduranceTracking";
 
 const GoalTrackingPage = () => {
   return (
     <div>
-      <h2>Mnage</h2>
+      <Title title="Active Goal"></Title>
+      <EnduranceTracking></EnduranceTracking>
     </div>
   );
 };
