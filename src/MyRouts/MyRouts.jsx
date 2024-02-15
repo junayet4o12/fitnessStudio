@@ -35,6 +35,9 @@ import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import ManageWeight from "../Pages/Set_Goal/ManageWeight";
+import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
+import Endurance from "../Pages/Set_Goal/Endurance";
 import Chat from "../Components/Chat";
 
 const axiosPublic = useAxiosPublic()
@@ -56,7 +59,7 @@ const MyRouts = createBrowserRouter([
       {
         path: "/blogs",
         loader: () => axiosPublic("/blogcount"),
-        element: <Blogpage />,
+        element: <PrivateRoute><Blogpage /></PrivateRoute>,
       },
       {
         path: "/library",
@@ -64,32 +67,32 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/specialRecipe",
-        element: <SpecialRecipe />
+        element: <PrivateRoute> <SpecialRecipe /></PrivateRoute>
+      },
+      {
+        path: '/chat',
+        element: <PrivateRoute><Chat></Chat></PrivateRoute>
       },
       {
         path: "/blogs/:id",
-        element: <DynamicBlogpage />,
+        element: <PrivateRoute><DynamicBlogpage /></PrivateRoute>,
       },
       {
         path: "/blogs/:email",
-        element: <UsersBlog />,
+        element: <PrivateRoute><UsersBlog /></PrivateRoute>,
       },
       {
         path: "/blogs/:id/:email",
-        element: <UsersBlog />,
+        element: <PrivateRoute><UsersBlog /> </PrivateRoute>,
       },
       {
         path: "/blogs/:id/:email/:newId",
-        element: <DynamicBlogpage2 />,
-      },
-      {
-        path: "/services",
-        element: <div>This is Services</div>,
+        element: <PrivateRoute> <DynamicBlogpage2 /></PrivateRoute>,
       },
 
       {
         path: "/contact_us",
-        element: <PrivateRoute><ContactUs></ContactUs></PrivateRoute>,
+        element: <ContactUs></ContactUs>,
       },
       {
         path: "/register",
@@ -101,11 +104,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: '/permission',
-        element: <FitbitTerms></FitbitTerms>
-      },
-      {
-        path: '/chat',
-        element: <Chat></Chat>
+        element: <PrivateRoute><FitbitTerms></FitbitTerms></PrivateRoute>
       }
     ],
   },
@@ -116,7 +115,7 @@ const MyRouts = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: <PrivateRoute><Profile></Profile> </PrivateRoute>,
       },
       {
         path: "/dashboard/users_profile/:id",
@@ -125,43 +124,56 @@ const MyRouts = createBrowserRouter([
 
       {
         path: "bmi_calculator",
-        element: <BmiCalculator />,
+        element: <PrivateRoute><BmiCalculator /> </PrivateRoute>,
       },
       {
         path: "BlogFrom",
-        element: <UploadBlogs />,
+        element: <PrivateRoute><UploadBlogs /> </PrivateRoute>,
       },
       {
         path: "set_goal",
-        element: <SetGoal></SetGoal>,
+        element: <PrivateRoute><SetGoal></SetGoal></PrivateRoute>,
       },
       {
+        path: "set_goal/weightManagement",
+        element: <PrivateRoute> <ManageWeight></ManageWeight> </PrivateRoute>
+      },
+      {
+        path: 'set_goal/strengthTraining',
+        element: <PrivateRoute><StrengthTraining></StrengthTraining></PrivateRoute>
+      },
+      {
+        path: 'set_goal/endurance',
+        element: <PrivateRoute><Endurance></Endurance></PrivateRoute>
+      }
+      ,
+      {
         path: "tracking_progress",
-        element: <TrackProgress />,
+        element: <PrivateRoute> <TrackProgress /></PrivateRoute>,
       },
       {
         path: "connect_app",
-        element: <ConnectApp></ConnectApp>
+        element: <PrivateRoute> <ConnectApp></ConnectApp></PrivateRoute>
       },
       {
         path: "strava_connect",
-        element: <StravaCondition></StravaCondition>
+        element: <PrivateRoute><StravaCondition></StravaCondition> </PrivateRoute>
       },
       {
         path: "strava_activities",
-        element: <StravaActivities></StravaActivities>
+        element: <PrivateRoute><StravaActivities></StravaActivities> </PrivateRoute>
       },
       {
         path: "/dashboard/compare_activity/:id1/:id2",
-        element: <CompareActivity></CompareActivity>
+        element: <PrivateRoute><CompareActivity></CompareActivity> </PrivateRoute>
       },
       {
         path: "set_goal/create_goal",
-        element: <CreateGoal></CreateGoal>,
+        element: <PrivateRoute>  <CreateGoal></CreateGoal></PrivateRoute>,
       },
       {
         path: "my_blogs",
-        element: <MyBlogs />,
+        element: <PrivateRoute><MyBlogs /> </PrivateRoute>,
       },
       {
         path: 'connect_people',

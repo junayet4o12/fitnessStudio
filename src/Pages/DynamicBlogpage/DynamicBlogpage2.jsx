@@ -2,16 +2,54 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
+import { useDispatch, useSelector } from "react-redux";
+import useAuth from '../../Hooks/useAuth';
+import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 
 const DynamicBlogpage2 = () => {
   const param = useParams().newId
   const axiosPublic = useAxiosPublic()
   const [blog, setblog] = useState([])
+  const [myblog, setmyblog] = useState([])
+  const { user } = useAuth()
+  const { user: userDetails } = useSelector(state => state.user)
+  const [loading, setloading] = useState(false)
+  const dispatch = useDispatch()
   console.log(param);
   useEffect(()=>{
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
   },[])
+
+  useEffect(()=>{
+    axiosPublic(`/user?email=${blog.userEmail}`)
+    .then(data=> setmyblog(data.data))
+  },[blog, loading])
+
+  useEffect(() => {
+    dispatch(fetchSingleUser(user?.email))
+}, [dispatch, user, loading])
+
+  const handleFollow = () => {
+    axiosPublic.put(`/following/${userDetails?._id}`, myblog)
+        .then(res => {
+            console.log(res?.data?.followingResult);
+            if (res.data.followingResult.matchedCount > 0) {
+              setloading(!loading)
+              Swal.fire({
+                title: "Followed successfully",
+                icon: "success"
+              })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+  }
+
+  const following = userDetails.following
+    const checking = following.filter(id => myblog?._id === id)
+    console.log(checking);
   
 console.log(blog);
   return (
@@ -33,7 +71,11 @@ console.log(blog);
         <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
-        <button className="bg-primary p-[10px] text-xl text-white rounded-md">Follow Now</button>
+        <button 
+        onClick={checking.length>0? console.log("already followed"): handleFollow}
+        className="bg-primary p-[10px] text-xl text-white rounded-md">
+          {checking.length? "Following" :"Follow Now"}
+        </button>
       </div>
     </div>
   )

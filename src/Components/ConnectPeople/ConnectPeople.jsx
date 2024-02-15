@@ -12,6 +12,7 @@ const ConnectPeople = () => {
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
     const { user } = useAuth()
+    console.log(user);
     const [searchedName, setSearchedName] = useState("");
     const [people, setPeople] = useState([])
     const [loading, setLoading] = useState(false)
