@@ -3,13 +3,20 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Select from 'react-select'
 const ManageWeight = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [userDetails,setUserDetails] = useState(null)
     const [selectedValue, setSelectedValue] = useState(null);
+    useEffect(()=>{
+        axiosSecure.get(`/users/${user?.email}`)
+        .then((res)=>{
+            setUserDetails(res.data.weight)
+        })
 
+    },[axiosSecure,user])
     const options = [
         { value: 'gainWeight', label: 'Gain Weight' },
         { value: 'maintainWeight', label: 'Maintain Weight' },
@@ -39,6 +46,7 @@ const ManageWeight = () => {
                 const goalInfo = {
                     user_name: user?.displayName,
                     user_email: user?.email,
+                    user_current_weight:  userDetails,
                     user_image: user?.photoURL,
                     goalType: selectedValue?.value,
                     targetWeight: data?.targetWeight,
