@@ -6,6 +6,7 @@ import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../Redux/SingleUserSlice/singleUserSlice";
 import useAuth from "../Hooks/useAuth";
+import { backendUrl } from "../BackendUrl/backendUrl";
 
 const Chat = () => {
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const Chat = () => {
     const [bold, setBold] = useState(false)
     const { user: userDetails, isLoading } = useSelector(state => state.user)
     console.log(user?.email);
-    const socket = io('http://localhost:4000')
+    const socket = io(backendUrl)
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
