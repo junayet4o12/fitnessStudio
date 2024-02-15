@@ -1,9 +1,9 @@
 // import React from 'react';
 import { useEffect, useState } from 'react';
 import imgOne from '../../assets/images/fitnessModalPic.jpg'
-import sliderImg1 from '../../assets/images/BannerSlider/slider1.jpg'
-import sliderImg2 from '../../assets/images/BannerSlider/slider2.jpg'
-import sliderImg3 from '../../assets/images/BannerSlider/slider3.jpg'
+import sliderImg2 from '../../assets/images/BannerSlider/slider1.jpg'
+import sliderImg3 from '../../assets/images/BannerSlider/slider2.jpg'
+import sliderImg1 from '../../assets/images/BannerSlider/slider3.jpg'
 import sliderImg4 from '../../assets/images/BannerSlider/slider4.jpg'
 import bg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg'
 
@@ -29,40 +29,13 @@ const Banner = () => {
         navigate("/login");
     };
     // bg-gradient-to-l from-orange-500 to-orange-900
-    const swiperTextStyle = 'w-full min-h-screen p-14     flex justify-center items-center uppercase bg-white/10'
+    const swiperTextStyle = 'w-full min-h-[93vh] xs:min-h-screen p-10 sm:p-20 flex items-center uppercase bg-black/50 text-4xl md:text-5xl'
+    const textColor = 'text-primary'
     return (
-        <div className='relative'>
-            <div className="grid grid-cols-1 md:grid-cols-7  max-h-screen min-h-screen overflow-hidden bg-black">
-                <div className=' hidden md:block   text-5xl font-bold  md:col-span-3 relative text-white' style={{ background: `url(${bg})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
-                    <div className='absolute w-full h-full bg-black/50'></div>
-                    <Swiper
-                        modules={[EffectCreative, Navigation, Scrollbar, A11y, Autoplay, Pagination]}
-                        className="mySwiper"
-                        speed={1000}
-                        autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        }}
-                    >
-                        <SwiperSlide>
-                            <div className={swiperTextStyle}>
-                                <h2 >Time to put fitness First</h2>
-                            </div>
-                        </SwiperSlide>
-                        <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2 >Get Your Body in Shap</h2>
-                        </div></SwiperSlide>
-                        <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2>Reach your goals</h2>
-                        </div></SwiperSlide>
-                        <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2 >Achieve your dreams</h2>
-                        </div></SwiperSlide>
+        <div >
+            <div className="min-h-[93vh] max-h-[93vh] sm:min-h-screen xs:max-h-screen bg-black  relative overflow-hidden">
 
-                    </Swiper>
-
-                </div>
-                <div className='overflow-hidden md:col-span-4 relative'>
+                <div className='overflow-hidden  '>
                     <Swiper
                         grabCursor={true}
                         effect={'creative'}
@@ -89,7 +62,7 @@ const Banner = () => {
                         <SwiperSlide><img className='min-h-screen object-cover' src={sliderImg4} alt="" /></SwiperSlide>
 
                     </Swiper>
-                    <div className="hidden md:flex justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7 absolute bottom-0 z-20 w-full h-full bg-black/30">
+                    <div className="flex justify-center items-end gap-5 sm:gap-10 py-20 xs:py-32 absolute bottom-0 z-20 w-full h-full ">
                         <Link to={"/contact_us"}>
                             <button
                                 className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary mt-14`}>
@@ -107,9 +80,42 @@ const Banner = () => {
                         )}
                     </div>
                 </div>
+                <div className='    font-bold   text-white absolute top-0  z-10   w-full h-full' >
 
+                    <Swiper
+                        modules={[EffectCreative, Navigation, Scrollbar, A11y, Autoplay, Pagination]}
+                        className="mySwiper"
+                        speed={1500}
+                        autoplay={{
+                            delay: 4500,
+                            disableOnInteraction: false,
+                        }}
+
+                    >
+                        <SwiperSlide>
+                            <div className={swiperTextStyle}>
+                                <h2 >Time to put <br />
+                                    <span className={textColor}>fitness First</span></h2>
+                            </div>
+                        </SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2 >Get Your Body <br />
+                                <span className={textColor}>in Shap</span></h2>
+                        </div></SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2>Reach your <br />
+                                <span className={textColor}>goals</span></h2>
+                        </div></SwiperSlide>
+                        <SwiperSlide> <div className={swiperTextStyle}>
+                            <h2 >Achieve <br />
+                                <span className={textColor}>your dreams</span></h2>
+                        </div></SwiperSlide>
+
+                    </Swiper>
+
+                </div>
             </div>
-            <span className={`text-3xl sm:text-5xl uppercase font-bold min-w-full min-h-[100%] bg-black/50 absolute top-0  md:hidden z-20 flex items-center p-20 text-white `}>
+            {/* <span className={`text-3xl sm:text-5xl uppercase font-bold min-w-full min-h-[100%] bg-black/50 absolute top-0  md:hidden z-20 flex items-center p-20 text-white `}>
                 <span className='mb-10'>
                     <TypeAnimation
                         sequence={[
@@ -128,8 +134,8 @@ const Banner = () => {
                         repeat={Infinity}
                     />
                 </span>
-            </span>
-            <div className="flex md:hidden justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7 absolute bottom-0 z-20 w-full  h-3/4">
+            </span> */}
+            {/* <div className="flex md:hidden justify-center items-center gap-5 sm:gap-10 py-3 sm:py-7 absolute bottom-0 z-40 w-full  h-3/4">
                 <Link to={"/contact_us"}>
                     <button
                         className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary `}>
@@ -145,7 +151,7 @@ const Banner = () => {
                         Log in
                     </button>
                 )}
-            </div>
+            </div> */}
         </div >
     );
 };
