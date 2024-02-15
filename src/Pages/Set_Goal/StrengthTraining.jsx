@@ -47,41 +47,36 @@ const StrengthTraining = () => {
             setWorkOutErr(true)
             return
         }
-        const goalWeight = data.goalWeight;
-        const timeline = data.timeline;
-        const targetLift = targetLiftselectedValue;
-        const currentLiftingExperience = currentLiftselectedValue;
-        const strengthTrainingData = { targetLift, goalWeight, timeline, workOutPreferences, currentLiftingExperience }
-        console.log(strengthTrainingData);
-        // Swal.fire({
-        //     title: "Are you sure?",
-        //     text: "Do you create goals?",
-        //     icon: "warning",
-        //     showCancelButton: true,
-        //     confirmButtonColor: "#3085d6",
-        //     cancelButtonColor: "#d33",
-        //     confirmButtonText: "Yes, Create!",
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-        //         const toastId = toast.loading("Goal Creating...");
-        //         const goalInfo = {
-        //             user_name: user?.displayName,
-        //             user_email: user?.email,
-        //             user_image: user?.photoURL,
-        //             goalType: selectedValue?.value,
-        //             targetWeight: data?.targetWeight,
-        //             bodyFat: data?.bodyFat,
-        //             timeline: data?.timeline,
-        //         };
-        //         console.log(goalInfo)
-        //         axiosSecure.post("user_goal", goalInfo).then((res) => {
-        //             if (res?.data?.insertedId) {
-        //                 reset();
-        //                 toast.success("Goal Created Successfully!", { id: toastId });
-        //             }
-        //         });
-        //     }
-        // });
+        
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you create goals?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Create!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const toastId = toast.loading("Goal Creating...");
+                const goalInfo = {
+                    user_name: user?.displayName,
+                    user_email: user?.email,
+                    user_image: user?.photoURL,
+                    goalWeight:  data.goalWeight,
+                    timeline:  data.timeline,
+                    targetLift: targetLiftselectedValue,
+                    currentLiftingExperience: currentLiftselectedValue
+                };
+                console.log(goalInfo)
+                axiosSecure.post("user_goal", goalInfo).then((res) => {
+                    if (res?.data?.insertedId) {
+                        reset();
+                        toast.success("Goal Created Successfully!", { id: toastId });
+                    }
+                });
+            }
+        });
     };
 
 
