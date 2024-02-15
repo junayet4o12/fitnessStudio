@@ -25,6 +25,7 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
+  console.log(progressBarStyles);
 
   // const originalDate = new Date();
   // const formattedDate = `${originalDate.getFullYear()}-${(
