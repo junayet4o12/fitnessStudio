@@ -11,16 +11,16 @@ import useAuth from "../../Hooks/useAuth";
 
 import { Helmet } from 'react-helmet-async'
 import useAdmin from "../../Hooks/useAdmin";
-import Loading from "../../Components/Loading";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { SlBookOpen } from "react-icons/sl";
+
 const DashboardNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user } = useAuth()
-    const [isAdmin, isAdminPanding] = useAdmin()
-    // logOut function
+    const [isAdmin, isAdminPanding] = useAdmin();
+
     if (isAdminPanding) {
-        return <Loading></Loading>
+        return ''
     }
     // navbar icon toggle
     const toggleNavbar = () => {

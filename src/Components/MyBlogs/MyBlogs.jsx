@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import MyBlogsCard from "./MyBlogsCard";
 import { useQuery } from '@tanstack/react-query'
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Loading from "../Loading";
 
 const MyBlogs = () => {
     const { user } = useAuth();
@@ -16,14 +17,16 @@ const MyBlogs = () => {
     //         .then(data => setMyBlogs(data))
     // }, [user?.email])
 
-    const { data: myBlogs = [], refetch } = useQuery({
+    const { data: myBlogs = [], refetch, isLoading: isBlogLoading } = useQuery({
         queryKey: ['myBlogs'],
         queryFn: async () => {
-            const response = await axiosPublic.get(`/my_blogs?email=${user?.email}`);
+            const response = await axiosPublic.get(`/my_blogs/${user?.email}`);
             return response.data;
         }
     })
-
+    if (isBlogLoading) {
+        return <Loading></Loading>
+    }
     /*
         TODO: 
         1. Change button color with discuss 

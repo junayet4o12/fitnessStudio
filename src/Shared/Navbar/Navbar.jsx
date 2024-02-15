@@ -15,7 +15,7 @@ import { CgGym } from "react-icons/cg";
 function NavList() {
   const { user } = useAuth()
   return (
-    <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
+    <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1">
       <Typography
         as="li"
         variant="small"
@@ -25,13 +25,13 @@ function NavList() {
           Home
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804] text-sm"></p>
           <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
             Home
           </NavLink>
@@ -51,8 +51,8 @@ function NavList() {
             to="/about_us"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
             About Us
           </NavLink>
@@ -69,10 +69,28 @@ function NavList() {
             to="/blogs"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
             Blogs
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <NavLink
+            to="/library"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
+            }>
+            Library
           </NavLink>
         </div>
       </Typography>
@@ -87,8 +105,8 @@ function NavList() {
             to="/specialRecipe"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
              Special Recipes
           </NavLink>
@@ -108,8 +126,8 @@ function NavList() {
             to="/contact_us"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
             Contact Us
           </NavLink>
@@ -129,8 +147,8 @@ function NavList() {
             to="/login"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-xl font-bold"
-                : "text-xl font-bold text-gray-600"
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-600"
             }>
             Login
           </NavLink>
@@ -155,7 +173,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" rounded-none px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
 
       <div className="lg:container mx-auto flex items-center justify-between text-blue-gray-900 text-black ">
         <Typography
@@ -170,7 +188,7 @@ export function NavbarSimple() {
             </h1>
           </Link>
         </Typography>
-        <div className="flex gap-7 xs:gap-10">
+        <div className="flex gap-7 xs:gap-5 items-center">
           <div className="hidden lg:block">
             <NavList />
           </div>
@@ -185,7 +203,7 @@ export function NavbarSimple() {
               <PiListBulletsFill className="h-6 w-8" strokeWidth={2} />
             )}
           </IconButton>
-          <span className="lg:mt-[-7px]">
+          <span className="">
             {user && <NavProfile />}
           </span>
         </div>

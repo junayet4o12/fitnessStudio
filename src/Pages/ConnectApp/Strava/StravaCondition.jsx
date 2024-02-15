@@ -13,9 +13,10 @@ const StravaCondition = () => {
     const [open, setOpen] = useState(false)
     const [exchangeCode, setExchangeCode] = useState('')
     const [isRegister, setIsRegister] = useState(localStorage.getItem('stravaKey'))
+    const [loading, setLoading] = useState(false)
     const axiosStrava = useAxiosStrava()
     const buttonStyle =
-        "btn transition-all duration-500  font-bold text-white hover:text-black text-sm rounded border-[3px] active:bg-[#ff470470] active:scale-90";
+        "btn transition-all duration-500 w-[140px]  font-bold text-white hover:text-black text-sm rounded border-[3px] active:bg-[#ff470470] active:scale-90";
     const disbuttonStyle =
         "transition-all duration-500  font-bold text-white  text-sm rounded border-[3px]  active:scale-90";
     useEffect(() => {
@@ -24,7 +25,7 @@ const StravaCondition = () => {
 
         if (!exchangeCode) {
             if (code) {
-
+                setLoading(true)
                 console.log('Received authorization code:', code);
                 setExchangeCode(code)
                 axiosStrava.post(`${backendUrl}/callbackstrava`, { exchangeCode: code })
@@ -38,6 +39,7 @@ const StravaCondition = () => {
                     .catch(err => {
                         console.log(err?.message);
                     })
+                setLoading(false)
             }
         }
         else {
@@ -67,11 +69,11 @@ const StravaCondition = () => {
                                 <hr className='border-[1.3px] border-primary my-2' />
                             </div>
                             {
-                                isRegister ? <button 
-                                disabled
-                                className={`${disbuttonStyle} bg-[#ff4704]   border-transparent  my-3 p-3`}>Already Connected</button> : <button onClick={() => setOpen(true)} className={`${buttonStyle} bg-[#ff4704] hover:bg-[#ff470436]  border-transparent hover:border-[#ff4704] my-3`}>Connect Strava</button>
+                                isRegister ? <button
+                                    disabled
+                                    className={`${disbuttonStyle} bg-[#ff4704]   border-transparent  my-3 p-3`}>Already Connected</button> : <button onClick={() => setOpen(true)} className={`${buttonStyle} bg-[#ff4704] hover:bg-[#ff470436]  border-transparent hover:border-[#ff4704] my-3`}>{loading ? <span className="loading loading-spinner loading-sm"></span> : 'Connect Strava'}</button>
                             }
-                            
+
                         </div>
                     </div>
 
