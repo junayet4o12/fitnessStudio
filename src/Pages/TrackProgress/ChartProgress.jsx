@@ -61,4 +61,4 @@ const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
 
 export default ChartProgress;
 
-// jkhsdfoghluiserghperuoig
+

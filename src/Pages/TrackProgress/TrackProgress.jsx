@@ -146,6 +146,7 @@ const TrackProgress = () => {
   );
 };
 
+<<<<<<< HEAD
 export default TrackProgress;
 
 
@@ -156,3 +157,6 @@ export default TrackProgress;
 //   .toString()
 //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
 // console.log(setFormattedDate);
+=======
+export default TrackProgress;
+>>>>>>> 576b51db015aadbe9dfebe7a4dfe07aeacbaf218
