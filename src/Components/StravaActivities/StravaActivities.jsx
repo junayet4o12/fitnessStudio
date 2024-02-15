@@ -76,7 +76,7 @@ const StravaActivities = () => {
     }
     return (
         <div className="p-5 relative max-w-7xl mx-auto container">
-            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-white/80 to-black/20 rounded sticky top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-black`}>
+            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-white/80 to-black/20 rounded fixed top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-black`}>
                 <div className="flex  flex-col justify-center items-center w-full relative pb-1">
                     <p className="text-lg font-bold ">Compare</p>
 
@@ -93,7 +93,7 @@ const StravaActivities = () => {
                     <button onClick={() => setComparingCardsData([])} className='absolute top-[2px] right-1 font-bold active:scale-90 transition-all duration-300'>X</button>
                 </div>
             </div>
-            <div className=" mt-[-180px]">
+            <div className=" ">
                 <Title title={'Activities In Strava'}></Title>
 
                 <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-7 ">

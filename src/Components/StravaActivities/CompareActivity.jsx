@@ -26,6 +26,7 @@ import VelomobileImg from '../../assets/images/stravaImg/Velomobile.jpg'
 import wheelchairImg from '../../assets/images/stravaImg/wheelchair.jpg'
 import workoutImg from '../../assets/images/stravaImg/workout.jpg'
 import yogaImg from '../../assets/images/stravaImg/yoga.jpg'
+import Loading from "../Loading";
 
 const CompareActivity = () => {
     const { id1, id2 } = useParams();
@@ -56,15 +57,7 @@ const CompareActivity = () => {
         }
     })
     if (isLoading1 || isLoading2) {
-        return <div className='h-screen flex items-center justify-center'>
-            {/* <Spinner className="h-16 w-16 text-gray-900/50" /> */}
-            <InfinitySpin
-                visible={true}
-                width="300"
-                color="#FF4804"
-                ariaLabel="infinity-spin-loading"
-            />
-        </div>
+        return <Loading></Loading>
     }
     console.log(data1, data2);
 
@@ -201,7 +194,7 @@ const CompareActivity = () => {
                 <ul className="timeline timeline-vertical px-2">
                     <li className="gap-2">
                         <div className="timeline-start timeline-box">
-                            <img className="md:h-64 md:w-64 lg:h-80 lg:w-72 rounded-md" src={cardImg1} alt="Photo" />
+                            <img className="md:h-64 md:w-64 lg:h-80 lg:w-72 rounded-md object-cover" src={cardImg1} alt="Photo" />
                             {/* <img className="md:h-64 md:w-64 lg:h-96 lg:w-72 rounded-md" src={data1?.photos?.primary?.urls[600]} alt="Photo" /> */}
                         </div>
                         <hr />
@@ -209,7 +202,7 @@ const CompareActivity = () => {
                             <p className="border rounded-full py-1 px-[6px] border-primary font-bold text-gray-500">VS</p>
                         </div>
                         <div className="timeline-end timeline-box">
-                            <img className="md:h-64 md:w-64 lg:h-80 lg:w-72 rounded-md" src={cardImg2} alt="Photo" />
+                            <img className="md:h-64 md:w-64 lg:h-80 lg:w-72 rounded-md object-cover" src={cardImg2} alt="Photo" />
                             {/* <img className="md:h-64 md:w-64 lg:h-96 lg:w-72 rounded-md" src={data2?.photos?.primary?.urls[600]} alt="Photo" /> */}
                         </div>
                         <hr />

@@ -35,6 +35,7 @@ import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import Chat from "../Components/Chat";
 
 const axiosPublic = useAxiosPublic()
 
@@ -101,6 +102,10 @@ const MyRouts = createBrowserRouter([
       {
         path: '/permission',
         element: <FitbitTerms></FitbitTerms>
+      },
+      {
+        path: '/chat',
+        element: <Chat></Chat>
       }
     ],
   },
