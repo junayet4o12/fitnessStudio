@@ -35,6 +35,9 @@ import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import ManageWeight from "../Pages/Set_Goal/ManageWeight";
+import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
+import Endurance from "../Pages/Set_Goal/Endurance";
 
 const axiosPublic = useAxiosPublic()
 
@@ -124,8 +127,21 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "set_goal",
-        element:<PrivateRoute>  <SetGoal></SetGoal></PrivateRoute> ,
+        element:<PrivateRoute><SetGoal></SetGoal></PrivateRoute> ,
       },
+      {
+        path:"set_goal/weightManagement",
+        element:<PrivateRoute> <ManageWeight></ManageWeight> </PrivateRoute>
+      },
+      {
+       path:'set_goal/strengthTraining' ,
+       element:<PrivateRoute><StrengthTraining></StrengthTraining></PrivateRoute>
+      },
+      {
+        path:'set_goal/endurance',
+        element:<PrivateRoute><Endurance></Endurance></PrivateRoute>
+      }
+      ,
       {
         path: "tracking_progress",
         element:<PrivateRoute> <TrackProgress /></PrivateRoute>  ,
