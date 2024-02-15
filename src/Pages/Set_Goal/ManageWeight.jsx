@@ -52,6 +52,7 @@ const ManageWeight = () => {
                     targetWeight: data?.targetWeight,
                     bodyFat: data?.bodyFat,
                     timeline: data?.timeline,
+                    tracking_goal: "Weight Management"
                 };
                 console.log(goalInfo)
                 axiosSecure.post("user_goal", goalInfo).then((res) => {
