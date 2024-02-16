@@ -17,6 +17,8 @@ const UsersBlog = () => {
   const [blogs, setblogs] = useState([])
   const [write, setWriter] = useState([]) 
   const [followings, setfollowings] = useState([]) 
+  const [checking, setchecking] = useState() 
+  const [staatus, setStatus] = useState() 
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
   const { user: userDetails } = useSelector(state => state.user)
@@ -42,9 +44,9 @@ const UsersBlog = () => {
     setfollowings(userDetails.following)
   },[userDetails])
     
-
-    const checking = followings?.filter(id => write?._id === id)
-    console.log(checking);
+  useEffect(()=>{
+    setchecking (followings?.filter(id => write && write?._id === id))
+  },[followings])
 
     const handleFollow = () => {
       axiosPublic.put(`/following/${userDetails?._id}`, write)
@@ -63,28 +65,60 @@ const UsersBlog = () => {
           })
   }
 
+  const unfollow = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to unfollow this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Unfollow"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.put(`/unfollowing/${userDetails?._id}`, write)
+        .then(res => {
+          setloading(!loading)
+            console.log(res.data);
+            Swal.fire({
+              title: "Unfollow!",
+              text: "unfollowed successfully",
+              icon: "success"
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+      }
+    });
+  }
+
   return (
     <div className="p-[10px]">
         <Helmet>
             <title> Blog collection</title>
         </Helmet>
-        <div className="flex gap-2 bg-secondary bg-opacity-40 my-[50px] p-[10px]">
+        <div className="flex gap-2 bg-secondary bg-opacity-40 my-[50px] p-[10px] text-wrap">
         {
             write === undefined ? <h1>Not found</h1> :
            <div 
-           className="flex flex-col md:flex-row justify-around items-center gap-4 bmiNumber text-primary">
-               <div className="flex flex-col items-center gap-3">
+           className="w-full md:w-fit flex flex-col md:flex-row justify-around items-center gap-4 bmiNumber text-primary">
+               <div className="flex flex-col items-center gap-3 text-wrap ">
                  <img className="h-[200px] rounded-full object
                  -cover" src={write.image}/>
-                 <button onClick={checking.length > 0 ? console.log("You Are following him") : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
+                 <button onClick={checking && checking.length > 0 ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
                   
-                  {checking.length > 0 ? "following" : "Follow Now"}
+                  {checking && checking.length ? "Unfollow" : "Follow"}
                   
                   </button>
+                  {/* <button 
+                  className={`${checking && checking.length > 0 ? 'hidden' : 'bg-primary p-[10px] text-xl text-white rounded-md'}`}>Follow</button>
+                  <button 
+                  className={`${checking && checking.length === 0 ? 'hidden' :"bg-primary p-[10px] text-xl text-white rounded-md"}`}>Unfollow</button> */}
                </div>
-               <div>
+               <div className="break-all">
                <h1 className="text-2xl font-[600]">{write.name}</h1>
-               <h1 className="text-base font-[600]">{write.email}</h1>
+               <h1 className="text-base font-[600]">Email: {write.email}</h1>
                <h1 className="text-base font-[600]">D.O.B: {write.birthDay}</h1>
                {/* <h1 className="text-base font-[600]">Status: {writer.Status}</h1> */}
                <h1 className="text-base font-[600]">Following: {write.following === undefined? 0  : write.following.length}</h1>

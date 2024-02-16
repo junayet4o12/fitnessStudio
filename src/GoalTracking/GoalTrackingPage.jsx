@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import WeightTrack from "./WeightTrack";
+import Title from "../Components/Title/Title";
+import EnduranceTracking from "./EnduranceTracking";
 
 const GoalTrackingPage = () => {
   return (
@@ -23,6 +25,8 @@ const GoalTrackingPage = () => {
        <WeightTrack/>
        </div>
       </div>
+      <Title title="Active Goal"></Title>
+      <EnduranceTracking></EnduranceTracking>
     </div>
   );
 };

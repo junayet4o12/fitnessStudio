@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
+import Swal from 'sweetalert2';
 
 const DynamicBlogpage2 = () => {
   const param = useParams().newId
@@ -47,6 +48,34 @@ const DynamicBlogpage2 = () => {
         })
   }
 
+  const unfollow = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to unfollow this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Unfollow"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
+        .then(res => {
+          setloading(!loading)
+            console.log(res.data);
+            Swal.fire({
+              title: "Unfollow!",
+              text: "unfollowed successfully",
+              icon: "success"
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+      }
+    });
+  }
+
   const following = userDetails.following
     const checking = following.filter(id => myblog?._id === id)
     console.log(checking);
@@ -72,9 +101,9 @@ console.log(blog);
         </Link>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
         <button 
-        onClick={checking.length>0? console.log("already followed"): handleFollow}
+        onClick={checking && checking.length > 0 ? unfollow : handleFollow}
         className="bg-primary p-[10px] text-xl text-white rounded-md">
-          {checking.length? "Following" :"Follow Now"}
+          {checking && checking.length > 0 ? "Unfollow" :"Follow Now"}
         </button>
       </div>
     </div>

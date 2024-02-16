@@ -22,7 +22,7 @@ const ContactQuick = () => {
                         <p className="text-md md:text-lg font-bold">Mail</p>
                         <p className="text-xs md:text-base">fitness@studio.com</p>
                     </div>
-                    <div className="bg-fuchsia-100 p-3 md:p-6 rounded-md w-36 md:w-96 md:h-44">
+                    <div className="bg-light-green-200 p-3 md:p-6 rounded-md w-36 md:w-96 md:h-44">
                         <FaPhoneAlt className="text-2xl md:text-4xl text-green-600 md:mb-3" />
                         <p className="text-md md:text-lg font-bold">Phone</p>
                         <p className="text-xs md:text-base bmiNumber">+880- 1454-256543</p>
