@@ -31,7 +31,7 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
     const isFollower = follower ? follower.find(data => data === personalInfo?._id) : ''
     console.log(followedByMe, personalInfo?._id, isFollow);
     const handleProfile = () => {
-        navigate(`/dashboard/users_profile/${info?._id}`)
+        navigate(`/blogs/blogs/${info?.email}`)
     }
     if (info?._id === personalInfo?._id) {
         return ''

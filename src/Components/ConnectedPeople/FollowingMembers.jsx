@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 import { RiUserUnfollowLine } from "react-icons/ri";
-
+import { BiMessageDetail } from "react-icons/bi";
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useState } from 'react';
 const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
@@ -12,7 +12,7 @@ const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
     const axiosPublic = useAxiosPublic()
     const [unFollowLoading, setUnfollowLoading] = useState(false)
     const handleProfile = () => {
-        navigate(`/dashboard/users_profile/${following?._id}`)
+        navigate(`/blogs/blogs/${following?.email}`)
     }
     const handleUnfollow = () => {
         setUnfollowLoading(true)
@@ -28,6 +28,9 @@ const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
                 setUnfollowLoading(false)
             })
     }
+    const handleMessage = () => {
+        navigate(`/dashboard/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
+    }
     return (
         <motion.div
             initial={{ scale: 0.7, x: -100 }}
@@ -41,7 +44,9 @@ const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
                 </div>
                 <div className='flex items-center gap-2'>
                     <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
+                    <p onClick={handleMessage} title='Chat with him' className=' cursor-pointer text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><BiMessageDetail /></p>
                     {unFollowLoading ? <p className=' text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full'><span className="loading loading-spinner loading-sm"></span></p> : <p onClick={handleUnfollow} title='unfollow him' className=' cursor-pointer text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><RiUserUnfollowLine /></p>}
+                    
                 </div>
             </div>
         </motion.div>

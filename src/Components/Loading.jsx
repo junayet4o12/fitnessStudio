@@ -1,6 +1,6 @@
 
 import { BallTriangle } from "react-loader-spinner";
-   
+    
 const Loading = () => {
     return (
         <div className='h-screen flex items-center justify-center'>

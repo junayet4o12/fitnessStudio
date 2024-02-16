@@ -1,11 +1,16 @@
 // import React from 'react';
 import { motion } from 'framer-motion'
+import { BiMessageDetail } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-const FollowedMembers = ({ follower, idx }) => {
+const FollowedMembers = ({ follower, idx, userDetails }) => {
     console.log(idx);
     const navigate = useNavigate();
     const handleProfile = () => {
-        navigate(`/dashboard/users_profile/${follower?._id}`)
+        navigate(`/blogs/blogs/${follower?.email}`)
+
+    }
+    const handleMessage = () => {
+        navigate(`/dashboard/message?userId1=${userDetails?._id}&userId2=${follower?._id}`)
     }
     return (
         <motion.div
@@ -18,8 +23,9 @@ const FollowedMembers = ({ follower, idx }) => {
                     <img className='h-9 w-9 rounded-full' src={follower?.image} alt="" />
                     <h2 className="text-sm font-bold">{follower?.name}</h2>
                 </div>
-                <div>
+                <div className='flex items-center gap-2'>
                     <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
+                    <p title="Chat with him" onClick={handleMessage}  className=' cursor-pointer text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><BiMessageDetail /></p>
                 </div>
             </div>
         </motion.div>

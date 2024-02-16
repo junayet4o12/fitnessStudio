@@ -10,9 +10,9 @@ import { backendUrl } from "../BackendUrl/backendUrl";
 
 const Chat = () => {
     const dispatch = useDispatch()
-    const { user } = useAuth()
+    const { user, messages, setMessages } = useAuth()
     const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
+
     const [bold, setBold] = useState(false)
     const { user: userDetails, isLoading } = useSelector(state => state.user)
     console.log(user?.email);
@@ -46,7 +46,7 @@ const Chat = () => {
                 time: new Date()
             })
         }
-       setMessage('')
+        setMessage('')
         setBold(true)
 
     }
@@ -69,7 +69,7 @@ const Chat = () => {
                 <span className={`text-sm  ${sms?.email === user?.email ? 'ml-auto ' : 'mr-auto'}`}>{makeTime(sms?.time)}</span>
                 <span className={`flex  items-end  gap-2 ${sms?.email === user?.email ? 'ml-auto flex-row-reverse chat-end' : 'mr-auto '} chat `}>
                     <img className="w-8 h-8 object-cover rounded-full" src={sms?.image} alt="" />
-                    <span className="chat-bubble chat-bubble-info max-w-[70%] ">{sms.message}</span>
+                    <span className={`chat-bubble ${sms?.email === user?.email ? 'chat-bubble-info ml-20' : 'chat-bubble-error bg-gray-400 mr-20'}  `}>{sms.message}</span>
                 </span>
             </p>)}
 
@@ -79,7 +79,7 @@ const Chat = () => {
                 <button className="btn btn-neutral mx-4">Submit</button>
             </form>
         </div>
-    ); 
+    );
 };
 
 export default Chat;

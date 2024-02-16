@@ -45,7 +45,7 @@ const ConnectedPeople = () => {
                  <h2 className="text-xl font-bold text-center pt-4 px-3 pb-1 w-max border-b-2 border-primary mx-auto">Followed By</h2>
                  
                  {
-                 (data.followedMembers).map((follower,idx)=> <FollowedMembers key={follower?._id} follower={follower} idx={idx}></FollowedMembers>)
+                 (data.followedMembers).map((follower,idx)=> <FollowedMembers key={follower?._id} follower={follower} idx={idx} userDetails={userDetails}></FollowedMembers>)
                  }
             </div>
             {/* followingMembers  */}
