@@ -11,9 +11,8 @@ const Dashboard = () => {
       </Helmet>
       <div className="md:flex ">
         <DashboardNavbar />
-       
-          <Sidebar />
-        
+
+        <Sidebar />
 
         {/* Dashboard content */}
         <div className="flex-1 overflow-x-hidden">

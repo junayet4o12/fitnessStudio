@@ -45,8 +45,8 @@ const MangeBlogPage = () => {
       <div className="bg-[#F6F6F6] py-8 md:py-10  rounded-xl px-8">
         <div>
           <div className="flex justify-between">
-            <h1 className="text-4xl  font-semibold">
-              Total Blogs: {allBlogs?.length}
+            <h1 className="text-4xl font-bold underline underline-offset-8">
+              Total Blogs: <span className="font-sans">{allBlogs?.length}</span>
             </h1>
           </div>
           {/*  */}
@@ -75,7 +75,9 @@ const MangeBlogPage = () => {
                         </div>
                       </th>
                       <td className="text-gray-500">
-                        {blog?.blogName?.slice(0, 30)} ...
+                        <div className="tooltip" data-tip={blog?.blogName}>
+                          {blog?.blogName?.slice(0, 30)} ...
+                        </div>
                       </td>
                       <td className="text-gray-500">{blog?.userName}</td>
                       <td className="text-gray-500 ">{blog?.userEmail}</td>

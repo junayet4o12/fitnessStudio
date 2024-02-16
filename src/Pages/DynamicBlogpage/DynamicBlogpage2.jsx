@@ -2,16 +2,83 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
+import { useDispatch, useSelector } from "react-redux";
+import useAuth from '../../Hooks/useAuth';
+import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
+import Swal from 'sweetalert2';
 
 const DynamicBlogpage2 = () => {
   const param = useParams().newId
   const axiosPublic = useAxiosPublic()
   const [blog, setblog] = useState([])
+  const [myblog, setmyblog] = useState([])
+  const { user } = useAuth()
+  const { user: userDetails } = useSelector(state => state.user)
+  const [loading, setloading] = useState(false)
+  const dispatch = useDispatch()
   console.log(param);
   useEffect(()=>{
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
   },[])
+
+  useEffect(()=>{
+    axiosPublic(`/user?email=${blog.userEmail}`)
+    .then(data=> setmyblog(data.data))
+  },[blog, loading])
+
+  useEffect(() => {
+    dispatch(fetchSingleUser(user?.email))
+}, [dispatch, user, loading])
+
+  const handleFollow = () => {
+    axiosPublic.put(`/following/${userDetails?._id}`, myblog)
+        .then(res => {
+            console.log(res?.data?.followingResult);
+            if (res.data.followingResult.matchedCount > 0) {
+              setloading(!loading)
+              Swal.fire({
+                title: "Followed successfully",
+                icon: "success"
+              })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+  }
+
+  const unfollow = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to unfollow this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Unfollow"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
+        .then(res => {
+          setloading(!loading)
+            console.log(res.data);
+            Swal.fire({
+              title: "Unfollow!",
+              text: "unfollowed successfully",
+              icon: "success"
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+      }
+    });
+  }
+
+  const following = userDetails.following
+    const checking = following.filter(id => myblog?._id === id)
+    console.log(checking);
   
 console.log(blog);
   return (
@@ -33,7 +100,11 @@ console.log(blog);
         <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
         <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
-        <button className="bg-primary p-[10px] text-xl text-white rounded-md">Follow Now</button>
+        <button 
+        onClick={checking && checking.length > 0 ? unfollow : handleFollow}
+        className="bg-primary p-[10px] text-xl text-white rounded-md">
+          {checking && checking.length > 0 ? "Unfollow" :"Follow Now"}
+        </button>
       </div>
     </div>
   )
