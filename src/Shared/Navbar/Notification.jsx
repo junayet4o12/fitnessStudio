@@ -62,7 +62,7 @@ export function NotificationsMenu() {
   return (
     <Menu>
       <MenuHandler>
-        <IconButton variant="text" className="text-2xl">
+        <IconButton variant="text" className="text-xl md:text-2xl mt-2">
           <Badge color="amber"><FaBell /></Badge>
         </IconButton>
       </MenuHandler>

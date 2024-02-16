@@ -189,10 +189,11 @@ export function NavbarSimple() {
             </h1>
           </Link>
         </Typography>
-        <div className="flex gap-7 xs:gap-5 items-center">
+        <div className="flex xs:gap-5 items-center flex-row-reverse lg:flex-row">
           <div className="hidden lg:block">
             <NavList />
           </div>
+
           <IconButton
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -205,13 +206,15 @@ export function NavbarSimple() {
             )}
           </IconButton>
 
-          {/* Bell icon with notification button */}
-          {user && <NotificationsMenu /> }
+          <div className="flex gap-1 items-center">
+            {/* Bell icon with notification button */}
+            {user && <NotificationsMenu />}
 
-          {/* User Profile component */}
-          <span className="">
-            {user && <NavProfile />}
-          </span>
+            {/* User Profile component */}
+            <span className="">
+              {user && <NavProfile />}
+            </span>
+          </div>
         </div>
 
       </div>
