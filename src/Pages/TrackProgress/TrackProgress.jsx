@@ -34,15 +34,6 @@ const TrackProgress = () => {
   //   .toString()
   //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
 
-  // const { user } = useAuth();
-  // const { data: userGoals } = useGetUserGoalQuery();
-  // const goals = userGoals?.filter(
-  //   (userGoal) =>
-  //     userGoal?.user_email === user?.email && userGoal?.date === formattedDate
-  // );
-
-  // console.log(goals);
-  // // console.log(goals?.[0]?._id);
 
   const { data: track, isLoading } = useGetTrackProQuery();
   console.log("tracking", track);
