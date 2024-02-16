@@ -11,7 +11,6 @@ import { Link, NavLink } from "react-router-dom";
 import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
-import { FaBell } from "react-icons/fa";
 import { NotificationsMenu } from "./Notification";
 
 function NavList() {
