@@ -41,6 +41,7 @@ import Endurance from "../Pages/Set_Goal/Endurance";
 import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
+import Message from "../Components/Message/Message";
 
 
 const axiosPublic = useAxiosPublic();
@@ -218,7 +219,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "goal_tracking",
-        element: <GoalTrackingPage/>,
+        element: <GoalTrackingPage />,
       },
       {
         path: "daily_activity",
@@ -286,6 +287,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "connected_with",
         element: <ConnectedPeople></ConnectedPeople>,
+      },
+      {
+        path: "message",
+        element:<Message></Message>
       },
       // admin routs
       {

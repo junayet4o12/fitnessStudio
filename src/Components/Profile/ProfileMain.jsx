@@ -16,7 +16,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const ageSuggestions = useAgeSuggestions(age);
     const BMRSuggestions = useBMRSuggestions(myBMR)
     const navigate = useNavigate()
-    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
     console.log('hello', localStorage.getItem('stravaKey'));
 
@@ -47,7 +47,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
                 </div>
                 <div className='w-full  flex justify-center items-center'>
                     <div className=' font-medium w-[100%]   grid grid-cols-2 md:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
-                        <p onClick={handleNavigateToConnectedPage} className={infoStyle}>
+                        <p onClick={handleNavigateToConnectedPage} className={`${infoStyle} cursor-pointer`}>
                             <span className='font-bold text-primary'>Connected With</span>
                             <span>
                                 <span className='text-sm font-bold'>Following: {userDetails?.following?.length || '0'}</span>

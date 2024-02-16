@@ -11,6 +11,7 @@ import { Link, NavLink } from "react-router-dom";
 import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
+import { FaBell } from "react-icons/fa";
 
 function NavList() {
   const { user } = useAuth()
@@ -203,7 +204,11 @@ export function NavbarSimple() {
               <PiListBulletsFill className="h-6 w-8" strokeWidth={2} />
             )}
           </IconButton>
-          <span className="">
+          <span className="flex  items-center gap-3 ">
+            {/* <span className="text-lg relative py-4 px-2 cursor-pointer active:scale-90 transition-all dura">
+              <FaBell/>
+              <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
+            </span> */}
             {user && <NavProfile />}
           </span>
         </div>

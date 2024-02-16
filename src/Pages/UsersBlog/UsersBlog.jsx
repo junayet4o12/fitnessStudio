@@ -121,9 +121,9 @@ const UsersBlog = () => {
                <h1 className="text-base font-[600]">Email: {write.email}</h1>
                <h1 className="text-base font-[600]">D.O.B: {write.birthDay}</h1>
                {/* <h1 className="text-base font-[600]">Status: {writer.Status}</h1> */}
-               <h1 className="text-base font-[600]">Following: {write.following === undefined? 0  : write.following.length}</h1>
-               <h1 className="text-base font-[600]">Followed: {write.following === undefined? 0 :write.followed.length}</h1>
-               <h1 className="text-base font-[600]">Total posts: {blogs.length}</h1>
+               <h1 className="text-base font-[600]">Following: {write?.following === undefined? 0  : write?.following?.length}</h1>
+               <h1 className="text-base font-[600]">Followed: {write?.followed === undefined? 0 :write?.followed?.length}</h1>
+               <h1 className="text-base font-[600]">Total posts: {blogs?.length}</h1>
                </div>
            </div>
         }
