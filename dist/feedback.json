@@ -1,0 +1,82 @@
+[
+    {
+      "rating": 4.9,
+      "feedback": "Cutting-edge fitness tracker integration and personalized workout plans. Exceptional service at Fitness Studio!",
+      "time": 1699950000000,
+      "feedbackGiver": "Karen Taylor",
+      "email": "karen.taylor@example.com",
+      "image": "https://i.ibb.co/PtkwbzC/client6.jpg"
+    },
+    {
+      "rating": 4.7,
+      "feedback": "The Fitness Studio's fitness assessments are top-notch. Free fitness gear kits were a nice touch.",
+      "time": 1689950000000,
+      "feedbackGiver": "Jennifer Roberts",
+      "email": "jennifer.roberts@example.com",
+      "image": "https://i.ibb.co/KXLMMS7/client5.jpg"
+    },
+    {
+      "rating": 4.6,
+      "feedback": "Learned a lot about nutrition and fitness tracking at Fitness Studio. Dr. Emily Turner's presentation was excellent.",
+      "time": 1689950000000,
+      "feedbackGiver": "Emily Turner",
+      "email": "emily.turner@example.com",
+      "image": "https://i.ibb.co/d4f7rL4/client7.jpg"
+    },
+    {
+      "rating": 4.5,
+      "feedback": "Fun and engaging fitness assessments at Fitness Studio. Lisa Walker's group exercise classes were energizing.",
+      "time": 1682880000000,
+      "feedbackGiver": "Lisa Walker",
+      "email": "lisa.walker@example.com",
+      "image": "https://i.ibb.co/GHTGz8J/client9.webp"
+    },
+    {
+      "rating": 4.3,
+      "feedback": "Important discussions on mental and physical health at Fitness Studio. Counseling sessions were valuable.",
+      "time": 1682870000000,
+      "feedbackGiver": "Maria Sanchez",
+      "email": "maria.sanchez@example.com",
+      "image": "https://i.ibb.co/2Mn57gH/client8.webp"
+    },
+    {
+      "rating": 4,
+      "feedback": "Insightful fitness tracker usage for geriatric health assessments. Dr. Susan Lee's seminar was enlightening.",
+      "time": 1682830000000,
+      "feedbackGiver": "Brian Turner",
+      "email": "brian.turner@example.com",
+      "image": "https://i.ibb.co/pjZ3q4q/client4.jpg"
+    },
+    {
+      "rating": 4.4,
+      "feedback": "Celebrated women's health with Fitness Studio's informative seminars. Dr. Laura Martinez provided excellent insights.",
+      "time": 1680950000000,
+      "feedbackGiver": "Laura Martinez",
+      "email": "laura.martinez@example.com",
+      "image": "https://i.ibb.co/yWHGBf5/client10.jpg"
+    },
+    {
+      "rating": 4.5,
+      "feedback": "Great experience! The Fitness Studio's fitness trackers and health screenings were very informative.",
+      "time": 1680600000000,
+      "feedbackGiver": "John Doe",
+      "email": "john.doe@example.com",
+      "image": "https://i.ibb.co/KhSkmS1/client1.jpg"
+    },
+    {
+      "rating": 4.8,
+      "feedback": "Fantastic pediatric fitness check-ups and fitness tracker usage. Kids had a blast at Fitness Studio!",
+      "time": 1679600000000,
+      "feedbackGiver": "Michael Carter",
+      "email": "michael.carter@example.com",
+      "image": "https://i.ibb.co/PC5D7q8/client3.jpg"
+    },
+    {
+      "rating": 4.2,
+      "feedback": "Enjoyed the Fitness Studio's heart-healthy cooking demo and fitness tracker insights. Dr. James Miller provided valuable fitness tips during the cardiac screenings.",
+      "time": 1660600000000,
+      "feedbackGiver": "Robert Johnson",
+      "email": "robert.johnson@example.com",
+      "image": "https://i.ibb.co/ZYzFPfy/client2.jpg"
+    }
+]
