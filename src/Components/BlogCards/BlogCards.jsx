@@ -55,7 +55,7 @@ const BlogCards = ({ blogs }) => {
                                 <div className='p-[10px] flex gap-2 items-center justify-start'>
                                     <img className='w-[50px] h-[50px] object-cover object-top rounded-full' src={blog.userImg} />
                                     <div>
-                                        <Link to={`blogs/${blog.userEmail}`}>
+                                        <Link to={`/userProfile/${blog.userEmail}`}>
                                             <h1 className='font-bold'>{blog.userName}</h1>
                                         </Link>
                                         <h1 className='bmiNumber'>{blog.time}</h1>

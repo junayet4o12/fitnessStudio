@@ -34,7 +34,6 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
-import UserProfile from "../Components/UserProfile/UserProfile";
 import ManageWeight from "../Pages/Set_Goal/ManageWeight";
 import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
 import Endurance from "../Pages/Set_Goal/Endurance";
@@ -101,7 +100,7 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
-        path: "/blogs/:email",
+        path: "/userProfile/:email",
         element: (
           <PrivateRoute>
             <UsersBlog />
@@ -164,10 +163,6 @@ const MyRouts = createBrowserRouter([
             <Profile></Profile>{" "}
           </PrivateRoute>
         ),
-      },
-      {
-        path: "/dashboard/users_profile/:id",
-        element: <UserProfile></UserProfile>,
       },
 
       {

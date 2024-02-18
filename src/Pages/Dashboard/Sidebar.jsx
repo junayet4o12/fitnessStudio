@@ -35,7 +35,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="scroolBar min-w-56  min-h-screen max-h-screen bg-gradient-to-r from-secondary/70 to-primary/70 hidden md:block sticky top-0 overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+    <div className="scroolBar min-w-56  min-h-screen max-h-screen  
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-gradient-to-l from-primary to-secondary " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       {/* Sidebar logo or Title */}
       <div className="p-4">
         <h1 className="flex text-2xl gap-1 font-bold bg-primary/70 shadow-lg shadow-gray-500 p-1 rounded-md">
@@ -208,7 +209,7 @@ const Sidebar = () => {
         </li>
         <li>
           <button
-          title="Click for logging out"
+            title="Click for logging out"
             onClick={handleLogout}
             className="py-2 px-4 text-white bg-black/50 border-b-2 border-l-2 hover:bg-black/70">
             <PiSignOutBold /> Log Out

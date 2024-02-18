@@ -106,10 +106,12 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10' style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
+        <div className='p-5 lg:p-10' 
+        // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
+        >
             <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
             <div>
-                <div className='w-full  bg-white/70  mx-auto p-5 pt-12 rounded relative shadow-lg '>
+                <div className='w-full  bg-gradient-to-r from-primary/80 to-primary/10   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
 
                     <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5'>
                         <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
@@ -149,7 +151,7 @@ const Profile = () => {
                         {/* height  */}
                         <div>
                             <label className='font-bold flex gap-0'>Height <span className='text-primary text-lg'>*</span></label>
-                            <div className='flex gap-3'>
+                            <div className='grid grid-cols-2 gap-3'>
                                 <div>
                                     <label className='font-bold text-sm'>Feet</label>
                                     <input
