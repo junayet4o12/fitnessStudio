@@ -3,6 +3,8 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
+import { FaBoxesPacking } from "react-icons/fa6";
+import { CiBoxes } from "react-icons/ci";
 import { CgGym } from "react-icons/cg";
 import { FaHome, FaPhoneAlt, FaUserAlt, FaUserFriends, FaUsers } from "react-icons/fa";
 import { FaBookAtlas, FaBookMedical, FaCalculator } from "react-icons/fa6";
@@ -138,6 +140,26 @@ const Sidebar = () => {
                     isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                   }>
                   <FaStrava /> Strava Activities
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/productForm"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  }
+                >
+                <FaBoxesPacking /> List a product
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/yourProducts"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  }
+                >
+                <CiBoxes /> Your Products
                 </NavLink>
               </li>
               <li>

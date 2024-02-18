@@ -42,6 +42,8 @@ import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
+import ProductFrom from "../Pages/ProductFoems/ProductFrom";
+import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
 
 
 const axiosPublic = useAxiosPublic();
@@ -175,6 +177,14 @@ const MyRouts = createBrowserRouter([
             <BmiCalculator />{" "}
           </PrivateRoute>
         ),
+      },
+      {
+        path: "productForm",
+        element: <PrivateRoute> <ProductFrom/> </PrivateRoute>
+      },
+      {
+        path: "yourProducts",
+        element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
       },
       {
         path: "BlogFrom",
