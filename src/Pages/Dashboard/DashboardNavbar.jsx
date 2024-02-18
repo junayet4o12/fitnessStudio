@@ -7,7 +7,10 @@ import { FaBars, FaStrava, FaTimes, FaUserAlt } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
 import {  GiProgression } from "react-icons/gi";
 import { FaPenNib } from "react-icons/fa";
+import { FaBoxesPacking } from "react-icons/fa6";
+import { CiBoxes } from "react-icons/ci";
 import useAuth from "../../Hooks/useAuth";
+
 
 import { Helmet } from 'react-helmet-async'
 import useAdmin from "../../Hooks/useAdmin";
@@ -144,6 +147,26 @@ const DashboardNavbar = () => {
                                         <FaStrava /> Strava Activities
                                     </NavLink>
                                 </li>
+                                <li>
+                                        <NavLink
+                                        to="/dashboard/productForm"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                        >
+                                        <FaBoxesPacking /> List a product
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                        to="/dashboard/yourProducts"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                        >
+                                        <CiBoxes /> Your Products
+                                        </NavLink>
+                                    </li>
                                 <li>
                                     <NavLink to="/dashboard/BlogFrom"
                                         className={({ isActive, isPending }) =>

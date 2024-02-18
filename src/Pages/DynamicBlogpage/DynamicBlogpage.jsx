@@ -79,8 +79,8 @@ const unfollow = () => {
   });
 }
 
-const following = userDetails.following
-    const checking = following.filter(id => myblog?._id === id)
+    const following = userDetails.following
+    const checking = following?.filter(id => myblog?._id === id)
     console.log(checking && checking.length);
 
   
