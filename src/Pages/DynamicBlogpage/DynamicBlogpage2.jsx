@@ -77,7 +77,7 @@ const DynamicBlogpage2 = () => {
   }
 
   const following = userDetails.following
-    const checking = following.filter(id => myblog?._id === id)
+    const checking = following?.filter(id => myblog?._id === id)
     console.log(checking);
   
 console.log(blog);
