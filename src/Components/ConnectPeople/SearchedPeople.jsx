@@ -31,25 +31,25 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
     const isFollower = follower ? follower.find(data => data === personalInfo?._id) : ''
     console.log(followedByMe, personalInfo?._id, isFollow);
     const handleProfile = () => {
-        navigate(`/dashboard/users_profile/${info?._id}`)
+        navigate(`/userProfile/${info?.email}`)
     }
     if (info?._id === personalInfo?._id) {
         return ''
     }
     return (
-        <div className="relative flex w-full max-w-[35rem] mx-auto my-4 border-b border-l-[1.5px] border-gray-700 p-[6px] rounded shadow-md shadow-primary/20 justify-between items-center ">
+        <div className="relative flex w-full max-w-[35rem] mx-auto my-4 border-b border-l-[1.5px] border-gray-700 p-[6px] rounded shadow-md shadow-primary/20 justify-between items-center bg-primary/60 text-white">
             <div className='flex gap-3 items-center'>
                 <img className='h-9 w-9 rounded-full' src={info?.image} alt="" />
                 <h2 className="text-sm font-bold">{info?.name}</h2>
             </div>
             <div className='flex items-center gap-2'>
                 {
-                    followBtnLoading ? <span className="loading loading-dots loading-sm"></span> : (isFollow ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Following</p> : (isFollower ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follower</p> : (!updateLoading ? <p onClick={handleFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Follow</p> : <span className="loading loading-spinner loading-sm mr-4"></span>)))
+                    followBtnLoading ? <span className="loading loading-dots loading-sm"></span> : (isFollow ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none'>Following</p> : (isFollower ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none'>Follower</p> : (!updateLoading ? <p onClick={handleFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none'>Follow</p> : <span className="loading loading-spinner loading-sm mr-4"></span>)))
                 }
                 <p
                 title='Go to User profile'
                  onClick={handleProfile}
-                  className=' cursor-pointer text-gray-700 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><CgProfile/></p>
+                  className=' cursor-pointer text-white w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><CgProfile/></p>
             </div>
         </div>
     );

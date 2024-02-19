@@ -12,6 +12,7 @@ import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
+import Notification2 from "./Notification2";
 
 function NavList() {
   const { user } = useAuth()
@@ -208,7 +209,8 @@ export function NavbarSimple() {
 
           <div className="flex gap-1 items-center">
             {/* Bell icon with notification button */}
-            {user && <NotificationsMenu />}
+            {/* {user && <NotificationsMenu />} */}
+            {user && <Notification2 />}
 
             {/* User Profile component */}
             <span className="">

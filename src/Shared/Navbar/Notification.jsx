@@ -57,7 +57,7 @@ export function NotificationsMenu() {
     }
   })
 
-  console.log(blogsNoti);
+  // console.log(blogsNoti);
 
   return (
     <Menu>
@@ -66,9 +66,9 @@ export function NotificationsMenu() {
           <Badge color="amber"><FaBell /></Badge>
         </IconButton>
       </MenuHandler>
-      <MenuList className="flex flex-col gap-2 max-h-48 scroolBar">
+      <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
         {
-          data?.followedMembers?.length === 0 ? <MenuItem><h1 className="text-lg text-gray-400">No Notification Here</h1></MenuItem>
+          data?.followedMembers?.length && blogsNoti === 0 ? <MenuItem><h1 className="text-lg text-gray-400">No Notification Here</h1></MenuItem>
             :
             (data?.followedMembers)?.map((follower) => <MenuItem key={follower?._id} className="flex items-center gap-4 py-2 pl-2 pr-8">
               <Avatar

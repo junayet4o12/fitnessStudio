@@ -16,8 +16,8 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const ageSuggestions = useAgeSuggestions(age);
     const BMRSuggestions = useBMRSuggestions(myBMR)
     const navigate = useNavigate()
-    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl cursor-pointer py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
-    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
+    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  bg-primary/70 hover:bg-primary hover:border-primary/80'
     console.log('hello', localStorage.getItem('stravaKey'));
 
 
@@ -35,19 +35,19 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     }
     return (
         <div className='max-w-7xl mx-auto'>
-            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7 gap-5  lg:gap-10 p-4 bg-white/60 rounded my-5 shadow-2xl px-10'>
+            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-center sm:justify-start   py-7 gap-5  lg:gap-10 p-4 bg-gradient-to-r from-primary/80 to-primary/10 rounded my-5 shadow-2xl px-10'>
                 <div className='flex flex-col justify-center items-center'>
                     <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
                         <img className='w-full h-full rounded-full' src={userDetails?.image} alt="" />
                     </div>
                     <div>
-                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70  bg-primary hover:bg-primary/90  border-transparent hover:border-primary my-4`}>Personal Suggestions</button>
+                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70     border-transparent  my-4`}>Personal Suggestions</button>
                     </div>
                 </div>
                 <div className='w-full  flex justify-center items-center'>
                     <div className=' font-medium w-[100%]   grid grid-cols-2 md:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
-                        <p onClick={handleNavigateToConnectedPage} className={infoStyle}>
+                        <p onClick={handleNavigateToConnectedPage} className={`${infoStyle} cursor-pointer`}>
                             <span className='font-bold text-primary'>Connected With</span>
                             <span>
                                 <span className='text-sm font-bold'>Following: {userDetails?.following?.length || '0'}</span>
