@@ -6,6 +6,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { backendUrl } from "../../BackendUrl/backendUrl";
 import { useNavigate } from "react-router";
 import { socket } from "../../socketIo/socket";
+import { io } from "socket.io-client";
 const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop }) => {
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
