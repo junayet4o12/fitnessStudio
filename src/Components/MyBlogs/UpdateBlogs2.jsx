@@ -21,18 +21,28 @@ const UpdateBlogs2 = () => {
     const dispatch = useDispatch()
     const { user: userDetails } = useSelector(state => state.user)
     console.log(userDetails?._id);
+    const [myBlogs, setMyBlogs] = useState({})
     const [tinyData, setTinyData] = useState("")
 
     // amar code
-    const { data: myBlogs = [] } = useQuery({
-        queryKey: ['myBlogs'],
-        queryFn: async () => {
-            const response = await axiosPublic.get(`/blogs/${id}`);
-            return response.data;
-        }
-    })
+    // const { data: myBlogs = [] } = useQuery({
+    //     queryKey: ['myBlogs'],
+    //     queryFn: async () => {
+    //         const response = await axiosPublic.get(`/blogs/${id}`);
+    //         return response.data;
+    //     }
+    // })
     //   console.log(myBlogs);
-    const { _id, blogName, blogImg, blogDes } = myBlogs || {}
+
+    useEffect(()=> {
+        axiosPublic.get(`/blogs/${id}`)
+        .then((res) => {
+            setMyBlogs(res?.data)
+            setTinyData(res?.data?.blogDes)
+        })
+    },[id, axiosPublic ])
+
+    const { _id, blogName, blogImg, } = myBlogs || {}
 
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
@@ -64,7 +74,7 @@ const UpdateBlogs2 = () => {
             axiosPublic.put(`/update_blog/${_id}`, allData)
                 .then(res => {
                     console.log(res?.data);
-                    if (res?.data?.insertedId) {
+                    if (res?.data?.modifiedCount > 0) {
                         toast.success("Update Successfully !", { id: toastId });
                         Navigate('/my_blogs')
                     }
@@ -125,7 +135,7 @@ const UpdateBlogs2 = () => {
                             tinycomments_author: 'Author name',
                             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                         }}
-                        value={blogDes}
+                        value={tinyData}
                         // defaultValue={blogDes}
                         onEditorChange={haldelChange} />
                 </div>
