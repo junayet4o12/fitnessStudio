@@ -37,7 +37,7 @@ const UserProductsCollections = () => {
                                     className='w-full md:w-[250px] md:h-[150px] object-cover rounded-md'
                                     src={product.imgUrl} />
                                 </div>
-                                <dv className="w-full p-[10px]">
+                                <div className="w-full p-[10px]">
                                     <Link to={product._id}>
                                     <h1 className='text-2xl font-bold'>{product.Pname}</h1>
                                     </Link>
@@ -49,7 +49,7 @@ const UserProductsCollections = () => {
                                     "bg-green-500 text-white p-[10px] rounded-md flex w-fit cursor-pointer"
                                 }`}>
                                         {product.verify}</h1>
-                                </dv>
+                                </div>
                                 </div>
                                 <div className='p-[10px] flex gap-2 '>
                                     <button title='sold'
