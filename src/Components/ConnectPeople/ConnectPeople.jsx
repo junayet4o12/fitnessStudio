@@ -73,13 +73,13 @@ const ConnectPeople = () => {
         <div>
             <Title title={'Connect People'}></Title>
             <form onSubmit={handleSubmit}>
-                <div className="relative flex w-full max-w-[35rem] mx-auto my-4">
+                <div className="relative flex w-full max-w-[35rem] mx-auto my-4 ">
                     <Input
                         type="text"
                         label="Search People"
                         value={searchedName}
                         onChange={onChange}
-                        className="pr-20"
+                        className="pr-20 "
                         containerProps={{
                             className: "min-w-0",
                         }}
@@ -93,7 +93,7 @@ const ConnectPeople = () => {
                         {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Search'}
                     </Button>
                 </div>
-                <div>
+                <div className="">
 
                     {
                         people?.map(one => <SearchedPeople key={one?._id} info={one} personalInfo={userDetails} followingSearch={following} setFollowing={setFollowing} followBtnLoading={followBtnLoading}></SearchedPeople>)

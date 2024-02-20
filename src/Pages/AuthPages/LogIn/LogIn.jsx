@@ -67,7 +67,7 @@ const LogIn = () => {
                     <input
                       {...register("email", { required: true })}
                       placeholder="Enter your email address"
-                      className="input input-bordered w-full"
+                      className="input input-bordered w-full text-black"
                     />
                     {errors.email && (
                       <span className="text-red-400 text-xs">
@@ -85,7 +85,7 @@ const LogIn = () => {
                         required: true,
                       })}
                       placeholder="Enter password"
-                      className="input input-bordered w-full"
+                      className="input input-bordered w-full text-black"
                     />
                     {errors.password?.type === "required" && (
                       <span className="text-red-400 text-xs ">

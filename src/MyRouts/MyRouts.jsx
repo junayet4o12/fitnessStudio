@@ -34,13 +34,15 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
-import UserProfile from "../Components/UserProfile/UserProfile";
 import ManageWeight from "../Pages/Set_Goal/ManageWeight";
 import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
 import Endurance from "../Pages/Set_Goal/Endurance";
 import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
+import Message from "../Components/Message/Message";
+import ProductFrom from "../Pages/ProductFoems/ProductFrom";
+import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
 
 
 const axiosPublic = useAxiosPublic();
@@ -98,7 +100,7 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
-        path: "/blogs/:email",
+        path: "/userProfile/:email",
         element: (
           <PrivateRoute>
             <UsersBlog />
@@ -162,10 +164,6 @@ const MyRouts = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/dashboard/users_profile/:id",
-        element: <UserProfile></UserProfile>,
-      },
 
       {
         path: "bmi_calculator",
@@ -174,6 +172,14 @@ const MyRouts = createBrowserRouter([
             <BmiCalculator />{" "}
           </PrivateRoute>
         ),
+      },
+      {
+        path: "productForm",
+        element: <PrivateRoute> <ProductFrom/> </PrivateRoute>
+      },
+      {
+        path: "yourProducts",
+        element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
       },
       {
         path: "BlogFrom",
@@ -218,7 +224,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "goal_tracking",
-        element: <GoalTrackingPage/>,
+        element: <GoalTrackingPage />,
       },
       {
         path: "daily_activity",
@@ -286,6 +292,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "connected_with",
         element: <ConnectedPeople></ConnectedPeople>,
+      },
+      {
+        path: "message",
+        element:<Message></Message>
       },
       // admin routs
       {
