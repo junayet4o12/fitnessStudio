@@ -70,6 +70,16 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink
+                to="/dashboard/manage_Products"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                }
+              >
+                <CiBoxes className="text-2xl" /> Manage Products
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/dashboard/manage_blogs"
                 className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""

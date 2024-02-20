@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../Authentication/AuthProvider/AuthProviders'
+import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { FaCheckCircle } from "react-icons/fa";
 import { FaPencilRuler } from "react-icons/fa";
@@ -7,21 +6,21 @@ import { MdDelete } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 
-const UserProductsCollections = () => {
-    const {user} = useContext(AuthContext)
+const ProductsForAdmin = () => {
+    // const {user} = useContext(AuthContext)
     const [products, setProducts] = useState()
     const Axoispublic = useAxiosPublic()
 
     useEffect(()=>{
-        Axoispublic(`/products?email=${user.email}`)
+        Axoispublic(`/products`)
         .then(res => setProducts(res.data))
     },[])
 
   return (
-    <div>
+    <div className='p-[10px]'>
       <div className='pt-[50px] pb-[50px]'>
-        <h1 className='text-3xl font-bold'>Your Listings</h1>
-        <p className='font-[500]'>Manage your products mark items as Sold, update them, or delete them.</p>
+        <h1 className='text-3xl font-bold'>Listings Requests</h1>
+        <p className='font-[500]'>Manage products in your website approve them, or delete them.</p>
       </div>
         <div>
             {
@@ -37,10 +36,11 @@ const UserProductsCollections = () => {
                                     className='w-full md:w-[250px] md:h-[150px] object-cover rounded-md'
                                     src={product.imgUrl} />
                                 </div>
-                                <dv className="w-full p-[10px]">
+                                <div className="w-full p-[10px] flex flex-col gap-2">
                                     <Link to={product._id}>
                                     <h1 className='text-2xl font-bold'>{product.Pname}</h1>
                                     </Link>
+                                    <h1 className='bmiNumber font-[600]'>Requested by: {product.sellerName}</h1>
                                     <h1 className='bmiNumber font-[600]'>Price: {product.Pprice} ৳</h1>
                                     <h1 
                                     className={`${product.verify === "notVerified"?
@@ -49,15 +49,12 @@ const UserProductsCollections = () => {
                                     "bg-green-500 text-white p-[10px] rounded-md flex w-fit cursor-pointer"
                                 }`}>
                                         {product.verify}</h1>
-                                </dv>
+                                </div>
                                 </div>
                                 <div className='p-[10px] flex gap-2 '>
-                                    <button title='sold'
+                                    <button title='Approve'
                                     className='text-2xl text-white  border-2 border-secondary bg-primary rounded-md p-[10px]'
                                     ><FaCheckCircle /></button>
-                                    <button title='Modify'
-                                    className='text-2xl text-white  border-2 border-secondary bg-primary rounded-md p-[10px]'
-                                    ><FaPencilRuler/></button>
                                     <button title='Delete'
                                     className='text-2xl text-white  border-2 border-secondary bg-primary rounded-md p-[10px]'
                                     ><MdDelete/></button>
@@ -72,4 +69,4 @@ const UserProductsCollections = () => {
   )
 }
 
-export default UserProductsCollections
+export default ProductsForAdmin
