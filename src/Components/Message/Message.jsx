@@ -32,7 +32,7 @@ const Message = () => {
             return res?.data
         }
     })
-    const { data: messages, isLoading: messageDataIsLoading, refetch } = useQuery({
+    const { data: messages=[], isLoading: messageDataIsLoading, refetch } = useQuery({
         queryKey: [userId, friendId],
         queryFn: async () => {
             const res = await axiosPublic.get(`/message_with_friend?you=${userId}&friend=${friendId}`)

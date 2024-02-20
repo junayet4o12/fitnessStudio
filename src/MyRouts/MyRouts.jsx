@@ -34,7 +34,6 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
-import UserProfile from "../Components/UserProfile/UserProfile";
 import ManageWeight from "../Pages/Set_Goal/ManageWeight";
 import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
 import Endurance from "../Pages/Set_Goal/Endurance";
@@ -42,6 +41,10 @@ import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
+import ProductFrom from "../Pages/ProductFoems/ProductFrom";
+import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
+import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
+import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
 
 
 const axiosPublic = useAxiosPublic();
@@ -99,7 +102,7 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
-        path: "/blogs/:email",
+        path: "/userProfile/:email",
         element: (
           <PrivateRoute>
             <UsersBlog />
@@ -163,10 +166,6 @@ const MyRouts = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/dashboard/users_profile/:id",
-        element: <UserProfile></UserProfile>,
-      },
 
       {
         path: "bmi_calculator",
@@ -175,6 +174,18 @@ const MyRouts = createBrowserRouter([
             <BmiCalculator />{" "}
           </PrivateRoute>
         ),
+      },
+      {
+        path: "productForm",
+        element: <PrivateRoute> <ProductFrom/> </PrivateRoute>
+      },
+      {
+        path: "yourProducts",
+        element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
+      },
+      {
+        path: "yourProducts/:id",
+        element: <PrivateRoute> <DynamicProductPage/> </PrivateRoute>
       },
       {
         path: "BlogFrom",
@@ -301,6 +312,14 @@ const MyRouts = createBrowserRouter([
             <ManageUsers />
           </AdminRouts>
         ),
+      },
+      {
+        path: "manage_Products",
+        element: <AdminRouts> <ProductsForAdmin/> </AdminRouts>
+      },
+      {
+        path: "manage_Products/:id",
+        element: <AdminRouts> <DynamicProductPage/> </AdminRouts>
       },
       {
         path: "manage_blogs",

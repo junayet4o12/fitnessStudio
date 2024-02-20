@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { IoSendSharp } from "react-icons/io5";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { backendUrl } from "../../BackendUrl/backendUrl";
-import { io } from "socket.io-client";
 import { useNavigate } from "react-router";
-const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) => {
+import { socket } from "../../socketIo/socket";
+const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop }) => {
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const [message, setMessage] = useState('')
@@ -17,13 +17,22 @@ const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) =>
             refetch()
         })
 
-        return () => {
-            socket.disconnect();
-        }
+        // return () => {
+        //     socket.disconnect();
+        // }
     }, [])
     useEffect(() => {
         scrollToBottom();
     }, [messages, scrollToTop]);
+    useEffect(() => {
+        axiosPublic.put(`/read_message?you=${userData?._id}&friend=${friendData?._id}`)
+            .then(res => {
+                console.log(res?.data);
+            })
+            .catch(err => {
+                console.log(err?.message);
+            })
+    }, [messages])
 
     const scrollToBottom = () => {
         if (chatContainerRef.current) {
@@ -31,9 +40,7 @@ const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) =>
         }
     };
     const handleChange = (e) => {
-
         e.preventDefault();
-
         setMessage(e.target.value)
     }
     const handleSubmit = (e) => {
@@ -58,6 +65,10 @@ const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) =>
                 if (res?.data?.insertedId) {
                     setMessage('')
                     socket.emit('refetch', {
+                        message,
+                        time: new Date()
+                    })
+                    socket.emit('unread_refetch', {
                         message,
                         time: new Date()
                     })
@@ -117,9 +128,9 @@ const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) =>
                 </div>
                 <div className="sticky bottom-0 w-full bg-white">
                     <form onSubmit={handleSubmit} className="w-full relative">
-                        <textarea value={message} onChange={handleChange} type="text"
+                        <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."
-                            className="input  w-full h-10 border-primary rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium" ></textarea>
+                            className="input  w-full h-10 border-primary rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium" />
                         <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-3 top-[10px] text-xl active:scale-90 duration-200 transition-all hover:text-black`}><IoSendSharp></IoSendSharp></button>
                     </form>
                 </div>
