@@ -43,7 +43,7 @@ import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
 import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
-import UpdateBlogs2 from "../Components/MyBlogs/UpdateBlogs2";
+import UpdateBlogs from "../Components/MyBlogs/UpdateBlogs";
 
 
 const axiosPublic = useAxiosPublic();
@@ -318,7 +318,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: '/dashboard/updateBlogs/:id',
-        element: <UpdateBlogs2 />
+        element: <UpdateBlogs />
       }
     ],
   },
