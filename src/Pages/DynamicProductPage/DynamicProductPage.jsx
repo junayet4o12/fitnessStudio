@@ -13,7 +13,7 @@ const DynamicProductPage = () => {
     },[])
   return (
     <div 
-    className='p-[10px] flex flex-col md:flex-row gap-3 items-center justify-center min-h-[100vh] h-[100vh]'>
+    className='p-[10px] flex flex-col md:flex-row gap-3 items-center justify-center min-h-[100vh] md:h-[100vh] pt-[100px] pb-[100px]'>
       <img
       className='md:w-[40%]'
       src={product?.imgUrl} alt={product?.Pname} />
