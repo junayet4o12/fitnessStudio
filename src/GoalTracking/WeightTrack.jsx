@@ -9,15 +9,17 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const WeightTrack = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(!open);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+
   const { register, handleSubmit } = useForm();
 
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
-  const { data: weight = [], isLoading, refetch } = useQuery({
+  const {
+    data: weight = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["tasks"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/user_goal/${user?.email}`);
@@ -36,7 +38,6 @@ const WeightTrack = () => {
   console.log(calculateWeight);
   const dayOfMonth = parseInt(calculateWeight?.timeline?.slice(-2));
 
-
   const originalDate = new Date();
   const formattedDate = parseInt(
     originalDate.getDate().toString().padStart(2, 0)
@@ -46,7 +47,6 @@ const WeightTrack = () => {
 
   const targetKg = parseInt(calculateWeight?.targetWeight);
   const current = calculateWeight?.user_current_weight;
-
 
   const onSubmit = async (data) => {
     const updatedData = {
@@ -62,30 +62,81 @@ const WeightTrack = () => {
     if (res.data.modifiedCount > 0) {
       Swal.fire({
         title: "Success!",
-        text: "Task details successfully Updated",
+        text: "Goal details successfully Updated",
         icon: "success",
         confirmButtonText: "Cool",
       });
     }
-    refetch()
-    setOpen(false)
+    refetch();
+    setIsOpen(false);
   };
+  const handleDeleteGoal = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, stop it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic.delete(`/user_goal/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "stop!",
+              text: "Your file has been stoped.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
+
+  const form =
+    "block bmiNumber w-full px-4 py-3 text-sm text-gray-800 bg-white border border-primary rounded-md focus:border-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 ";
+
+  // if (current >= targetKg) {
+  //   Swal.fire({
+  //     title: "Congratulations!",
+  //     text: "You've achieved your target weight!",
+  //     icon: "success",
+  //     confirmButtonText: "Great",
+  //   });
+  // }
+
+  if (day <= 0) {
+    Swal.fire({
+      title: "Alert!",
+      text: "Your goal timeline has ended!",
+      icon: "warning",
+      confirmButtonText: "Got it",
+    });
+  }
 
   return (
     <div className="my-4 ml-0 lg:ml-28">
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
-            Total time {day} days
+            Total time {day ? day : "0"} days
           </span>
-          <button className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500">
+          <button  onClick={() => handleDeleteGoal(calculateWeight?._id)} className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500">
             Stop Goal
           </button>
         </div>
 
         <div className="w-40 my-2">
-        
-          <ProgressBar width="350px"  bgColor="#FF4804" completed={current} maxCompleted={targetKg} />
+          <ProgressBar
+            width="350px"
+            bgColor="#FF4804"
+            completed={current}
+            maxCompleted={targetKg}
+          />
         </div>
 
         <div className="mt-2">
@@ -93,59 +144,100 @@ const WeightTrack = () => {
             Tracked by Weight Management
           </h2>
           <h2 className="text-sm font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
-            Target Weight {calculateWeight?.targetWeight} kg
+            Target Weight{" "}
+            <span className="text-primary">
+              {calculateWeight?.targetWeight}
+            </span>{" "}
+            kg
           </h2>
         </div>
 
         <div className="flex items-center justify-between mt-4">
-          <div>
+          <div className="relative flex justify-center">
             <button
-              onClick={handleOpen}
-              className="btn btn-error my-2 text-white"
+              disabled={current >= targetKg}
+              onClick={() => setIsOpen(true)}
+              className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold "
             >
-              Update
+              Update Goal
             </button>
 
-            {open && (
-              <div className=" flex">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div>
-                    <label className="label">
-                      <span className="label-text">Current Weight</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      {...register("user_current_weight", {
-                        required: true,
-                      })}
-                      defaultValue={calculateWeight?.user_current_weight}
-                      className="input input-bordered input-error mb-2 w-full max-w-xs bmiNumber "
-                    />
-                  </div>
-
-                  <div>
-                    <label className="label">
-                      <span className="label-text">Fat</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      {...register("bodyFat", {
-                        required: true,
-                      })}
-                      defaultValue={calculateWeight.bodyFat}
-                      className="input input-bordered input-error w-full max-w-xs bmiNumber"
-                    />
-                  </div>
-
-                  <button
-                    className="btn btn-error my-1 w-full max-w-xs"
-                    type="submit"
+            {isOpen && (
+              <div
+                className="fixed inset-0 z-10 overflow-y-auto"
+                aria-labelledby="modal-title"
+                role="dialog"
+                aria-modal="true"
+              >
+                <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+                  <span
+                    className="hidden sm:inline-block sm:h-screen sm:align-middle"
+                    aria-hidden="true"
                   >
-                    Submit
-                  </button>
-                </form>
+                    &#8203;
+                  </span>
+
+                  <div className="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
+                    <h3
+                      className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white"
+                      id="modal-title"
+                    >
+                      Invite your team
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                      Your new project has been created. Invite your team to
+                      collaborate on this project.
+                    </p>
+
+                    <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+                      <label className="text-sm text-gray-700 ">
+                        Current Weight
+                      </label>
+
+                      <label className="block mt-3">
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          {...register("user_current_weight", {
+                            required: true,
+                          })}
+                          defaultValue={calculateWeight?.user_current_weight}
+                          className={`${form}`}
+                        />
+                      </label>
+
+                      <label className="text-sm text-gray-700 mt-2">Fat</label>
+                      <label className="block mt-2">
+                        <input
+                          type="text"
+                          placeholder="Type here"
+                          {...register("bodyFat", {
+                            required: true,
+                          })}
+                          defaultValue={calculateWeight?.bodyFat}
+                          className={`${form}`}
+                        />
+                      </label>
+
+                      <div className="mt-4 sm:flex sm:items-center sm:-mx-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsOpen(false)}
+                          className="w-full px-4 py-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:w-1/2 sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40"
+                        >
+                          Cancel
+                        </button>
+
+                        <button
+                          type="submit"
+                          className="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40"
+                        >
+                          Update Weight
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             )}
           </div>

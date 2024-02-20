@@ -1,9 +1,10 @@
 import React from 'react'
+import ProductUploadForm from '../../Components/ProductUploadForm/ProductUploadForm'
 
 const ProductFrom = () => {
   return (
     <div className='p-[10px]'>
-      <h1>I am The product form Page</h1>
+      <ProductUploadForm/>
     </div>
   )
 }
