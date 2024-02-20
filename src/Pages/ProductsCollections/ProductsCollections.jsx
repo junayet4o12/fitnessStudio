@@ -1,9 +1,10 @@
 import React from 'react'
+import UserProductsCollections from '../../Components/UserProductsCollections/UserProductsCollections'
 
 const ProductsCollections = () => {
   return (
     <div className='p-[10px] '>
-      <h1>Products Collections.</h1>
+      <UserProductsCollections/>
     </div>
   )
 }
