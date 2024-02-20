@@ -43,6 +43,8 @@ import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
 import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
+import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
+import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
 
 
 const axiosPublic = useAxiosPublic();
@@ -182,6 +184,10 @@ const MyRouts = createBrowserRouter([
         element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
       },
       {
+        path: "yourProducts/:id",
+        element: <PrivateRoute> <DynamicProductPage/> </PrivateRoute>
+      },
+      {
         path: "BlogFrom",
         element: (
           <PrivateRoute>
@@ -306,6 +312,14 @@ const MyRouts = createBrowserRouter([
             <ManageUsers />
           </AdminRouts>
         ),
+      },
+      {
+        path: "manage_Products",
+        element: <AdminRouts> <ProductsForAdmin/> </AdminRouts>
+      },
+      {
+        path: "manage_Products/:id",
+        element: <AdminRouts> <DynamicProductPage/> </AdminRouts>
       },
       {
         path: "manage_blogs",
