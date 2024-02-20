@@ -43,6 +43,7 @@ import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
 import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
+import UserProfile from "../Components/UserProfile/UserProfile";
 
 
 const axiosPublic = useAxiosPublic();
@@ -103,7 +104,7 @@ const MyRouts = createBrowserRouter([
         path: "/userProfile/:email",
         element: (
           <PrivateRoute>
-            <UsersBlog />
+            <UserProfile></UserProfile>
           </PrivateRoute>
         ),
       },

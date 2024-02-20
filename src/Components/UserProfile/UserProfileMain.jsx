@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import Loading from "../Loading";
 
-const UserProfileMain = ({ age, myBMI, myBMR, userDetails, refetch }) => {
+const UserProfileMain = ({ age, myBMI, myBMR, userDetails, refetch, userPost }) => {
     const dispatch = useDispatch()
     const { user } = useAuth()
     const { user: personalInfo, isLoading } = useSelector(state => state.user)
@@ -15,10 +15,12 @@ const UserProfileMain = ({ age, myBMI, myBMR, userDetails, refetch }) => {
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
+
     if (isLoading) {
         return <Loading></Loading>
     }
     const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const infoStyle2 = 'w-[100%] flex flex-wrap  items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white/70 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
 
     const handleFollow = () => {
         axiosPublic.put(`/following/${personalInfo?._id}`, userDetails)
@@ -54,26 +56,42 @@ const UserProfileMain = ({ age, myBMI, myBMR, userDetails, refetch }) => {
                     <div className=' font-medium w-[100%]   grid grid-cols-2 md:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
                         <p className={infoStyle}>
                             <span className='font-bold text-primary'>Connected With</span>
-                            <span>
+                            <span className="border-l-2 border-b-2 rounded-md border-primary p-2">
                                 <span className='text-sm font-bold'>Following: {userDetails?.following?.length || '0'}</span>
                                 <br />
                                 <span className='text-sm font-bold'>Follower: {userDetails?.followed?.length || '0'}</span>
                             </span>
                         </p>
                         <p className={infoStyle}>
-                            <span className='font-bold text-primary'>Age</span>
-                            <span className='text-sm font-bold'>{age ? `${age} Year` : 'Not Updated'} </span>
-                        </p>
-                        <p className={infoStyle}>
-                            <span className='font-bold text-primary'>BMI</span>
-                            <span className='text-sm font-bold'>{!isNaN(myBMI) ? `${myBMI} kg/m` : 'Not Updated'}  {!isNaN(myBMI) ? <sup> 2</sup> : ''}</span>
-                        </p>
-                        <p className={infoStyle}>
-                            <span className='font-bold text-primary'>BMR</span>
-                            <span className='text-sm font-bold'>
-                                {!isNaN(myBMR) ? `${myBMR} Cal/Day` : 'Not Updated'}
+                            <span className='font-bold text-primary'>Total Posts</span>
+                            <span className='text-sm font-bold border-l-2 border-b-2 rounded-md border-primary p-2'>
+                                {userPost?.length}
                             </span>
                         </p>
+                        <p className={`${infoStyle2}`}>
+                            <span className="flex flex-wrap justify-center items-center gap-2 flex-col border-l-2 border-b-2 rounded-md border-primary p-2">
+                                <span className='font-bold text-primary'>Age</span>
+                                <span className='text-sm font-bold'>{age ? `${age} Year` : 'Not Updated'} </span>
+                            </span>
+
+                            <span className="flex flex-wrap justify-center items-center gap-2 flex-col border-l-2 border-b-2 rounded-md border-primary p-2">
+                                <span className='font-bold text-primary'>Gender</span>
+                                <span className='text-sm font-bold'>{userDetails?.gender} </span>
+                            </span>
+                        </p>
+                        <p className={infoStyle2}>
+                            <span className="flex flex-wrap justify-center items-center gap-2 flex-col border-l-2 border-b-2 rounded-md border-primary p-2">
+                                <span className='font-bold text-primary'>BMI</span>
+                                <span className='text-sm font-bold'>{!isNaN(myBMI) ? `${myBMI} kg/m` : 'Not Updated'}  {!isNaN(myBMI) ? <sup> 2</sup> : ''}</span>
+                            </span>
+
+                            <span className="flex flex-wrap justify-center items-center gap-2 flex-col border-l-2 border-b-2 rounded-md border-primary p-2">
+                                <span className='font-bold text-primary'>Weight</span>
+                                <span className='text-sm font-bold'>{userDetails?.weight ? `${userDetails?.weight} KG` : 'Not Updated'} </span>
+                            </span>
+
+                        </p>
+
                     </div>
 
                 </div>

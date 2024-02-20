@@ -14,7 +14,7 @@ import { FaPenNib, FaStrava } from "react-icons/fa";
 import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
 import useAdmin from "../../Hooks/useAdmin";
-import { MdOutlineManageAccounts } from "react-icons/md";
+import { MdOutlineConnectWithoutContact, MdOutlineManageAccounts } from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Sidebar = () => {
 
   return (
     <div className="scroolBar min-w-56  min-h-screen max-h-screen  
-     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-gradient-to-l from-primary to-secondary " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-gradient-to-l from-primary/70 to-secondary/70 " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       {/* Sidebar logo or Title */}
       <div className="p-4">
         <h1 className="flex text-2xl gap-1 font-bold bg-primary/70 shadow-lg shadow-gray-500 p-1 rounded-md">
@@ -50,7 +50,7 @@ const Sidebar = () => {
           <NavLink
             to="/dashboard/profile"
             className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white " : ""
+              isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary text-white " : ""
             }>
             <FaUserAlt /> My Profile
           </NavLink>
@@ -87,6 +87,15 @@ const Sidebar = () => {
                     isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                   }>
                   <FaUserFriends /> Connect People
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/connected_with"
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  }>
+                  <MdOutlineConnectWithoutContact/> Connected With
                 </NavLink>
               </li>
               <li>
@@ -150,7 +159,7 @@ const Sidebar = () => {
                     isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                   }
                 >
-                <FaBoxesPacking /> List a product
+                  <FaBoxesPacking /> List a product
                 </NavLink>
               </li>
               <li>
@@ -160,7 +169,7 @@ const Sidebar = () => {
                     isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
                   }
                 >
-                <CiBoxes /> Your Products
+                  <CiBoxes /> Your Products
                 </NavLink>
               </li>
               <li>

@@ -18,7 +18,7 @@ const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([])
-  const [followFollowingActive, setfollowFollowingActive] = useState(false)
+  const [followFollowingActive, setfollowFollowingActive] = useState(true)
   const axiosPublic = useAxiosPublic();
 
   const createUser = (email, pass) => {

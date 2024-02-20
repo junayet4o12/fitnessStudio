@@ -40,15 +40,15 @@ const LogIn = () => {
         <title>Login - Fitness Studio</title>
       </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
-        <div>
+        <div className="hidden lg:block">
           <img
-            className="w-[700px]"
+            className=" md:w-[500px] xl:w-[700px]"
             src="https://i.ibb.co/fNCmcRV/Login-pana-1.png"
             alt=""
           />
         </div>
         <div>
-          <div className="w-full md:w-[700px] lg:w-[400px] mb-10 lg:mb-0 px-5 lg:px-0">
+          <div className="w-full md:w-[500px] lg:w-[400px] xl:w-[500px] mb-10 lg:mb-0 px-5 lg:px-5">
             <div className="w-full">
               <div>
                 <h1 className="text-start text-4xl font-semibold">

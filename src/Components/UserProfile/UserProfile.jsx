@@ -7,7 +7,7 @@ import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg'
 import UserProfileMain from "./UserProfileMain";
 import Loading from "../Loading";
 const UserProfile = () => {
-    const { id } = useParams();
+    const { email } = useParams();
     const axiosPublic = useAxiosPublic()
     // style Variable start
 
@@ -16,16 +16,23 @@ const UserProfile = () => {
 
     // style Variable end
     const { data: userData, isLoading, refetch } = useQuery({
-        queryKey: [id],
+        queryKey: [email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/single_user/${id}`)
+            const res = await axiosPublic.get(`/user?email=${email}`)
             return res?.data
         }
     })
-    if (isLoading) {
+    const { data: userPost, isLoading: userPostIsLoading, refetch: userPostRefetch } = useQuery({
+        queryKey: [email, 'userPost'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/my_blogs/${email}`)
+            return res?.data
+        }
+    })
+    if (isLoading || userPostIsLoading) {
         return <Loading></Loading>
     }
-    console.log(userData);
+    console.log(userData,userPost);
     const myBMI = (userData.weight / Math.pow(userData.height / 39.37, 2)).toFixed(2)
     const age = userData.birthDay && Math.floor((new Date() - new Date(userData.birthDay)) / 31556952000)
 
@@ -35,7 +42,7 @@ const UserProfile = () => {
     const myBMR = (userData?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
     return (
         <div className='p-5 lg:p-10' style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
-            <UserProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userData} refetch={refetch}></UserProfileMain>
+            <UserProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userData} refetch={refetch} userPost={userPost}></UserProfileMain>
             <div>
                 <div className='w-full  bg-white/70  mx-auto p-5 pt-12 rounded relative shadow-lg '>
 
