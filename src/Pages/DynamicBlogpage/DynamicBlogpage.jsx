@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
@@ -20,13 +20,13 @@ const DynamicBlogpage = () => {
   console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
-      .then(data => setblog(data.data))
-  }, [])
+    .then(data=> setblog(data.data))
+  },[param,axiosPublic])
 
   useEffect(() => {
     axiosPublic(`/user?email=${blog.userEmail}`)
-      .then(data => setmyblog(data.data))
-  }, [blog, loading])
+    .then(data=> setmyblog(data.data))
+  },[blog,axiosPublic])
 
   console.log(myblog);
 
