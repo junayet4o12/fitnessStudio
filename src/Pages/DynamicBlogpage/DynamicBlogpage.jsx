@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
@@ -21,12 +21,12 @@ const DynamicBlogpage = () => {
   useEffect(()=>{
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
-  },[])
+  },[param,axiosPublic])
 
   useEffect(()=>{
     axiosPublic(`/user?email=${blog.userEmail}`)
     .then(data=> setmyblog(data.data))
-  },[blog, loading])
+  },[blog,axiosPublic])
 
   console.log(myblog);
 
@@ -80,7 +80,7 @@ const unfollow = () => {
 }
 
 const following = userDetails.following
-    const checking = following.filter(id => myblog?._id === id)
+    const checking = following?.filter(id => myblog?._id === id)
     console.log(checking && checking.length);
 
   

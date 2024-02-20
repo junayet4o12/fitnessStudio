@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="scroolBar min-w-56  min-h-screen max-h-screen bg-gradient-to-r from-secondary/70 to-primary/70 hidden md:block sticky top-0 overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+    <div className="scroolBar min-w-56  min-h-screen max-h-screen bg-[#000428] hidden md:block sticky top-0 text-white overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       {/* Sidebar logo or Title */}
       <div className="p-4">
         <h1 className="flex text-2xl gap-1 font-bold bg-primary/70 shadow-lg shadow-gray-500 p-1 rounded-md">
@@ -47,7 +47,7 @@ const Sidebar = () => {
           <NavLink
             to="/dashboard/profile"
             className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white " : ""
+              isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white " : ""
             }>
             <FaUserAlt /> My Profile
           </NavLink>
@@ -59,7 +59,7 @@ const Sidebar = () => {
               <NavLink
                 to="/dashboard/manage_users"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                 }
               >
                 <MdOutlineManageAccounts className="text-2xl" /> Manage Users
@@ -69,7 +69,7 @@ const Sidebar = () => {
               <NavLink
                 to="/dashboard/manage_blogs"
                 className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                  isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                 }>
                 <SlBookOpen /> Manage Blogs
               </NavLink>
@@ -81,7 +81,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/connect_people"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <FaUserFriends /> Connect People
                 </NavLink>
@@ -90,7 +90,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/bmi_calculator"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <FaCalculator /> BMI Calculator
                 </NavLink>
@@ -99,7 +99,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/connect_app"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <BiSolidMessageSquareAdd /> Connected app
                 </NavLink>
@@ -108,7 +108,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/set_goal"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <AiFillClockCircle /> Set goals
                 </NavLink>
@@ -117,7 +117,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/goal_tracking"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <BiSolidMessageSquareAdd /> Goal Tracking
                 </NavLink>
@@ -126,7 +126,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/daily_activity"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <GiProgression /> Daily Activities
                 </NavLink>
@@ -135,7 +135,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/strava_activities"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <FaStrava /> Strava Activities
                 </NavLink>
@@ -144,7 +144,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/BlogFrom"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }
                 >
                   <FaPenNib /> Write a Blog
@@ -154,7 +154,7 @@ const Sidebar = () => {
                 <NavLink
                   to="/dashboard/my_blogs"
                   className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                    isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                   }>
                   <FaBookMedical /> My Blogs
                 </NavLink>

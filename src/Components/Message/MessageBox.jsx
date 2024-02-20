@@ -11,7 +11,7 @@ const MessageBox = ({ userData, friendData, messages, refetch, scrollToTop }) =>
     const navigate = useNavigate()
     const [message, setMessage] = useState('')
     const chatContainerRef = useRef(null);
-    const socket = io(backendUrl)
+    const socket = io('wss://green-aquamarine-pint.glitch.me')
     useEffect(() => {
         socket.on('refetch', (message) => {
             refetch()
