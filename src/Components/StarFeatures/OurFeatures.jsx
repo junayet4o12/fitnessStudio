@@ -22,7 +22,7 @@ const OurFeatures = () => {
                   </div>
 
                   <div className="mt-2">
-                    <h3 className="text-lg font-medium text-gray-100">
+                    <h3 className="text-lg font-medium text-white">
                       Activity Tracking
                     </h3>
                   </div>
@@ -36,7 +36,7 @@ const OurFeatures = () => {
                 </div>
 
                 <div className="mt-2">
-                  <h3 className="text-lg font-medium text-gray-100">
+                  <h3 className="text-lg font-medium text-white">
                     Progress Analytics
                   </h3>
                 </div>
@@ -49,7 +49,7 @@ const OurFeatures = () => {
                   </div>
 
                   <div className="mt-2">
-                    <h3 className="text-lg font-medium text-gray-100">
+                    <h3 className="text-lg font-medium text-white">
                       Time Management
                     </h3>
                   </div>
@@ -63,7 +63,7 @@ const OurFeatures = () => {
                 </div>
 
                 <div className="mt-2">
-                  <h3 className="text-lg font-medium text-gray-100">
+                  <h3 className="text-lg font-medium text-white">
                     Workout Progress
                   </h3>
                 </div>

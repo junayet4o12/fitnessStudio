@@ -32,7 +32,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Home
           </NavLink>
@@ -50,7 +50,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Blogs
           </NavLink>
@@ -68,7 +68,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Library
           </NavLink>
@@ -86,7 +86,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Special Recipes
           </NavLink>
@@ -107,7 +107,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             About Us
           </NavLink>
@@ -128,7 +128,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Contact Us
           </NavLink>
@@ -149,7 +149,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-600"
+                : "text-base font-bold text-gray-300"
             }>
             Login
           </NavLink>
@@ -174,7 +174,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-white sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 inset-0">
+    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none backdrop-saturate-200 inset-0">
 
       <div className="lg:container mx-auto flex items-center justify-between text-black ">
         <Typography
@@ -183,7 +183,7 @@ export function NavbarSimple() {
           variant="h6"
           className="mr-4 cursor-pointer py-1.5">
           <Link to={'/'} className="scroll-smooth">
-            <h1 className="flex items-center text-xl xs:text-2xl font-bold md:text-4xl md:font-extrabold">
+            <h1 className="flex items-center text-xl xs:text-2xl text-white font-bold md:text-4xl md:font-extrabold">
               <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
               <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
             </h1>
