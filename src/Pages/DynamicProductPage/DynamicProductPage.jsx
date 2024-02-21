@@ -12,10 +12,17 @@ const DynamicProductPage = () => {
         .then(res => setProduct(res.data))
     },[])
   return (
-    <div 
+    <div>
+      {
+        product?.sold === "sold" ?
+       <div className='h-[100vh] w-full flex flex-col items-center justify-center text-center p-[10px]'> 
+          <h1 className='text-2xl font-bold text-red-500 border-4 border-red-500 p-[10px] rounded-md'> This product is not available anymore </h1>
+       </div> 
+        :
+        <div 
     className='p-[10px] flex flex-col md:flex-row gap-3 items-center justify-center min-h-[100vh] md:h-[100vh] pt-[100px] pb-[100px]'>
       <img
-      className='md:w-[40%]'
+      className='md:w-[40%] md:h-[70vh] object-contain'
       src={product?.imgUrl} alt={product?.Pname} />
       <div className='flex flex-col gap-2'>
         <h1 className='bmiNumber font-bold text-xl'>৳ {product?.Pprice}</h1>
@@ -36,6 +43,8 @@ const DynamicProductPage = () => {
             </a>
         </div>
       </div>
+    </div>
+      }
     </div>
   )
 }

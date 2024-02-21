@@ -45,9 +45,12 @@ import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
 import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
 import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
+import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
+import { backendUrl } from "../BackendUrl/backendUrl";
 
 
 const axiosPublic = useAxiosPublic();
+
 
 const MyRouts = createBrowserRouter([
   {
@@ -182,6 +185,11 @@ const MyRouts = createBrowserRouter([
       {
         path: "yourProducts",
         element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
+      },
+      {
+        path: "yourProducts/updateProducts/:id",
+        loader: ({params})=> axiosPublic(`/products/${params.id}`),
+        element: <PrivateRoute> <UpdateProductForm/> </PrivateRoute>
       },
       {
         path: "yourProducts/:id",
