@@ -47,6 +47,7 @@ import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
 import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
 import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
 import { backendUrl } from "../BackendUrl/backendUrl";
+import Shop from "../Pages/Shop/Shop";
 
 
 const axiosPublic = useAxiosPublic();
@@ -87,6 +88,10 @@ const MyRouts = createBrowserRouter([
             <SpecialRecipe />
           </PrivateRoute>
         ),
+      },
+      {
+        path:"/shop",
+        element: <Shop/>
       },
       {
         path: "/chat",

@@ -111,15 +111,15 @@ const UserProductsCollections = () => {
       <div className='flex flex-wrap gap-2 mb-[25px]'>
         <button
         onClick={allFunction}
-        className={`${allstate? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 pl-[10px] pr-[10px]'}`}
+        className={`${allstate? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 border-transparent pl-[10px] pr-[10px]'}`}
         >All</button>
         <button
         onClick={unverified}
-        className={`${authorizedState? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 pl-[10px] pr-[10px]'}`}
+        className={`${authorizedState? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 border-transparent pl-[10px] pr-[10px]'}`}
         >Live</button>
         <button
         onClick={SoldFunction}
-        className={`${soldstate? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 pl-[10px] pr-[10px]'}`}
+        className={`${soldstate? 'text-xl text-secondary font-bold border-b-4 border-secondary pl-[10px] pr-[10px]' :'text-xl font-bold border-b-4 border-transparent pl-[10px] pr-[10px]'}`}
         >Sold</button>
       </div>
         <div>
@@ -128,7 +128,7 @@ const UserProductsCollections = () => {
                 <div className='flex flex-col gap-4'>
                     {
                         products.map(product => 
-                                <div className='flex flex-col md:flex-row gap-2 items-center justify-between shadow-lg rounded-md' key={product._id}>
+                                <div className=' flex flex-col md:flex-row gap-2 items-center justify-between shadow-inner shadow-white rounded-md' key={product._id}>
                                     <div 
                             className='flex flex-col md:flex-row gap-2 items-center w-full'>
                                 <div>
