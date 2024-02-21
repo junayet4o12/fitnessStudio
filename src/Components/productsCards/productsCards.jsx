@@ -8,14 +8,18 @@ const ProductsCards = ({products}) => {
         products.map(product=>
             
             <div 
-            className='border-2 border-secondary '
+            className='border-2 border-secondary flex flex-col justify-between'
             key={product._id}>
-                <img src={product.imgUrl}/>
+                <img 
+                className='h-[250px] object-cover'
+                src={product.imgUrl}/>
                 <div className='p-[10px]'>
                     <Link to={product._id}>
                         <h1 className='text-xl font-[600]'>{product.Pname}</h1>
                     </Link>
-                    <h1 className='text-xl font-[600] bmiNumber'>৳ {product.Pprice}</h1>
+                    <h1 className='text-xl font-[600] bmiNumber mt-[10px] flex items-center'>৳ {product.Pprice} &nbsp;
+                    <span className={`${product.sold && 'text-sm text-secondary font-[600] bmiNumber rounded-md p-[3px] border-2 border-secondary w-fit'}`}>{product.sold}</span>
+                    </h1>
                 </div>
             </div>
             
