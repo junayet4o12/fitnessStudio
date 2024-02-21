@@ -1,13 +1,14 @@
 // import React from 'react';
 
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg'
 import UserProfileMain from "./UserProfileMain";
 import Loading from "../Loading";
+import Title from "../Title/Title";
 const UserProfile = () => {
-    const { id } = useParams();
+    const { email, id } = useParams();
     const axiosPublic = useAxiosPublic()
     // style Variable start
 
@@ -16,16 +17,23 @@ const UserProfile = () => {
 
     // style Variable end
     const { data: userData, isLoading, refetch } = useQuery({
-        queryKey: [id],
+        queryKey: [email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/single_user/${id}`)
+            const res = await axiosPublic.get(`/user?email=${email}`)
             return res?.data
         }
     })
-    if (isLoading) {
+    const { data: userPost, isLoading: userPostIsLoading, refetch: userPostRefetch } = useQuery({
+        queryKey: [email, 'userPost'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/my_blogs/${email}`)
+            return res?.data
+        }
+    })
+    if (isLoading || userPostIsLoading) {
         return <Loading></Loading>
     }
-    console.log(userData);
+    console.log(userData, userPost);
     const myBMI = (userData.weight / Math.pow(userData.height / 39.37, 2)).toFixed(2)
     const age = userData.birthDay && Math.floor((new Date() - new Date(userData.birthDay)) / 31556952000)
 
@@ -34,67 +42,41 @@ const UserProfile = () => {
 
     const myBMR = (userData?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
     return (
-        <div className='p-5 lg:p-10' style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}>
-            <UserProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userData} refetch={refetch}></UserProfileMain>
-            <div>
-                <div className='w-full  bg-white/70  mx-auto p-5 pt-12 rounded relative shadow-lg '>
+        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]'
+        // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
+        >
+            <UserProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userData} refetch={refetch} userPost={userPost}></UserProfileMain>
+            {/* user Blogs  */}
+            <div className="text-white">
+               <Title title={'Posted Blog'}></Title>
+            </div>
+            <div className="flex flex-col md:flex-row flex-wrap justify-evenly gap-2">
 
-                    <div className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5'>
-                        <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
-                        {/* name  */}
-                        <div>
-                            <label className='font-bold flex gap-0'>Name <span className='text-primary text-lg'>*</span></label>
-                            <div className={`${inputFieldStyle}`}>
-                                {userData?.name}
-                            </div>
-                        </div>
-                        {/* date of birth  */}
-                        <div>
-                            <label className='font-bold flex gap-0'>Date of Birth <span className='text-primary text-lg'>*</span></label>
-                            <div className={`${inputFieldStyle} `} >
-                                {userData?.birthDay || 'Not Given'}
-                            </div>
+                {
+                    userPost?.length < 1 ? <span className="text-xl font-bold text-white">
+                    <span className="text-2xl block text-center">Opps!!</span>
+                    No posts have been uploaded yet.</span> : (
 
-                        </div>
-                        {/* weight  */}
-                        <div>
-                            <label className='font-bold flex gap-0'>Weight <span className='text-primary text-lg'>*</span></label>
-                            <label className='font-bold text-sm'>KG</label>
-                            <div className={`${inputFieldStyle}`}>
-                                {userData?.weight || 'Not Given'}
-                            </div>
-                        </div>
-                        {/* height  */}
-                        <div>
-                            <label className='font-bold flex gap-0'>Height <span className='text-primary text-lg'>*</span></label>
-                            <div className='grid grid-cols-2 gap-3'>
-                                <div>
-                                    <label className='font-bold text-sm'>Feet</label>
-                                    <div className={`${inputFieldStyle} `} placeholder='Feet' defaultValue={Math.floor(userData?.height / 12) || 'Not Given'} >
-                                        {Math.floor(userData?.height / 12) || 'Not Given'}
-                                    </div>
+                        userPost.map(blog =>
+                            <div
+                                className="lg:w-[30%] shadow-xl rounded-md flex flex-col justify-between overflow-hidden bg-white"
+                                key={blog._id}>
+                                <img className="h-[260px] w-full object-cover" src={blog.blogImg} />
+                                <div className="p-[10px] flex flex-col gap-2">
+                                    <Link
+                                        to={`/blogs/${blog._id}`}
+                                    >
+                                        <h1 className="text-2xl font-[600]">{blog.blogName}</h1>
+                                    </Link>
+                                    <p>published at: <span className="bmiNumber">{blog.time}</span></p>
+                                    <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}}` }} />
                                 </div>
-                                <div>
-                                    <label className='font-bold text-sm'>Inch</label>
-                                    <div className={`${inputFieldStyle} `}>
-                                        {userData?.height ? (userData?.height % 12) : 'Not Given'}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* gender  */}
-                        <div className='relative'>
-                            <label className='font-bold flex gap-0'>Gender <span className='text-primary text-lg'>*</span></label>
-                            <div className={`${selectFieldFieldStyle} flex items-center px-3`} >
-                                {userData?.gender || 'Not Given'}
-                            </div>
-                        </div>
-                        {/* action  */}
+                            </div>)
 
-                    </div>
-
-                </div>
-            </div >
+                    )
+                }
+            </div>
+            {/* user Blogs  */}
         </div >
     );
 };

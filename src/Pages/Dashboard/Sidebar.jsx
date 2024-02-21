@@ -14,7 +14,7 @@ import { FaPenNib, FaStrava } from "react-icons/fa";
 import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
 import useAdmin from "../../Hooks/useAdmin";
-import { MdOutlineManageAccounts } from "react-icons/md";
+import { MdOutlineConnectWithoutContact, MdOutlineManageAccounts } from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
