@@ -107,7 +107,7 @@ const NavProfile = () => {
                   as="span"
                   variant="small"
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}>
+                  color={isLastItem ? "green" : "inherit"}>
                   {label}
                 </Typography>
               </MenuItem>

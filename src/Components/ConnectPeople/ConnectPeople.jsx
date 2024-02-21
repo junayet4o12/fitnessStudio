@@ -116,7 +116,7 @@ const ConnectPeople = () => {
                         {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Search'}
                     </Button>
                 </div>
-                <div className="">
+                <div className={`grid ${people?.length<=4 ? 'lg:grid-cols-1' : 'lg:grid-cols-2 max-w-[95%]'}  mx-auto gap-x-4`}>
 
                     {
                         people?.map(one => <SearchedPeople key={one?._id} info={one} personalInfo={userDetails} followingSearch={following} setFollowing={setFollowing} followBtnLoading={followBtnLoading}></SearchedPeople>)

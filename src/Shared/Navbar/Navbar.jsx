@@ -26,7 +26,7 @@ function NavList() {
           Home
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804] text-sm"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary text-sm"></p>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -44,7 +44,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/blogs"
             className={({ isActive }) =>
@@ -62,7 +62,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/library"
             className={({ isActive }) =>
@@ -80,7 +80,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/specialRecipe"
             className={({ isActive }) =>
@@ -101,7 +101,7 @@ function NavList() {
           About Us
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/about_us"
             className={({ isActive }) =>
@@ -122,7 +122,7 @@ function NavList() {
           Contact
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/contact_us"
             className={({ isActive }) =>
@@ -143,7 +143,7 @@ function NavList() {
           Login
         </a> */}
         {!user && <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/login"
             className={({ isActive }) =>
