@@ -11,8 +11,12 @@ import { FaCarSide } from "react-icons/fa";
 // import { useGetUserGoalQuery } from "./api/baseApiGoal";
 // import useAuth from "../../Hooks/useAuth";
 import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading";
+import toast from "react-hot-toast";
 
 const TrackProgress = () => {
+  const navigate = useNavigate()
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-green-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
 
@@ -35,10 +39,10 @@ const TrackProgress = () => {
   //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
 
 
-  const { data: track, isLoading } = useGetTrackProQuery();
+  const { data: track, isLoading:isTrackLoading, isError: isTrackError } = useGetTrackProQuery();
   console.log("tracking", track);
   // // console.log(track);
-  const { data: sleep } = useGetTrackSleepProQuery();
+  const { data: sleep, isError: isSleepError, isLoading: isSleepLoading } = useGetTrackSleepProQuery();
   console.log("sleeping", sleep);
 
   const sleepDuration = sleep?.summary?.totalMinutesAsleep;
@@ -47,10 +51,15 @@ const TrackProgress = () => {
   const caloriesOut = track?.summary.caloriesBMR;
   const caloBurned = track?.summary.caloriesOut;
 
-  if (isLoading) {
-    return "";
+  if (isTrackLoading || isSleepLoading) {
+    return <Loading></Loading>;
   }
-
+  if (isTrackError || isSleepError) {
+    localStorage.removeItem('Authorization')
+    toast.error('Please Connect Fitbit!!!')
+    navigate(`/dashboard/connect_app`);
+    return
+  }
   return (
     <div>
       <Helmet>
@@ -66,6 +75,9 @@ const TrackProgress = () => {
             have
             <br />
             accomplished today and plan for more success tomorrow.
+          </p>
+          <p className="font-medium text-base mt-2 max-w-[600px]">
+           <strong>Note:</strong> This daily Progress data is coming from Fitbit app You've already connected it to our web page.
           </p>
         </div>
 

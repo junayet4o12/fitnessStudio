@@ -11,7 +11,6 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
     const navigate = useNavigate()
     const [message, setMessage] = useState('')
     const chatContainerRef = useRef(null);
-    const socket = io('wss://green-aquamarine-pint.glitch.me')
     useEffect(() => {
         socket.on('refetch', (message) => {
             refetch()
@@ -131,7 +130,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                         <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."
                             className="input  w-full h-10 border-primary rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium" />
-                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-3 top-[10px] text-xl active:scale-90 duration-200 transition-all hover:text-black`}><IoSendSharp></IoSendSharp></button>
+                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-1 text-xl active:scale-90 duration-200 transition-all hover:text-black   px-1.5 py-1 top-[5px]`}><IoSendSharp></IoSendSharp></button>
                     </form>
                 </div>
             </div>

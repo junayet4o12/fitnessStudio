@@ -43,6 +43,7 @@ import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
 import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
+import UserProfile from "../Components/UserProfile/UserProfile";
 import UpdateBlogs from "../Components/MyBlogs/UpdateBlogs";
 import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
 import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
@@ -114,7 +115,7 @@ const MyRouts = createBrowserRouter([
         path: "/userProfile/:email",
         element: (
           <PrivateRoute>
-            <UsersBlog />
+            <UserProfile></UserProfile>
           </PrivateRoute>
         ),
       },

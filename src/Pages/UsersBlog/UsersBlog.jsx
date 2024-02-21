@@ -48,8 +48,8 @@ const UsersBlog = () => {
   }, [userDetails])
 
   useEffect(() => {
-    setchecking(followings?.find(id =>  write?._id === id))
-    setIsFollower(followed?.find(id =>  write?._id === id))
+    setchecking(followings?.find(id => write?._id === id))
+    setIsFollower(followed?.find(id => write?._id === id))
   }, [followings])
 
   const handleFollow = () => {
@@ -99,6 +99,7 @@ const UsersBlog = () => {
   const handleChat = () => {
     navigate(`/dashboard/message?userId1=${userDetails?._id}&userId2=${write?._id}`)
   }
+  const age = userDetails.birthDay && Math.floor((new Date() - new Date(userDetails.birthDay)) / 31556952000)
   return (
     <div className="p-[10px]">
       <Helmet>
@@ -114,14 +115,14 @@ const UsersBlog = () => {
                  -cover" src={write.image} />
                 <div className="flex flex-wrap justify-center items-center gap-3">
                   {
-                    user?.email === param ? <span className="text-lg font-bold">It's You</span> : (isFollower  ?
+                    user?.email === param ? <span className="text-lg font-bold">It's You</span> : (isFollower ?
                       <button disabled className="bg-primary p-[10px] text-xl text-white rounded-md">
                         Follower
                       </button>
                       :
                       (<>
-                        <button onClick={checking  ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
-                          {checking  ? "Unfollow" : "Follow"}
+                        <button onClick={checking ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
+                          {checking ? "Unfollow" : "Follow"}
                         </button>
 
                       </>))
@@ -146,7 +147,7 @@ const UsersBlog = () => {
               <div className="break-all">
                 <h1 className="text-2xl font-[600]">{write.name}</h1>
                 <h1 className="text-base font-[600]">Email: {write.email}</h1>
-                <h1 className="text-base font-[600]">D.O.B: {write.birthDay}</h1>
+                <h1 className="text-base font-[600]">Age: {age}</h1>
                 {/* <h1 className="text-base font-[600]">Status: {writer.Status}</h1> */}
                 <h1 className="text-base font-[600]">Following: {write?.following === undefined ? 0 : write?.following?.length}</h1>
                 <h1 className="text-base font-[600]">Followed: {write?.followed === undefined ? 0 : write?.followed?.length}</h1>
