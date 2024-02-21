@@ -13,7 +13,7 @@ import Loading from '../Loading';
 
 const Profile = () => {
     const dispatch = useDispatch()
-    const { user } = useAuth()
+    const { user, changeRefetch, setChangeRefetch } = useAuth()
     const axiosPublic = useAxiosSecure()
     const { user: userDetails, isLoading } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
@@ -92,6 +92,7 @@ const Profile = () => {
                                 timer: 1500
                             });
                             setEdit(false)
+                            setChangeRefetch(changeRefetch + 1)
                         }
                     })
                     .catch(err => {
@@ -106,14 +107,14 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10' 
+        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]'
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
             <div>
-                <div className='w-full  bg-gradient-to-r from-primary/80 to-primary/10   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
+                <div className='w-full max-w-7xl  bg-gradient-to-br from-primary/80 via-primary/60 to-primary/30   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5'>
+                    <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5 text-white'>
                         <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
                         {/* name  */}
                         <div>

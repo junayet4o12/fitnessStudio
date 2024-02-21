@@ -12,7 +12,6 @@ import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
-// import Notification2 from "./Notification2";
 
 function NavList() {
   const { user } = useAuth()
@@ -27,7 +26,7 @@ function NavList() {
           Home
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804] text-sm"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary text-sm"></p>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -45,7 +44,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/blogs"
             className={({ isActive }) =>
@@ -63,7 +62,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/library"
             className={({ isActive }) =>
@@ -81,7 +80,7 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/specialRecipe"
             className={({ isActive }) =>
@@ -102,7 +101,7 @@ function NavList() {
           About Us
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/about_us"
             className={({ isActive }) =>
@@ -123,7 +122,7 @@ function NavList() {
           Contact
         </a> */}
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/contact_us"
             className={({ isActive }) =>
@@ -144,7 +143,7 @@ function NavList() {
           Login
         </a> */}
         {!user && <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-[#FF4804]"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
           <NavLink
             to="/login"
             className={({ isActive }) =>
@@ -175,9 +174,9 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none backdrop-saturate-200 inset-0">
+    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0">
 
-      <div className="lg:container mx-auto flex items-center justify-between text-black ">
+      <div className="lg:container mx-auto flex items-center justify-between text-black">
         <Typography
           as="a"
           href="#"
@@ -190,14 +189,13 @@ export function NavbarSimple() {
             </h1>
           </Link>
         </Typography>
-        <div className="flex xs:gap-5 items-center flex-row-reverse lg:flex-row">
+        <div className="flex gap-7 xs:gap-5 items-center">
           <div className="hidden lg:block">
             <NavList />
           </div>
-
           <IconButton
             variant="text"
-            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+            className="ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden text-white/90"
             ripple={false}
             onClick={() => setOpenNav(!openNav)}>
             {openNav ? (
@@ -207,16 +205,22 @@ export function NavbarSimple() {
             )}
           </IconButton>
 
-          <div className="flex gap-1 items-center">
-            {/* Bell icon with notification button */}
-            {user && <NotificationsMenu />}
-            {/* {user && <Notification2 />} */}
+          <span className="flex  items-center gap-3 ">
+            {/* <span className="text-lg relative py-4 px-2 cursor-pointer active:scale-90 transition-all dura">
+              <FaBell/>
+              <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
+            </span> */}
 
-            {/* User Profile component */}
-            <span className="">
-              {user && <NavProfile />}
-            </span>
-          </div>
+          {/* Bell icon with notification button */}
+          {user && <NotificationsMenu /> }
+
+          {/* User Profile component */}
+          <span className="">
+            {user && <NavProfile />}
+          </span>
+          </span>
+
+
         </div>
 
       </div>

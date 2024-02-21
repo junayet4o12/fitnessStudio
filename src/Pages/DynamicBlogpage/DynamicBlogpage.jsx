@@ -114,7 +114,7 @@ const DynamicBlogpage = () => {
             :
             (<>
               <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
-                {isFollowing ? "Unfollow" : "Follow"}
+                {isFollowing ? "Unfollow" : "Follow Now"}
               </button>
 
             </>))

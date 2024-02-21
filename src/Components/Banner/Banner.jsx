@@ -65,7 +65,7 @@ const Banner = () => {
                     <div className="flex justify-center items-end gap-5 sm:gap-10 py-20 xs:py-32 absolute bottom-0 z-20 w-full h-full ">
                         <Link to={"/contact_us"}>
                             <button
-                                className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary mt-14`}>
+                                className={`${buttonStyle} bg-primary hover:bg-primary/40  border-transparent hover:border-primary mt-14`}>
                                 Contact us
                             </button>
                         </Link>

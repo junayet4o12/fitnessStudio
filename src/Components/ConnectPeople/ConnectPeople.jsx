@@ -24,35 +24,57 @@ const ConnectPeople = () => {
     }, [dispatch, user])
     console.log(userDetails);
     useEffect(() => {
-        setFollowBtnLoading(true)
-        axiosPublic.get(`/search_people/${searchedName === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : searchedName}`)
-            .then(res => {
-                console.log(res?.data);
-                setPeople(res?.data)
-                setFollowBtnLoading(false)
-            })
-            .catch(err => {
-                console.log(err?.message);
-                setFollowBtnLoading(false)
-            })
+        if (!searchedName) {
+            setFollowBtnLoading(true)
+            axiosPublic.get(`/random_people`)
+                .then(res => {
+                    console.log(res?.data);
+                    setPeople(res?.data)
+                    setFollowBtnLoading(false)
+                })
+                .catch(err => {
+                    console.log(err?.message);
+                    setFollowBtnLoading(false)
+                })
+            // random_people
+        }
+        else {
+            setFollowBtnLoading(true)
+            axiosPublic.get(`/search_people/${searchedName}`)
+                .then(res => {
+                    console.log(res?.data);
+                    setPeople(res?.data)
+                    setFollowBtnLoading(false)
+                })
+                .catch(err => {
+                    console.log(err?.message);
+                    setFollowBtnLoading(false)
+                })
+        }
     }, [following])
     const onChange = (e) => {
         e.preventDefault()
-        setFollowBtnLoading(true)
+        console.log(e.target.value);
         setSearchedName(e.target.value)
-        setLoading(true)
-        axiosPublic.get(`/search_people/${e.target.value === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : e.target.value}`)
-            .then(res => {
-                console.log(res?.data);
-                setPeople(res?.data)
-                setLoading(false)
-                setFollowBtnLoading(false)
-            })
-            .catch(err => {
-                console.log(err?.message);
-                setLoading(false)
-                setFollowBtnLoading(false)
-            })
+        if (!e.target.value) {
+            return setPeople([])
+        }
+        else {
+            setFollowBtnLoading(true)
+            setLoading(true)
+            axiosPublic.get(`/search_people/${e.target.value}`)
+                .then(res => {
+                    console.log(res?.data);
+                    setPeople(res?.data)
+                    setLoading(false)
+                    setFollowBtnLoading(false)
+                })
+                .catch(err => {
+                    console.log(err?.message);
+                    setLoading(false)
+                    setFollowBtnLoading(false)
+                })
+        }
 
     };
     const handleSubmit = (e) => {
@@ -70,12 +92,13 @@ const ConnectPeople = () => {
             })
     }
     return (
-        <div>
+        <div className="bg-gradient-to-r from-[#000428] to-[#004e92] text-white min-h-screen">
             <Title title={'Connect People'}></Title>
             <form onSubmit={handleSubmit}>
                 <div className="relative flex w-full max-w-[35rem] mx-auto my-4 ">
                     <Input
                         type="text"
+                        color="white"
                         label="Search People"
                         value={searchedName}
                         onChange={onChange}
@@ -93,10 +116,15 @@ const ConnectPeople = () => {
                         {loading ? <span className="loading loading-spinner loading-xs"></span> : 'Search'}
                     </Button>
                 </div>
-                <div className="">
+                <div className={`grid ${people?.length<=4 ? 'lg:grid-cols-1' : 'lg:grid-cols-2 max-w-[95%]'}  mx-auto gap-x-4`}>
 
                     {
                         people?.map(one => <SearchedPeople key={one?._id} info={one} personalInfo={userDetails} followingSearch={following} setFollowing={setFollowing} followBtnLoading={followBtnLoading}></SearchedPeople>)
+                    }
+                </div>
+                <div className="">
+                    {
+                        people.length < 1 && <div className="w-full p-10 text-center text-2xl font-medium">No User Available!!</div>
                     }
                 </div>
             </form>

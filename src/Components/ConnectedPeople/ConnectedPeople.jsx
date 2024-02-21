@@ -32,11 +32,12 @@ const ConnectedPeople = () => {
     }
     console.log(data);
     return (
-        <div className="p-4 overflow-x-hidden text-white min-h-screen">
+        <div className="p-4 overflow-x-hidden  min-h-screen">
             <Title title={"The People You're connected with"}></Title>
             <ul className="flex justify-center items-center gap-5 flex-wrap">
-                <li onClick={() => setfollowFollowingActive(true)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2   ${followFollowingActive ? ' border-white/70' : "border-transparent"}  hover:border-primary`}>Followers</li>
-                <li onClick={() => setfollowFollowingActive(false)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2  ${!followFollowingActive ? ' border-white/70' : "border-transparent"}  hover:border-primary`}> Following</li>
+                <li onClick={() => setfollowFollowingActive(true)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2   ${followFollowingActive ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}>Followers <span className="bmiNumber text-xs font-normal">({data.followedMembers ? data.followedMembers?.length : '0'})</span></li>
+                {/* bmiNumber */}
+                <li onClick={() => setfollowFollowingActive(false)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2  ${!followFollowingActive ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}> Following <span className="bmiNumber text-xs font-normal">({data.followingMembers ? data.followingMembers?.length : '0'})</span></li>
             </ul>
             {/* followedMembers  */}
             <div className={`${!followFollowingActive && 'hidden'}`}>
