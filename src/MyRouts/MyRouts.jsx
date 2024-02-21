@@ -44,11 +44,16 @@ import Message from "../Components/Message/Message";
 import ProductFrom from "../Pages/ProductFoems/ProductFrom";
 import ProductsCollections from "../Pages/ProductsCollections/ProductsCollections";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import UpdateBlogs from "../Components/MyBlogs/UpdateBlogs";
 import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
 import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
+import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
+import { backendUrl } from "../BackendUrl/backendUrl";
+import Shop from "../Pages/Shop/Shop";
 
 
 const axiosPublic = useAxiosPublic();
+
 
 const MyRouts = createBrowserRouter([
   {
@@ -85,6 +90,10 @@ const MyRouts = createBrowserRouter([
             <SpecialRecipe />
           </PrivateRoute>
         ),
+      },
+      {
+        path:"/shop",
+        element: <Shop/>
       },
       {
         path: "/chat",
@@ -178,11 +187,16 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "productForm",
-        element: <PrivateRoute> <ProductFrom/> </PrivateRoute>
+        element: <PrivateRoute> <ProductFrom /> </PrivateRoute>
       },
       {
         path: "yourProducts",
-        element: <PrivateRoute> <ProductsCollections/> </PrivateRoute>
+        element: <PrivateRoute> <ProductsCollections /> </PrivateRoute>
+      },
+      {
+        path: "yourProducts/updateProducts/:id",
+        loader: ({params})=> axiosPublic(`/products/${params.id}`),
+        element: <PrivateRoute> <UpdateProductForm/> </PrivateRoute>
       },
       {
         path: "yourProducts/:id",
@@ -302,7 +316,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "message",
-        element:<Message></Message>
+        element: <Message></Message>
       },
       // admin routs
       {
@@ -330,6 +344,10 @@ const MyRouts = createBrowserRouter([
           </AdminRouts>
         ),
       },
+      {
+        path: '/dashboard/updateBlogs/:id',
+        element: <UpdateBlogs />
+      }
     ],
   },
 ]);

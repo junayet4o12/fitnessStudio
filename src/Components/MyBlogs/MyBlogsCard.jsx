@@ -3,7 +3,9 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { MdDelete } from "react-icons/md";
-import UpdateBlogs from "./UpdateBlogs"
+// import UpdateBlogs from "./UpdateBlogs"
+import { Link } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
 const MyBlogsCard = ({ blog, refetch }) => {
     const axiosPublic = useAxiosPublic()
@@ -65,7 +67,13 @@ const MyBlogsCard = ({ blog, refetch }) => {
                 <div className='w-[100%] h-[2px] bg-secondary'></div>
                 <div className="mt-4 flex justify-evenly">
                     {/* update bloguct */}
-                    <UpdateBlogs blog={blog} refetch={refetch}></UpdateBlogs>
+                    {/* <UpdateBlogs blog={blog} refetch={refetch}></UpdateBlogs> */}
+                    <Link to={`/dashboard/updateBlogs/${blog?._id}`}>
+                        <button
+                            className="px-4 py-2 text-sm flex gap-2 uppercase bg-primary rounded-lg text-white font-semibold hover:shadow-xl hover:shadow-gray-400 transition duration-700 ease-in-out"
+                            >Update <FaEdit className="text-lg" />
+                        </button>
+                    </Link>
                     {/* delete Blogs */}
                     <button onClick={() => handleDeleteItem(blog)} className="px-4 py-2 flex gap-2 uppercase text-sm bg-secondary rounded-lg text-white font-semibold hover:shadow-xl hover:shadow-gray-400 transition duration-700 ease-in-out">delete <MdDelete className="text-xl" /></button>
                 </div>
