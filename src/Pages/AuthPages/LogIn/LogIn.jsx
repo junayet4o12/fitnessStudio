@@ -39,7 +39,7 @@ const LogIn = () => {
       <Helmet>
         <title>Login - Fitness Studio</title>
       </Helmet>
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-10 ">
         <div className="hidden lg:block">
           <img
             className=" md:w-[500px] xl:w-[700px]"
@@ -54,7 +54,7 @@ const LogIn = () => {
                 <h1 className="text-start text-4xl font-semibold">
                   Welcome Back !
                 </h1>
-                <p className="text-start text-sm text-gray-600 mt-2">
+                <p className="text-start text-sm text-white/80 mt-2">
                   Enter to get unlimited access to data & information.
                 </p>
               </div>
@@ -62,7 +62,7 @@ const LogIn = () => {
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Email <span className="text-red-500 text-xl">*</span>
+                      Email <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       {...register("email", { required: true })}
@@ -70,14 +70,14 @@ const LogIn = () => {
                       className="input input-bordered w-full text-black"
                     />
                     {errors.email && (
-                      <span className="text-red-400 text-xs">
+                      <span className="text-primary text-xs">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Password <span className="text-red-500 text-xl">*</span>
+                      Password <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="password"
@@ -88,7 +88,7 @@ const LogIn = () => {
                       className="input input-bordered w-full text-black"
                     />
                     {errors.password?.type === "required" && (
-                      <span className="text-red-400 text-xs ">
+                      <span className="text-primary text-xs ">
                         This field is required
                       </span>
                     )}
@@ -99,21 +99,21 @@ const LogIn = () => {
                         <input
                           type="checkbox"
                           onChange={() => setDisable(!disable)}
-                          className="checkbox checkbox-warning w-5 h-5 border-[#FF4804]"
+                          className="checkbox checkbox-warning w-5 h-5 border-primary"
                         />
-                        <span className="label-text text-sm font-medium ml-2">
+                        <span className="label-text text-sm font-medium ml-2 text-white/80">
                           Remember me
                         </span>
                       </label>
                     </div>
                     <div>
-                      <h1 className="text-sm font-medium text-[#FF4804] hover:cursor-pointer">
+                      <h1 className="text-sm font-medium text-primary hover:cursor-pointer">
                         Forgot your password ?
                       </h1>
                     </div>
                   </div>
                   <button
-                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-[#FF4804] py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-primary py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="submit"
                     disabled={disable}
                     data-ripple-light="true">
@@ -132,7 +132,7 @@ const LogIn = () => {
                   </p>
                   <Link
                     to="/register"
-                    className="block font-medium leading-normal text-[#FF4804] antialiased">
+                    className="block font-medium leading-normal text-primary antialiased">
                     Register here
                   </Link>
                 </div>

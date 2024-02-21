@@ -110,8 +110,8 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
     }
     return (
         <div className="p-5 h-[80vh] md:h-screen flex justify-center items-center text-black">
-            <div className={`text-white w-full max-w-[450px] min-h-[75vh] max-h-[75vh] mx-auto  border-[1.5px] border-primary rounded-md shadow-xl relative overflow-hidden overflow-y-scroll  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''}`} ref={chatContainerRef}>
-                <div className="w-full h-10 border-b-[1.4px] border-primary sticky top-0 z-10 bg-teal-400">
+            <div className={`text-white w-full max-w-[450px] min-h-[75vh] max-h-[75vh] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-scroll  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
+                <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-teal-400">
                     <div className="flex gap-2   px-2 items-center h-10 justify-between">
 
 
@@ -130,7 +130,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                             <span className={`text-xs bmiNumber  ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}`}>
                                 {makeTime(sms?.time)}
                             </span>
-                            <span className={`flex  items-end  gap-2 ${sms?.sender == userData?._id ? 'ml-auto flex-row-reverse chat-end' : 'mr-auto '} chat `}>
+                            <span className={`flex  items-end  gap-2 ${sms?.sender == userData?._id ? 'ml-auto pl-12 flex-row-reverse chat-end' : 'mr-auto pr-12'} chat `}>
                                 <img className="w-8 h-8 object-cover rounded-full" src={sms?.sender == userData?._id ? userData?.image : friendData?.image} alt="" />
                                 <span className={`chat-bubble ${sms?.sender == userData?._id ? 'chat-bubble-info bg-white/90' : 'chat-bubble-error bg-black/80 text-white'} font-medium`}>
                                     {sms.message}
@@ -143,7 +143,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                     <form onSubmit={handleSubmit} className="w-full relative">
                         <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."
-                            className="input  w-full h-10 border-primary rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-teal-400" />
+                            className="input  w-full h-10 border-white rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-teal-400" />
                         <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-1 text-xl active:scale-90 duration-200 transition-all hover:text-black   px-1.5 py-1 top-[5px]`}>
                             {
                                 isMessageLoading ? <span className="loading loading-spinner loading-xs"></span> : <IoSendSharp></IoSendSharp>

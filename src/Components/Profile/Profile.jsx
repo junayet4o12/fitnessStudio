@@ -20,7 +20,7 @@ const Profile = () => {
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-    console.log(userDetails);
+    console.log(userDetails?.followedTime);
     // style Variable start
 
     const inputFieldStyle = ` ${edit ? 'input input-error border-[1.4px]' : 'border-[1px] cursor-not-allowed'}  w-full bg-white/70 p-3  border-primary rounded font-semibold  text-black`

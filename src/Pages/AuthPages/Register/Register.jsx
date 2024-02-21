@@ -81,7 +81,7 @@ const Register = () => {
                 <h1 className="text-start text-4xl font-semibold">
                   Create Account !
                 </h1>
-                <p className="text-start text-sm text-gray-600 mt-2">
+                <p className="text-start text-sm text-white/80 mt-2">
                   Enter to get unlimited access to data & information.
                 </p>
               </div>
@@ -89,7 +89,7 @@ const Register = () => {
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Name <span className="text-red-500 text-xl">*</span>
+                      Name <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="text"
@@ -98,14 +98,14 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.name && (
-                      <span className="text-red-400 text-xs">
+                      <span className="text-primary text-xs">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Email <span className="text-red-500 text-xl">*</span>
+                      Email <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="email"
@@ -116,14 +116,14 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.email?.type === "required" && (
-                      <span className="text-red-400 text-xs ">
+                      <span className="text-primary text-xs ">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Password <span className="text-red-500 text-xl">*</span>
+                      Password <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="password"
@@ -134,7 +134,7 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.password?.type === "required" && (
-                      <span className="text-red-400 text-xs ">
+                      <span className="text-primary text-xs ">
                         This field is required
                       </span>
                     )}
@@ -151,12 +151,12 @@ const Register = () => {
                     />
                   </div>
                   {errors.image?.type === "required" && (
-                    <span className="text-red-400 text-xs ">
+                    <span className="text-primary text-xs ">
                       This field is required
                     </span>
                   )}
                   <button
-                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-[#FF4804] py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-primary py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="submit"
                     data-ripple-light="true">
                     Register
@@ -172,7 +172,7 @@ const Register = () => {
                   </p>
                   <Link
                     to="/login"
-                    className="block font-medium leading-normal text-[#FF4804] antialiased">
+                    className="block font-medium leading-normal text-primary antialiased">
                     Login
                   </Link>
                 </div>

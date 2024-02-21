@@ -4,7 +4,7 @@ import Fitbit from "./Fitbit";
 import Strava from "./Strava/Strava";
 const ConnectApp = () => {
     const LinkStyle =
-        "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-[#ff470470] active:scale-90 hover:text-white";
+        "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[130px] font-bold  rounded border-[3px] active:bg-primary/70 active:scale-90 hover:text-white";
 
 
     return (
@@ -19,7 +19,7 @@ const ConnectApp = () => {
                         The integration of fitness apps with tracking websites has revolutionized personal wellness. By connecting these apps to in FitnessStdio, users can effortlessly monitor their exercise data in real time. Whether it is steps taken, workout duration, or calorie burn, this seamless connection provides a comprehensive overview of physical activity.
                     </p>
                     <a href="#connect_app" to={'#connect_app'}
-                        className={`${LinkStyle} bg-[#ff470436] hover:bg-[#ff4704]  border-[#ff4704] hover:border-transparent`}>
+                        className={`${LinkStyle} bg-primary/35 hover:bg-primary  border-primary hover:border-transparent`}>
                         Connect App
                     </a>
                 </div>

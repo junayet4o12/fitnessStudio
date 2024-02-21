@@ -50,7 +50,7 @@ const Sidebar = () => {
             {/* pesonal info start */}
             <div className=" p-2 px-7 border-2 border-primary border-t-0 w-[90%] mx-auto flex justify-center items-center flex-col gap-y-2 rounded-2xl shadow-md shadow-primary">
               <img className="w-24 h-24 rounded-full object-cover " src={user?.photoURL} alt="" />
-              <p className="text-lg font-bold">{user?.displayName.split(' ').slice(0,2).join(' ')}</p>
+              <p className="text-lg font-bold">{user?.displayName.split(' ').slice(0, 2).join(' ')}</p>
             </div>
           </div>
           {/* pesonal info end */}
@@ -102,6 +102,15 @@ const Sidebar = () => {
                 <>
                   <li>
                     <NavLink
+                      to="/dashboard/connected_with"
+                      className={({ isActive, isPending }) =>
+                        isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
+                      }>
+                      <MdOutlineConnectWithoutContact /> Connected With
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
                       to="/dashboard/connect_people"
                       className={({ isActive, isPending }) =>
                         isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
@@ -109,6 +118,7 @@ const Sidebar = () => {
                       <FaUserFriends /> Connect People
                     </NavLink>
                   </li>
+
                   <li>
                     <NavLink
                       to="/dashboard/bmi_calculator"
