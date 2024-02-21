@@ -46,9 +46,13 @@ import ProductsCollections from "../Pages/ProductsCollections/ProductsCollection
 import UpdateBlogs from "../Components/MyBlogs/UpdateBlogs";
 import DynamicProductPage from "../Pages/DynamicProductPage/DynamicProductPage";
 import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
+import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
+import { backendUrl } from "../BackendUrl/backendUrl";
+import Shop from "../Pages/Shop/Shop";
 
 
 const axiosPublic = useAxiosPublic();
+
 
 const MyRouts = createBrowserRouter([
   {
@@ -85,6 +89,10 @@ const MyRouts = createBrowserRouter([
             <SpecialRecipe />
           </PrivateRoute>
         ),
+      },
+      {
+        path:"/shop",
+        element: <Shop/>
       },
       {
         path: "/chat",
@@ -183,6 +191,11 @@ const MyRouts = createBrowserRouter([
       {
         path: "yourProducts",
         element: <PrivateRoute> <ProductsCollections /> </PrivateRoute>
+      },
+      {
+        path: "yourProducts/updateProducts/:id",
+        loader: ({params})=> axiosPublic(`/products/${params.id}`),
+        element: <PrivateRoute> <UpdateProductForm/> </PrivateRoute>
       },
       {
         path: "yourProducts/:id",

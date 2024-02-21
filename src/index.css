@@ -11,8 +11,8 @@
 
 body {
     font-family: 'Raleway', sans-serif;
-    /* background-color: black;
-    color: white; */
+    background-image: linear-gradient(to right,#000428,#004e92);
+    color: white;
 }
 
 .specialFont{

@@ -26,7 +26,7 @@ const SpecialRecipe = () => {
 
 
   return (
-    <div className='p-[10px] min-h-[100vh]'>
+    <div className='p-[10px] min-h-[100vh] bg-gradient-to-r from-[#000428] to-[#004e92] text-white'>
         <Helmet> 
             <title>Recipe - FitnessStudion</title>
         </Helmet>
