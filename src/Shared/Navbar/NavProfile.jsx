@@ -74,7 +74,7 @@ const NavProfile = () => {
               alt="tania andrew"
               className={`border ${
                 isMenuOpen && "border-primary"
-              } w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
+              } w-9 h-9 xs:w-10 xs:h-10 p-0.5 rounded-full`}
               src={user?.photoURL}
             />
           </Button>
@@ -107,7 +107,7 @@ const NavProfile = () => {
                   as="span"
                   variant="small"
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}>
+                  color={isLastItem ? "green" : "inherit"}>
                   {label}
                 </Typography>
               </MenuItem>

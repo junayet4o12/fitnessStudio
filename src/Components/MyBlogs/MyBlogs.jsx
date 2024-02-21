@@ -35,14 +35,14 @@ const MyBlogs = () => {
     return (
         <>
             {
-                myBlogs.length === 0 ?
+                myBlogs?.length === 0 ?
                     <div>
                         <p className="text-xl flex justify-center items-center h-screen text-gray-400">You don't have a blog</p>
                     </div>
                     :
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-2 max-w-5xl mx-auto">
                         {
-                            myBlogs?.map((blog) =>
+                            (myBlogs ? myBlogs : []).map((blog) =>
                                 <MyBlogsCard key={blog} blog={blog} refetch={refetch}></MyBlogsCard>
                             )
                         }

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import UnreadMessage from './UnreadMessage';
 const FollowedMembers = ({ follower, idx, userDetails }) => {
-    console.log(idx);
+    console.log(idx +1);
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic()
     const { data: unreadMessage, isLoading: unreadMessageDataIsLoading, refetch } = useQuery({
@@ -28,7 +28,7 @@ const FollowedMembers = ({ follower, idx, userDetails }) => {
     }
     return (
         <motion.div
-            initial={{ scale: 0.7, x: -100 }}
+            initial={{ scale: 0.9, x: ((idx + 1) % 2 === 0 ? -50 : 50) }}
             whileInView={{ scale: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.01 * idx }}
         >

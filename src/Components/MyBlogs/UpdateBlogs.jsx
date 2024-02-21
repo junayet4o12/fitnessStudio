@@ -1,26 +1,46 @@
-/* eslint-disable react/prop-types */
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { FaEdit } from "react-icons/fa";
-import toast from "react-hot-toast";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Editor } from '@tinymce/tinymce-react';
+import { useForm } from 'react-hook-form';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import { Helmet } from 'react-helmet-async'
+import toast from 'react-hot-toast';
+import Title from '../Title/Title'
 
-const UpdateBlogs = ({ blog, refetch }) => {
-    const axiosPublic = useAxiosPublic();
+const UpdateBlogs = () => {
+
+    const { id } = useParams();
+    const Navigate = useNavigate();
+    const axiosPublic = useAxiosPublic()
+    const [myBlogs, setMyBlogs] = useState({})
+    const [tinyData, setTinyData] = useState("")
+
+    // get blogs by id
+    useEffect(() => {
+        axiosPublic.get(`/blogs/${id}`)
+            .then((res) => {
+                setMyBlogs(res?.data)
+                setTinyData(res?.data?.blogDes)
+            })
+    }, [id, axiosPublic])
+
+    // Destructucring myBlogs Object
+    const { _id, blogName, blogImg: previousImg } = myBlogs || {}
+
+    // New Image Host in ImageBB
     const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
     const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
-    // console.log(blog);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    // Extract blog data
-    const { blogImg, blogName, blogDes } = blog;
-    const handleUpdate = () => {
-        document.getElementById(`my_modal_${blog._id}`).showModal()
-    }
-
-    // Handle form submission
-    const handleBlogUpdate = async (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const image = { image: form.blogImg.files[0] };
+    const onSubmit = async (data) => {
+        // console.log(data);
+        const toastId = toast.loading("Updating...");
+        const image = { image: data?.img[0] };
         let imgUrl = ''
         try {
             const res = await axios.post(imgHostingApi, image, {
@@ -33,67 +53,80 @@ const UpdateBlogs = ({ blog, refetch }) => {
         catch (err) {
             console.log(err.message);
 
-            imgUrl = blogImg
-        }
-        console.log(imgUrl);
-        const updatedData = {
-            blogImg: imgUrl,
-            blogName: form.blogName.value,
-            blogDes: form.blogDes.value
-        };
-
-        try {
-            await axiosPublic.put(`/update_blog/${blog._id}`, updatedData);
-            toast.success('Blog has been updated');
-            refetch()
-        } catch (error) {
-            console.error('Error updating blog:', error);
-            toast.error('Failed to update blog');
+            imgUrl = previousImg
         }
 
-        form.reset();
-        form.closest('dialog').close();
-    };
+        const blogImg = imgUrl;
+        const blogName = data?.blogname;
+        const blogDes = tinyData;
+        const allData = { blogImg, blogName, blogDes }
+        // Update blog using put method
+        axiosPublic.put(`/update_blog/${_id}`, allData)
+            .then(res => {
+                console.log(res?.data);
+                if (res?.data?.modifiedCount > 0) {
+                    toast.success("Update Successfully !", { id: toastId });
+                    Navigate('/dashboard/my_blogs')
+                }
+            })
+            .catch((err) => {
+                toast.error(err?.code, { id: toastId });
+            });
+    }
+
+    // Content Change function
+    const haldelChange = (content, editor) => {
+        setTinyData(content)
+    }
 
     return (
-        <div>
-            <button
-                className="px-4 py-2 text-sm flex gap-2 uppercase bg-primary rounded-lg text-white font-semibold hover:shadow-xl hover:shadow-gray-400 transition duration-700 ease-in-out"
-                onClick={handleUpdate}>
-                Update <FaEdit className="text-lg" />
-            </button>
-
-            <dialog id={`my_modal_${blog._id}`} className="modal">
-                <div className="modal-box">
-                    <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                    </form>
-                    <h3 className="font-bold text-xl text-center">Update Your Blog!</h3>
-                    <form onSubmit={handleBlogUpdate}>
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text text-lg font-semibold">Blog Image:</span>
-                            </div>
-                            <input name="blogImg" type="file" className=" border-primary border p-2 rounded-lg w-full flex" />
-                        </label>
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text text-lg font-semibold">Blog Name:</span>
-                            </div>
-                            <input required name="blogName" type="text" defaultValue={blogName} className="input input-error w-full" />
-                        </label>
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text text-lg font-semibold">Blog Description:</span>
-                            </div>
-                            <textarea required name="blogDes" type="text" defaultValue={blogDes} className="textarea textarea-error textarea-lg p-2 text-sm w-full min-h-[150px] max-h-[150px]" ></textarea>
-                        </label>
-                        <button
-                            className="px-5 py-2 mt-2 text-sm flex gap-2 uppercase bg-primary rounded-lg text-white font-semibold hover:shadow-xl hover:shadow-gray-400 transition duration-700 ease-in-out">Update
-                        </button>
-                    </form>
+        <div className='p-[10px]'>
+            <Helmet>
+                <title>Update Your Blog - FitnessStudio</title>
+            </Helmet>
+            <div className='flex flex-col items-center gap-[20px]'>
+                <Title title={'Update Your Blog'} />
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)} className='border-2 border-secondary my-[50px] flex flex-col gap-3 bg-opacity-70 rounded-xl formStyle'>
+                <label htmlFor="" className='pl-2 pt-1 text-sm text-gray-500'>Your Blog Name:</label>
+                <div className='flex flex-col gap-[20px] items-start w-full'>
+                    <input
+                        {...register("blogname", { required: true })}
+                        className='border-b-[3px] border-secondary rounded-t-xl outline-none w-full p-[10px] text-black'
+                        type="text" name="blogname" defaultValue={blogName} id="blogname" />
                 </div>
-            </dialog>
+
+                <div className='flex flex-col gap-[20px] items-start w-full'>
+                    <label htmlFor="" className='pl-2 pt-1 text-sm text-gray-500'>Choose Another File:</label>
+                    <input
+                        {...register("img")}
+                        className='border-b-[3px] border-secondary outline-none w-full p-[10px]'
+                        type="file" name="img" id="img" />
+                </div>
+
+                <div className='flex flex-col gap-[20px] items-start w-full'>
+                    <Editor
+                        apiKey='ffaw0tilo4m0ex1q5nmpaa5fblipi8p51r8bnqbq3wbyf8vi'
+                        init={{
+                            height: 500,
+                            max_height: "400",
+                            width: '100%',
+                            border: "0px",
+                            //    menubar: false,
+                            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                            tinycomments_mode: 'embedded',
+                            tinycomments_author: 'Author name',
+                            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                        }}
+                        value={tinyData}
+                        onEditorChange={haldelChange} />
+                </div>
+                <button
+                    className='bg-secondary text-white font-[600] p-[10px] text-xl rounded-md'
+                    type='submit'>
+                    Update
+                </button>
+            </form>
         </div>
     );
 };

@@ -112,7 +112,7 @@ const ProductUploadForm = () => {
                 <input
                 required
                 onChange={(e)=> setPname(e.target.value)}
-                className='text-xl p-[10px] w-full border-2 border-primary rounded-md'
+                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bg-transparent'
                 type="text" name="name" placeholder='Product name' id="name" />
             </div>
             <div className='w-full'>
@@ -122,7 +122,7 @@ const ProductUploadForm = () => {
                 <input
                 required
                 onChange={(e)=> setPprice(e.target.value)}
-                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber'
+                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber bg-transparent'
                 type="number" name="Price" placeholder='৳ 00' id="price" />
             </div>
             <div className='w-full'>
@@ -133,7 +133,7 @@ const ProductUploadForm = () => {
                 required
                 // value={Pquantity}
                 onChange={(e)=> setPquantity(e.target.value)}
-                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber'
+                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber bg-transparent'
                 type="number" name="Quantity" placeholder='Qualtity'  id="Quantity" />
             </div>
         </div>
@@ -143,7 +143,7 @@ const ProductUploadForm = () => {
         <textarea
         required
         onChange={(e)=> setPdescription(e.target.value)}
-        className='text-xl p-[10px] w-full border-2 border-primary rounded-md h-[250px] max-h-[250px] min-h-[250px] text-left'
+        className='text-xl p-[10px] w-full border-2 border-primary rounded-md h-[250px] max-h-[250px] min-h-[250px] text-left bg-transparent'
         placeholder='Description' id='description' name='description'
         />
         <div>
@@ -170,7 +170,7 @@ const ProductUploadForm = () => {
                 <input
                 required
                 onChange={(e)=> setPPhone(e.target.value)}
-                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber'
+                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber bg-transparent'
                 type="text" name="phone" placeholder='your contact number' id="phone" />
             </div>
             <div className='w-full'>
@@ -180,7 +180,7 @@ const ProductUploadForm = () => {
                 <input
                 required
                 onChange={(e)=> setPEmail(e.target.value)}
-                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber'
+                className='text-xl p-[10px] w-full border-2 border-primary rounded-md bmiNumber bg-transparent'
                 type="email" name="email" placeholder='Your Email' id="email" />
             </div>
         </div>
