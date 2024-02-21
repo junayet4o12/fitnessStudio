@@ -5,7 +5,7 @@ const LibraryBanner = () => {
     <div className='flex flex-col items-center text-center justify-center gap-4 container mx-auto min-h-[50vh] bg-secondary bg-opacity-70 text-white rounded-t-lg rounded-br-[50px] p-[10px]'>
       <h1
       className='text-4xl font-[600]'
-      >Welcome to our <span className='specialFont text-primary'>workout</span> library</h1>
+      >Welcome to our <span className='specialFont text-green-300'>workout</span> library</h1>
       <p
       className='font-[600]'
       >

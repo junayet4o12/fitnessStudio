@@ -28,7 +28,7 @@ const Error = () => {
 
     const returnBtn = `btn  errorBtn  text-white font-bold`
     return (
-        <div id="error-page" className="flex flex-col lg:flex-row justify-center items-center gap-5 bg-blue-50 min-h-screen pb-7">
+        <div id="error-page" className="flex flex-col lg:flex-row justify-center items-center gap-5 bg-blue-50 min-h-screen pb-7 text-black">
             <Helmet>
                 <title>Page Not Found</title>
             </Helmet>
