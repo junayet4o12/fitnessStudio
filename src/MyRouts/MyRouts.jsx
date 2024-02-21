@@ -94,6 +94,10 @@ const MyRouts = createBrowserRouter([
         element: <Shop/>
       },
       {
+        path:"/shop/:id",
+        element: <DynamicProductPage/>
+      },
+      {
         path: "/chat",
         element: (
           <PrivateRoute>
