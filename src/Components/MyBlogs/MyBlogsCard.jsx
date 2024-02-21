@@ -63,7 +63,8 @@ const MyBlogsCard = ({ blog, refetch }) => {
                         </span>
                     )} */}
                 </div>
-                <h5 className="bmiNumber">Post: {blog?.time}</h5>
+                <h5 className="bmiNumber">Post: {(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</h5>
+                {/* <h5 className="bmiNumber">Post: {blog?.time}</h5> */}
                 <div className='w-[100%] h-[2px] bg-secondary'></div>
                 <div className="mt-4 flex justify-evenly">
                     {/* update bloguct */}
