@@ -212,12 +212,12 @@ const CompareActivity = () => {
                 <div className="flex gap-4 lg:gap-8 justify-center items-center text-xl md:text-3xl lg:text-4xl font-bold py-2">
                     <div>
                         <p>{data1?.name}</p>
-                        <h1 className="bmiNumber text-xs md:text-sm text-center py-2">{formattedTime1}{formattedDate1}</h1>
+                        <h1 className="bmiNumber text-xs md:text-sm text-center py-2">{formattedTime1} {formattedDate1}</h1>
                     </div>
                     <p className="text-primary font-extrabold">VS</p>
                     <div>
                         <p>{data2?.name}</p>
-                        <h1 className="bmiNumber text-xs md:text-sm text-center py-2">{formattedTime2}{formattedDate2}</h1>
+                        <h1 className="bmiNumber text-xs md:text-sm text-center py-2">{formattedTime2} {formattedDate2}</h1>
                     </div>
                 </div>
 

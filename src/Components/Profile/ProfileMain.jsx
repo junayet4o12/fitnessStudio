@@ -7,11 +7,13 @@ import { DialogHeader } from '@material-tailwind/react';
 import HealthSuggestionsModal from './HealthSuggestionsModal';
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 
 
 
 const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
+    const {user} = useAuth()
     const BMISuggestions = useBMISuggestions(myBMI);
     const ageSuggestions = useAgeSuggestions(age);
     const BMRSuggestions = useBMRSuggestions(myBMR)
@@ -39,7 +41,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
                 <div className='flex flex-col justify-center items-center'>
                     <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
-                        <img className='w-full h-full rounded-full object-cover' src={userDetails?.image} alt="" />
+                        <img className='w-full h-full rounded-full object-cover' src={user?.photoURL} alt="" />
                     </div>
                     <div>
                         <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70     border-transparent  my-4`}>Personal Suggestions</button>

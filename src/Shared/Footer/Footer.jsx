@@ -12,7 +12,7 @@ const Footer = () => {
 
     
       <Container>
-        <div className=" text-black py-6 grid grid-cols-2 md:grid-cols-4">
+        <div className=" text-white/90 py-6 grid grid-cols-2 md:grid-cols-4">
           <div className="mt-12">
             <img
               className="h-24 w-32 md:h-36 md:w-44 lg:h-44 lg:w-52"
@@ -110,8 +110,8 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <hr className="border-black border-[1.3px]" />
-        <div className="footer footer-center p-4  text-black">
+        <hr className="border-white/90 border-[1.3px]" />
+        <div className="footer footer-center p-4  text-white/90">
           <aside>
             <p>{`Copyright © ${moment().format("YYYY")} - All right reserved by FITNESS STUDIO Ltd.`}</p>
           </aside>

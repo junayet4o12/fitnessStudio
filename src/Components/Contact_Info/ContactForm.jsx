@@ -22,39 +22,39 @@ const ContactForm = () => {
             });
     };
     return (
-        <>
+        <div className=''>
             <Container>
                 <div className='md:mt-8'></div>
                 <Title title={"Message Us"}></Title>
                 {/* Contact section */}
-                <div className="flex gap-8 md:m-8 shadow-xl shadow-gray-500">
+                <div className="flex gap-8 md:m-8 shadow-xl shadow-gray-500 ">
                     <div className="flex-1 hidden md:block">
                         <img className="h-full" src="https://media.discordapp.net/attachments/1177886803424976896/1199788105952133242/dLNlDo0GRPyraLXHtgU5_blog-Blush.jpg?ex=65c3d0bf&is=65b15bbf&hm=6d08e334af8a3b45f1fe3f3ce8570bcb7ecb6abd7c2ce3fee11a4194e12c9909&=&format=webp&width=439&height=417" alt="" />
                     </div>
                     {/* Contact Feild */}
-                    <div className="flex-1 px-8 md:px-4 py-4">
+                    <div className="flex-1 px-8 md:px-4 py-4 text-black">
                         <form ref={form} onSubmit={sendEmail}>
                             <label className="form-control w-full max-w-md">
                                 <div className="label">
-                                    <span className="label-text text-lg font-bold">Name:</span>
+                                    <span className="label-text text-lg font-bold  text-white">Name:</span>
                                 </div>
                                 <input type="text" name="from_name" placeholder="Type Your Name...." className="input input-bordered w-full input-error" />
                             </label>
                             <label className="form-control w-full max-w-md">
                                 <div className="label">
-                                    <span className="label-text text-lg font-bold">Email:</span>
+                                    <span className="label-text text-lg font-bold text-white">Email:</span>
                                 </div>
                                 <input type="email" name="from_email" placeholder="Type Your Email...." className="input input-bordered w-full input-error" required />
                             </label>
                             <label className="form-control w-full max-w-md">
                                 <div className="label">
-                                    <span className="label-text text-lg font-bold">Phone Number:</span>
+                                    <span className="label-text text-lg font-bold text-white">Phone Number:</span>
                                 </div>
                                 <input type="number" name="phone_number" placeholder="Type Your Number...." className="input input-bordered w-full input-error" />
                             </label>
                             <label className="form-control w-full max-w-md">
                                 <div className="label">
-                                    <span className="label-text text-lg font-bold">Message:</span>
+                                    <span className="label-text text-lg font-bold text-white">Message:</span>
                                 </div>
                                 <textarea name="message" placeholder="Type Your Message..." className="textarea textarea-bordered textarea-md w-full textarea-error max-w-md" required >
                                 </textarea>
@@ -96,7 +96,7 @@ const ContactForm = () => {
                     </div>
                 </div>
             </Container>
-        </>
+        </div>
     );
 };
 
