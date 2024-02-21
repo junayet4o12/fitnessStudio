@@ -167,8 +167,8 @@ const UsersBlog = () => {
                 <Link to={`/blogs/${paramid}/${param}/${blog._id}`}>
                   <h1 className="text-2xl font-[600]">{blog.blogName}</h1>
                 </Link>
-                <p>published at: <span className="bmiNumber">{blog.time}</span></p>
-                <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}}` }} />
+                <p>published at: <span className="bmiNumber">{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</span></p>
+                <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}` }} />
               </div>
             </div>)
         }

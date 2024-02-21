@@ -104,7 +104,7 @@ const DynamicBlogpage = () => {
           <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
-        <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
+        <p>Published at: <span className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</span></p>
 
         {
           myblog?._id === userDetails?._id ? '' : (isFollower ?
