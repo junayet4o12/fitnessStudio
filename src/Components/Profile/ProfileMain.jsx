@@ -16,7 +16,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const ageSuggestions = useAgeSuggestions(age);
     const BMRSuggestions = useBMRSuggestions(myBMR)
     const navigate = useNavigate()
-    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white transition-all duration-500 hover:bg-white/90 hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const infoStyle = 'text-black w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white transition-all duration-500 hover:bg-white/90 hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  bg-primary/70 hover:bg-primary hover:border-primary/80'
     console.log('hello', localStorage.getItem('stravaKey'));
 

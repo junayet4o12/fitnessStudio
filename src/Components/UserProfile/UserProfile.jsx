@@ -59,7 +59,7 @@ const UserProfile = () => {
 
                         userPost.map(blog =>
                             <div
-                                className="lg:w-[30%] shadow-xl rounded-md flex flex-col justify-between overflow-hidden bg-white"
+                                className="lg:w-[30%] shadow-xl rounded-md flex flex-col justify-between overflow-hidden bg-white text-black"
                                 key={blog._id}>
                                 <img className="h-[260px] w-full object-cover" src={blog.blogImg} />
                                 <div className="p-[10px] flex flex-col gap-2">

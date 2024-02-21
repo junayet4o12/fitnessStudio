@@ -225,49 +225,49 @@ const CompareActivity = () => {
                 <div className="overflow-x-auto mx-6 my-12 p-2 border-x border-b border-primary rounded-md shadow-xl">
                     <table className="table bmiNumber">
                         <thead>
-                            <tr className="text-sm md:text-lg lg:text-xl text-black font-bold">
+                            <tr className="text-sm md:text-lg lg:text-xl text-primary font-bold">
                                 <th>Activities</th>
                                 <th>{data1?.name}</th>
                                 <th>{data2?.name}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Distance</th>
                                 <td>{showingDistance1}</td>
                                 <td>{showingDistance2}</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Active Time</th>
                                 <td>{showingTime1}</td>
                                 <td>{showingTime2}</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Average Speed</th>
                                 <td>{(data1?.average_speed * 1.60934).toFixed(2)} km/h</td>
                                 <td>{(data2?.average_speed * 1.60934).toFixed(2)} km/h</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Max Speed</th>
                                 <td>{(data1?.max_speed * 1.60934).toFixed(2)} km/h</td>
                                 <td>{(data2?.max_speed * 1.60934).toFixed(2)} km/h</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Elev High</th>
                                 <td>{data1?.elev_high}</td>
                                 <td>{data2?.elev_high}</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Elev Low</th>
                                 <td>{data1?.elev_low}</td>
                                 <td>{data2?.elev_low}</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Tracking Type</th>
                                 <td>{data1?.sport_type}</td>
                                 <td>{data2?.sport_type}</td>
                             </tr>
-                            <tr className="hover">
+                            <tr className="hover:bg-primary/50">
                                 <th className="text-xs md:text-sm">Country</th>
                                 <td>{data1?.location_country}</td>
                                 <td>{data2?.location_country}</td>
