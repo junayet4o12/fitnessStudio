@@ -3,9 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
-import { FaBars, FaStrava, FaTimes, FaUserAlt } from "react-icons/fa";
+import { FaBars, FaStrava, FaTimes, FaUserAlt, FaUserFriends } from "react-icons/fa";
 import { FaBookAtlas, FaCalculator } from "react-icons/fa6";
-import {  GiProgression } from "react-icons/gi";
+import { GiProgression } from "react-icons/gi";
 import { FaPenNib } from "react-icons/fa";
 import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
@@ -15,7 +15,7 @@ import { MdFeedback } from "react-icons/md";
 
 import { Helmet } from 'react-helmet-async'
 import useAdmin from "../../Hooks/useAdmin";
-import { MdOutlineManageAccounts } from "react-icons/md";
+import { MdOutlineConnectWithoutContact, MdOutlineManageAccounts } from "react-icons/md";
 import { SlBookOpen } from "react-icons/sl";
 
 const DashboardNavbar = () => {
@@ -38,7 +38,7 @@ const DashboardNavbar = () => {
                     <title>Dashboard - FitnessStudio</title>
                 </Helmet>
                 <Link to={'/'}>
-                    <h1 className="flex text-2xl font-extrabold">
+                    <h1 className="flex text-2xl font-extrabold text-black">
                         <CgGym className="text-3xl text-primary mr-1" /> Fitness
                         <span className="text-primary text-[31px]">Studio</span>
                     </h1>
@@ -60,7 +60,7 @@ const DashboardNavbar = () => {
                 className={`mt-4 transition-all duration-300 ${isOpen ? "opacity-100 max-h-screen" : "opacity-0 max-h-0 overflow-hidden"
                     }`}
             >
-                <ul className="menu font-semibold text-sm">
+                <ul className="menu font-semibold text-sm text-black">
                     <li>
                         <NavLink to="/dashboard/profile"
                             className={({ isActive, isPending }) =>
@@ -93,6 +93,24 @@ const DashboardNavbar = () => {
                             </li>
                         </> :
                             <>
+                                <li>
+                                    <NavLink to="/dashboard/connected_with"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                    >
+                                        <MdOutlineConnectWithoutContact /> Connected With
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/connect_people"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                    >
+                                        <FaUserFriends /> Connect People
+                                    </NavLink>
+                                </li>
 
                                 <li>
                                     <NavLink to="/dashboard/bmi_calculator"
@@ -149,25 +167,25 @@ const DashboardNavbar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                        <NavLink
+                                    <NavLink
                                         to="/dashboard/productForm"
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                                         }
-                                        >
+                                    >
                                         <FaBoxesPacking /> List a product
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
                                         to="/dashboard/yourProducts"
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "bg-primary text-white" : ""
                                         }
-                                        >
+                                    >
                                         <CiBoxes /> Your Products
-                                        </NavLink>
-                                    </li>
+                                    </NavLink>
+                                </li>
                                 <li>
                                     <NavLink to="/dashboard/BlogFrom"
                                         className={({ isActive, isPending }) =>

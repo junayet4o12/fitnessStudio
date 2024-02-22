@@ -20,6 +20,7 @@ const AuthProviders = ({ children }) => {
   const [messages, setMessages] = useState([])
   const [followFollowingActive, setfollowFollowingActive] = useState(true)
   const axiosPublic = useAxiosPublic();
+  const [changeRefetch, setChangeRefetch] = useState(0)
 
   const createUser = (email, pass) => {
     return createUserWithEmailAndPassword(auth, email, pass);
@@ -66,7 +67,7 @@ const AuthProviders = ({ children }) => {
     return () => {
       socket.disconnect();
     }
-  }, [])
+  }, [changeRefetch])
   const authInfo = {
     user,
     loading,
@@ -77,7 +78,10 @@ const AuthProviders = ({ children }) => {
     messages,
     setMessages,
     followFollowingActive,
-    setfollowFollowingActive
+    setfollowFollowingActive,
+    changeRefetch,
+    setChangeRefetch
+
   };
 
   return (

@@ -74,12 +74,12 @@ const NavProfile = () => {
               alt="tania andrew"
               className={`border ${
                 isMenuOpen && "border-primary"
-              } w-9 h-9 xs:w-10 xs:h-10 p-0.5 rounded-full`}
+              } w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
               src={user?.photoURL}
             />
           </Button>
         </MenuHandler>
-        <MenuList className="p-1 px-3 z-20">
+        <MenuList className="p-1 px-3 z-40">
           <div className="border-2 border-primary w-max rounded-full p-[2px] mx-auto mt-1">
             <img
               className="w-10 h-10 rounded-full"
@@ -99,7 +99,7 @@ const NavProfile = () => {
               <MenuItem
                 key={label}
                 onClick={() => handleAction(label)}
-                className={`flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 }`}>
+                className={`flex items-center gap-2 rounded hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10 }`}>
                 <p className="w-8 h-8 flex justify-center items-center text-xl text-primary">
                   {icon}
                 </p>
