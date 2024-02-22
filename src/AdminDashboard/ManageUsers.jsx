@@ -124,12 +124,12 @@ const ManageUsers = () => {
             <div className="mx-auto bmiNumber md:my-8 px-4 md:px-0 lg:px-6 ">
                 <div
                     className="text-2xl lg:text-4xl font-semibold py-4 flex flex-col lg:flex-row items-center justify-center lg:justify-between my-[25px] ">
-                    <h3 className="flex items-center text-black gap-2" style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}><FaUsers /> Total Users: {totalUsers}</h3>
+                    <h3 className="flex items-center text-white gap-2" style={{ textShadow: '0px 0px 5px #FF4804', webkitTextStroke: '1px black' }}><FaUsers /> Total Users: {totalUsers}</h3>
                     <form
                         onSubmit={handleSubmit}
                         className=" w-[90%] md:w-fit lg:w-fit  flex mx-auto lg:mx-[0px] items-center">
                         <input
-                            className="h-[40px] md:h-[50px] text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-l-xl outline-none"
+                            className="h-[40px] md:h-[50px] text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-l-xl outline-none text-black"
                             onChange={SearchFunction} type="text" name="name" placeholder="Search Users" id="" />
                         <button
                             className="text-xs md:text-xl p-[10px] font-[600] border-2 border-primary rounded-r-xl outline-none bg-primary text-white w-[70px]  md:w-[100px] h-[40px] md:h-[50px]"
@@ -156,7 +156,7 @@ const ManageUsers = () => {
                                     :
 
                                     users.map((user, index) =>
-                                        <tr key={user._id} className="hover">
+                                        <tr key={user._id} className=" hover:bg-primary/50">
                                             <th>{index + 1}</th>
                                             <td>{user?.name}</td>
                                             <td>{user?.email}</td>

@@ -10,21 +10,21 @@ import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg';
 import Loading from '../Loading';
-
+import { FaPen, FaRegPenToSquare } from "react-icons/fa6";
 const Profile = () => {
     const dispatch = useDispatch()
-    const { user } = useAuth()
+    const { user, changeRefetch, setChangeRefetch } = useAuth()
     const axiosPublic = useAxiosSecure()
     const { user: userDetails, isLoading } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-    console.log(userDetails);
+    console.log(userDetails?.followedTime);
     // style Variable start
 
-    const inputFieldStyle = ` ${edit ? 'input input-error border-[1.4px]' : 'border-[1px] cursor-not-allowed'}  w-full bg-white/70 p-3  border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px]' : 'border-[1px] cursor-not-allowed'}   w-full  bg-white/70 h-[50px]  border-primary rounded font-semibold  text-black`
+    const inputFieldStyle = ` ${edit ? 'input input-info border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}   w-full   h-[50px]  border-primary rounded font-semibold  text-black`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
 
     // style Variable end
@@ -92,6 +92,7 @@ const Profile = () => {
                                 timer: 1500
                             });
                             setEdit(false)
+                            setChangeRefetch(changeRefetch + 1)
                         }
                     })
                     .catch(err => {
@@ -106,12 +107,12 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]' 
+        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]'
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
             <div>
-                <div className='w-full  bg-gradient-to-br from-primary/80 via-primary/60 to-primary/30   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
+                <div className='w-full max-w-7xl  bg-gradient-to-br from-primary/80 via-primary/60 to-primary/30   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
 
                     <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5 text-white'>
                         <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
@@ -217,7 +218,9 @@ const Profile = () => {
                         </div>
                     </form>
                     <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-primary/90 text-white'>Edit</button>
+                        <button
+                            onClick={() => setEdit(true)}
+                            className=' border-2 border-white py-[5px] px-3 font-medium  transition-all rounded hover:rounded-md hover:bg-secondary/20 duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-base '><span className='text-sm'><FaRegPenToSquare /></span>Edit Profile</button>
                     </div>
                 </div>
             </div>

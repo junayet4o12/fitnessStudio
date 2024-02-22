@@ -24,8 +24,8 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    const infoStyle = 'w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
-    const infoStyle2 = 'w-[100%] flex flex-wrap  items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const infoStyle = 'text-black w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
+    const infoStyle2 = 'text-black w-[100%] flex flex-wrap  items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
 
     const handleFollow = () => {
         const toastId = toast.loading("Following...");
@@ -82,9 +82,10 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-white overflow-hidden flex justify-center items-center '>
                         <img className='w-full h-full rounded-full object-cover' src={userDetails?.image} alt="" />
                     </div>
-                    <div className="flex py-4 gap-2">
+                    <p className="text-lg font-bold py-1 border-b-[1.5px] border-l-[1.5px] border-white px-2 rounded shadow-lg">{userDetails?.name.split(' ').slice(0, 2).join(' ')}</p>
+                    <div className={`flex duration-500 transition-all py-2 mt-3  gap-2 ${userDetails?._id === personalInfo?._id ? '' : 'border-b-[1.5px]  border-r-[1.5px] border-white px-2 rounded shadow-lg'}`} >
                         {
-                            userDetails?._id === personalInfo?._id ? <span className="font-bold p-4 text-white">It&apos;s Your Profile</span> : (
+                            userDetails?._id === personalInfo?._id ? '' : (
                                 isFollow ? <p onClick={handleUnFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none '>Unfollow</p> : (isFollower ? <p className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none '>Follower</p> : <p onClick={handleFollow} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-none '>Follow</p>)
                             )
                         }
