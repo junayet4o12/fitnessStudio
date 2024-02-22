@@ -15,6 +15,7 @@ import { SlBookOpen } from "react-icons/sl";
 import "./Sidebar.css"
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineConnectWithoutContact, MdOutlineManageAccounts } from "react-icons/md";
+import { MdFeedback } from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -191,6 +192,15 @@ const Sidebar = () => {
                       isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                     }>
                     <FaBookMedical /> My Blogs
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/feedback"
+                    className={({ isActive, isPending }) =>
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
+                    }>
+                    <MdFeedback /> Feedback
                   </NavLink>
                 </li>
               </>
