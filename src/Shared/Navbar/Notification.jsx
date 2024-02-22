@@ -58,25 +58,27 @@ export function NotificationsMenu() {
   // console.log(blogsNotify);
 
   // Get the current time in milliseconds
-const currentTime = new Date().getTime();
-const storedTime = blogsNotify?.map(item => (item?.time));
-const differenceTime = currentTime - storedTime;
+  const currentTime = new Date().getTime();
+  const storedTime = blogsNotify?.map(item => item?.time);
+  // const storedTime = blogsNotify?.map(item => (item?.time)) || (data?.followedMembers)?.map(item => (item?.followedTime?.map(follow => follow?.time)))
+  const differenceTime = storedTime?.map(value => currentTime - new Date(value).getTime());
 
-  // Convert milliseconds to minutes, hours, or days
-  const minutes = Math.floor(differenceTime / (1000 * 60));
-  const hours = Math.floor(differenceTime / (1000 * 60 * 60));
-  const days = Math.floor(differenceTime / (1000 * 60 * 60 * 24));
+  // console.log(differenceTime);
+
+  const minutesArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60)));
+  const hoursArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60)));
+  const daysArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60 * 24)));
 
   // Determine the appropriate time unit based on the difference
   let timeAgo;
-  if (days > 0) {
-    timeAgo = `${days} day${days > 1 ? 's' : ''} ago`;
-  } else if (hours > 0) {
-    timeAgo = `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  if (daysArray > 0) {
+    timeAgo = `${daysArray} day${daysArray > 1 ? 's' : ''} ago`;
+  } else if (hoursArray > 0) {
+    timeAgo = `${hoursArray} hour${hoursArray > 1 ? 's' : ''} ago`;
   } else {
-    timeAgo = `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    timeAgo = `${minutesArray} minute${minutesArray > 1 ? 's' : ''} ago`;
   }
-  // console.log(timeAgo);
+  console.log(timeAgo);
 
   return (
     <Menu>
@@ -105,6 +107,7 @@ const differenceTime = currentTime - storedTime;
                 <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
                   <ClockIcon />
                   {item?.time ? timeAgo : 'a few minutes ago'}
+                  {/* {item?.time ? timeAgo || item?.followedTime?.map(follow => follow.time ? timeAgo : '') : '' } */}
                 </Typography>
               </div>
             </MenuItem>

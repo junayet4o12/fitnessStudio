@@ -46,7 +46,7 @@ const MyBlogsCard = ({ blog, refetch }) => {
     }
     return (
         <div key={blog._id} className="container mx-auto my-4">
-            <div className=" mx-auto bg-white p-4 rounded-md shadow-lg shadow-gray-500">
+            <div className=" mx-auto bg-white text-black p-4 rounded-md shadow-lg shadow-gray-500">
                 <div className="w-full h-56 overflow-hidden">
                     <img src={blog?.blogImg} alt='' className="w-full max-w-lg mx-auto" />
                 </div>
