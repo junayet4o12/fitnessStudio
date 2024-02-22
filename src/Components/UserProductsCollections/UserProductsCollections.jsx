@@ -42,7 +42,7 @@ const UserProductsCollections = () => {
     }
 
     const unverified = () =>{
-        Axoispublic(`/products?verify=verified`)
+        Axoispublic(`/products?email=${user.email}&verify=verified`)
         .then(res => setProducts(res.data))
         setauthorizedState(true)
         setAllState(false)
