@@ -10,7 +10,7 @@ import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg';
 import Loading from '../Loading';
-
+import { FaPen, FaRegPenToSquare } from "react-icons/fa6";
 const Profile = () => {
     const dispatch = useDispatch()
     const { user, changeRefetch, setChangeRefetch } = useAuth()
@@ -23,8 +23,8 @@ const Profile = () => {
     console.log(userDetails?.followedTime);
     // style Variable start
 
-    const inputFieldStyle = ` ${edit ? 'input input-error border-[1.4px]' : 'border-[1px] cursor-not-allowed'}  w-full bg-white/70 p-3  border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px]' : 'border-[1px] cursor-not-allowed'}   w-full  bg-white/70 h-[50px]  border-primary rounded font-semibold  text-black`
+    const inputFieldStyle = ` ${edit ? 'input input-info border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}   w-full   h-[50px]  border-primary rounded font-semibold  text-black`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
 
     // style Variable end
@@ -218,7 +218,9 @@ const Profile = () => {
                         </div>
                     </form>
                     <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-primary/90 text-white'>Edit</button>
+                        <button
+                            onClick={() => setEdit(true)}
+                            className=' border-2 border-white py-[5px] px-3 font-medium  transition-all rounded hover:rounded-md hover:bg-secondary/20 duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-base '><span className='text-sm'><FaRegPenToSquare /></span>Edit Profile</button>
                     </div>
                 </div>
             </div>

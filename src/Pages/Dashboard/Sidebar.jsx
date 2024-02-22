@@ -48,9 +48,9 @@ const Sidebar = () => {
           <div className="sticky top-0 pt-3 z-10 bg-[#000428]">
 
             {/* pesonal info start */}
-            <div className=" p-2 px-7 border-2 border-primary border-t-0 w-[90%] mx-auto flex justify-center items-center flex-col gap-y-2 rounded-2xl shadow-md shadow-primary">
-              <img className="w-24 h-24 rounded-full object-cover " src={user?.photoURL} alt="" />
-              <p className="text-lg font-bold">{user?.displayName.split(' ').slice(0, 2).join(' ')}</p>
+            <div className=" p-2 px-4 border-2 border-primary border-t-0 w-[80%] mx-auto flex justify-center items-center flex-col gap-y-2 rounded-2xl shadow-md shadow-primary mt-3 mb-2">
+              <img className="w-20 h-20 rounded-full object-cover " src={user?.photoURL} alt="" />
+              <p className="text-base font-bold">{user?.displayName.split(' ').slice(0, 2).join(' ')}</p>
             </div>
           </div>
           {/* pesonal info end */}

@@ -9,7 +9,7 @@ import auth from "../../../firebase/firebase.config";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import registerImg from '../../../assets/images/LogInRegistration/register.png'
 const Register = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
@@ -183,7 +183,7 @@ const Register = () => {
         <div className="hidden md:block">
           <img
             className="md:w-[500px] xl:w-[700px]"
-            src="https://i.ibb.co/2Yp0RdD/Sign-up-pana.png"
+            src={registerImg}
             alt=""
           />
         </div>

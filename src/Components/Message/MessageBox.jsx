@@ -124,7 +124,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                         </div>
                     </div>
                 </div>
-                <div className={`p-2 space-y-2`} style={{ minHeight: `calc(75vh - 90px)` }}>
+                <div className={`p-2 space-y-2`} style={{ minHeight: `calc(75vh - 83px)` }}>
                     {
                         messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender !== userData?._id ? 'chat chat-start' : 'chat chat-end'}`}>
                             <span className={`text-xs bmiNumber  ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}`}>

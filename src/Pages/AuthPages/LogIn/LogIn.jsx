@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
-
+import logInImg from '../../../assets/images/LogInRegistration/login.png'
 const LogIn = () => {
   const [disable, setDisable] = useState(true);
   const { loginUser } = useAuth();
@@ -43,7 +43,7 @@ const LogIn = () => {
         <div className="hidden lg:block">
           <img
             className=" md:w-[500px] xl:w-[700px]"
-            src="https://i.ibb.co/fNCmcRV/Login-pana-1.png"
+            src={logInImg}
             alt=""
           />
         </div>

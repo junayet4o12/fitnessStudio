@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 // import UpdateBlogs from "./UpdateBlogs"
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import { makeVisibleTime } from "../../Hooks/makeVisibleTime";
 
 const MyBlogsCard = ({ blog, refetch }) => {
     const axiosPublic = useAxiosPublic()
@@ -63,7 +64,7 @@ const MyBlogsCard = ({ blog, refetch }) => {
                         </span>
                     )} */}
                 </div>
-                <h5 className="bmiNumber">Post: {blog?.time}</h5>
+                <h5 className="bmiNumber">Post: {makeVisibleTime(blog?.time)}</h5>
                 <div className='w-[100%] h-[2px] bg-secondary'></div>
                 <div className="mt-4 flex justify-evenly">
                     {/* update bloguct */}
