@@ -16,7 +16,7 @@ const StravaCondition = () => {
     const [loading, setLoading] = useState(false)
     const axiosStrava = useAxiosStrava()
     const buttonStyle =
-        "btn transition-all duration-500 w-[140px]  font-bold text-white hover:text-black text-sm rounded border-[3px] active:bg-[#ff470470] active:scale-90";
+        "btn transition-all duration-500 w-[140px]  font-bold text-white  text-sm rounded border-[3px] active:bg-primary/70 active:scale-90";
     const disbuttonStyle =
         "transition-all duration-500  font-bold text-white  text-sm rounded border-[3px]  active:scale-90";
     useEffect(() => {
@@ -71,7 +71,7 @@ const StravaCondition = () => {
                             {
                                 isRegister ? <button
                                     disabled
-                                    className={`${disbuttonStyle} bg-[#ff4704]   border-transparent  my-3 p-3`}>Already Connected</button> : <button onClick={() => setOpen(true)} className={`${buttonStyle} bg-[#ff4704] hover:bg-[#ff470436]  border-transparent hover:border-[#ff4704] my-3`}>{loading ? <span className="loading loading-spinner loading-sm"></span> : 'Connect Strava'}</button>
+                                    className={`${disbuttonStyle} bg-primary   border-transparent  my-3 p-3`}>Already Connected</button> : <button onClick={() => setOpen(true)} className={`${buttonStyle} bg-primary hover:bg-primary/35  border-transparent hover:border-primary my-3`}>{loading ? <span className="loading loading-spinner loading-sm"></span> : 'Connect Strava'}</button>
                             }
 
                         </div>

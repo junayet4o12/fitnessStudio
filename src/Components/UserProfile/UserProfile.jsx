@@ -7,6 +7,7 @@ import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg'
 import UserProfileMain from "./UserProfileMain";
 import Loading from "../Loading";
 import Title from "../Title/Title";
+import { makeVisibleTime } from "../../Hooks/makeVisibleTime";
 const UserProfile = () => {
     const { email, id } = useParams();
     const axiosPublic = useAxiosPublic()
@@ -68,7 +69,7 @@ const UserProfile = () => {
                                     >
                                         <h1 className="text-2xl font-[600]">{blog.blogName}</h1>
                                     </Link>
-                                    <p>published at: <span className="bmiNumber">{blog.time}</span></p>
+                                    <p>published at: <span className="bmiNumber">{makeVisibleTime(blog.time)}</span></p>
                                     <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}}` }} />
                                 </div>
                             </div>)

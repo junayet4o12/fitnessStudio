@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import Swal from 'sweetalert2';
+import { makeVisibleTime } from '../../Hooks/makeVisibleTime';
 
 const DynamicBlogpage = () => {
   const param = useParams().id
@@ -104,7 +105,7 @@ const DynamicBlogpage = () => {
           <h1 className='text-xl font-[600] '>{blog.userName}</h1>
         </Link>
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
-        <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
+        <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
         {
           myblog?._id === userDetails?._id ? '' : (isFollower ?
