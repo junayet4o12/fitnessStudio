@@ -94,6 +94,15 @@ const Sidebar = () => {
               <>
                 <li>
                   <NavLink
+                    to="/dashboard/connected_with"
+                    className={({ isActive, isPending }) =>
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
+                    }>
+                    <MdOutlineConnectWithoutContact /> Connected With
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/dashboard/connect_people"
                     className={({ isActive, isPending }) =>
                       isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
