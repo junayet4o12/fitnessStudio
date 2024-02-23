@@ -84,12 +84,12 @@ const StrengthTraining = () => {
                     Object.entries(goalInfo).filter(([key, value]) => value !== undefined)
                 )
                 console.log(filteredGoalInfo)
-                // axiosSecure.post("user_goal", goalInfo).then((res) => {
-                //     if (res?.data?.insertedId) {
-                //         reset();
-                //         toast.success("Goal Created Successfully!", { id: toastId });
-                //     }
-                // });
+                axiosSecure.post("user_goal", goalInfo).then((res) => {
+                    if (res?.data?.insertedId) {
+                        reset();
+                        toast.success("Goal Created Successfully!", { id: toastId });
+                    }
+                });
             }
         });
     };
@@ -117,10 +117,7 @@ const StrengthTraining = () => {
 
                             {/* Main form starts here */}
                             <div>
-                                {/* TODO:
-                                1.Select Goal Type
-                                2. Create different form for each type */}
-
+                               
                                 <div className="bg-slate-100 p-4 w-full text-black rounded-xl rounded-b-md">
                                     <div className="flex items-center justify-between">
                                         <h1 className="text-white">Goal Type</h1>
