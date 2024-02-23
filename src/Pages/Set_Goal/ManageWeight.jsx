@@ -137,7 +137,7 @@ const ManageWeight = () => {
                                     </div>
                                     {errors.selectedValue?.type === "required" && (
                                         <span className="text-red-400 text-xs ">
-                                           {' This field is required' || errorMessage}
+                                            This field is required
                                         </span>
                                     )}
                                 </div>
