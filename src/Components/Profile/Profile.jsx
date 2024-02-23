@@ -23,7 +23,7 @@ const Profile = () => {
     console.log(userDetails?.followedTime);
     // style Variable start
 
-    const inputFieldStyle = ` ${edit ? 'input input-info border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
+    const inputFieldStyle = ` ${edit ? 'input input-accent border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
     const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}   w-full   h-[50px]  border-primary rounded font-semibold  text-black`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
 

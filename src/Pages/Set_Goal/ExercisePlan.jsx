@@ -16,7 +16,7 @@ const ExercisePlan = () => {
           <p className="text-base text-gray-300 font-medium mt-5">{`Embrace the simple yet powerful act of walking and unlock a path to better health with our comprehensive guide, "Step into Wellness." Whether you're a seasoned walker or just getting started, this resource is designed to inspire and inform, helping you harness the numerous benefits of walking for your physical and mental well-being.`}</p>
 
           <button
-            className={`${buttonStyle} bg-primary hover:bg-[#ff470436]  border-transparent hover:border-primary hover:text-black mt-5`}>
+            className={`${buttonStyle} bg-primary hover:bg-primary/40  border-transparent hover:border-primary mt-5`}>
             Start
           </button>
         </div>
