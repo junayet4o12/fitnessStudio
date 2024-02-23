@@ -51,6 +51,7 @@ import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
 import { backendUrl } from "../BackendUrl/backendUrl";
 import Shop from "../Pages/Shop/Shop";
 import Feedback from "../Pages/Feedback/Feedback";
+import AddEvent from "../Pages/Event/AddEvent";
 
 
 const axiosPublic = useAxiosPublic();
@@ -354,6 +355,14 @@ const MyRouts = createBrowserRouter([
         element: (
           <AdminRouts>
             <MangeBlogPage></MangeBlogPage>
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "add_event",
+        element: (
+          <AdminRouts>
+            <AddEvent></AddEvent>
           </AdminRouts>
         ),
       },
