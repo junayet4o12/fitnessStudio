@@ -8,7 +8,7 @@ const SetGoal = () => {
  
 
   return (
-    <div className="text-white px-4 bg-gradient-to-r from-[#000428] to-[#004e92]">
+    <div className="text-white px-4 bg-gradient-to-r from-[#000428] to-[#004e92] py-10 pb-20">
       <Helmet>
         <title>Set Goal - FitnessStudio</title>
       </Helmet>

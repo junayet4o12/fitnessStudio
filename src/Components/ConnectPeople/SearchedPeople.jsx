@@ -39,7 +39,7 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
     return (
         <div className="relative flex w-full max-w-[35rem] mx-auto my-3 border-b border-l-[1.5px] border-gray-700 p-[6px] rounded shadow-md shadow-primary/50 justify-between items-center bg-primary/70 text-white">
             <div className='flex gap-3 items-center'>
-                <img className='h-9 w-9 rounded-full' src={info?.image} alt="" />
+                <img className='h-9 w-9 rounded-full object-cover' src={info?.image} alt="" />
                 <h2 className="text-sm font-bold">{info?.name}</h2>
             </div>
             <div className='flex items-center gap-2'>
