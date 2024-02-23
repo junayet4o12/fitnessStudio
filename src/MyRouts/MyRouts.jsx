@@ -50,6 +50,7 @@ import ProductsForAdmin from "../Pages/ProductsForAdmin/ProductsForAdmin";
 import UpdateProductForm from "../Pages/UpdateProductForm/UpdateProductForm";
 import { backendUrl } from "../BackendUrl/backendUrl";
 import Shop from "../Pages/Shop/Shop";
+import Feedback from "../Pages/Feedback/Feedback";
 
 
 const axiosPublic = useAxiosPublic();
@@ -307,6 +308,14 @@ const MyRouts = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyBlogs />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "feedback",
+        element: (
+          <PrivateRoute>
+            <Feedback></Feedback>
           </PrivateRoute>
         ),
       },

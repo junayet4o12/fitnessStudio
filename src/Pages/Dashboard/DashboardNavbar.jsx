@@ -10,6 +10,7 @@ import { FaPenNib } from "react-icons/fa";
 import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import useAuth from "../../Hooks/useAuth";
+import { MdFeedback } from "react-icons/md";
 
 
 import { Helmet } from 'react-helmet-async'
@@ -201,6 +202,15 @@ const DashboardNavbar = () => {
                                         }
                                     >
                                         <FaBookAtlas /> My Blogs
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/feedback"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "bg-primary text-white" : ""
+                                        }
+                                    >
+                                        <MdFeedback /> Feedback
                                     </NavLink>
                                 </li>
                             </>
