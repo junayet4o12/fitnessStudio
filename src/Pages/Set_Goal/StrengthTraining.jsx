@@ -81,7 +81,7 @@ const StrengthTraining = () => {
                     
                 };
                 const filteredGoalInfo = Object.fromEntries(
-                    Object.entries(goalInfo).filter(([key, value]) => value !== undefined)
+                    Object.entries(goalInfo).filter(([, value]) => value !== undefined)
                 )
                 console.log(filteredGoalInfo)
                 axiosSecure.post("user_goal", goalInfo).then((res) => {
@@ -316,7 +316,7 @@ const StrengthTraining = () => {
                                         </div>
 
                                         <div className="bg-slate-100 p-5 rounded-md mt-2">
-                                            <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-8 justify-between">
                                                 <h1 className="font-semibold">{muscleGroup?.value ==='shoulders' ? 'Current Overhead Press 1RM' : muscleGroup?.value ==='arms' ? 'Current Bicep Curl 1RM' :
                                                         muscleGroup?.value ==='core' ? 'Current Plank Duration' :''}</h1>
                                                 <div>
@@ -382,9 +382,7 @@ const StrengthTraining = () => {
                                                            })}
                                                            className={inputStyle}
                                                        />
-                                                       <label className={labelStyle}>
-                                                           KG
-                                                       </label>
+                                                     
                                                    </div>
                                                </div>
                                            </div>
