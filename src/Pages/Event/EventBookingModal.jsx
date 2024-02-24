@@ -1,18 +1,40 @@
 import { Button, Dialog, DialogFooter } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import PropTypes from "prop-types";
 
 const EventBookingModal = ({ open, setOpen, booked }) => {
   const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
-    setOpen(false);
-    console.log(data);
+    const toastId = toast.loading("Event Booking...");
+    const bookingInfo = {
+      event_image: booked?.event_image,
+      event_name: booked?.event_name,
+      event_price: booked?.event_price,
+      event_provider_name: booked?.event_provider_name,
+      event_provider_email: booked?.event_provider_email,
+      user_name: data?.user_name,
+      user_email: data?.user_email,
+      user_number: data?.user_number,
+    };
+
+    axiosPublic.post("/events_booking", bookingInfo).then((res) => {
+      if (res?.data?.insertedId) {
+        reset();
+        toast.success("Event Booking Successfully !", { id: toastId });
+        setOpen(false);
+      }
+    });
   };
 
   const buttonStyle =
@@ -97,6 +119,9 @@ const EventBookingModal = ({ open, setOpen, booked }) => {
       </div>
     </div>
   );
+};
+EventBookingModal.propTypes = {
+  booked: PropTypes.object.isRequired,
 };
 
 export default EventBookingModal;

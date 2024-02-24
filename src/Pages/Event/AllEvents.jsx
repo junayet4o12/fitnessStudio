@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "../../Components/Container/Container";
 import Title from "../../Components/Title/Title";
 import EventCard from "./EventCard";
@@ -16,16 +15,14 @@ const AllEvents = () => {
     },
   });
 
-
   return (
     <div className="min-h-screen">
       <Container>
         <Title title="All Events"></Title>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {
-                allEvents?.map(event => <EventCard key={event._id} event={event}></EventCard>)
-            }
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+          {allEvents?.map((event) => (
+            <EventCard key={event._id} event={event}></EventCard>
+          ))}
         </div>
       </Container>
     </div>

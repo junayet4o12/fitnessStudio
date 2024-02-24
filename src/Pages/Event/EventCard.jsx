@@ -77,8 +77,8 @@ const EventCard = ({ event }) => {
             </button>
           </div>
 
-          <p className=" block font-sans text-base antialiased font-light leading-relaxed text-gray-600 min-h-[160px] ">
-            {event_description}....
+          <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-600 min-h-[160px] ">
+            {event_description?.slice(0, 315)}....
           </p>
           <div className="mt-2">
             <p className="text-lg font-bold text-black ">
