@@ -30,12 +30,12 @@ const Banner = () => {
     };
     // bg-gradient-to-l from-orange-500 to-orange-900
     const swiperTextStyle = 'w-full min-h-[93vh] xs:min-h-screen p-10 sm:p-20 flex items-center uppercase bg-black/50 text-4xl md:text-5xl xl:text-6xl'
-    const textColor = 'text-primary'
+    const textColor = 'text-secondary'
     return (
         <div >
             <div className="min-h-[93vh] max-h-[93vh] sm:min-h-screen xs:max-h-screen bg-black  relative overflow-hidden">
 
-                <div className='overflow-hidden  '>
+                <div className='overflow-hidden'>
                     <Swiper
                         grabCursor={true}
                         effect={'creative'}
@@ -65,7 +65,7 @@ const Banner = () => {
                     <div className="flex justify-center items-end gap-5 sm:gap-10 py-20 xs:py-32 absolute bottom-0 z-20 w-full h-full ">
                         <Link to={"/contact_us"}>
                             <button
-                                className={`${buttonStyle} bg-primary hover:bg-primary/40  border-transparent hover:border-primary mt-14`}>
+                                className={`${buttonStyle} bg-secondaryDeep hover:bg-secondaryDeep/40  border-transparent hover:border-secondarybg-secondaryDeep mt-14`}>
                                 Contact us
                             </button>
                         </Link>
@@ -74,7 +74,7 @@ const Banner = () => {
                         ) : (
                             <button
                                 onClick={handleLogin}
-                                className={`${buttonStyle} bg-primary/40 hover:bg-primary  border-primary hover:border-transparent mt-14`}>
+                                className={`${buttonStyle} bg-secondaryDeep/40 hover:bg-secondaryDeep  border-secondaryDeep hover:border-transparent mt-14`}>
                                 Log in
                             </button>
                         )}

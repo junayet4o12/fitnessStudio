@@ -43,18 +43,18 @@ const UserProfile = () => {
 
     const myBMR = (userData?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
     return (
-        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]'
+        <div className='p-5 lg:p-10 '
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <UserProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userData} refetch={refetch} userPost={userPost}></UserProfileMain>
             {/* user Blogs  */}
-            <div className="text-white">
+            <div className="">
                <Title title={'Posted Blog'}></Title>
             </div>
             <div className="flex flex-col md:flex-row flex-wrap justify-evenly gap-2">
 
                 {
-                    userPost?.length < 1 ? <span className="text-xl font-bold text-white">
+                    userPost?.length < 1 ? <span className="text-xl font-bold ">
                     <span className="text-2xl block text-center">Opps!!</span>
                     No posts have been uploaded yet.</span> : (
 
