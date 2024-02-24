@@ -2,16 +2,6 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
-// import {
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   AreaChart,
-//   Area,
-//   ResponsiveContainer,
-// } from "recharts";
-
 
 const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
   // const data1 = weightTracking || [];
@@ -21,10 +11,10 @@ const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
 
   const progressBarStyles = {
     path: {
-      stroke: "#FF4804",
+      stroke: "#05a16d",
     },
     text: {
-      fill: "#FF4804",
+      fill: "#05a16d",
       fontSize: "16px",
       fontFamily: "Poppins",
     },
@@ -39,11 +29,11 @@ const ChartProgress = ({ caloriesOut, caloriesBurned }) => {
     <div className="mt-6 mx-2">
       <h2 className="text-2xl my-2 font-bold">Todays Calories</h2>
       <BarChart width={500} height={300} data={data} style={{fontFamily: "Poppins"}}>
-        <XAxis dataKey="name" stroke="#8884d8" />
+        <XAxis dataKey="name" stroke="#05a16d" />
         <YAxis />
         <Tooltip />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <Bar dataKey="uv" fill="#8884d8" barSize={30} />
+        <Bar dataKey="uv" fill="#05a16d" barSize={30} />
       </BarChart>
 
       {/* <h2 className="text-2xl my-2 font-bold">Calories Burned</h2> */}
