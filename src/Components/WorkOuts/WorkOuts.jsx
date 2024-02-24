@@ -35,7 +35,7 @@ const WorkOuts = () => {
     <div>
       <div className='flex flex-col items-center gap-5 justify-center container my-[100px] mx-auto p-[10px]'>
     { exercise.map((item)=>
-    <div key={item.id} className='flex flex-col md:flex-row gap-5 p-[20px] border-2 bg-gradient-to-r from-[#000428] to-[#004e92] border-primary w-full rounded-md'>
+    <div key={item.id} className='flex flex-col md:flex-row gap-5 p-[20px] border-2 bg-secondary/20 border-primary w-full rounded-md'>
       <div className='flex flex-col items-center'>
           <a href={item.gifUrl} target='_blank'>
             {/* <img src="./exerciseIcon.gif"/> */}
