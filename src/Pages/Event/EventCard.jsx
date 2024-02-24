@@ -1,20 +1,39 @@
 import { BiSolidPurchaseTag } from "react-icons/bi";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
+import { useState } from "react";
+import EventBookingModal from "./EventBookingModal";
 
 const EventCard = ({ event }) => {
+  const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
   const {
     event_description,
     event_image,
     event_name,
     event_price,
     event_provider_email,
-    event_provider_image,
     event_provider_name,
     event_start_date,
     event_start_end,
     event_tickets,
-    _id,
   } = event || {};
+  const [booked, setBooked] = useState("");
+  const handleBook = (
+    event_image,
+    event_name,
+    event_price,
+    event_provider_name,
+    event_provider_email
+  ) => {
+    const bookingData = {
+      event_image: event_image,
+      event_name: event_name,
+      event_price: event_price,
+      event_provider_name: event_provider_name,
+      event_provider_email: event_provider_email,
+    };
+    setBooked(bookingData);
+  };
+
   const formDate = (numericDate) => {
     const date = new Date(numericDate);
     const formattedDate = date.toLocaleDateString("en-US", {
@@ -41,10 +60,24 @@ const EventCard = ({ event }) => {
             <h5 className="block text-2xl mb-3 antialiased font-bold leading-snug tracking-normal text-primary">
               {event_name}
             </h5>
-            <BiSolidPurchaseTag className="text-3xl -mt-2 hover:text-black hover:cursor-pointer" />
+            <button
+              onClick={() =>
+                handleBook(
+                  event_image,
+                  event_name,
+                  event_price,
+                  event_provider_name,
+                  event_provider_email
+                )
+              }>
+              <BiSolidPurchaseTag
+                onClick={() => setOpenSuggestionsModal(true)}
+                className="text-3xl -mt-2 hover:text-black hover:cursor-pointer"
+              />
+            </button>
           </div>
 
-          <p className=" block font-sans text-base antialiased font-light leading-relaxed text-gray-600 min-h-[160px] border">
+          <p className=" block font-sans text-base antialiased font-light leading-relaxed text-gray-600 min-h-[160px] ">
             {event_description}....
           </p>
           <div className="mt-2">
@@ -71,12 +104,16 @@ const EventCard = ({ event }) => {
           </div>
         </div>
       </div>
+      <EventBookingModal
+        booked={booked}
+        open={openSuggestionsModal}
+        setOpen={setOpenSuggestionsModal}></EventBookingModal>
     </div>
   );
 };
 
 EventCard.propTypes = {
-    event: PropTypes.object.isRequired
-}
+  event: PropTypes.object.isRequired,
+};
 
 export default EventCard;
