@@ -16,7 +16,7 @@ import { NotificationsMenu } from "./Notification";
 function NavList() {
   const { user } = useAuth()
   return (
-    <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1">
+    <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1  ">
       <Typography
         as="li"
         variant="small"
@@ -31,8 +31,8 @@ function NavList() {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             Home
           </NavLink>
@@ -49,8 +49,8 @@ function NavList() {
             to="/blogs"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             Blogs
           </NavLink>
@@ -67,8 +67,8 @@ function NavList() {
             to="/library"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm font-bold"
+                : "text-sm  font-bold text-gray-300"
             }>
             Library
           </NavLink>
@@ -85,8 +85,8 @@ function NavList() {
             to="/specialRecipe"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             Special Recipes
           </NavLink>
@@ -103,8 +103,8 @@ function NavList() {
             to="/shop"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             shop
           </NavLink>
@@ -124,8 +124,8 @@ function NavList() {
             to="/about_us"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             About Us
           </NavLink>
@@ -145,8 +145,8 @@ function NavList() {
             to="/contact_us"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             Contact Us
           </NavLink>
@@ -166,8 +166,8 @@ function NavList() {
             to="/login"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-primary underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold text-gray-300"
             }>
             Login
           </NavLink>
@@ -192,14 +192,14 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0">
+    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 sm:px-6 lg:px-3 xl:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0">
 
       <div className="lg:container mx-auto flex items-center justify-between text-black">
         <Typography
           as="a"
           href="#"
           variant="h6"
-          className="mr-4 cursor-pointer py-1.5">
+          className="mr-4 cursor-pointer py-1.5  ">
           <Link to={'/'} className="scroll-smooth">
             <h1 className="flex items-center text-xl xs:text-2xl text-white font-bold md:text-4xl md:font-extrabold">
               <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
@@ -223,19 +223,19 @@ export function NavbarSimple() {
             )}
           </IconButton>
 
-          <span className="flex  items-center gap-3 ">
+          <span className="flex  items-center gap-2  ">
             {/* <span className="text-lg relative py-4 px-2 cursor-pointer active:scale-90 transition-all dura">
               <FaBell/>
               <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
             </span> */}
 
-          {/* Bell icon with notification button */}
-          {user && <NotificationsMenu /> }
+            {/* Bell icon with notification button */}
+            {user && <NotificationsMenu />}
 
-          {/* User Profile component */}
-          <span className="">
-            {user && <NavProfile />}
-          </span>
+            {/* User Profile component */}
+            <span className="">
+              {user && <NavProfile />}
+            </span>
           </span>
 
 

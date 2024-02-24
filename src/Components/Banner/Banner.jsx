@@ -29,7 +29,7 @@ const Banner = () => {
         navigate("/login");
     };
     // bg-gradient-to-l from-orange-500 to-orange-900
-    const swiperTextStyle = 'w-full min-h-[93vh] xs:min-h-screen p-10 sm:p-20 flex items-center uppercase bg-black/50 text-4xl md:text-5xl'
+    const swiperTextStyle = 'w-full min-h-[93vh] xs:min-h-screen p-10 sm:p-20 flex items-center uppercase bg-black/50 text-4xl md:text-5xl xl:text-6xl'
     const textColor = 'text-primary'
     return (
         <div >
@@ -103,12 +103,12 @@ const Banner = () => {
                                 <span className={textColor}>in Shap</span></h2>
                         </div></SwiperSlide>
                         <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2>Reach your <br />
-                                <span className={textColor}>goals</span></h2>
+                            <h2>Reach to your <br />
+                                <span className={textColor}>own goals </span></h2>
                         </div></SwiperSlide>
                         <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2 >Achieve <br />
-                                <span className={textColor}>your dreams</span></h2>
+                            <h2 >Gain your dreams  <br />
+                                <span className={textColor}>With Perfection</span></h2>
                         </div></SwiperSlide>
 
                     </Swiper>
