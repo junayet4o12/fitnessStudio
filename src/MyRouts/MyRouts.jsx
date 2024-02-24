@@ -52,6 +52,7 @@ import { backendUrl } from "../BackendUrl/backendUrl";
 import Shop from "../Pages/Shop/Shop";
 import Feedback from "../Pages/Feedback/Feedback";
 import AddEvent from "../Pages/Event/AddEvent";
+import AllEvents from "../Pages/Event/AllEvents";
 
 
 const axiosPublic = useAxiosPublic();
@@ -139,6 +140,15 @@ const MyRouts = createBrowserRouter([
           <PrivateRoute>
             {" "}
             <DynamicBlogpage2 />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all_events",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AllEvents></AllEvents>
           </PrivateRoute>
         ),
       },

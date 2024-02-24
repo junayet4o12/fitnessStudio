@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const AddEvent = () => {
   const { user } = useAuth();
@@ -17,7 +17,7 @@ const AddEvent = () => {
   const [endDate, setEndDate] = useState();
   const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
   const {
     register,
     handleSubmit,
@@ -26,13 +26,6 @@ const AddEvent = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // const image = { image: data?.image[0] };
-    // const res = await axios.post(imgHostingApi, image, {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // });
-    // const eventImageURL = res?.data?.data?.display_url;
     Swal.fire({
       title: "Are you sure?",
       text: "Do you add event?",
@@ -63,7 +56,7 @@ const AddEvent = () => {
               event_start_date: startDate,
               event_start_end: endDate,
             };
-            axiosSecure.post("/all_event", eventInfo).then((res) => {
+            axiosPublic.post("/all_event", eventInfo).then((res) => {
               if (res?.data?.insertedId) {
                 reset();
                 toast.success("Event Added Successfully!", { id: toastId });

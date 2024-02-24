@@ -14,7 +14,7 @@ import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
 
 function NavList() {
-  const { user } = useAuth()
+  const { user } = useAuth();
   return (
     <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1">
       <Typography
@@ -106,7 +106,25 @@ function NavList() {
                 ? "text-primary underline underline-offset-8 text-base font-bold"
                 : "text-base font-bold text-gray-300"
             }>
-            shop
+            Shop
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
+          <NavLink
+            to="/all_events"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary underline underline-offset-8 text-base font-bold"
+                : "text-base font-bold text-gray-300"
+            }>
+            Events
           </NavLink>
         </div>
       </Typography>
@@ -160,18 +178,20 @@ function NavList() {
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Login
         </a> */}
-        {!user && <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
-            }>
-            Login
-          </NavLink>
-        </div>}
+        {!user && (
+          <div className="relative group tracking-[1px] w-fit">
+            <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-primary underline underline-offset-8 text-base font-bold"
+                  : "text-base font-bold text-gray-300"
+              }>
+              Login
+            </NavLink>
+          </div>
+        )}
       </Typography>
     </ul>
   );
@@ -179,7 +199,7 @@ function NavList() {
 
 export function NavbarSimple() {
   const [openNav, setOpenNav] = React.useState(false);
-  const { user } = useAuth()
+  const { user } = useAuth();
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
@@ -193,17 +213,19 @@ export function NavbarSimple() {
 
   return (
     <Navbar className=" mx-auto min-w-[100vw] rounded-none px-1 xs:px-6 py-3 bg-gradient-to-r from-[#000428] to-[#004e92] sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0">
-
       <div className="lg:container mx-auto flex items-center justify-between text-black">
         <Typography
           as="a"
           href="#"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5">
-          <Link to={'/'} className="scroll-smooth">
+          <Link to={"/"} className="scroll-smooth">
             <h1 className="flex items-center text-xl xs:text-2xl text-white font-bold md:text-4xl md:font-extrabold">
-              <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />Fitness
-              <span className="text-primary text-2xl xs:text-3xl md:text-5xl">Studio</span>
+              <CgGym className="text-primary mr-1 text-3xl md:text-5xl" />
+              Fitness
+              <span className="text-primary text-2xl xs:text-3xl md:text-5xl">
+                Studio
+              </span>
             </h1>
           </Link>
         </Typography>
@@ -229,24 +251,18 @@ export function NavbarSimple() {
               <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
             </span> */}
 
-          {/* Bell icon with notification button */}
-          {user && <NotificationsMenu /> }
+            {/* Bell icon with notification button */}
+            {user && <NotificationsMenu />}
 
-          {/* User Profile component */}
-          <span className="">
-            {user && <NavProfile />}
+            {/* User Profile component */}
+            <span className="">{user && <NavProfile />}</span>
           </span>
-          </span>
-
-
         </div>
-
       </div>
 
       <Collapse open={openNav} className="w-fit">
         <NavList />
       </Collapse>
-
     </Navbar>
   );
 }
