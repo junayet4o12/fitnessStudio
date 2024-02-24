@@ -15,7 +15,6 @@ const MyBooking = () => {
       return res?.data;
     },
   });
-  console.log(myAllBookings);
 
   const handleCancel = (id) => {
     Swal.fire({
@@ -25,14 +24,14 @@ const MyBooking = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const toastId = toast.loading("Deleting...");
-        axiosPublic.delete(`/delete_blog/${id}`).then((res) => {
+        const toastId = toast.loading("Canceling...");
+        axiosPublic.delete(`/cancel_booking/${id}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
             refetch();
-            toast.success("This event has been deleted.", { id: toastId });
+            toast.success("This event has been canceled.", { id: toastId });
           }
         });
       }
@@ -52,81 +51,101 @@ const MyBooking = () => {
     "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[110px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
 
   return (
-    <div className=" py-10 px-10">
-      <Title title="My Bookings"></Title>
-      <div className="bg-[#F6F6F6] py-8 md:py-10  rounded-xl px-8">
-        <div>
-          <div className="flex justify-between">
-            <h1 className="text-4xl font-bold underline underline-offset-8 text-black">
-              Total Booked:{" "}
-              <span className="font-sans">{myAllBookings?.length}</span>
-            </h1>
-          </div>
-          {/*  */}
-          <div>
-            <div className="overflow-x-auto">
-              <table className="table max-w-full my-10">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th className="text-lg text-black">Event Image</th>
-                    <th className="text-lg text-black">Name</th>
-                    <th className="text-lg text-black">Provider</th>
-                    <th className="text-lg text-black">Email</th>
-                    <th className="text-lg text-black">Duration</th>
-                    <th className="text-lg text-black">Price</th>
-                    <th className="text-lg text-black">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {myAllBookings?.map((booking) => (
-                    <tr key={booking?._id}>
-                      <th>
-                        <div className="avatar">
-                          <div className="w-24 h-16 object-cover rounded-lg">
-                            <img src={booking?.event_image} />
-                          </div>
-                        </div>
-                      </th>
-                      <td className="text-gray-700">
-                        <div className="tooltip" data-tip={booking?.event_name}>
-                          {booking?.event_name?.slice(0, 30)} ...
-                        </div>
-                      </td>
-                      <td className="text-gray-700">
-                        {booking?.event_provider_name}
-                      </td>
-                      <td className="text-gray-700 ">
-                        {booking?.event_provider_email}
-                      </td>
-                      <td className="text-gray-700 ">
-                        <span className="font-sans text-gray-700">
-                          {formDate(booking?.event_start_date).slice(5, 17)}
-                        </span>{" "}
-                        -{" "}
-                        <span className="font-sans text-gray-700">
-                          {formDate(booking?.event_start_end).slice(5, 17)}
-                        </span>
-                      </td>
-                      <td className="text-gray-700 font-sans">
-                        {booking?.event_price} $
-                      </td>
-                      <th>
-                        <button
-                          onClick={() => handleCancel(booking?._id)}
-                          className={`${buttonStyle} bg-red-500 hover:bg-red-100  border-transparent hover:border-red-500 hover:text-black `}>
-                          Cancel
-                        </button>
-                      </th>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+    <>
+      <div>
+        {myAllBookings?.length > 0 ? (
+          <div className=" py-10 px-10">
+            <Title title="My Bookings"></Title>
+            <div className="bg-[#F6F6F6] py-8 md:py-10  rounded-xl px-8">
+              <div>
+                <div className="flex justify-between">
+                  <h1 className="text-4xl font-bold underline underline-offset-8 text-black">
+                    Total Booked:{" "}
+                    <span className="font-sans">{myAllBookings?.length}</span>
+                  </h1>
+                </div>
+                {/*  */}
+                <div>
+                  <div className="overflow-x-auto">
+                    <table className="table max-w-full my-10">
+                      {/* head */}
+                      <thead>
+                        <tr>
+                          <th className="text-lg text-black">Event Image</th>
+                          <th className="text-lg text-black">Name</th>
+                          <th className="text-lg text-black">Provider</th>
+                          <th className="text-lg text-black">Email</th>
+                          <th className="text-lg text-black">Duration</th>
+                          <th className="text-lg text-black">Price</th>
+                          <th className="text-lg text-black">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {myAllBookings?.map((booking) => (
+                          <tr key={booking?._id}>
+                            <th>
+                              <div className="avatar">
+                                <div className="w-24 h-16 object-cover rounded-lg">
+                                  <img src={booking?.event_image} />
+                                </div>
+                              </div>
+                            </th>
+                            <td className="text-gray-700">
+                              <div
+                                className="tooltip"
+                                data-tip={booking?.event_name}>
+                                {booking?.event_name?.slice(0, 30)} ...
+                              </div>
+                            </td>
+                            <td className="text-gray-700">
+                              {booking?.event_provider_name}
+                            </td>
+                            <td className="text-gray-700 ">
+                              {booking?.event_provider_email}
+                            </td>
+                            <td className="text-gray-700 ">
+                              <span className="font-sans text-gray-700">
+                                {formDate(booking?.event_start_date).slice(
+                                  5,
+                                  17
+                                )}
+                              </span>{" "}
+                              -{" "}
+                              <span className="font-sans text-gray-700">
+                                {formDate(booking?.event_start_end).slice(
+                                  5,
+                                  17
+                                )}
+                              </span>
+                            </td>
+                            <td className="text-gray-700 font-sans">
+                              {booking?.event_price} $
+                            </td>
+                            <th>
+                              <button
+                                onClick={() => handleCancel(booking?._id)}
+                                className={`${buttonStyle} bg-red-500 hover:bg-red-100  border-transparent hover:border-red-500 hover:text-black `}>
+                                Cancel
+                              </button>
+                            </th>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex items-center justify-center h-screen">
+            <h1 className="text-xl md:text-3xl font-semibold text-gray-500">
+              {"You don't have a booked event"}
+            </h1>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
