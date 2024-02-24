@@ -4,7 +4,7 @@ import { useState } from "react";
 import EventBookingModal from "./EventBookingModal";
 
 const EventCard = ({ event }) => {
-  const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const {
     event_description,
     event_image,
@@ -77,7 +77,7 @@ const EventCard = ({ event }) => {
                 )
               }>
               <BiSolidPurchaseTag
-                onClick={() => setOpenSuggestionsModal(true)}
+                onClick={() => setOpenModal(true)}
                 className="text-3xl -mt-2 hover:text-black hover:cursor-pointer"
               />
             </button>
@@ -112,8 +112,8 @@ const EventCard = ({ event }) => {
       </div>
       <EventBookingModal
         booked={booked}
-        open={openSuggestionsModal}
-        setOpen={setOpenSuggestionsModal}></EventBookingModal>
+        openModal={openModal}
+        setOpenModal={setOpenModal}></EventBookingModal>
     </div>
   );
 };

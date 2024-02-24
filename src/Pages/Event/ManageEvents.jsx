@@ -2,12 +2,14 @@ import toast from "react-hot-toast";
 import Title from "../../Components/Title/Title";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useState } from "react";
+import EventUpdateModal from "./EventUpdateModal";
 
 const ManageEvents = () => {
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
+  const [openModal, setOpenModal] = useState(false);
+  const [update, SetUpdate] = useState("");
   const { data: allEvent, refetch } = useQuery({
     queryKey: ["allEvent"],
     queryFn: async () => {
@@ -16,6 +18,9 @@ const ManageEvents = () => {
     },
   });
 
+  const handleEdit = (id) => {
+    SetUpdate(id);
+  };
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -135,11 +140,13 @@ const ManageEvents = () => {
                               {event?.event_price} $
                             </td>
                             <td>
-                              <button
-                                onClick={() => handleEdit(event?._id)}
-                                className={`${buttonStyle} bg-green-500 hover:bg-green-100  border-transparent hover:border-green-500 hover:text-black `}>
-                                Edit
-                              </button>
+                              <div onClick={() => handleEdit(event?._id)}>
+                                <button
+                                  onClick={() => setOpenModal(true)}
+                                  className={`${buttonStyle} bg-green-500 hover:bg-green-100  border-transparent hover:border-green-500 hover:text-black `}>
+                                  Edit
+                                </button>
+                              </div>
                             </td>
                             <th>
                               <button
@@ -156,6 +163,12 @@ const ManageEvents = () => {
                 </div>
               </div>
             </div>
+            <EventUpdateModal
+              allEvent={allEvent}
+              refetch={refetch}
+              update={update}
+              openModal={openModal}
+              setOpenModal={setOpenModal}></EventUpdateModal>
           </div>
         ) : (
           <div className="flex items-center justify-center h-screen">
