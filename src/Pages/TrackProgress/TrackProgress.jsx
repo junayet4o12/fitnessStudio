@@ -8,41 +8,41 @@ import { Helmet } from "react-helmet-async";
 import { IoFootstepsOutline } from "react-icons/io5";
 import { FaCarSide } from "react-icons/fa";
 
-// import { useGetUserGoalQuery } from "./api/baseApiGoal";
-// import useAuth from "../../Hooks/useAuth";
 import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading";
 import toast from "react-hot-toast";
 
+
 const TrackProgress = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const cardStyle =
-    "mx-auto my-2 px-5 text-center bg-green-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+    "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber  flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
 
   const progressBarStyles = {
     path: {
-      stroke: "#FF4804",
+      stroke: "#05a16d",
     },
     text: {
-      fill: "#FF4804",
+      fill: "#05a16d",
       fontSize: "20px",
     },
   };
   console.log(progressBarStyles);
 
-  // const originalDate = new Date();
-  // const formattedDate = `${originalDate.getFullYear()}-${(
-  //   originalDate.getMonth() + 1
-  // )
-  //   .toString()
-  //   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
-
-
-  const { data: track, isLoading:isTrackLoading, isError: isTrackError } = useGetTrackProQuery();
+  const {
+    data: track,
+    isLoading: isTrackLoading,
+    isError: isTrackError,
+  } = useGetTrackProQuery();
   console.log("tracking", track);
   // // console.log(track);
-  const { data: sleep, isError: isSleepError, isLoading: isSleepLoading } = useGetTrackSleepProQuery();
+  const {
+    data: sleep,
+    isError: isSleepError,
+    isLoading: isSleepLoading,
+  } = useGetTrackSleepProQuery();
   console.log("sleeping", sleep);
 
   const sleepDuration = sleep?.summary?.totalMinutesAsleep;
@@ -55,10 +55,10 @@ const TrackProgress = () => {
     return <Loading></Loading>;
   }
   if (isTrackError || isSleepError) {
-    localStorage.removeItem('Authorization')
-    toast.error('Please Connect Fitbit!!!')
+    localStorage.removeItem("Authorization");
+    toast.error("Please Connect Fitbit!!!");
     navigate(`/dashboard/connect_app`);
-    return
+    return;
   }
   return (
     <div>
@@ -77,7 +77,8 @@ const TrackProgress = () => {
             accomplished today and plan for more success tomorrow.
           </p>
           <p className="font-medium text-base mt-2 max-w-[600px]">
-           <strong>Note:</strong> This daily Progress data is coming from Fitbit app You've already connected it to our web page.
+            <strong>Note:</strong> This daily Progress data is coming from
+            Fitbit app You have already connected it to our web page.
           </p>
         </div>
 
@@ -88,7 +89,7 @@ const TrackProgress = () => {
                 <div className={`${cardStyle}`}>
                   <div className="mb-2 flex justify-center items-center space-x-1 ">
                     <IoFootstepsOutline className="text-primary text-2xl " />
-                    <h3 className="text-lg font-medium text-gray-700">Steps</h3>
+                    <h3 className="text-lg font-medium text-gray-900">Steps</h3>
                   </div>
                   <div>
                     <CircularProgressbar
@@ -106,7 +107,7 @@ const TrackProgress = () => {
                       <div className="card-actions justify-start">
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
-                      <div>
+                      <div className="text-black">
                         <p className="text-xl font-semibold">Distance</p>
                         <span className="text-xl font-semibold">
                           {track?.summary?.distances[0]?.distance} miles
@@ -122,7 +123,7 @@ const TrackProgress = () => {
                       <div className="card-actions justify-start ">
                         <GiNightSleep className="text-primary text-2xl" />
                       </div>
-                      <div className="">
+                      <div className="text-black">
                         <p className="text-xl font-semibold">Sleep</p>
                         <span className="text-xl font-semibold">
                           {totalSleep} hr
@@ -147,13 +148,5 @@ const TrackProgress = () => {
     </div>
   );
 };
-
-// const originalDate = new Date();
-// const setFormattedDate = `${originalDate.getFullYear()}-${(
-//   originalDate.getMonth() + 1
-// )
-//   .toString()
-//   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
-// console.log(setFormattedDate);
 
 export default TrackProgress;

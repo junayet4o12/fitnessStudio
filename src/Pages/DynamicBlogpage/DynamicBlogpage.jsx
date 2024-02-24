@@ -101,7 +101,7 @@ const DynamicBlogpage = () => {
       </div>
       <div className='mt-[50px] lg:mt-[0px] lg:w-[25%] md:sticky top-[25%] rounded-md p-[20px] text-white flex flex-col items-center bg-primary bg-opacity-50 h-fit gap-3'>
         <img className='rounded-full' draggable src={blog.userImg} />
-        <Link to={`/blogs/${param}/${blog.userEmail}`}>
+        <Link to={`/userProfile/${blog.userEmail}`}>
           <h1 className='text-xl font-[600] '>{blog.userName}</h1>
         </Link>
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}

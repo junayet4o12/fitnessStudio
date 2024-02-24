@@ -7,7 +7,7 @@ import Testimonials from "../../Components/Testimonials/Testimonials";
 
 const Home = () => {
   return (
-    <div className="bg-gradient-to-r from-[#000428] to-[#004e92] text-white">
+    <div className="bg-white text-black">
       <Banner></Banner>
       <OurFeatures></OurFeatures>
       <HowItWorks></HowItWorks>

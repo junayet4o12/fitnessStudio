@@ -1,31 +1,21 @@
 /* eslint-disable react/no-unknown-property */
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
-import useAuth from "../Hooks/useAuth";
+
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useState } from "react";
 import Loading from "../Components/Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import "react-circular-progressbar/dist/styles.css";
+import { Link } from "react-router-dom";
+import useDailyActivities from "../Hooks/useDailyActivities";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const WeightTrack = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const { register, handleSubmit } = useForm();
-
+  const [weight, isLoading, refetch] = useDailyActivities();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
-  const {
-    data: weight = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/user_goal/${user?.email}`);
-      return res.data;
-    },
-  });
+
   if (isLoading) {
     return <Loading />;
   }
@@ -33,6 +23,21 @@ const WeightTrack = () => {
   const specificWeight = weight?.find(
     (category) => category.tracking_goal === "Weight_Management"
   );
+
+  if (!specificWeight) {
+    return (
+      <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
+        <div className="card-body justify-center">
+          <h2 className="card-title text-center">No goal you have !!!</h2>
+          <div className="card-actions justify-center">
+            <Link to="/dashboard/set_goal">
+              <button className="btn">Set Goal</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const calculateWeight = specificWeight;
   console.log(calculateWeight);
@@ -42,19 +47,25 @@ const WeightTrack = () => {
   const formattedDate = parseInt(
     originalDate.getDate().toString().padStart(2, 0)
   );
-
   const day = dayOfMonth - formattedDate;
 
-  const targetKg = parseInt(calculateWeight?.targetWeight);
-  const current = calculateWeight?.user_current_weight;
+  const oldKg = calculateWeight?.user_current_weight;
+
+  const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
+  const currentKg = calculateWeight?.current_weight;
+  const percentTargeWeight = targetKg - oldKg;
+  const kg = currentKg - oldKg || 0;
+
+  const lossPercent = oldKg - targetKg;
+  const lossKg = oldKg - currentKg || 0;
 
   const onSubmit = async (data) => {
     const updatedData = {
-      user_current_weight: parseInt(data?.user_current_weight),
+      current_weight: parseInt(data?.user_current_weight),
       bodyFat: data?.bodyFat,
     };
-    console.log(updatedData);
-    const res = await axiosPublic.put(
+    // console.log(updatedData);
+    const res = await axiosPublic?.put(
       `/user_goal/${calculateWeight?._id}`,
       updatedData
     );
@@ -83,7 +94,7 @@ const WeightTrack = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/user_goal/${id}`).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -99,15 +110,6 @@ const WeightTrack = () => {
 
   const form =
     "block bmiNumber w-full px-4 py-3 text-sm text-gray-800 bg-white border border-primary rounded-md focus:border-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 ";
-
-  // if (current >= targetKg) {
-  //   Swal.fire({
-  //     title: "Congratulations!",
-  //     text: "You've achieved your target weight!",
-  //     icon: "success",
-  //     confirmButtonText: "Great",
-  //   });
-  // }
 
   if (day <= 0) {
     Swal.fire({
@@ -125,18 +127,30 @@ const WeightTrack = () => {
           <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
             Total time {day ? day : "0"} days
           </span>
-          <button  onClick={() => handleDeleteGoal(calculateWeight?._id)} className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500">
+          <button
+            onClick={() => handleDeleteGoal(calculateWeight?._id)}
+            className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500"
+          >
             Stop Goal
           </button>
         </div>
 
         <div className="w-40 my-2">
-          <ProgressBar
-            width="350px"
-            bgColor="#FF4804"
-            completed={current}
-            maxCompleted={targetKg}
-          />
+          {calculateWeight?.goalType !== "gainWeight" ? (
+            <ProgressBar
+              width="350px"
+              bgColor="#05a16d"
+              completed={lossKg}
+              maxCompleted={lossPercent}
+            />
+          ) : (
+            <ProgressBar
+              width="350px"
+              bgColor="#05a16d"
+              completed={kg}
+              maxCompleted={percentTargeWeight}
+            />
+          )}
         </div>
 
         <div className="mt-2">
@@ -155,11 +169,23 @@ const WeightTrack = () => {
         <div className="flex items-center justify-between mt-4">
           <div className="relative flex justify-center">
             <button
-              disabled={current >= targetKg}
+              disabled={currentKg >= targetKg}
               onClick={() => setIsOpen(true)}
-              className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold "
+              className={`${
+                calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
-              Update Goal
+              Update
+            </button>
+
+            <button
+              disabled={currentKg <= targetKg}
+              onClick={() => setIsOpen(true)}
+              className={`${
+                calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+            >
+              Update
             </button>
 
             {isOpen && (
@@ -201,7 +227,11 @@ const WeightTrack = () => {
                           {...register("user_current_weight", {
                             required: true,
                           })}
-                          defaultValue={calculateWeight?.user_current_weight}
+                          defaultValue={
+                            calculateWeight?.current_weight
+                              ? calculateWeight.current_weight
+                              : calculateWeight.user_current_weight
+                          }
                           className={`${form}`}
                         />
                       </label>

@@ -4,34 +4,42 @@ import "react-circular-progressbar/dist/styles.css";
 import { LuGlassWater } from "react-icons/lu";
 import { FaWeight } from "react-icons/fa";
 import { GiWeightLiftingUp } from "react-icons/gi";
-import { useGetTrackWaterProQuery, useGetTrackWeightProQuery } from "./api/baseApi";
-
+import { useGetTrackWaterProQuery } from "./api/baseApi";
+import useDailyActivities from "../../Hooks/useDailyActivities";
 
 const HeartRate = () => {
+  const [weight] = useDailyActivities();
+  console.log(weight);
+
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
 
   const progressBarStyles = {
     path: {
-      stroke: "#FF4804",
+      stroke: "#05a16d",
     },
     text: {
-      fill: "#FF4804",
+      fill: "#05a16d",
       fontSize: "10px",
       fontFamily: "Poppins",
     },
   };
   const { data: water, isLoading } = useGetTrackWaterProQuery();
-  const { data: weight } = useGetTrackWeightProQuery();
-  console.log(" weight", weight);
 
   if (isLoading) {
     return "";
   }
 
   const waterConsumed = water?.summary?.water;
-  const totalWeight = weight?.weight[0]?.weight || 0;
-  const currentBmi = weight?.weight[0]?.bmi || 0;
+
+  const specificWeight = weight?.find(
+    (category) => category?.tracking_goal === "Weight_Management"
+  );
+  console.log(specificWeight);
+
+
+
+
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
@@ -42,10 +50,10 @@ const HeartRate = () => {
               <div className="card-actions justify-start">
                 <FaWeight className="text-primary text-2xl with-shadow" />
               </div>
-              <div>
+              <div className="text-black">
                 <p className="text-xl font-semibold">Current Bmi</p>
                 <span className="text-xl font-semibold bmiNumber">
-                  {weight ? `${currentBmi}` : 0}
+                  23.4
                 </span>
               </div>
             </div>
@@ -54,8 +62,8 @@ const HeartRate = () => {
 
         <div className="">
           <div className="card bg-orange-50  mb-1">
-            <div className="card-body flex flex-row bmiNumber justify-center items-center">
-              <div className="card-actions justify-start">
+            <div className="card-body flex flex-row bmiNumber justify-center text-black items-center">
+              <div className="card-actions justify-start text-black">
                 <LuGlassWater className="text-primary text-2xl" />
               </div>
               <div>
@@ -78,8 +86,16 @@ const HeartRate = () => {
           </div>
           <div>
             <CircularProgressbar
-              value={totalWeight * 100}
-              text={weight ? `${totalWeight} kg` : "0 kg"}
+              value={
+                specificWeight && specificWeight.current_weight !== undefined
+                  ? specificWeight.current_weight
+                  : specificWeight?.user_current_weight
+              }
+              text={
+                specificWeight && specificWeight.current_weight !== undefined
+                  ? specificWeight.current_weight
+                  : specificWeight?.user_current_weight
+              }
               strokeWidth={20}
               styles={{
                 ...progressBarStyles,
