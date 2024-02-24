@@ -1,7 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
-import useAuth from "../Hooks/useAuth";
+
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useState } from "react";
 import Loading from "../Components/Loading";
@@ -9,25 +7,15 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import useDailyActivities from "../Hooks/useDailyActivities";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const WeightTrack = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const { register, handleSubmit } = useForm();
-
+  const [weight, isLoading, refetch] = useDailyActivities();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
-  const {
-    data: weight = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["user_goal"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/user_goal/${user?.email}`);
-      return res.data;
-    },
-  });
+
   if (isLoading) {
     return <Loading />;
   }
@@ -59,27 +47,25 @@ const WeightTrack = () => {
   const formattedDate = parseInt(
     originalDate.getDate().toString().padStart(2, 0)
   );
-
   const day = dayOfMonth - formattedDate;
+
   const oldKg = calculateWeight?.user_current_weight;
-  console.log(oldKg);
 
   const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
-  console.log(targetKg);
   const currentKg = calculateWeight?.current_weight;
-  console.log(currentKg);
   const percentTargeWeight = targetKg - oldKg;
-  // console.log(percentTargeWeight);
   const kg = currentKg - oldKg || 0;
-  console.log(kg);
+
+  const lossPercent = oldKg - targetKg;
+  const lossKg = oldKg - currentKg || 0;
 
   const onSubmit = async (data) => {
     const updatedData = {
       current_weight: parseInt(data?.user_current_weight),
       bodyFat: data?.bodyFat,
     };
-    console.log(updatedData);
-    const res = await axiosPublic.put(
+    // console.log(updatedData);
+    const res = await axiosPublic?.put(
       `/user_goal/${calculateWeight?._id}`,
       updatedData
     );
@@ -125,8 +111,6 @@ const WeightTrack = () => {
   const form =
     "block bmiNumber w-full px-4 py-3 text-sm text-gray-800 bg-white border border-primary rounded-md focus:border-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 ";
 
-
-
   if (day <= 0) {
     Swal.fire({
       title: "Alert!",
@@ -152,12 +136,21 @@ const WeightTrack = () => {
         </div>
 
         <div className="w-40 my-2">
-          <ProgressBar
-            width="350px"
-            bgColor="#05a16d"
-            completed={kg}
-            maxCompleted={percentTargeWeight}
-          />
+          {calculateWeight?.goalType !== "gainWeight" ? (
+            <ProgressBar
+              width="350px"
+              bgColor="#05a16d"
+              completed={lossKg}
+              maxCompleted={lossPercent}
+            />
+          ) : (
+            <ProgressBar
+              width="350px"
+              bgColor="#05a16d"
+              completed={kg}
+              maxCompleted={percentTargeWeight}
+            />
+          )}
         </div>
 
         <div className="mt-2">
@@ -178,9 +171,21 @@ const WeightTrack = () => {
             <button
               disabled={currentKg >= targetKg}
               onClick={() => setIsOpen(true)}
-              className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold "
+              className={`${
+                calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
-              Update Goal
+              Update
+            </button>
+
+            <button
+              disabled={currentKg <= targetKg}
+              onClick={() => setIsOpen(true)}
+              className={`${
+                calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+            >
+              Update
             </button>
 
             {isOpen && (
