@@ -54,6 +54,7 @@ import Feedback from "../Pages/Feedback/Feedback";
 import AddEvent from "../Pages/Event/AddEvent";
 import AllEvents from "../Pages/Event/AllEvents";
 import MyBooking from "../Pages/Event/MyBooking";
+import ManageEvents from "../Pages/Event/ManageEvents";
 
 const axiosPublic = useAxiosPublic();
 
@@ -410,6 +411,14 @@ const MyRouts = createBrowserRouter([
         element: (
           <AdminRouts>
             <AddEvent></AddEvent>
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "manage_events",
+        element: (
+          <AdminRouts>
+            <ManageEvents></ManageEvents>
           </AdminRouts>
         ),
       },

@@ -7,6 +7,7 @@ import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import { CgGym } from "react-icons/cg";
 import { FaBookmark } from "react-icons/fa6";
+import { MdOutlineManageHistory } from "react-icons/md";
 import {
   FaHome,
   FaPhoneAlt,
@@ -77,6 +78,19 @@ const Sidebar = () => {
             <>
               <li>
                 <NavLink
+                  to="/dashboard/add_event"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                      : ""
+                  }>
+                  <BiSolidMessageSquareAdd className="text-xl" /> Add Event
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/manage_users"
                   className={({ isActive, isPending }) =>
                     isPending
@@ -116,7 +130,7 @@ const Sidebar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/add_event"
+                  to="/dashboard/manage_events"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
@@ -124,7 +138,7 @@ const Sidebar = () => {
                       ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
                       : ""
                   }>
-                  <BiSolidMessageSquareAdd className="text-xl" /> Add Event
+                  <MdOutlineManageHistory className="text-xl" /> Manage Events
                 </NavLink>
               </li>
             </>

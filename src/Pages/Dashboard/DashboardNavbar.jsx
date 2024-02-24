@@ -4,6 +4,7 @@ import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
 import { FaBookmark } from "react-icons/fa6";
+import { MdOutlineManageHistory } from "react-icons/md";
 import {
   FaBars,
   FaStrava,
@@ -85,6 +86,19 @@ const DashboardNavbar = () => {
           </li>
           {isAdmin ? (
             <>
+            <li>
+                <NavLink
+                  to="/dashboard/add_event"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <BiSolidMessageSquareAdd className="text-xl" /> Add Event
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard/manage_users"
@@ -113,7 +127,7 @@ const DashboardNavbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/add_event"
+                  to="/dashboard/manage_events"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
@@ -121,9 +135,10 @@ const DashboardNavbar = () => {
                       ? "bg-primary text-white"
                       : ""
                   }>
-                  <BiSolidMessageSquareAdd className="text-xl" /> Add Event
+                  <MdOutlineManageHistory /> Manage Events
                 </NavLink>
               </li>
+              
             </>
           ) : (
             <>
