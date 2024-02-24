@@ -3,6 +3,7 @@ import Title from "../../Components/Title/Title";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { makeVisibleTime } from "../../Hooks/makeVisibleTime";
 
 const MangeBlogPage = () => {
   const axiosPublic = useAxiosPublic();
@@ -45,7 +46,7 @@ const MangeBlogPage = () => {
       <div className="bg-[#F6F6F6] py-8 md:py-10  rounded-xl px-8">
         <div>
           <div className="flex justify-between">
-            <h1 className="text-4xl font-bold underline underline-offset-8">
+            <h1 className="text-4xl font-bold underline underline-offset-8 text-black">
               Total Blogs: <span className="font-sans">{allBlogs?.length}</span>
             </h1>
           </div>
@@ -74,14 +75,14 @@ const MangeBlogPage = () => {
                           </div>
                         </div>
                       </th>
-                      <td className="text-gray-500">
+                      <td className="text-gray-700">
                         <div className="tooltip" data-tip={blog?.blogName}>
                           {blog?.blogName?.slice(0, 30)} ...
                         </div>
                       </td>
-                      <td className="text-gray-500">{blog?.userName}</td>
-                      <td className="text-gray-500 ">{blog?.userEmail}</td>
-                      <td className="text-gray-500 ">{blog?.time}</td>
+                      <td className="text-gray-700">{blog?.userName}</td>
+                      <td className="text-gray-700 ">{blog?.userEmail}</td>
+                      <td className="text-gray-700 ">{makeVisibleTime(blog?.time)}</td>
                       <th>
                         <button
                           onClick={() => handleDelete(blog?._id)}

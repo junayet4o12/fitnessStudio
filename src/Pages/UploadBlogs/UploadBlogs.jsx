@@ -91,7 +91,7 @@ const UploadBlogs = () => {
                     </label> */}
                     <input
                         {...register("blogname", { required: true })}
-                        className='border-b-[3px] border-secondary rounded-t-xl outline-none w-full p-[10px]'
+                        className='border-b-[3px] border-secondary rounded-t-xl outline-none w-full p-[10px] text-black'
                         type="text" name="blogname" placeholder='Blog name' id="blogname" />
                 </div>
                 <div className='flex flex-col gap-[20px] items-start w-full'>

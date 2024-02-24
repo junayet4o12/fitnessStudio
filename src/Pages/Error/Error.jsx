@@ -49,7 +49,7 @@ const Error = () => {
                     <i className="text-center text-xl font-normal">{error?.statusText || error?.message}</i>
                 </p>
                 <div className="text-center flex gap-3">
-                    <button onClick={handleback} className={`${returnBtn} bg-[#ff4704] hover:bg-[#c63602]`}>Go back</button>
+                    <button onClick={handleback} className={`${returnBtn} bg-primary/80 hover:bg-primary`}>Go back</button>
                     <Link to="/"><button className={`${returnBtn} bg-blue-500 hover:bg-blue-700`} >Go home</button></Link>
                 </div>
             </div>

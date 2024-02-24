@@ -47,7 +47,7 @@ const EnduranceTracking = () => {
       </div>
       {/* Manuel Form Container */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="Container flex gap-5">
+        <div className="Container flex gap-5 ">
           {/* Distance Field */}
           <div className="bg-slate-100 p-5 rounded-md mt-2 flex-1">
             <div className="flex items-center justify-between">

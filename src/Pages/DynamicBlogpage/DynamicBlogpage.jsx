@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import Swal from 'sweetalert2';
+import { makeVisibleTime } from '../../Hooks/makeVisibleTime';
 
 const DynamicBlogpage = () => {
   const param = useParams().id
@@ -93,18 +94,18 @@ const DynamicBlogpage = () => {
       <div className='lg:w-[70%]'>
         <img className='h-[350px] w-[90%] mx-auto object-cover' src={blog.blogImg} alt={blog.blogName} />
         <div className='flex gap-2 items-center my-[25px] bg-primary rounded-md'>
-          <h1 className='text-2xl font-[600] w-fit bg-white'>{blog.blogName} &nbsp;</h1>
+          <h1 className='text-2xl font-[600] w-fit bg'>{blog.blogName} &nbsp;</h1>
         </div>
         <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes}` }}>
         </div>
       </div>
       <div className='mt-[50px] lg:mt-[0px] lg:w-[25%] md:sticky top-[25%] rounded-md p-[20px] text-white flex flex-col items-center bg-primary bg-opacity-50 h-fit gap-3'>
         <img className='rounded-full' draggable src={blog.userImg} />
-        <Link to={`/blogs/${param}/${blog.userEmail}`}>
-          <h1 className='text-xl font-[600]'>{blog.userName}</h1>
+        <Link to={`/userProfile/${blog.userEmail}`}>
+          <h1 className='text-xl font-[600] '>{blog.userName}</h1>
         </Link>
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
-        <p>Published at: <span className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</span></p>
+        <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
         {
           myblog?._id === userDetails?._id ? '' : (isFollower ?

@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
+import { makeVisibleTime } from '../../Hooks/makeVisibleTime'
 
 const BlogCards = ({ blogs }) => {
     const [Cardblogs, setCardblogs] = useState([])
@@ -15,7 +16,7 @@ const BlogCards = ({ blogs }) => {
         AxiosPublic(`/blogs?search=${searchInput}`)
             .then(res => setCardblogs(res.data))
     }
-
+    
     return (
         // <div className='grid grid-cols-1 md:grid-cols-4 gap-4 p-[10px]'>
         <div className={"flex flex-col md:flex-row items-start p-[10px]"}>
@@ -29,7 +30,7 @@ const BlogCards = ({ blogs }) => {
                                 <form onSubmit={SearchFunction} className='w-full flex justify-center  p-[10px] mx-auto'>
                                     <input
                                         onChange={(e) => setsearchInput(e.target.value)}
-                                        className='border-2 border-secondary p-[10px] text-xl w-[60%] rounded-l-[50px] outline-none text-black'
+                                        className='border-2 border-secondary p-[10px] text-xl w-[60%] rounded-l-[50px] outline-none'
                                         type="text" placeholder='Search a blog' name='search' />
                                     <button
                                         type='submit'
@@ -58,7 +59,7 @@ const BlogCards = ({ blogs }) => {
                                                     <Link to={`/userProfile/${blog.userEmail}`}>
                                                         <h1 className='font-bold'>{blog.userName}</h1>
                                                     </Link>
-                                                    <h1 className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</h1>
+                                                    <h1 className='bmiNumber'>{makeVisibleTime(blog.time)}</h1>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,6 +93,10 @@ const BlogCards = ({ blogs }) => {
                                                         <h1 className='font-bold'>{blog.userName}</h1>
                                                     </Link>
                                                     <h1 className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</h1>
+                                                    <Link to={`/userProfile/${blog.userEmail}`}>
+                                                        <h1 className='font-bold'>{blog.userName}</h1>
+                                                    </Link>
+                                                    <h1 className='bmiNumber'>{makeVisibleTime(blog.time)}</h1>
                                                 </div>
                                             </div>
                                         </div>

@@ -19,10 +19,12 @@ module.exports = withMT({
       colors: {
         // #038282
         // primary: '#FF4804',
-        primary: '#05a16d',
+        primary: '#0c0c0c',
+        
         // primary: 'white',
         // secondary: 'white',
-        secondary: '#c193b8',
+        secondary: '#4299e1',
+        secondaryDeep: '#1e40af',
         info: '#FF4804'
       }
     },

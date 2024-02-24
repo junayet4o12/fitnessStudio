@@ -8,19 +8,25 @@ import Select from 'react-select'
 const ManageWeight = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const [userDetails,setUserDetails] = useState(null)
+    const [userCurrentWeight,setUserCurrentWeight] = useState(null)
     const [selectedValue, setSelectedValue] = useState(null);
+    
     useEffect(()=>{
         axiosSecure.get(`/users/${user?.email}`)
         .then((res)=>{
-            setUserDetails(res.data.weight)
+<<<<<<< HEAD
+            setUserCurrentWeight(res.data.weight)
+=======
+            setUserDetails({ weight: res.data.weight, height: res.data.height })
+>>>>>>> c2e2cd97b168e1a757b59d581cf84e215cf7ea95
         })
 
     },[axiosSecure,user])
+    // console.log(userDetails);
     const options = [
-        { value: 'gainWeight', label: 'Gain Weight' },
-        { value: 'maintainWeight', label: 'Maintain Weight' },
-        { value: 'lossWeight', label: 'Loss Weight' }
+        { value: 'gainWeight', label: 'Weight Gain' },
+        { value: 'maintainWeight', label: 'Weight Maintain' },
+        { value: 'lossWeight', label: ' Weight Loss' }
     ]
     const buttonStyle =
         "p-2 xs:p-2.5 transition-all duration-500 w-[110px] xs:w-[160px] font-bold text-white rounded border-[3px] active:bg-[#ff470470] active:scale-90";
@@ -32,6 +38,42 @@ const ManageWeight = () => {
     } = useForm();
 
     const onSubmit = (data) => {
+        const currentDate = new Date ();
+        const selectedDate = new Date(data?.timeline)
+        if(selectedValue?.value === 'gainWeight' && userCurrentWeight > data?.targetWeight){
+          return  Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Set the target weight More than ${userCurrentWeight}`,
+                footer: '<a href="#">Set the target weight correctly and try again!!</a>'
+              })
+        }
+        else if(selectedValue?.value === 'lossWeight' && userCurrentWeight < data?.targetWeight){
+                return Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Set the target weight less than ${userCurrentWeight} `,
+                    footer: '<a href="#">Set the target correctly weight and try again!!</a>'
+                  })
+            
+        }
+        else if(selectedValue?.value === 'maintainWeight' && userCurrentWeight !== data?.targetWeight){
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `You must set the target weight ${userCurrentWeight} `,
+                footer: '<a href="#">Set the target correctly weight and try again!!</a>'
+              })
+        }
+       
+        else if(currentDate > selectedDate){
+            return   Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Selected date cannot be earlier than the current date",
+                footer: '<a href="#">Please select a valid date and try again!</a>'
+            });
+        }
         Swal.fire({
             title: "Are you sure?",
             text: "Do you create goals?",
@@ -46,7 +88,7 @@ const ManageWeight = () => {
                 const goalInfo = {
                     user_name: user?.displayName,
                     user_email: user?.email,
-                    user_current_weight:  userDetails,
+                    user_current_weight:  userCurrentWeight,
                     user_image: user?.photoURL,
                     goalType: selectedValue?.value,
                     targetWeight: data?.targetWeight,
@@ -73,7 +115,7 @@ const ManageWeight = () => {
                         <span className="text-primary">ACHIEVE</span> YOUR BEST
                     </h1>
                     <p className="text-base text-gray-600 font-medium mt-2">
-                        Stay on target with a weekly goal
+                        Set a weight Goal to achieve within a time frame.
                     </p>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
@@ -93,7 +135,7 @@ const ManageWeight = () => {
                                                     options={options}
                                                 />
                                                 <label className="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                                                    Weekly
+                                                    Weight Management
                                                 </label>
                                             </div>
                                         </div>
@@ -166,7 +208,6 @@ const ManageWeight = () => {
                                             <div className="relative h-11 ">
                                                 <input
                                                     type="date"
-                                                    placeholder="00 mi"
                                                     {...register("timeline", {
                                                         required: true,
                                                     })}

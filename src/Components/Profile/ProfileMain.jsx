@@ -8,7 +8,7 @@ import HealthSuggestionsModal from './HealthSuggestionsModal';
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
 
 
 const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
@@ -19,7 +19,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const BMRSuggestions = useBMRSuggestions(myBMR)
     const navigate = useNavigate()
     const infoStyle = 'text-black w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white transition-all duration-500 hover:bg-white/90 hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
-    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  bg-primary/70 hover:bg-primary hover:border-primary/80'
+    const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded bg-primary/70 hover:bg-primary '
     console.log('hello', localStorage.getItem('stravaKey'));
 
 
@@ -44,14 +44,14 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
                         <img className='w-full h-full rounded-full object-cover' src={user?.photoURL} alt="" />
                     </div>
                     <div>
-                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70     border-transparent  my-4`}>Personal Suggestions</button>
+                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70  my-4 border-0 border-l-[1.4px] border-b-[1.4px] rounded-md border-white p-2 flex  gap-1`}>Personal Tips<span className='text-base tipscolor'><MdOutlineTipsAndUpdates /></span></button>
                     </div>
                 </div>
                 <div className='w-full  flex justify-center items-center'>
                     <div className=' font-medium w-[100%]   grid grid-cols-2 md:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
                         <p onClick={handleNavigateToConnectedPage} className={`${infoStyle} cursor-pointer`}>
                             <span className='font-bold text-primary'>Connected With</span>
-                            <span>
+                            <span className='border-l-2 border-b-2 rounded-md border-primary p-2'>
                                 <span className='text-sm font-bold'>Following: {userDetails?.following?.length || '0'}</span>
                                 <br />
                                 <span className='text-sm font-bold'>Follower: {userDetails?.followed?.length || '0'}</span>
@@ -59,15 +59,15 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
                         </p>
                         <p className={infoStyle}>
                             <span className='font-bold text-primary'>My Age</span>
-                            <span className='text-sm font-bold'>{age ? `${age} Year` : 'Update Data'} </span>
+                            <span className='text-sm font-bold border-l-2 border-b-2 rounded-md border-primary p-2'>{age ? `${age} Year` : 'Update Data'} </span>
                         </p>
                         <p className={infoStyle}>
                             <span className='font-bold text-primary'>My BMI</span>
-                            <span className='text-sm font-bold'>{!isNaN(myBMI) ? `${myBMI} kg/m` : 'Update Data'}  {!isNaN(myBMI) ? <sup> 2</sup> : ''}</span>
+                            <span className='text-sm font-bold border-l-2 border-b-2 rounded-md border-primary p-2'>{!isNaN(myBMI) ? `${myBMI} kg/m` : 'Update Data'}  {!isNaN(myBMI) ? <sup> 2</sup> : ''}</span>
                         </p>
                         <p className={infoStyle}>
-                            <span className='font-bold text-primary'>My BMR</span>
-                            <span className='text-sm font-bold'>
+                            <span className='font-bold text-primary '>My BMR</span>
+                            <span className='text-sm font-bold border-l-2 border-b-2 rounded-md border-primary p-2'>
                                 {!isNaN(myBMR) ? `${myBMR} Cal/Day` : 'Update Data'}
                             </span>
                         </p>
