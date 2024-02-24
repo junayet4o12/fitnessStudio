@@ -21,6 +21,8 @@ const EventBookingModal = ({ open, setOpen, booked }) => {
       event_image: booked?.event_image,
       event_name: booked?.event_name,
       event_price: booked?.event_price,
+      event_start_date: booked?.event_start_date,
+      event_start_end: booked?.event_start_end,
       event_provider_name: booked?.event_provider_name,
       event_provider_email: booked?.event_provider_email,
       user_name: data?.user_name,

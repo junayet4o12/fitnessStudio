@@ -53,10 +53,9 @@ import Shop from "../Pages/Shop/Shop";
 import Feedback from "../Pages/Feedback/Feedback";
 import AddEvent from "../Pages/Event/AddEvent";
 import AllEvents from "../Pages/Event/AllEvents";
-
+import MyBooking from "../Pages/Event/MyBooking";
 
 const axiosPublic = useAxiosPublic();
-
 
 const MyRouts = createBrowserRouter([
   {
@@ -95,12 +94,12 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
-        path:"/shop",
-        element: <Shop/>
+        path: "/shop",
+        element: <Shop />,
       },
       {
-        path:"/shop/:id",
-        element: <DynamicProductPage/>
+        path: "/shop/:id",
+        element: <DynamicProductPage />,
       },
       {
         path: "/chat",
@@ -203,20 +202,40 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "productForm",
-        element: <PrivateRoute> <ProductFrom /> </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ProductFrom />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "yourProducts",
-        element: <PrivateRoute> <ProductsCollections /> </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ProductsCollections />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "yourProducts/updateProducts/:id",
-        loader: ({params})=> axiosPublic(`/products/${params.id}`),
-        element: <PrivateRoute> <UpdateProductForm/> </PrivateRoute>
+        loader: ({ params }) => axiosPublic(`/products/${params.id}`),
+        element: (
+          <PrivateRoute>
+            {" "}
+            <UpdateProductForm />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "yourProducts/:id",
-        element: <PrivateRoute> <DynamicProductPage/> </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            {" "}
+            <DynamicProductPage />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "BlogFrom",
@@ -331,6 +350,14 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
+        path: "my_bookings",
+        element: (
+          <PrivateRoute>
+            <MyBooking></MyBooking>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "connect_people",
         element: <ConnectPeople></ConnectPeople>,
       },
@@ -340,7 +367,7 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "message",
-        element: <Message></Message>
+        element: <Message></Message>,
       },
       // admin routs
       {
@@ -354,11 +381,21 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "manage_Products",
-        element: <AdminRouts> <ProductsForAdmin/> </AdminRouts>
+        element: (
+          <AdminRouts>
+            {" "}
+            <ProductsForAdmin />{" "}
+          </AdminRouts>
+        ),
       },
       {
         path: "manage_Products/:id",
-        element: <AdminRouts> <DynamicProductPage/> </AdminRouts>
+        element: (
+          <AdminRouts>
+            {" "}
+            <DynamicProductPage />{" "}
+          </AdminRouts>
+        ),
       },
       {
         path: "manage_blogs",
@@ -377,9 +414,9 @@ const MyRouts = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/updateBlogs/:id',
-        element: <UpdateBlogs />
-      }
+        path: "/dashboard/updateBlogs/:id",
+        element: <UpdateBlogs />,
+      },
     ],
   },
 ]);

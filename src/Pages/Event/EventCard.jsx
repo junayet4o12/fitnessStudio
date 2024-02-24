@@ -22,7 +22,9 @@ const EventCard = ({ event }) => {
     event_name,
     event_price,
     event_provider_name,
-    event_provider_email
+    event_provider_email,
+    event_start_date,
+    event_start_end
   ) => {
     const bookingData = {
       event_image: event_image,
@@ -30,6 +32,8 @@ const EventCard = ({ event }) => {
       event_price: event_price,
       event_provider_name: event_provider_name,
       event_provider_email: event_provider_email,
+      event_start_date: event_start_date,
+      event_start_end: event_start_end,
     };
     setBooked(bookingData);
   };
@@ -67,7 +71,9 @@ const EventCard = ({ event }) => {
                   event_name,
                   event_price,
                   event_provider_name,
-                  event_provider_email
+                  event_provider_email,
+                  event_start_date,
+                  event_start_end
                 )
               }>
               <BiSolidPurchaseTag

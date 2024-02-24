@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
+import { FaBookmark } from "react-icons/fa6";
 import {
   FaBars,
   FaStrava,
@@ -281,6 +282,19 @@ const DashboardNavbar = () => {
                       : ""
                   }>
                   <FaBookAtlas /> My Blogs
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my_bookings"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <FaBookmark /> My Bookings
                 </NavLink>
               </li>
               <li>

@@ -6,6 +6,7 @@ import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import { CgGym } from "react-icons/cg";
+import { FaBookmark } from "react-icons/fa6";
 import {
   FaHome,
   FaPhoneAlt,
@@ -271,6 +272,19 @@ const Sidebar = () => {
                       : ""
                   }>
                   <FaBookMedical /> My Blogs
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my_bookings"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                      : ""
+                  }>
+                  <FaBookmark /> My Bookings
                 </NavLink>
               </li>
               <li>
