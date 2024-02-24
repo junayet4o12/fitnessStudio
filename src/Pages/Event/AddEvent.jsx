@@ -6,6 +6,10 @@ import DatePicker from "react-datepicker";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AddEvent = () => {
   const { user } = useAuth();
@@ -13,22 +17,61 @@ const AddEvent = () => {
   const [endDate, setEndDate] = useState();
   const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
-    const image = { image: data?.image[0] };
-    console.log({ image: data?.image[0]?.name });
-    const res = await axios.post(imgHostingApi, image, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
+    // const image = { image: data?.image[0] };
+    // const res = await axios.post(imgHostingApi, image, {
+    //   headers: {
+    //     "content-type": "multipart/form-data",
+    //   },
+    // });
+    // const eventImageURL = res?.data?.data?.display_url;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you add event?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Add!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const toastId = toast.loading("Event Adding...");
+        const image = { image: data?.image[0] };
+        axios
+          .post(imgHostingApi, image, {
+            headers: { "content-type": "multipart/form-data" },
+          })
+          .then((res) => {
+            const eventImageURL = res?.data?.data?.display_url;
+            const eventInfo = {
+              event_provider_name: user?.displayName,
+              event_provider_email: user?.email,
+              event_provider_image: user?.photoURL,
+              event_name: data?.event_name,
+              event_description: data?.description,
+              event_image: eventImageURL,
+              event_price: data?.event_price,
+              event_tickets: data?.tickets,
+              event_start_date: startDate,
+              event_start_end: endDate,
+            };
+            axiosSecure.post("/all_event", eventInfo).then((res) => {
+              if (res?.data?.insertedId) {
+                reset();
+                toast.success("Event Added Successfully!", { id: toastId });
+              }
+            });
+          });
+      }
     });
-    const imageURL = res?.data?.data?.display_url;
-    console.log(data, imageURL);
   };
 
   const buttonStyle =
@@ -38,9 +81,9 @@ const AddEvent = () => {
     <>
       <div className="flex items-center justify-center h-screen">
         <div className="w-full px-20">
-          {/* <Helmet>
-            <title>Product form - FitnessStudion</title>
-        </Helmet> */}
+          <Helmet>
+            <title>Add-Event - FitnessStudio</title>
+          </Helmet>
           <Title title="Add Event"></Title>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -140,7 +183,7 @@ const AddEvent = () => {
                 <DatePicker
                   required
                   selected={startDate}
-                  onChange={(date) => setStartDate(date)}
+                  onChange={(date) => setStartDate(date.getTime())}
                   endDate={endDate}
                   minDate={new Date()}
                   showDisabledMonthNavigation
@@ -157,7 +200,7 @@ const AddEvent = () => {
                 <DatePicker
                   required
                   selected={endDate}
-                  onChange={(date) => setEndDate(date)}
+                  onChange={(date) => setEndDate(date.getTime())}
                   selectsEnd
                   startDate={startDate}
                   endDate={endDate}
