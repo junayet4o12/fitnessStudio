@@ -45,6 +45,7 @@ const Profile = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    console.log(userDetails?.admin);
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
