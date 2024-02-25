@@ -55,7 +55,6 @@ const EventUpdateModal = ({
       };
       axiosPublic.put(`/update_event/${update}`, updateInfo).then((res) => {
         if (res?.data?.modifiedCount > 0) {
-            console.log("withImag", res?.data)
           refetch();
           reset();
           setOpenModal(false);

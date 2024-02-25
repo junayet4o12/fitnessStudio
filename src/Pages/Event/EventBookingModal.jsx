@@ -5,7 +5,13 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import PropTypes from "prop-types";
 
-const EventBookingModal = ({ openModal, setOpenModal, booked }) => {
+const EventBookingModal = ({
+  openModal,
+  setOpenModal,
+  booked,
+  allEvents,
+  refetch,
+}) => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const {
@@ -17,10 +23,15 @@ const EventBookingModal = ({ openModal, setOpenModal, booked }) => {
 
   const onSubmit = async (data) => {
     const toastId = toast.loading("Event Booking...");
+    const ticketsInt = parseInt(booked?.event_tickets);
+    const ticketsMinus = ticketsInt - 1;
+    const ticketsStg = ticketsMinus.toString();
     const bookingInfo = {
+      event_id: booked?._id,
       event_image: booked?.event_image,
       event_name: booked?.event_name,
       event_price: booked?.event_price,
+      event_tickets: ticketsStg,
       event_start_date: booked?.event_start_date,
       event_start_end: booked?.event_start_end,
       event_provider_name: booked?.event_provider_name,
@@ -32,9 +43,23 @@ const EventBookingModal = ({ openModal, setOpenModal, booked }) => {
 
     axiosPublic.post("/events_booking", bookingInfo).then((res) => {
       if (res?.data?.insertedId) {
-        reset();
-        toast.success("Event Booking Successfully !", { id: toastId });
-        setOpenModal(false);
+        // update tickets count
+        const ticketsInt = parseInt(booked?.event_tickets);
+        const ticketsMinus = ticketsInt - 1;
+        const ticketsStg = ticketsMinus.toString();
+        const ticketsCountMinus = {
+          event_tickets: ticketsStg,
+        };
+        axiosPublic
+          .put(`/event_booking_update/${booked?._id}`, ticketsCountMinus)
+          .then((res) => {
+            if (res?.data?.modifiedCount > 0) {
+              refetch();
+              reset();
+              toast.success("Event Booking Successfully !", { id: toastId });
+              setOpenModal(false);
+            }
+          });
       }
     });
   };

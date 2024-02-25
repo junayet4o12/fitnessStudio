@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import EventBookingModal from "./EventBookingModal";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, allEvents, refetch }) => {
   const [openModal, setOpenModal] = useState(false);
   const {
+    _id,
     event_description,
     event_image,
     event_name,
@@ -18,18 +19,22 @@ const EventCard = ({ event }) => {
   } = event || {};
   const [booked, setBooked] = useState("");
   const handleBook = (
+    _id,
     event_image,
     event_name,
     event_price,
+    event_tickets,
     event_provider_name,
     event_provider_email,
     event_start_date,
     event_start_end
   ) => {
     const bookingData = {
+      _id,
       event_image: event_image,
       event_name: event_name,
       event_price: event_price,
+      event_tickets: event_tickets,
       event_provider_name: event_provider_name,
       event_provider_email: event_provider_email,
       event_start_date: event_start_date,
@@ -67,9 +72,11 @@ const EventCard = ({ event }) => {
             <button
               onClick={() =>
                 handleBook(
+                  _id,
                   event_image,
                   event_name,
                   event_price,
+                  event_tickets,
                   event_provider_name,
                   event_provider_email,
                   event_start_date,
@@ -111,6 +118,8 @@ const EventCard = ({ event }) => {
         </div>
       </div>
       <EventBookingModal
+        allEvents={allEvents}
+        refetch={refetch}
         booked={booked}
         openModal={openModal}
         setOpenModal={setOpenModal}></EventBookingModal>

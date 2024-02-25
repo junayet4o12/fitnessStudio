@@ -16,7 +16,7 @@ const MyBooking = () => {
     },
   });
 
-  const handleCancel = (id) => {
+  const handleCancel = (id, event_id, event_tickets) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -30,8 +30,23 @@ const MyBooking = () => {
         const toastId = toast.loading("Canceling...");
         axiosPublic.delete(`/cancel_booking/${id}`).then((res) => {
           if (res?.data?.deletedCount > 0) {
-            refetch();
-            toast.success("This event has been canceled.", { id: toastId });
+            // update tickets count
+            const ticketsInt = parseInt(event_tickets);
+            const ticketsPlus = ticketsInt + 1;
+            const ticketsStg = ticketsPlus.toString();
+            const ticketsCountPlus = {
+              event_tickets: ticketsStg,
+            };
+            axiosPublic
+              .put(`/event_booking_update/${event_id}`, ticketsCountPlus)
+              .then((res) => {
+                if (res?.data?.modifiedCount > 0) {
+                  refetch();
+                  toast.success("This event has been canceled.", {
+                    id: toastId,
+                  });
+                }
+              });
           }
         });
       }
@@ -123,7 +138,13 @@ const MyBooking = () => {
                             </td>
                             <th>
                               <button
-                                onClick={() => handleCancel(booking?._id)}
+                                onClick={() =>
+                                  handleCancel(
+                                    booking?._id,
+                                    booking?.event_id,
+                                    booking?.event_tickets
+                                  )
+                                }
                                 className={`${buttonStyle} bg-red-500 hover:bg-red-100  border-transparent hover:border-red-500 hover:text-black `}>
                                 Cancel
                               </button>

@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const AllEvents = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: allEvents } = useQuery({
+  const { data: allEvents , refetch } = useQuery({
     queryKey: ["allEvents"],
     queryFn: async () => {
       const res = await axiosPublic.get("/all_event");
@@ -21,7 +21,7 @@ const AllEvents = () => {
         <Title title="All Events"></Title>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           {allEvents?.map((event) => (
-            <EventCard key={event._id} event={event}></EventCard>
+            <EventCard key={event._id} event={event} allEvents={allEvents} refetch={refetch}></EventCard>
           ))}
         </div>
       </Container>
