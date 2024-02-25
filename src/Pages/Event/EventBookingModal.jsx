@@ -118,11 +118,25 @@ const EventBookingModal = ({
                       <span className="text-red-600 text-xl">*</span>{" "}
                     </label>
                     <input
-                      {...register("user_number", { required: true })}
+                      {...register("user_number", {
+                        required: true,
+                        minLength: 11,
+                        maxLength: 11,
+                      })}
                       className="text-xl p-[10px] w-full border-2 border-primary rounded-md bg-transparent my-2"
                       type="number"
                       placeholder="016******59"
                     />
+                    {errors.user_number?.type === "minLength" && (
+                      <span className="text-red-600 text-xs ">
+                        Enter the 11 digits number
+                      </span>
+                    )}
+                    {errors.user_number?.type === "maxLength" && (
+                      <span className="text-red-600 text-xs ">
+                        No more than 11 digits can be entered
+                      </span>
+                    )}
                     {errors.user_number?.type === "required" && (
                       <span className="text-red-600 text-xs">
                         This field is required

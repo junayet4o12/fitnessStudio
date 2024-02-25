@@ -17,7 +17,7 @@ const AddEvent = () => {
   const [endDate, setEndDate] = useState();
   const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -72,8 +72,8 @@ const AddEvent = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-full px-20">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-full px-5 md:px-10 lg:px-20 pb-10">
           <Helmet>
             <title>Add-Event - FitnessStudio</title>
           </Helmet>
@@ -146,14 +146,14 @@ const AddEvent = () => {
                 This field is required
               </span>
             )}
-            <div className="flex flex-col md:flex-row justify-between gap-2 w-full mt-2">
+            <div className="flex flex-col subxl:flex-row justify-between gap-2 w-full mt-2">
               <div className="flex-1">
                 <label className="text-xl font-[600]" htmlFor="image">
                   Select Event Photo{" "}
                   <span className="text-red-600 text-xl">*</span>
                 </label>
                 <div className="relative group border-2 border-dashed border-primary rounded-lg py-2 my-2">
-                  <div className="flex items-center justify-center gap-5 absolute left-[162px]  group-hover:cursor-pointer">
+                  <div className="flex items-center justify-center gap-5 absolute left-28 md:left-40 lg:left-[232px] subxl:left-[100px]   group-hover:cursor-pointer">
                     <FaCloudUploadAlt className="text-2xl"></FaCloudUploadAlt>
                     <h1 className="text-lg font-medium">Upload Photo</h1>
                   </div>
@@ -181,7 +181,7 @@ const AddEvent = () => {
                   minDate={new Date()}
                   showDisabledMonthNavigation
                   placeholderText="Select Date"
-                  className="text-black hover:cursor-pointer pl-[198px] py-[13px] rounded-md my-2 bg-gray-100 w-[485px]"
+                  className="text-black hover:cursor-pointer pl-[170px] pr-20 md:pl-[200px] lg:pl-[280px] lg:pr-56 subxl:pl-[200px] subxl:pr-[85px] py-[13px] rounded-md my-2 bg-gray-100 w-full "
                 />
               </div>
               <div className="flex-1">
@@ -199,7 +199,7 @@ const AddEvent = () => {
                   endDate={endDate}
                   minDate={new Date(startDate)}
                   placeholderText="Select Date"
-                  className="text-black hover:cursor-pointer pl-[198px] py-[13px] rounded-md my-2 bg-gray-100 w-[485px]"
+                  className="text-black hover:cursor-pointer pl-[170px] pr-20 md:pl-[200px] lg:pl-[280px] lg:pr-56 subxl:pl-[200px] subxl:pr-[85px] py-[13px] rounded-md my-2 bg-gray-100 w-full "
                 />
               </div>
             </div>
