@@ -8,20 +8,18 @@ import Select from 'react-select'
 const ManageWeight = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const [userCurrentWeight,setUserCurrentWeight] = useState(null)
+    const [userCurrentWeight, setUserCurrentWeight] = useState(null)
+    const [userDetails, setUserDetails] = useState(null)
     const [selectedValue, setSelectedValue] = useState(null);
-    
-    useEffect(()=>{
-        axiosSecure.get(`/users/${user?.email}`)
-        .then((res)=>{
-<<<<<<< HEAD
-            setUserCurrentWeight(res.data.weight)
-=======
-            setUserDetails({ weight: res.data.weight, height: res.data.height })
->>>>>>> c2e2cd97b168e1a757b59d581cf84e215cf7ea95
-        })
 
-    },[axiosSecure,user])
+    useEffect(() => {
+        axiosSecure.get(`/users/${user?.email}`)
+            .then((res) => {
+                setUserCurrentWeight(res.data.weight)
+                setUserDetails({ weight: res.data.weight, height: res.data.height })
+            })
+
+    }, [axiosSecure, user])
     // console.log(userDetails);
     const options = [
         { value: 'gainWeight', label: 'Weight Gain' },
@@ -38,36 +36,36 @@ const ManageWeight = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        const currentDate = new Date ();
+        const currentDate = new Date();
         const selectedDate = new Date(data?.timeline)
-        if(selectedValue?.value === 'gainWeight' && userCurrentWeight > data?.targetWeight){
-          return  Swal.fire({
+        if (selectedValue?.value === 'gainWeight' && userCurrentWeight > data?.targetWeight) {
+            return Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: `Set the target weight More than ${userCurrentWeight}`,
                 footer: '<a href="#">Set the target weight correctly and try again!!</a>'
-              })
+            })
         }
-        else if(selectedValue?.value === 'lossWeight' && userCurrentWeight < data?.targetWeight){
-                return Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: `Set the target weight less than ${userCurrentWeight} `,
-                    footer: '<a href="#">Set the target correctly weight and try again!!</a>'
-                  })
-            
+        else if (selectedValue?.value === 'lossWeight' && userCurrentWeight < data?.targetWeight) {
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Set the target weight less than ${userCurrentWeight} `,
+                footer: '<a href="#">Set the target correctly weight and try again!!</a>'
+            })
+
         }
-        else if(selectedValue?.value === 'maintainWeight' && userCurrentWeight !== data?.targetWeight){
+        else if (selectedValue?.value === 'maintainWeight' && userCurrentWeight !== data?.targetWeight) {
             return Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: `You must set the target weight ${userCurrentWeight} `,
                 footer: '<a href="#">Set the target correctly weight and try again!!</a>'
-              })
+            })
         }
-       
-        else if(currentDate > selectedDate){
-            return   Swal.fire({
+
+        else if (currentDate > selectedDate) {
+            return Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Selected date cannot be earlier than the current date",
@@ -88,13 +86,13 @@ const ManageWeight = () => {
                 const goalInfo = {
                     user_name: user?.displayName,
                     user_email: user?.email,
-                    user_current_weight:  userCurrentWeight,
+                    user_current_weight: userCurrentWeight,
                     user_image: user?.photoURL,
                     goalType: selectedValue?.value,
                     targetWeight: data?.targetWeight,
                     bodyFat: data?.bodyFat,
                     timeline: data?.timeline,
-                    tracking_goal : "Weight_Management"
+                    tracking_goal: "Weight_Management"
                 };
                 console.log(goalInfo)
                 axiosSecure.post("user_goal", goalInfo).then((res) => {
@@ -233,7 +231,7 @@ const ManageWeight = () => {
                             Create Goal
                         </button>
                     </form>
-                </div> 
+                </div>
                 <div>
                     <img
                         src="https://i.ibb.co/bQrRftP/Screenshot-416-removebg-preview.png"

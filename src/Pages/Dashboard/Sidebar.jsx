@@ -38,7 +38,7 @@ const Sidebar = () => {
   return (
     <div className="scroolBar min-w-56  min-h-screen max-h-screen  hidden md:block sticky top-0 text-white overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       <div className="scroolBar min-w-56  min-h-screen max-h-screen  
-     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-primary " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-primary/80 " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
         {/* Sidebar logo or Title */}
         <div className="p-4">
           <h1 className="flex text-2xl gap-1 font-bold bg-primary/70 shadow-lg shadow-gray-500 p-1 rounded-md">
@@ -168,7 +168,7 @@ const Sidebar = () => {
                   <NavLink
                     to="/dashboard/productForm"
                     className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40  text-white" : ""
                     }
                   >
                     <FaBoxesPacking /> List a product
@@ -178,7 +178,7 @@ const Sidebar = () => {
                   <NavLink
                     to="/dashboard/yourProducts"
                     className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                     }
                   >
                     <CiBoxes /> Your Products

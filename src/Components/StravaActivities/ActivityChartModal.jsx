@@ -54,7 +54,7 @@ const ActivityChartModal = ({ handleOpen, handleClose, activity, open }) => {
                         </div>
 
                     </div>
-                    <div className="md:col-span-2 flex flex-wrap gap-x-5 justify-center items-center">
+                    <div className="md:col-span-2 flex flex-wrap gap-x-5 justify-center items-center gap-y-5">
                         <div className=" flex justify-center items-center gap-5 flex-wrap">
                             {/* distance start  */}
                             <div className="w-[270px] text-black">
@@ -90,7 +90,7 @@ const ActivityChartModal = ({ handleOpen, handleClose, activity, open }) => {
 
                 <Button
                     onClick={handleClose}
-                    className='text-black bg-primary/40'
+                    className='text-white bg-primary/70'
                 >
                     <span>Okay</span>
                 </Button>

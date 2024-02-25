@@ -89,7 +89,7 @@ const StravaActivities = () => {
 
                     </p>
 
-                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 rounded hover:bg-primary/90 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
+                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 rounded hover:bg-primary/9 0 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
                     <button onClick={() => setComparingCardsData([])} className='absolute top-[2px] right-1 font-bold active:scale-90 transition-all duration-300'>X</button>
                 </div>
             </div>
