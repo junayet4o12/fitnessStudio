@@ -13,13 +13,8 @@ import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
 
-<<<<<<< HEAD
-function NavList() {
-  const { user } = useAuth();
-=======
 function NavList({navbarColor}) {
   const { user } = useAuth()
->>>>>>> b1030708f76a4fbd93bed3260f556db334320645
   return (
     <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
@@ -118,16 +113,16 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
-          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-primary"></p>
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
           <NavLink
             to="/all_events"
             className={({ isActive }) =>
               isActive
-                ? "text-primary underline underline-offset-8 text-base font-bold"
-                : "text-base font-bold text-gray-300"
+                ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold    "
             }>
             Events
           </NavLink>
@@ -200,16 +195,10 @@ function NavList({navbarColor}) {
   );
 }
 
-<<<<<<< HEAD
-export function NavbarSimple() {
-  const [openNav, setOpenNav] = React.useState(false);
-  const { user } = useAuth();
-=======
 export function NavbarSimple({navbarColor}) {
   console.log(navbarColor);
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
->>>>>>> b1030708f76a4fbd93bed3260f556db334320645
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 

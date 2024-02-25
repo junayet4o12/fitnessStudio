@@ -11,15 +11,6 @@ const ManageWeight = () => {
     const [userCurrentWeight, setUserCurrentWeight] = useState(null)
     const [userDetails, setUserDetails] = useState(null)
     const [selectedValue, setSelectedValue] = useState(null);
-<<<<<<< HEAD
-    
-    useEffect(()=>{
-        axiosSecure.get(`/users/${user?.email}`)
-        .then((res)=>{
-            setUserCurrentWeight(res.data.weight)
-        })
-=======
->>>>>>> b1030708f76a4fbd93bed3260f556db334320645
 
     useEffect(() => {
         axiosSecure.get(`/users/${user?.email}`)
