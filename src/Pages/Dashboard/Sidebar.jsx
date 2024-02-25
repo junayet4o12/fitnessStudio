@@ -7,7 +7,7 @@ import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import { CgGym } from "react-icons/cg";
 import { FaBookmark } from "react-icons/fa6";
-import { MdOutlineManageHistory } from "react-icons/md";
+import { MdOutlineConnectWithoutContact, MdOutlineManageHistory } from "react-icons/md";
 import {
   FaHome,
   FaPhoneAlt,
@@ -63,8 +63,8 @@ const Sidebar = () => {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white "
-                  : ""
+                    ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white "
+                    : ""
               }>
               <FaUserAlt /> My Profile
             </NavLink>
@@ -79,8 +79,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd className="text-xl" /> Add Event
                 </NavLink>
@@ -92,8 +92,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <MdOutlineManageAccounts className="text-2xl" /> Manage Users
                 </NavLink>
@@ -105,8 +105,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
+                        : ""
                   }>
                   <CiBoxes className="text-2xl" /> Manage Products
                 </NavLink>
@@ -118,8 +118,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <SlBookOpen /> Manage Blogs
                 </NavLink>
@@ -131,8 +131,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <MdOutlineManageHistory className="text-xl" /> Manage Events
                 </NavLink>
@@ -143,13 +143,26 @@ const Sidebar = () => {
             <>
               <li>
                 <NavLink
+                  to="/dashboard/connected_with"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
+                  }>
+                  <MdOutlineConnectWithoutContact /> Connected With
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/connect_people"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaUserFriends /> Connect People
                 </NavLink>
@@ -161,8 +174,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaCalculator /> BMI Calculator
                 </NavLink>
@@ -174,8 +187,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd /> Connected app
                 </NavLink>
@@ -187,8 +200,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <AiFillClockCircle /> Set goals
                 </NavLink>
@@ -200,8 +213,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd /> Goal Tracking
                 </NavLink>
@@ -213,8 +226,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <GiProgression /> Daily Activities
                 </NavLink>
@@ -226,8 +239,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaStrava /> Strava Activities
                 </NavLink>
@@ -239,8 +252,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
+                        : ""
                   }>
                   <FaBoxesPacking /> List a product
                 </NavLink>
@@ -252,8 +265,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
+                        : ""
                   }>
                   <CiBoxes /> Your Products
                 </NavLink>
@@ -265,8 +278,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaPenNib /> Write a Blog
                 </NavLink>
@@ -278,8 +291,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaBookMedical /> My Blogs
                 </NavLink>
@@ -291,8 +304,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <FaBookmark /> My Bookings
                 </NavLink>
@@ -304,8 +317,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
+                        : ""
                   }>
                   <MdFeedback /> Feedback
                 </NavLink>

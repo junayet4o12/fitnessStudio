@@ -41,7 +41,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
         <div className='max-w-7xl mx-auto'>
             <div className='profile-Status-Section w-full mx-auto flex  flex-col    py-7 gap-5  lg:gap-10 p-4  bg-secondary/40 rounded  shadow-2xl px-10'>
                 <div className='flex flex-wrap justify-center  items-center gap-4'>
-                    <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px]  p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
+                    <div className='w-[160px] h-[160px] min-w-[160px] min-h-[160px] xs:w-[200px] xs:h-[200px] xs:min-w-[200px] xs:min-h-[200px]  p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
                         <img className='w-full h-full rounded-full object-cover' src={user?.photoURL} alt="" />
                     </div>
                     <div>
