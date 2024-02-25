@@ -106,7 +106,25 @@ function NavList({navbarColor}) {
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
                 : "text-sm font-bold    "
             }>
-            shop
+            Shop
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+            
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
+          <NavLink
+            to="/all_events"
+            className={({ isActive }) =>
+              isActive
+                ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold    "
+            }>
+            Events
           </NavLink>
         </div>
       </Typography>
@@ -241,13 +259,11 @@ export function NavbarSimple({navbarColor}) {
 
 
         </div>
-
       </div>
 
       <Collapse open={openNav} className="w-fit">
         <NavList navbarColor={navbarColor} />
       </Collapse>
-
     </Navbar>
   );
 }
