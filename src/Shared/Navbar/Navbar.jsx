@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -13,14 +13,19 @@ import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
 
+<<<<<<< HEAD
 function NavList() {
   const { user } = useAuth();
+=======
+function NavList({navbarColor}) {
+  const { user } = useAuth()
+>>>>>>> b1030708f76a4fbd93bed3260f556db334320645
   return (
-    <ul className="my-2 flex flex-col text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1   ">
+    <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Home
@@ -32,7 +37,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             Home
           </NavLink>
@@ -41,7 +46,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -50,7 +55,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             Blogs
           </NavLink>
@@ -59,7 +64,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -68,7 +73,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm font-bold"
-                : "text-sm  font-bold text-gray-300"
+                : "text-sm  font-bold    "
             }>
             Library
           </NavLink>
@@ -77,7 +82,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -86,7 +91,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             Special Recipes
           </NavLink>
@@ -95,7 +100,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -104,7 +109,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             Shop
           </NavLink>
@@ -131,7 +136,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           About Us
@@ -143,7 +148,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             About Us
           </NavLink>
@@ -152,7 +157,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Contact
@@ -164,7 +169,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold    "
             }>
             Contact Us
           </NavLink>
@@ -173,7 +178,7 @@ function NavList() {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+            
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Login
@@ -185,7 +190,7 @@ function NavList() {
             className={({ isActive }) =>
               isActive
                 ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
-                : "text-sm font-bold text-gray-300"
+                : "text-sm font-bold text-gray-00"
             }>
             Login
           </NavLink>
@@ -195,13 +200,20 @@ function NavList() {
   );
 }
 
+<<<<<<< HEAD
 export function NavbarSimple() {
   const [openNav, setOpenNav] = React.useState(false);
   const { user } = useAuth();
+=======
+export function NavbarSimple({navbarColor}) {
+  console.log(navbarColor);
+  const [openNav, setOpenNav] = useState(false);
+  const { user } = useAuth()
+>>>>>>> b1030708f76a4fbd93bed3260f556db334320645
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
     return () => {
@@ -210,7 +222,7 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <Navbar className=" mx-auto min-w-[100vw] rounded-none px-4 sm:px-6 lg:px-3 xl:px-6 py-3 bg-black sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0">
+    <Navbar className={`mx-auto min-w-[100vw] rounded-none px-4 sm:px-6 lg:px-3 xl:px-6 py-3 sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0 ${!navbarColor ? 'bg-white' : 'bg-black'} transition-all duration-500`}>
 
       <div className="lg:container mx-auto flex items-center justify-between text-black">
         <Typography
@@ -219,7 +231,7 @@ export function NavbarSimple() {
           variant="h6"
           className="mr-4 cursor-pointer py-1.5   ">
           <Link to={'/'} className="scroll-smooth">
-            <h1 className="flex items-center text-xl xs:text-2xl text-white font-bold md:text-4xl md:font-extrabold">
+            <h1 className={`flex items-center text-xl xs:text-2xl  font-bold md:text-4xl md:font-extrabold  ${navbarColor ? 'text-white' : 'text-black'}`}>
               <CgGym className="text-secondary   mr-1 text-3xl md:text-5xl" />Fitness
               <span className="text-secondary   text-2xl xs:text-3xl md:text-5xl">Studio</span>
             </h1>
@@ -227,7 +239,7 @@ export function NavbarSimple() {
         </Typography>
         <div className="flex gap-7 xs:gap-5 items-center">
           <div className="hidden lg:block">
-            <NavList />
+            <NavList navbarColor={navbarColor} />
           </div>
           <IconButton
             variant="text"
@@ -248,7 +260,7 @@ export function NavbarSimple() {
             </span> */}
 
             {/* Bell icon with notification button */}
-            {user && <NotificationsMenu />}
+            {user && <NotificationsMenu navbarColor={navbarColor} />}
 
             {/* User Profile component */}
             <span className="">
@@ -261,7 +273,7 @@ export function NavbarSimple() {
       </div>
 
       <Collapse open={openNav} className="w-fit">
-        <NavList />
+        <NavList navbarColor={navbarColor} />
       </Collapse>
     </Navbar>
   );

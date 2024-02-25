@@ -27,7 +27,7 @@ const CaloryAct = ({type, moving_time}) => {
     }
     const Calories = MET * userDetails?.weight * (moving_time / 3600)
     return (
-        <div className="card bg-primary/20 mb-2">
+        <div className="card bg-secondary/30 mb-2">
             <div className="card-body flex flex-row justify-center bmiNumber items-center">
                 <div className="card-actions justify-start">
                     <FaFire className="text-primary text-2xl" />

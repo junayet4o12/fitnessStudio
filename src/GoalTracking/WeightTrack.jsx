@@ -24,6 +24,7 @@ const WeightTrack = () => {
     (category) => category.tracking_goal === "Weight_Management"
   );
 
+
   if (!specificWeight) {
     return (
       <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
@@ -54,12 +55,12 @@ const WeightTrack = () => {
   const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
   const currentKg = calculateWeight?.current_weight;
   const percentTargeWeight = targetKg - oldKg;
-  const kg = currentKg - oldKg || 0;
+  
 
   const lossPercent = oldKg - targetKg;
-  const lossKg = oldKg - currentKg || 0;
 
   const onSubmit = async (data) => {
+    console.log(data?.user_current_weight);
     const updatedData = {
       current_weight: parseInt(data?.user_current_weight),
       bodyFat: data?.bodyFat,
@@ -120,6 +121,15 @@ const WeightTrack = () => {
     });
   }
 
+  const percant = (previusWeight, currentWeight, need) => {
+    console.log(currentWeight, previusWeight);
+    const kg = currentWeight - previusWeight || 0
+    const realPercant = Math.ceil((100 / need) * kg)
+
+    return realPercant
+  }
+  const kg = percant(oldKg, currentKg, percentTargeWeight);
+  const lossKg = percant(currentKg, oldKg, lossPercent);
   return (
     <div className="my-4 ml-0 lg:ml-28">
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
@@ -141,14 +151,14 @@ const WeightTrack = () => {
               width="350px"
               bgColor="#05a16d"
               completed={lossKg}
-              maxCompleted={lossPercent}
+              maxCompleted={100}
             />
           ) : (
             <ProgressBar
               width="350px"
               bgColor="#05a16d"
               completed={kg}
-              maxCompleted={percentTargeWeight}
+              maxCompleted={100}
             />
           )}
         </div>
@@ -164,6 +174,13 @@ const WeightTrack = () => {
             </span>{" "}
             kg
           </h2>
+          <h2 className="text-sm font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
+            current Weight{" "}
+            <span className="text-primary">
+              {currentKg ? currentKg : oldKg}
+            </span>{" "}
+            kg
+          </h2>
         </div>
 
         <div className="flex items-center justify-between mt-4">
@@ -171,9 +188,8 @@ const WeightTrack = () => {
             <button
               disabled={currentKg >= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${
-                calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
-              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
@@ -181,9 +197,8 @@ const WeightTrack = () => {
             <button
               disabled={currentKg <= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${
-                calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
-              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>

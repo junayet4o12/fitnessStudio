@@ -34,7 +34,7 @@ const HowItWorks = () => {
               healthier, happier you!
             </p>
             {
-              user ? <h2 className="text-xl font-semibold"><span className="text-primary font-extrabold ">Awesome !!</span> You have already logged in.</h2> : <button
+              user ? <h2 className="text-xl font-semibold"><span className="text-secondary font-extrabold ">Awesome !!</span> You have already logged in.</h2> : <button
                 onClick={handleLogin}
                 className={`${buttonStyle} bg-primary/70 hover:bg-primary/80  border-primary hover:border-transparent`}>
                 Log in
