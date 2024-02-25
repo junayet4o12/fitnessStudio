@@ -29,7 +29,7 @@ const Banner = () => {
         navigate("/login");
     };
     // bg-gradient-to-l from-orange-500 to-orange-900
-    const swiperTextStyle = 'w-full min-h-[300px] xs:min-h-full border-black md:min-h-screen p-10 sm:p-20 flex bg-white/50 sm:bg-transparent items-center uppercase  text-2xl sm:text-4xl md:text-5xl xl:text-6xl'
+    const swiperTextStyle = 'w-full min-h-[300px] xs:min-h-full border-black md:min-h-screen p-10 sm:p-20 flex bg-white/30 sm:bg-white/10 items-center uppercase  text-2xl sm:text-4xl md:text-5xl xl:text-6xl'
     const textColor = 'text-secondary'
     return (
         <div>
@@ -56,16 +56,16 @@ const Banner = () => {
                             disableOnInteraction: false,
                         }}
                     >
-                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover' src={sliderImg1} alt="" /></SwiperSlide>
-                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover' src={sliderImg2} alt="" /></SwiperSlide>
-                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover' src={sliderImg3} alt="" /></SwiperSlide>
-                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover' src={sliderImg4} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover min-w-full' src={sliderImg1} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover min-w-full' src={sliderImg2} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover min-w-full' src={sliderImg3} alt="" /></SwiperSlide>
+                        <SwiperSlide><img className='min-h-[300px] xs:min-h-full md:min-h-screen object-cover min-w-full' src={sliderImg4} alt="" /></SwiperSlide>
 
                     </Swiper>
                     <div className="flex justify-center items-end gap-5 sm:gap-10 py-10  md:py-32 absolute bottom-0 z-20 w-full h-full ">
                         <Link to={"/contact_us"}>
                             <button
-                                className={`${buttonStyle} bg-secondaryDeep hover:bg-secondaryDeep/40  border-transparent hover:border-secondarybg-secondaryDeep mt-14`}>
+                                className={`${buttonStyle} bg-primary hover:bg-primary/70  border-transparent hover:border-secondarybg-primary mt-14`}>
                                 Contact us
                             </button>
                         </Link>
@@ -74,7 +74,7 @@ const Banner = () => {
                         ) : (
                             <button
                                 onClick={handleLogin}
-                                className={`${buttonStyle} bg-secondaryDeep/40 hover:bg-secondaryDeep  border-secondaryDeep hover:border-transparent mt-14`}>
+                                className={`${buttonStyle} bg-primary/80 border-transparent hover:bg-primary   hover:border-transparent mt-14`}>
                                 Log in
                             </button>
                         )}

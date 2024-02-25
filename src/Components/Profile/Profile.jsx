@@ -115,7 +115,7 @@ const Profile = () => {
                 <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
                         <button
                             onClick={() => setEdit(true)}
-                            className=' border-2 border-primary py-[5px] px-3 font-bold  transition-all rounded hover:rounded-md hover:bg-secondary/20 duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-base'><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
+                            className=' border-2 border-primary py-[5px] px-3 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-base'><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
                     </div>
             </div>
             <div className={`${edit ? 'block' : 'hidden'}`}>
