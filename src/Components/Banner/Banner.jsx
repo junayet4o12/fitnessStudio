@@ -52,7 +52,7 @@ const Banner = () => {
                         className="mySwiper"
                         speed={1400}
                         autoplay={{
-                            delay: 6200,
+                            delay: 6100,
                             disableOnInteraction: false,
                         }}
                     >

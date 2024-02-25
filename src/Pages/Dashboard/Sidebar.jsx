@@ -168,7 +168,7 @@ const Sidebar = () => {
                   <NavLink
                     to="/dashboard/productForm"
                     className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40  text-white" : ""
                     }
                   >
                     <FaBoxesPacking /> List a product
@@ -178,7 +178,7 @@ const Sidebar = () => {
                   <NavLink
                     to="/dashboard/yourProducts"
                     className={({ isActive, isPending }) =>
-                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white" : ""
+                      isPending ? "pending" : isActive ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white" : ""
                     }
                   >
                     <CiBoxes /> Your Products
