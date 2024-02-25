@@ -16,7 +16,7 @@ const GoalCard = ({title,description,image,category}) => {
             </div>
             <div className="flex items-center justify-center">
               <Link to={`/dashboard/set_goal/${category}`}
-                className={`text-white mx-4 hover:text-blue-60 px-3 py-2 rounded-lg mt-2 bg-primary absolute -bottom-0 ${isHovered ? 'z-10 transform transition-transform duration-500 -translate-y-2' : '-z-20'}`}
+                className={`text-white mx-4 hover:text-blue-60 px-3 py-2  font-medium rounded-lg mt-2 bg-secondary transform transition-all absolute -bottom-0 ${isHovered ? 'z-10 transform transition-all  duration-500 -translate-y-2 opacity-100 scale-100' : '-z-20 opacity-0 scale-0'}`}
               >
                 Set Goal
               </Link>

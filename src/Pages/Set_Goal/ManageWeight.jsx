@@ -9,12 +9,14 @@ const ManageWeight = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [userCurrentWeight,setUserCurrentWeight] = useState(null)
+    const [userDetails,setUserDetails]=useState(null)
     const [selectedValue, setSelectedValue] = useState(null);
     
     useEffect(()=>{
         axiosSecure.get(`/users/${user?.email}`)
         .then((res)=>{
-            setUserCurrentWeight({ weight: res.data.weight, height: res.data.height })
+            setUserCurrentWeight(res.data.weight)
+            setUserDetails({ weight: res.data.weight, height: res.data.height })
         })
 
     },[axiosSecure,user])
@@ -85,6 +87,7 @@ const ManageWeight = () => {
                     user_name: user?.displayName,
                     user_email: user?.email,
                     user_current_weight:  userCurrentWeight,
+                    user_current_height:  userDetails.height,
                     user_image: user?.photoURL,
                     goalType: selectedValue?.value,
                     targetWeight: data?.targetWeight,
