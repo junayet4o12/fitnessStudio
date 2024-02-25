@@ -81,7 +81,7 @@ const Testimonials = () => {
           {feedback?.map((item) => (
             <SwiperSlide key={item._id}>
               <div className="mx-5">
-                <div className="py-3 pr-5 border-2 border-primary rounded-lg  sm:h-[230px]  overflow-hidden max-w-[350px] mx-auto">
+                <div className="py-3 pr-5 border-2 border-primary rounded-lg  sm:h-[230px]  overflow-hidden max-w-[350px] mx-auto bg-black/20">
                   <div className="flex gap-x-5 mb-3 pl-5">
                     <div className="w-16 h-16 rounded-full overflow-hidden flex justify-center items-center">
                       {" "}
@@ -97,7 +97,7 @@ const Testimonials = () => {
                           <FaStar className="text-lg text-gray-400 hover:scale-110 duration-300"></FaStar>
                         }
                         fullSymbol={
-                          <FaStar className="text-lg text-[#FFB400] hover:scale-110 duration-300"></FaStar>
+                          <FaStar className="text-lg text-primary hover:scale-110 duration-300"></FaStar>
                         }
                         initialRating={item?.rating}
                         readonly

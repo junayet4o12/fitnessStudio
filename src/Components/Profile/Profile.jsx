@@ -107,7 +107,7 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10 bg-gradient-to-r from-[#000428] to-[#004e92]'
+        <div className='p-5 lg:p-10 '
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>

@@ -40,7 +40,7 @@ const Blogpage = () => {
 
 
   return (
-    <div className='mb-[100px] text-white bg-gradient-to-r from-[#000428] to-[#004e92]'>
+    <div className='mb-[100px]'>
         <Helmet>
             <title>Blogs - FitnessStudion</title>
         </Helmet>

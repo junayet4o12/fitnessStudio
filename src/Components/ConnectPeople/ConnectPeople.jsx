@@ -92,13 +92,12 @@ const ConnectPeople = () => {
             })
     }
     return (
-        <div className="bg-gradient-to-r from-[#000428] to-[#004e92] text-white min-h-screen">
+        <div className=" min-h-screen">
             <Title title={'Connect People'}></Title>
             <form onSubmit={handleSubmit}>
                 <div className="relative flex w-full max-w-[35rem] mx-auto my-4 ">
                     <Input
                         type="text"
-                        color="white"
                         label="Search People"
                         value={searchedName}
                         onChange={onChange}
