@@ -24,12 +24,26 @@ import "./Sidebar.css";
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import { MdFeedback } from "react-icons/md";
-
+import { useEffect, useRef, useState } from "react";
+import sidebarBG from '../../assets/images/dashboardbg.jpg'
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
   const [isAdmin, isAdminPanding] = useAdmin();
-
+  const [sideBarTransition, setSideBarTransition] = useState(false)
+  const handleTransition = () => {
+    const selectedId = document.getElementById('checkScroll');
+    if (selectedId?.scrollTop >= 145) {
+      setSideBarTransition(true)
+    } else {
+      setSideBarTransition(false)
+    }
+  }
+  useEffect(() => {
+    handleTransition()
+    const selectedId = document.getElementById('checkScroll');
+    selectedId?.addEventListener("scroll", handleTransition)
+  })
   // logOut function
   if (isAdminPanding) {
     return "";
@@ -42,19 +56,33 @@ const Sidebar = () => {
       })
       .catch((err) => toast.error(err));
   };
+  const handleGoToHome = () => {
+    navigate('/')
+  }
 
+  const sidebarLinkStyle = 'bg-gradient-to-r from-white/90 to-white/60 text-black'
   return (
     <div className="scroolBar min-w-56  min-h-screen max-h-screen  hidden md:block sticky top-0 text-white overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
-      <div className="scroolBar min-w-56  min-h-screen max-h-screen  
-     hidden md:block sticky top-0 overflow-y-auto scroll-smooth bg-primary/80 " style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
+      <div id="checkScroll" className="scroolBar min-w-56  min-h-screen max-h-screen  
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth  "  style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1', background: `url(${sidebarBG})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' }}>
         {/* Sidebar logo or Title */}
-        <div className="p-4">
-          <h1 className="flex text-2xl gap-1 font-bold bg-primary/70 shadow-lg shadow-gray-500 p-1 rounded-md">
-            <CgGym className="text-3xl" /> Fitness
-            <span className="text-white">Studio</span>
-          </h1>
-        </div>
+
         {/* sidebar content here */}
+
+        <div className={`sticky top-[-154px] z-10 pb-2  rounded bg-primary transition-all duration-500`}>
+          <div className="px-4 pt-[18px] bg-primary rounded-md pb-[10px] sticky top-0 z-10">
+            <h1 onClick={handleGoToHome} className="flex text-2xl gap-1 font-bold bg-primary  shadow-lg shadow-gray-500 p-1 rounded-md w-full cursor-pointer">
+              <CgGym className="text-3xl" /> Fitness
+              <span className="text-secondary">Studio</span>
+            </h1>
+          </div>
+          <div className={` ${sideBarTransition ? 'opacity-0 scale-y-0' : 'opacity-100  scale-y-100 '} flex transition-all duration-500 w-[85%] px-3 py-2   mx-auto rounded-md  justify-center items-center gap-1 flex-col shadow-md shadow-white  bg-primary my-2 mt-3`}>
+            <img className="rounded-full w-24 h-24 object-cover border-white border-[2px]  p-[2px]" src={user?.photoURL} alt="" />
+            <p className="text-base font-bold">
+              {user?.displayName.split(' ').slice(0, 2).join(' ')}
+            </p>
+          </div>
+        </div>
         <ul className="menu p-4 font-semibold text-base">
           <li>
             <NavLink
@@ -63,8 +91,8 @@ const Sidebar = () => {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white "
-                  : ""
+                    ? `${sidebarLinkStyle}`
+                    : ""
               }>
               <FaUserAlt /> My Profile
             </NavLink>
@@ -79,8 +107,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd className="text-xl" /> Add Event
                 </NavLink>
@@ -92,8 +120,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <MdOutlineManageAccounts className="text-2xl" /> Manage Users
                 </NavLink>
@@ -105,8 +133,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <CiBoxes className="text-2xl" /> Manage Products
                 </NavLink>
@@ -118,8 +146,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <SlBookOpen /> Manage Blogs
                 </NavLink>
@@ -131,8 +159,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <MdOutlineManageHistory className="text-xl" /> Manage Events
                 </NavLink>
@@ -156,13 +184,26 @@ const Sidebar = () => {
               </li>
               <li>
                 <NavLink
+                  to="/dashboard/connected_with"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? `${sidebarLinkStyle}`
+                        : ""
+                  }>
+                  <MdOutlineConnectWithoutContact /> Connected With
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/connect_people"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaUserFriends /> Connect People
                 </NavLink>
@@ -174,8 +215,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaCalculator /> BMI Calculator
                 </NavLink>
@@ -187,8 +228,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd /> Connected app
                 </NavLink>
@@ -200,8 +241,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <AiFillClockCircle /> Set goals
                 </NavLink>
@@ -213,8 +254,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd /> Goal Tracking
                 </NavLink>
@@ -226,8 +267,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <GiProgression /> Daily Activities
                 </NavLink>
@@ -239,8 +280,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaStrava /> Strava Activities
                 </NavLink>
@@ -252,8 +293,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaBoxesPacking /> List a product
                 </NavLink>
@@ -265,8 +306,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-primary/80 to-primary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <CiBoxes /> Your Products
                 </NavLink>
@@ -278,8 +319,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaPenNib /> Write a Blog
                 </NavLink>
@@ -291,8 +332,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaBookMedical /> My Blogs
                 </NavLink>
@@ -304,8 +345,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <FaBookmark /> My Bookings
                 </NavLink>
@@ -317,8 +358,8 @@ const Sidebar = () => {
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-gradient-to-r from-secondary/80 to-secondary/40 text-white"
-                      : ""
+                        ? `${sidebarLinkStyle}`
+                        : ""
                   }>
                   <MdFeedback /> Feedback
                 </NavLink>
