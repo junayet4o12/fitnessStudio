@@ -111,8 +111,8 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
     }
     return (
         <div className="p-5 h-[80vh] md:h-screen flex justify-center items-center text-black">
-            <div className={`text-white w-full max-w-[450px] min-h-[75vh] max-h-[75vh] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-scroll  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
-                <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-teal-400">
+            <div className={`text-white w-full max-w-[450px] min-h-[75vh] max-h-[75vh] xl:min-h-[550px] xl:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-scroll  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
+                <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-primary">
                     <div className="flex gap-2   px-2 items-center h-10 justify-between">
 
 
@@ -121,7 +121,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                             <span className="text-sm font-bold">{friendData?.name?.split(' ')[0]}</span>
                         </div>
                         <div>
-                            <button onClick={handleBack} className="text-sm font-bold  hover:text-black active:scale-90 transition-all duration-500 mr-1 p-1">Back</button>
+                            <button onClick={handleBack} className="text-sm font-bold  hover:text-white active:scale-90 transition-all duration-500 mr-1 p-1">Back</button>
                         </div>
                     </div>
                 </div>
@@ -144,8 +144,8 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                     <form onSubmit={handleSubmit} className="w-full relative">
                         <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."
-                            className="input  w-full h-10 border-white rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-teal-400" />
-                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-1 text-xl active:scale-90 duration-200 transition-all hover:text-black   px-1.5 py-1 top-[5px]`}>
+                            className="input  w-full h-10 border-white rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-primary/50" />
+                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-1 text-xl active:scale-90 duration-200 transition-all hover:text-white   px-1.5 py-1 top-[5px]`}>
                             {
                                 isMessageLoading ? <span className="loading loading-spinner loading-xs"></span> : <IoSendSharp></IoSendSharp>
                             }

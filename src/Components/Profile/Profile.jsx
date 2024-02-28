@@ -45,6 +45,7 @@ const Profile = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    console.log(userDetails?.admin);
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
@@ -110,11 +111,18 @@ const Profile = () => {
         <div className='p-5 lg:p-10 '
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
-            <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
-            <div>
-                <div className='w-full max-w-7xl  bg-gradient-to-br from-primary/80 via-primary/60 to-primary/30   mx-auto p-5 pt-12 rounded relative shadow-lg  '>
+            <div className={`${!edit ? 'block' : 'hidden'} my-5 relative `}>
+                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
+                <div className={`${edit && 'hidden'} absolute top-4 right-4`}>
+                        <button
+                            onClick={() => setEdit(true)}
+                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-sm '><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
+                    </div>
+            </div>
+            <div className={`${edit ? 'block' : 'hidden'}`}>
+                <div className='w-full max-w-7xl  bg-gray-200  mx-auto p-5 pt-12 rounded relative shadow-lg  '>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5 text-white'>
+                    <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5 '>
                         <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
                         {/* name  */}
                         <div>
@@ -217,11 +225,7 @@ const Profile = () => {
                             <p onClick={handleCancel} className={`${buttonStyle} active:bg-red-800  bg-red-500 hover:bg-red-700  border-transparent hover:border-red-700`}>Cancel</p>
                         </div>
                     </form>
-                    <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button
-                            onClick={() => setEdit(true)}
-                            className=' border-2 border-white py-[5px] px-3 font-medium  transition-all rounded hover:rounded-md hover:bg-secondary/20 duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-base '><span className='text-sm'><FaRegPenToSquare /></span>Edit Profile</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

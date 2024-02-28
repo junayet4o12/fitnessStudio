@@ -164,12 +164,12 @@ const ManageUsers = () => {
                                                 <button
                                                     // disabled={user.role === "Admin"}
                                                     onClick={() => {
-                                                        user.role === "Admin" ?
+                                                        user?.admin ?
                                                             handleMakeUser(user.email) : handleMakeAdmin(user.email)
                                                     }} title="Make Admin"
                                                     className="disabled:cursor-not-allowed disabled:text-primary disabled:bg-white text-[8px] lg:text-base px-2 py-1 rounded-md bg-primary text-white hover:text-primary hover:border-primary hover:bg-white"
                                                 >
-                                                    {user.role === "Admin" ? "Admin" : "Make Admin"}
+                                                    {user?.admin ? "Admin" : "Make Admin"}
                                                 </button>
                                             </td>
                                             <td>
