@@ -139,7 +139,7 @@ const WeightTrack = () => {
           </span>
           <button
             onClick={() => handleDeleteGoal(calculateWeight?._id)}
-            className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500"
+            className="px-3 py-1 text-sm font-bold  text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500"
           >
             Stop Goal
           </button>
@@ -149,14 +149,14 @@ const WeightTrack = () => {
           {calculateWeight?.goalType !== "gainWeight" ? (
             <ProgressBar
               width="350px"
-              bgColor="#05a16d"
+              bgColor="#000000"
               completed={lossKg}
               maxCompleted={100}
             />
           ) : (
             <ProgressBar
               width="350px"
-              bgColor="#05a16d"
+              bgColor="#0c0c0c"
               completed={kg}
               maxCompleted={100}
             />
@@ -188,8 +188,9 @@ const WeightTrack = () => {
             <button
               disabled={currentKg >= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
-                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${
+                calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
@@ -197,8 +198,9 @@ const WeightTrack = () => {
             <button
               disabled={currentKg <= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
-                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${
+                calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
