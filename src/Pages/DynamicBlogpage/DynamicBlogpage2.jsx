@@ -89,7 +89,7 @@ console.log(blog);
       <div className='lg:w-[70%]'>
       <img className='h-[350px] w-[90%] mx-auto object-cover' src={blog.blogImg} alt={blog.blogName} />
       <div  className='flex gap-2 items-center my-[25px] bg-primary rounded-md'>
-        <h1 className='text-2xl font-[600] w-fit bg'>{blog.blogName} &nbsp;</h1>
+        <h1 className='text-2xl font-[600] w-fit bg-white'>{blog.blogName} &nbsp;</h1>
       </div>
       <div dangerouslySetInnerHTML={{__html: `${blog.blogDes}`}}>
       </div>

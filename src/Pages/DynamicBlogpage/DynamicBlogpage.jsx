@@ -16,9 +16,9 @@ const DynamicBlogpage = () => {
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
   const { user } = useAuth()
-  console.log(user);
+  // console.log(user);
   const { user: userDetails } = useSelector(state => state.user)
-  console.log(param);
+  // console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
@@ -94,7 +94,7 @@ const DynamicBlogpage = () => {
       <div className='lg:w-[70%]'>
         <img className='h-[350px] w-[90%] mx-auto object-cover' src={blog.blogImg} alt={blog.blogName} />
         <div className='flex gap-2 items-center my-[25px] bg-primary rounded-md'>
-          <h1 className='text-2xl font-[600] w-fit bg'>{blog.blogName} &nbsp;</h1>
+          <h1 className='text-2xl font-[600] w-fit bg-white'>{blog.blogName} &nbsp;</h1>
         </div>
         <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes}` }}>
         </div>
@@ -107,19 +107,14 @@ const DynamicBlogpage = () => {
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
         <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
-        {
-          myblog?._id === userDetails?._id ? '' : (isFollower ?
-            <button disabled className="bg-primary p-[10px] text-xl text-white rounded-md">
-              Follower
-            </button>
-            :
-            (<>
+        
+          <>
               <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
                 {isFollowing ? "Unfollow" : "Follow Now"}
               </button>
 
-            </>))
-        }
+            </>
+        
       </div>
     </div>
   )
