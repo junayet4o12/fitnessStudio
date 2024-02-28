@@ -76,7 +76,7 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
     }
     return (
         <div className='max-w-7xl mx-auto '>
-            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-start sm:justify-start   py-7 gap-5  lg:gap-10 p-4 bg-secondary/40 rounded my-5 shadow-2xl px-10'>
+            <div className='profile-Status-Section w-full mx-auto flex  flex-col sm:flex-row justify-center items-center sm:items-start sm:justify-start   py-7 gap-5  lg:gap-10 p-4 bg-gray-300 rounded my-5 shadow-2xl px-3 sm:px-10'>
                 <div className='flex flex-col justify-center items-center'>
                     <div className='w-[200px] h-[200px] min-w-[200px] min-h-[200px] 
                 lg:w-[250px]  lg:h-[250px] lg:min-w-[250px] lg:min-h-[250px] p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-white overflow-hidden flex justify-center items-center '>

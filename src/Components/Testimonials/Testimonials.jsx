@@ -94,10 +94,10 @@ const Testimonials = () => {
                       <p className="font-bold">{item?.feedbackGiver}</p>
                       <Rating
                         emptySymbol={
-                          <FaStar className="text-lg text-gray-400 hover:scale-110 duration-300"></FaStar>
+                          <FaStar className="text-lg text-gray-500 hover:scale-110 duration-300"></FaStar>
                         }
                         fullSymbol={
-                          <FaStar className="text-lg text-primary hover:scale-110 duration-300"></FaStar>
+                          <FaStar className="text-lg text-yellow-800 hover:scale-110 duration-300"></FaStar>
                         }
                         initialRating={item?.rating}
                         readonly

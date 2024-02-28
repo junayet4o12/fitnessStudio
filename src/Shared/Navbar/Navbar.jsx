@@ -16,7 +16,7 @@ import { NotificationsMenu } from "./Notification";
 function NavList({navbarColor}) {
   const { user } = useAuth()
   return (
-    <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
+    <ul className={`my-2 flex flex-col  ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
         as="li"
         variant="small"
@@ -222,17 +222,14 @@ export function NavbarSimple({navbarColor}) {
           <Link to={'/'} className="scroll-smooth">
             <h1 className={`flex items-center text-xl xs:text-2xl  font-bold md:text-4xl md:font-extrabold  ${navbarColor ? 'text-white' : 'text-black'}`}>
               <CgGym className="text-secondary   mr-1 text-3xl md:text-5xl" />Fitness
-              <span className="text-secondary   text-2xl xs:text-3xl md:text-5xl">Studio</span>
+              <span className="text-secondary   text-2xl xs:text-3xl md:text-3xl">Studio</span>
             </h1>
           </Link>
         </Typography>
         <div className="flex gap-7 xs:gap-5 items-center">
-          <div className="hidden lg:block">
-            <NavList navbarColor={navbarColor} />
-          </div>
           <IconButton
             variant="text"
-            className="ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden text-white/90"
+            className={`ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent  ${navbarColor ? 'text-white' : 'text-black'}`}
             ripple={false}
             onClick={() => setOpenNav(!openNav)}>
             {openNav ? (
@@ -253,7 +250,7 @@ export function NavbarSimple({navbarColor}) {
 
             {/* User Profile component */}
             <span className="">
-              {user && <NavProfile />}
+              {user && <NavProfile navbarColor={navbarColor} />}
             </span>
           </span>
 
