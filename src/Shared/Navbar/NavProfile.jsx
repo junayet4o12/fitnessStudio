@@ -17,7 +17,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { MdOutlineConnectWithoutContact } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-const NavProfile = () => {
+const NavProfile = ({ navbarColor }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
   const { user, logOut } = useAuth();
@@ -32,23 +32,23 @@ const NavProfile = () => {
       icon: <MdOutlineDashboard />,
     },
     {
-      label:'Connected With',
-      icon: <MdOutlineConnectWithoutContact/>
+      label: 'Connected With',
+      icon: <MdOutlineConnectWithoutContact />
     },
     {
       label: "Sign Out",
       icon: <LiaSignOutAltSolid />,
     },
-    
+
   ];
   const handleAction = (input) => {
     if (input === "My Profile") {
       navigate("/dashboard/profile");
     } else if (input === "Dashboard") {
       navigate("/dashboard/profile");
-    } else if(input ==='Connected With'){
+    } else if (input === 'Connected With') {
       navigate("/dashboard/connected_with")
-    }else if (input === "Sign Out") {
+    } else if (input === "Sign Out") {
       const toastId = toast.loading("Logged Outing...");
       logOut()
         .then(() => {
@@ -61,7 +61,7 @@ const NavProfile = () => {
     closeMenu();
   };
   return (
-    <div>
+    <div className="">
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
         <MenuHandler>
           <Button
@@ -72,15 +72,14 @@ const NavProfile = () => {
               variant="circular"
               size="sm"
               alt="tania andrew"
-              className={`border ${
-                isMenuOpen && "border-primary"
-              } w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
+              className={`border ${isMenuOpen && "border-primary"
+                } w-9 h-9 xs:w-12 xs:h-12 p-0.5 rounded-full`}
               src={user?.photoURL}
             />
           </Button>
         </MenuHandler>
-        <MenuList className="p-1 px-3 z-40">
-          <div className="border-2 border-primary w-max rounded-full p-[2px] mx-auto mt-1">
+        <MenuList className={`p-1 px-3 z-40 ${!navbarColor ? 'bg-white border-primary text-black' : 'bg-primary border-white text-white'} transition-all duration-300`}>
+          <div className={`border  w-max rounded-full p-[2px] mx-auto mt-1 ${!navbarColor ? 'border-primary ' : ' border-white '}`}>
             <img
               className="w-10 h-10 rounded-full"
               src={user?.photoURL}
@@ -92,22 +91,22 @@ const NavProfile = () => {
               {user?.displayName}
             </p>
           </div>
-          <hr className="border-primary my-1 border-[1.3px]" />
+          <hr className={`${!navbarColor ? 'border-black' : ' border-white'} my-1 border-[1.3px]`} />
           {profileMenuItems.map(({ label, icon }, key) => {
             const isLastItem = key === profileMenuItems.length - 1;
             return (
               <MenuItem
                 key={label}
                 onClick={() => handleAction(label)}
-                className={`flex items-center gap-2 rounded hover:bg-primary/10 focus:bg-primary/10 active:bg-primary/10 }`}>
-                <p className="w-8 h-8 flex justify-center items-center text-xl text-primary">
+                className={`flex items-center gap-2  rounded ${!navbarColor ? 'hover:bg-primary/30 focus:bg-primary/30 active:bg-primary/30' : 'hover:bg-white focus:bg-white active:bg-white'} ${isLastItem && `${navbarColor ?  "bg-white text-black" : "bg-primary/20 "}`}`}>
+                <p className={`w-8 h-8 flex justify-center items-center text-xl  `}>
                   {icon}
                 </p>
                 <Typography
                   as="span"
                   variant="small"
                   className="font-normal"
-                  color={isLastItem ? "green" : "inherit"}>
+                  color={isLastItem ? "red" : "inherit"}>
                   {label}
                 </Typography>
               </MenuItem>
