@@ -7,7 +7,7 @@ import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import { CgGym } from "react-icons/cg";
 import { FaBookmark } from "react-icons/fa6";
-import { MdOutlineManageHistory } from "react-icons/md";
+import { MdOutlineConnectWithoutContact, MdOutlineManageHistory } from "react-icons/md";
 import {
   FaHome,
   FaPhoneAlt,
@@ -141,6 +141,19 @@ const Sidebar = () => {
           ) : (
             // user Routs
             <>
+             <li>
+                <NavLink
+                  to="/dashboard/connected_with"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <MdOutlineConnectWithoutContact /> Connected With
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard/connect_people"
