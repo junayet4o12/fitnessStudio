@@ -6,25 +6,11 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 const ManageWeight = () => {
-<<<<<<< HEAD
-    const { user } = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const [userCurrentWeight,setUserCurrentWeight] = useState(null)
-    const [selectedValue, setSelectedValue] = useState(null);
-    
-    useEffect(()=>{
-        axiosSecure.get(`/users/${user?.email}`)
-        .then((res)=>{
-            setUserCurrentWeight(res.data.weight)
-            // setUserDetails({ weight: res.data.     eight, height: res.data.height })
-        })
-=======
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [userCurrentWeight, setUserCurrentWeight] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
   const [selectedValue, setSelectedValue] = useState(null);
->>>>>>> a2b9eaca970c930108c424e8a3a670825e371163
 
   useEffect(() => {
     axiosSecure.get(`/users/${user?.email}`).then((res) => {
