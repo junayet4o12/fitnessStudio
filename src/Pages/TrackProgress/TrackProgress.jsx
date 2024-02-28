@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../Components/Loading";
 import toast from "react-hot-toast";
 
-
 const TrackProgress = () => {
   const navigate = useNavigate();
 
@@ -22,10 +21,10 @@ const TrackProgress = () => {
 
   const progressBarStyles = {
     path: {
-      stroke: "#05a16d",
+      stroke: "#0c0c0c",
     },
     text: {
-      fill: "#05a16d",
+      fill: "#0c0c0c",
       fontSize: "20px",
     },
   };
