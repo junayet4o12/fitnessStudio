@@ -9,17 +9,19 @@ const Dashboard = () => {
       <Helmet>
         <title> Dashboard - FitnessStudio</title>
       </Helmet>
-      <div className="md:flex">
+      <div className="md:flex  ">
+        {/* bg-gradient-to-l from-[#1e5e5e] to-[#022222] */}
         <DashboardNavbar />
+
         <Sidebar />
 
         {/* Dashboard content */}
-        <div className="flex-1">
+        <div className="flex-1 overflow-x-hidden">
           <ScrollRestoration />
           <Outlet />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

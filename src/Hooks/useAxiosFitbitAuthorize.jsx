@@ -1,7 +1,8 @@
 import axios from "axios";
+import { backendUrl } from "../BackendUrl/backendUrl";
 
 const axiosFitbitAuthorize = axios.create({
-    baseURL: 'http://localhost:5000', 
+    baseURL: backendUrl, 
     headers: {
       'Content-Type': 'application/json',
     },

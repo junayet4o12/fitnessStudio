@@ -1,7 +1,7 @@
 
 const StoryBehind = () => {
   return (
-    <div className="storyBehind bg-[#ff4704] p-[25px] bg-opacity-[0.6] min-h-[350px] justify-center rounded-tl-[50px] rounded-br-[50px] flex flex-col items-center gap-2 text-white text-center">
+    <div className="storyBehind bg-secondary p-[25px]  min-h-[350px] justify-center rounded-tl-[50px] rounded-br-[50px] flex flex-col items-center gap-2 text-white text-center">
           <h1 className="text-xl pb-[15px] lg:text-4xl font-bold"> Story Behind the Platform</h1>
           <div className='bg-[white] h-[4px] w-[90%] lg:w-[25%] rounded-lg'></div>
           <p className="font-[500] pt-[15px]">

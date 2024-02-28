@@ -11,12 +11,16 @@ import {
   signOut,
 } from "@firebase/auth";
 import auth from "../../firebase/firebase.config";
+import { socket } from "../../socketIo/socket";
 
 export const AuthContext = createContext(null);
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState([])
+  const [followFollowingActive, setfollowFollowingActive] = useState(true)
   const axiosPublic = useAxiosPublic();
+  const [changeRefetch, setChangeRefetch] = useState(0)
 
   const createUser = (email, pass) => {
     return createUserWithEmailAndPassword(auth, email, pass);
@@ -25,11 +29,11 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, pass);
   };
-  const logOut =async () => {
+  const logOut = async () => {
 
     setLoading(true);
     await axiosPublic.post('/logout')
-    
+
     return signOut(auth);
   };
   const googleProvider = new GoogleAuthProvider();
@@ -44,10 +48,10 @@ const AuthProviders = ({ children }) => {
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
         axiosPublic.post('/jwt', userInfo)
-        .then(res =>{
-          console.log(res.data)
-        
-        });
+          .then(res => {
+            console.log(res.data)
+
+          });
         console.log(userInfo);
       }
 
@@ -57,6 +61,13 @@ const AuthProviders = ({ children }) => {
       return unsubscribe();
     };
   }, [axiosPublic]);
+  useEffect(() => {
+
+
+    return () => {
+      socket.disconnect();
+    }
+  }, [changeRefetch])
   const authInfo = {
     user,
     loading,
@@ -64,13 +75,20 @@ const AuthProviders = ({ children }) => {
     loginUser,
     logOut,
     googleLogIn,
+    messages,
+    setMessages,
+    followFollowingActive,
+    setfollowFollowingActive,
+    changeRefetch,
+    setChangeRefetch
+
   };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
-AuthProviders.propTypes ={
+AuthProviders.propTypes = {
   children: PropTypes.node.isRequired
 }
 

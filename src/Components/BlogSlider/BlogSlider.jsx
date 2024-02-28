@@ -1,5 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 const responsive = {
     desktop: {
@@ -21,6 +22,9 @@ const responsive = {
 
 const BlogSlider = ({blogs}) => {
   return (
+    <>
+    {
+      blogs === undefined ? <h1>I am Ohee</h1>:
       <Carousel
         swipeable={true}
         draggable={true}
@@ -43,11 +47,18 @@ const BlogSlider = ({blogs}) => {
             }}
                 className="h-[250px] md:h-[350px] mb-[25px] md:mb-[50px] flex flex-col items-start justify-end object-contain ">
                     {/* <img src={blog.BlogImg}/> */}
-                    <h1 className="text-xl md:text-5xl font-bold text-white bg-primary w-full bg-opacity-[0.8] p-[10px]">{blog.blogName}</h1>
+                    <Link 
+                    className="text-xl md:text-5xl font-bold text-white bg-primary w-full bg-opacity-[0.8] p-[10px]"
+                    to={`/blogs/${blog._id}`}>
+                    <h1 >
+                      {blog.blogName}</h1>
+                    </Link>
                 </div>
             )
         }
       </Carousel>
+    }
+    </>
   )
 }
 

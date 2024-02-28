@@ -1,26 +1,64 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { IoFootstepsOutline } from "react-icons/io5";
-import { FaCarSide } from "react-icons/fa";
 import { GiNightSleep } from "react-icons/gi";
 import HeartRate from "./HeartRate";
 import ChartProgress from "./ChartProgress";
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from "react-helmet-async";
+
+import { IoFootstepsOutline } from "react-icons/io5";
+import { FaCarSide } from "react-icons/fa";
+
+import { useGetTrackProQuery, useGetTrackSleepProQuery } from "./api/baseApi";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../Components/Loading";
+import toast from "react-hot-toast";
+
 const TrackProgress = () => {
+  const navigate = useNavigate();
+
   const cardStyle =
-    "mx-auto my-2 px-5 text-center bg-emerald-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
-  const percentage = 3056;
-  const totalPercentage = (percentage / 10000) * 100;
+    "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber  flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
+
   const progressBarStyles = {
     path: {
-      stroke: "#FF4804",
+      stroke: "#0c0c0c",
     },
     text: {
-      fill: "#FF4804",
+      fill: "#0c0c0c",
       fontSize: "20px",
     },
   };
+  console.log(progressBarStyles);
 
+  const {
+    data: track,
+    isLoading: isTrackLoading,
+    isError: isTrackError,
+  } = useGetTrackProQuery();
+  console.log("tracking", track);
+  // // console.log(track);
+  const {
+    data: sleep,
+    isError: isSleepError,
+    isLoading: isSleepLoading,
+  } = useGetTrackSleepProQuery();
+  console.log("sleeping", sleep);
+
+  const sleepDuration = sleep?.summary?.totalMinutesAsleep;
+  const totalSleep = Math.floor(sleepDuration / 60);
+  // // console.log(totalSleep);
+  const caloriesOut = track?.summary.caloriesBMR;
+  const caloBurned = track?.summary.caloriesOut;
+
+  if (isTrackLoading || isSleepLoading) {
+    return <Loading></Loading>;
+  }
+  if (isTrackError || isSleepError) {
+    localStorage.removeItem("Authorization");
+    toast.error("Please Connect Fitbit!!!");
+    navigate(`/dashboard/connect_app`);
+    return;
+  }
   return (
     <div>
       <Helmet>
@@ -32,9 +70,14 @@ const TrackProgress = () => {
             Daily <span className="text-primary">Activity</span>
           </h2>
           <p className="font-medium text-xl mt-2">
-            Here are your Daily Activities. Check out the exciting things you have
+            Here are your Daily Activities. Check out the exciting things you
+            have
             <br />
             accomplished today and plan for more success tomorrow.
+          </p>
+          <p className="font-medium text-base mt-2 max-w-[600px]">
+            <strong>Note:</strong> This daily Progress data is coming from
+            Fitbit app You have already connected it to our web page.
           </p>
         </div>
 
@@ -45,13 +88,13 @@ const TrackProgress = () => {
                 <div className={`${cardStyle}`}>
                   <div className="mb-2 flex justify-center items-center space-x-1 ">
                     <IoFootstepsOutline className="text-primary text-2xl " />
-                    <h3 className="text-lg font-medium text-gray-700">Steps</h3>
+                    <h3 className="text-lg font-medium text-gray-900">Steps</h3>
                   </div>
                   <div>
                     <CircularProgressbar
                       styles={progressBarStyles}
-                      value={totalPercentage}
-                      text={`${totalPercentage.toFixed(1)}%`}
+                      value={(track?.summary?.steps / 10000) * 100}
+                      text={track?.summary?.steps}
                     />
                   </div>
                 </div>
@@ -63,10 +106,10 @@ const TrackProgress = () => {
                       <div className="card-actions justify-start">
                         <FaCarSide className="text-primary text-2xl" />
                       </div>
-                      <div>
+                      <div className="text-black">
                         <p className="text-xl font-semibold">Distance</p>
                         <span className="text-xl font-semibold">
-                          6.4 kilometers
+                          {track?.summary?.distances[0]?.distance} miles
                         </span>
                       </div>
                     </div>
@@ -74,30 +117,35 @@ const TrackProgress = () => {
                 </div>
 
                 <div className="">
-                  <div className="card bg-sky-50 mb-1">
+                  <div className="card bg-blue-50 mb-1">
                     <div className="card-body flex flex-row bmiNumber justify-center items-center">
                       <div className="card-actions justify-start ">
                         <GiNightSleep className="text-primary text-2xl" />
                       </div>
-                      <div className="">
+                      <div className="text-black">
                         <p className="text-xl font-semibold">Sleep</p>
-                        <span className="text-xl font-semibold">8.4 Hours</span>
+                        <span className="text-xl font-semibold">
+                          {totalSleep} hr
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <HeartRate />
+            <HeartRate caloriesOut={caloriesOut} />
           </div>
 
           <div className="lg:w-1/2 ">
-            <ChartProgress />
+            <ChartProgress
+              caloriesBurned={caloBurned}
+              caloriesOut={caloriesOut}
+            />
           </div>
         </div>
       </div>
-      </div>
-      );
+    </div>
+  );
 };
 
-      export default TrackProgress;
+export default TrackProgress;

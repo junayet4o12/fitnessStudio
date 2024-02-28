@@ -3,27 +3,28 @@ import useAuth from '../../Hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import { useForm } from 'react-hook-form';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { updateProfile } from '@firebase/auth';
 import auth from '../../firebase/firebase.config';
 import ProfileMain from './ProfileMain';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
-
+import pageBg from '../../assets/images/dumbbells-floor-gym-ai-generative.jpg';
+import Loading from '../Loading';
+import { FaPen, FaRegPenToSquare } from "react-icons/fa6";
 const Profile = () => {
     const dispatch = useDispatch()
-    const { user } = useAuth()
+    const { user, changeRefetch, setChangeRefetch } = useAuth()
     const axiosPublic = useAxiosSecure()
-    const { isLoading, user: userDetails } = useSelector(state => state.user)
+    const { user: userDetails, isLoading } = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-
+    console.log(userDetails?.followedTime);
     // style Variable start
 
-    const inputFieldStyle = ` ${edit ? 'input input-error border-[3px]' : 'border-[1.5px] cursor-not-allowed'}  w-full bg-white p-3  border-primary rounded font-semibold  text-black`
-    const selectFieldFieldStyle = ` ${edit ? 'border-[3px]' : 'border-[1.5px] cursor-not-allowed'}   w-full  bg-white h-[50px]  border-primary rounded font-semibold  text-black`
+    const inputFieldStyle = ` ${edit ? 'input input-accent border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
+    const selectFieldFieldStyle = ` ${edit ? 'border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}   w-full   h-[50px]  border-primary rounded font-semibold  text-black`
     const buttonStyle = 'btn transition-all duration-500 font-bold text-white rounded border-[3px]  '
 
     // style Variable end
@@ -40,10 +41,11 @@ const Profile = () => {
         const myBMR = (userDetails?.gender === 'Male' ? bmrForMale : bmrForFemale).toFixed(2)
         setMyPersonalInfo({ myBMI, age, myBMR })
     }, [userDetails])
-    if (isLoading) {
-        return ''
-    }
 
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    console.log(userDetails?.admin);
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
@@ -58,10 +60,11 @@ const Profile = () => {
         const feet = data?.feet;
         const inch = data?.inch;
         const gender = data?.gender;
+        const bio = data?.bio
         const height = feet * 12 + parseFloat(inch);
         const isPerfectAge = new Date() - new Date(birthDay);
         const ageInYears = Math.floor(isPerfectAge / 31556952000);
-        console.log(ageInYears);
+        console.log(bio);
 
         if (ageInYears < 5) {
             setAgeErr('Make sure Your age is more than 5')
@@ -77,7 +80,8 @@ const Profile = () => {
                     birthDay,
                     weight,
                     height,
-                    gender
+                    gender,
+                    bio
                 }
                 axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
@@ -89,6 +93,7 @@ const Profile = () => {
                                 timer: 1500
                             });
                             setEdit(false)
+                            setChangeRefetch(changeRefetch + 1)
                         }
                     })
                     .catch(err => {
@@ -103,12 +108,22 @@ const Profile = () => {
 
 
     return (
-        <div className='p-4'>
-            <ProfileMain image={userDetails?.image} age={age} myBMI={myBMI} myBMR={myBMR}></ProfileMain>
-            <div>
-                <div className='w-full max-w-[500px] bg-orange-200  mx-auto p-5 pt-12 rounded relative shadow-lg'>
-                    <p className='text-lg font-bold mb-2 text-center'>Personal Information</p>
-                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
+        <div className='p-5 lg:p-10 '
+        // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
+        >
+            <div className={`${!edit ? 'block' : 'hidden'} my-5 relative `}>
+                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
+                <div className={`${edit && 'hidden'} absolute top-4 right-4`}>
+                        <button
+                            onClick={() => setEdit(true)}
+                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-sm '><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
+                    </div>
+            </div>
+            <div className={`${edit ? 'block' : 'hidden'}`}>
+                <div className='w-full max-w-7xl  bg-gray-200  mx-auto p-5 pt-12 rounded relative shadow-lg  '>
+
+                    <form onSubmit={handleSubmit(onSubmit)} className=' grid grid-cols-1 sm:grid-cols-2 gap-3  p-5 '>
+                        <p className='text-2xl font-bold mb-2 sm:col-span-2'>Personal Information</p>
                         {/* name  */}
                         <div>
                             <label className='font-bold flex gap-0'>Name <span className='text-primary text-lg'>*</span></label>
@@ -116,7 +131,7 @@ const Profile = () => {
                                 required
                                 disabled={!edit}
                                 {...register("name")}
-                                className={`${inputFieldStyle}`} placeholder='Your Name' defaultValue={userDetails?.name} />
+                                className={`${inputFieldStyle}`} defaultValue={userDetails?.name} />
                         </div>
                         {/* date of birth  */}
                         <div>
@@ -131,7 +146,8 @@ const Profile = () => {
                         </div>
                         {/* weight  */}
                         <div>
-                            <label className='font-bold flex gap-0'>Weight(KG) <span className='text-primary text-lg'>*</span></label>
+                            <label className='font-bold flex gap-0'>Weight <span className='text-primary text-lg'>*</span></label>
+                            <label className='font-bold text-sm'>KG</label>
                             <input
                                 required
                                 disabled={!edit}
@@ -144,7 +160,7 @@ const Profile = () => {
                         {/* height  */}
                         <div>
                             <label className='font-bold flex gap-0'>Height <span className='text-primary text-lg'>*</span></label>
-                            <div className='flex gap-3'>
+                            <div className='grid grid-cols-2 gap-3'>
                                 <div>
                                     <label className='font-bold text-sm'>Feet</label>
                                     <input
@@ -191,22 +207,30 @@ const Profile = () => {
                                     Female
                                 </option>
                             </select>
-                            <div className={`${!edit ? 'block' : 'hidden'} w-4 h-7 bg-white absolute bottom-3 right-1 `}></div>
+
+                        </div>
+                        {/* bio  */}
+                        <div className='sm:col-span-2'>
+                            <label className='font-bold flex gap-0'>Bio <span className='text-primary text-lg'>*</span></label>
+                            <textarea
+                                // required
+                                disabled={!edit}
+                                {...register("bio")}
+                                type='text'
+                                className={`${inputFieldStyle} h-[150px] md:h-[130px]`} placeholder='Your bio' defaultValue={userDetails?.bio ? userDetails?.bio : 'Not Given'} ></textarea>
                         </div>
                         {/* action  */}
-                        <div className={`${!edit && 'hidden'} flex gap-5`}>
-                            <button className={`${buttonStyle} active:bg-[#ff470470]  bg-[#ff4704] hover:bg-orange-700  border-transparent hover:border-[#ff4704]`}>Update</button>
-                            <p onClick={handleCancel} className={`${buttonStyle} active:bg-red-800  bg-red-500 hover:bg-red-700  border-transparent hover:border-red-500`}>Cancel</p>
+                        <div className={`${!edit && 'hidden'} flex gap-5 sm:col-span-2`}>
+                            <button className={`${buttonStyle} active:bg-primary/70  bg-primary/80 hover:bg-primary  border-transparent hover:border-primary`}>Update</button>
+                            <p onClick={handleCancel} className={`${buttonStyle} active:bg-red-800  bg-red-500 hover:bg-red-700  border-transparent hover:border-red-700`}>Cancel</p>
                         </div>
                     </form>
-                    <div className={`${edit && 'hidden'} absolute top-5 right-5`}>
-                        <button onClick={() => setEdit(true)} className='btn btn-sm bg-primary hover:bg-orange-700 text-white'>Edit</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>
     )
-    
+
 }
 
 

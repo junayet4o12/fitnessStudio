@@ -9,7 +9,7 @@ import auth from "../../../firebase/firebase.config";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import registerImg from '../../../assets/images/LogInRegistration/register.png'
 const Register = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Register = () => {
             const userInfo = {
               name: data.name,
               email: data.email,
-              image: imgurl,
+              image: imgurl
             };
             axiosPublic.post("/users", userInfo).then((res) => {
               if (res.data.insertedId) {
@@ -75,13 +75,13 @@ const Register = () => {
       </Helmet>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
         <div>
-          <div className="w-full md:w-[700px] lg:w-[400px] mb-10 lg:mb-0 px-5 lg:px-0">
+          <div className="w-full md:w-[500px] lg:w-[400px] xl:w-[500px] mb-10 lg:mb-0 px-5 lg:px-5">
             <div className="w-full">
               <div>
                 <h1 className="text-start text-4xl font-semibold">
                   Create Account !
                 </h1>
-                <p className="text-start text-sm text-gray-600 mt-2">
+                <p className="text-start text-sm text-white/80 mt-2">
                   Enter to get unlimited access to data & information.
                 </p>
               </div>
@@ -89,7 +89,7 @@ const Register = () => {
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Name <span className="text-red-500 text-xl">*</span>
+                      Name <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="text"
@@ -98,14 +98,14 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.name && (
-                      <span className="text-red-400 text-xs">
+                      <span className="text-primary text-xs">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Email <span className="text-red-500 text-xl">*</span>
+                      Email <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="email"
@@ -116,14 +116,14 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.email?.type === "required" && (
-                      <span className="text-red-400 text-xs ">
+                      <span className="text-primary text-xs ">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
                     <h1 className="text-start text-sm font-medium mb-1">
-                      Password <span className="text-red-500 text-xl">*</span>
+                      Password <span className="text-primary text-xl">*</span>
                     </h1>
                     <input
                       type="password"
@@ -134,7 +134,7 @@ const Register = () => {
                       className="input input-bordered w-full"
                     />
                     {errors.password?.type === "required" && (
-                      <span className="text-red-400 text-xs ">
+                      <span className="text-primary text-xs ">
                         This field is required
                       </span>
                     )}
@@ -151,12 +151,12 @@ const Register = () => {
                     />
                   </div>
                   {errors.image?.type === "required" && (
-                    <span className="text-red-400 text-xs ">
+                    <span className="text-primary text-xs ">
                       This field is required
                     </span>
                   )}
                   <button
-                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-[#FF4804] py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    className="duration-300 hover:rounded-3xl block w-full select-none rounded-lg bg-primary py-3 px-6  text-center align-middle text-xl  text-white shadow-md shadow-[#FFA828]/20 transition-all hover:shadow-lg hover:shadow-[#FFA828]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="submit"
                     data-ripple-light="true">
                     Register
@@ -172,7 +172,7 @@ const Register = () => {
                   </p>
                   <Link
                     to="/login"
-                    className="block font-medium leading-normal text-[#FF4804] antialiased">
+                    className="block font-medium leading-normal text-primary antialiased">
                     Login
                   </Link>
                 </div>
@@ -180,10 +180,10 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="hidden md:block">
           <img
-            className="w-[701px]"
-            src="https://i.ibb.co/2Yp0RdD/Sign-up-pana.png"
+            className="md:w-[500px] xl:w-[700px]"
+            src={registerImg}
             alt=""
           />
         </div>

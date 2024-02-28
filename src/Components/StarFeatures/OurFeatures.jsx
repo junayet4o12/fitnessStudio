@@ -8,13 +8,13 @@ const OurFeatures = () => {
   // const cardStyle = 'w-[280px] max-w-xs text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl'
 
   const cardStyle =
-    "   mx-auto min-w-[250px] xs:min-w-[300px]  sm:min-w-[400px] lg:w-[200px] subxl:w-[250px]  lg:min-w-[200px] subxl:min-w-[250px]  text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer";
+    "   mx-auto w-full max-w-[350px]  text-center bg-primary flex flex-col justify-center items-center transform transition-transform duration-500 py-5 rounded-xl shadow-xl cursor-pointer";
   return (
     <Container>
       <div className="mt-[50px] mb-[120px] p-4">
         <section className="">
           <Title title={"Our Features"}></Title>
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-8 my-[50px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-between items-center gap-8 my-[50px]">
               <div className=" ">
                 <div className={`${cardStyle} hover:translate-y-4 `}>
                   <div>
@@ -22,7 +22,7 @@ const OurFeatures = () => {
                   </div>
 
                   <div className="mt-2">
-                    <h3 className="text-lg font-medium text-gray-100">
+                    <h3 className="text-lg font-medium text-white">
                       Activity Tracking
                     </h3>
                   </div>
@@ -36,7 +36,7 @@ const OurFeatures = () => {
                 </div>
 
                 <div className="mt-2">
-                  <h3 className="text-lg font-medium text-gray-100">
+                  <h3 className="text-lg font-medium text-white">
                     Progress Analytics
                   </h3>
                 </div>
@@ -49,7 +49,7 @@ const OurFeatures = () => {
                   </div>
 
                   <div className="mt-2">
-                    <h3 className="text-lg font-medium text-gray-100">
+                    <h3 className="text-lg font-medium text-white">
                       Time Management
                     </h3>
                   </div>
@@ -63,7 +63,7 @@ const OurFeatures = () => {
                 </div>
 
                 <div className="mt-2">
-                  <h3 className="text-lg font-medium text-gray-100">
+                  <h3 className="text-lg font-medium text-white">
                     Workout Progress
                   </h3>
                 </div>

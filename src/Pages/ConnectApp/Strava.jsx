@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import stravaImg from '../../assets/images/strava.jpeg'
 import useAxiosStrava from '../../Hooks/useAxiosStrava';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import useAxiosStravaFetch from '../../Hooks/useAxiosStravaFetch';
+import { backendUrl } from '../../BackendUrl/backendUrl';
+
 
 const Strava = () => {
     const navigate = useNavigate()
     const [exchangeCode, setExchangeCode] = useState('')
     const [isRegister, setIsRegister] = useState(localStorage.getItem('stravaKey'))
     const axiosStrava = useAxiosStrava()
-    const axiosStravaFetch = useAxiosStravaFetch()
+    
     const handleAuthorize = async () => {
         if (exchangeCode) {
             console.log('already done', exchangeCode);
@@ -42,7 +42,7 @@ const Strava = () => {
 
                 console.log('Received authorization code:', code);
                 setExchangeCode(code)
-                axiosStrava.post('http://localhost:5000/callbackstrava', { exchangeCode: code })
+                axiosStrava.post(`${backendUrl}/callbackstrava`, { exchangeCode: code })
                     .then(res => {
                         console.log(res.data.accessToken)
                         const token = res.data.accessToken
@@ -57,7 +57,7 @@ const Strava = () => {
         else {
             console.log('eroi');
         }
-    }, []);
+    }, [exchangeCode,axiosStrava]);
    
     // const handleGetData = () => {
     //     console.log('hello', localStorage.getItem('stravaKey'));

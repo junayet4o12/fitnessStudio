@@ -9,7 +9,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body, .bg {
     font-family: 'Raleway', sans-serif;
 }
 
@@ -23,3 +23,5 @@ body {
 .bmiNumber{
     font-family: 'Poppins', sans-serif;
 }
+
+
