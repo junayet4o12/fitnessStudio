@@ -16,10 +16,10 @@ const HeartRate = () => {
 
   const progressBarStyles = {
     path: {
-      stroke: "#05a16d",
+      stroke: "#0c0c0c",
     },
     text: {
-      fill: "#05a16d",
+      fill: "#0c0c0c",
       fontSize: "10px",
       fontFamily: "Poppins",
     },

@@ -98,29 +98,29 @@ const ActivityCard = ({ activity,  handleGivingCompareDate, comparingCard }) => 
     // showing distance text end
     return (
         <div className=''>
-            <Card className="mt-6 w-72 xs:w-96 bg-primary/60 shadow-xl shadow-primary/30 ">
+            <Card className="mt-6 w-72 xs:w-96 bg-primary/20 shadow-xl shadow-primary/30 ">
                 <CardHeader color="blue-gray" className="relative h-56 m-0 rounded-br-none rounded-bl-none">
                     <img
                         src={cardImg}
                     />
                 </CardHeader>
                 <CardBody>
-                    <Typography variant="h5" color="blue-gray" className="mb-2 text-white">
+                    <Typography variant="h5" color="blue-gray" className="mb-2">
                         Type: {name}
                     </Typography>
-                    <Typography variant="h6" color="blue-gray" className="mb-2 text-white">
+                    <Typography variant="h6" color="blue-gray" className="mb-2">
                         Time: <span className='font-normal'>{formattedTime}, {formattedDate}</span>
                         <br />
                     </Typography>
-                    <Typography variant="h6" color="blue-gray" className="mb-2 text-white">
+                    <Typography variant="h6" color="blue-gray" className="mb-2">
                         Distance: <span className='font-normal'>{showingDistance}</span>
                         <br />
                     </Typography>
                 </CardBody>
                 <CardFooter className="pt-0">
-                    <Button onClick={handleOpenActivityChartModal} className='text-black bg-primary hover:bg-primary/70 transition-all duration-500'>Details</Button>
+                    <Button onClick={handleOpenActivityChartModal} className='text-white bg-primary hover:bg-primary/70 transition-all duration-500'>Details</Button>
 
-                    <Button onClick={() => handleGivingCompareDate({ id, name })} className='text-black bg-secondary hover:bg-secondary/70 transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
+                    <Button onClick={() => handleGivingCompareDate({ id, name })} className='text-white bg-secondaryDeep/90 hover:bg-secondaryDeep transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
                 </CardFooter>
             </Card>
             <ActivityChartModal open={openActivityModal} handleOpen={handleOpenActivityChartModal} handleClose={handleCloseActivityChartModal} activity={activity}></ActivityChartModal>
