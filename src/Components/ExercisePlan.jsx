@@ -1,4 +1,4 @@
-import Title from "../../Components/Title/Title";
+import Title from "./Title/Title";
 
 const ExercisePlan = () => {
   const buttonStyle =
