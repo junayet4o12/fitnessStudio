@@ -26,7 +26,6 @@ const WeightTrack = ({completedGoalsrefetch}) => {
     (category) => category.tracking_goal === "Weight_Management"
   );
 
-
   if (!specificWeight) {
     return (
       <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
@@ -58,7 +57,6 @@ const WeightTrack = ({completedGoalsrefetch}) => {
   const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
   const currentKg = calculateWeight?.current_weight;
   const percentTargeWeight = targetKg - oldKg;
-
 
   const lossPercent = oldKg - targetKg;
 
@@ -130,11 +128,11 @@ const WeightTrack = ({completedGoalsrefetch}) => {
 
   const percant = (previusWeight, currentWeight, need) => {
     console.log(currentWeight, previusWeight);
-    const kg = currentWeight - previusWeight || 0
-    const realPercant = Math.ceil((100 / need) * kg)
+    const kg = currentWeight - previusWeight || 0;
+    const realPercant = Math.ceil((100 / need) * kg);
 
-    return realPercant
-  }
+    return realPercant;
+  };
   const kg = percant(oldKg, currentKg, percentTargeWeight);
   const lossKg = percant(currentKg, oldKg, lossPercent);
   console.log(calculateWeight.completed);
