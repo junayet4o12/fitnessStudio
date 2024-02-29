@@ -11,11 +11,14 @@ import useAuth from '../../Hooks/useAuth';
 import { MdOutlineDone, MdOutlineDoneAll, MdOutlineTipsAndUpdates } from "react-icons/md";
 import { heightInInch } from '../../Hooks/height';
 import { ageInYearandDay } from '../../Hooks/age';
-import { FaEye, FaPeopleGroup, FaPlus, FaUsers } from 'react-icons/fa6';
+import { FaEye, FaPeopleGroup, FaPlus, FaRegPenToSquare, FaUsers } from 'react-icons/fa6';
 import { GoGoal } from "react-icons/go";
 import { VscEye } from "react-icons/vsc";
-const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
+import { CiMenuKebab } from "react-icons/ci";
+import { RxCross2 } from "react-icons/rx";
+const ProfileMain = ({ age, myBMI, myBMR, userDetails, showMenu, setShowMenu, edit, setEdit }) => {
     const [openSuggestionsModal, setOpenSuggestionsModal] = useState(false);
+
     const { user } = useAuth()
     const BMISuggestions = useBMISuggestions(myBMI);
     const ageSuggestions = useAgeSuggestions(age);
@@ -23,6 +26,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     const navigate = useNavigate()
     const infoStyle = 'text-black w-[100%] max-w-[300px] sm:max-w-full mx-auto flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-lg hover:shadow-2xl  py-[6px]  bg-white transition-all duration-500 hover:bg-white/90 hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
     const linkStyle = ' flex gap-2 items-center underline hover:text-blue-800 active:scale-90 transition-all duration-500 font-medium text-sm'
+    const linkStyle2 = ' flex gap-2 items-center underline hover:text-blue-500 active:scale-90 transition-all duration-500 font-medium text-sm'
     const buttonStyle = 'btn transition-all duration-500 font-semibold text-white rounded bg-primary/70 hover:bg-primary '
     console.log('hello', localStorage.getItem('stravaKey'));
     const boxTitleStyle = 'font-semibold text-primary border-b-[1.5px] border-primary px-2 rounded-sm'
@@ -43,20 +47,45 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails }) => {
     return (
         <div className='max-w-7xl mx-auto bmiNumber'>
             <div className='profile-Status-Section w-full mx-auto    bg-gray-300 rounded  shadow-2xl grid grid-cols-1  sm:grid-cols-2  pb-10'>
-                <div className='flex flex-wrap justify-center  items-center gap-4 border-b-[8px] sm:border-r-[8px] border-white p-5 pt-16 sm:rounded-br'>
-                    <div className='w-[160px] h-[160px] min-w-[160px] min-h-[160px]  p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
+                <div className='flex flex-wrap justify-center  items-center gap-4 border-b-[17px] sm:border-r-[17px] border-white p-5 pt-16 sm:rounded-br'>
+                    <div className='w-[140px] h-[140px] min-w-[140px] min-h-[140px]  p-1 rounded-full border-l-[4px] border-b-[3px] border-t-2 border-r border-primary overflow-hidden flex justify-center items-center '>
                         <img className='w-full h-full rounded-full object-cover' src={user?.photoURL} alt="" />
                     </div>
-                    <div>
-                        <p className='text-lg font-semibold'>{userDetails?.name}</p>
-                        <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70  my-4 border-0 border-l-[1.4px] border-b-[1.4px] rounded-md border-white p-2 flex  gap-1`}>Personal Tips<span className='text-base tipscolor'><MdOutlineTipsAndUpdates /></span></button>
+                    <div className='relative'>
+                        <p className='text-base font-semibold'>{userDetails?.name}</p>
+                        <span className='flex gap-4 items-center'>
+                            <button onClick={() => setOpenSuggestionsModal(true)} className={`${buttonStyle} active:bg-primary/70  my-4 border-0 border-l-[1.4px] border-b-[1.4px] rounded-md border-white p-2 flex  gap-1 text-sm`}>Personal Tips<span className='text-base tipscolor'><MdOutlineTipsAndUpdates /></span></button>
+
+                            <button onClick={() => setShowMenu(!showMenu)} className='text-2xl  w-12 h-12 flex justify-center items-center rounded-full transition-all duration-500 hover:bg-black/10 active:scale-90  sm:hidden  relative'> <span
+                                className={`
+                             absolute
+                             duration-500 transition-all ${!showMenu ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                            `}
+                            ><CiMenuKebab /></span> <span
+                                className={`
+                                absolute
+                                duration-500 transition-all ${showMenu ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                            `}
+                            ><RxCross2 /></span></button>
+                        </span>
+                        <div
+                            className={`p-3 rounded-lg w-max  border-black bg-black/80 text-white absolute bottom-[-150px] right-0  flex-col gap-2 transition-all duration-500 ${!showMenu ? 'opacity-0 scale-y-0' : 'opacity-100 scale-y-100'} flex sm:hidden`}>
+                            <button onClick={() => navigate('/dashboard/set_goal')} className={linkStyle2}><GoGoal /> Create Goal</button>
+                            <button onClick={() => navigate('/dashboard/goal_tracking')} className={linkStyle2}><MdOutlineDoneAll /> Complete Goal</button>
+                            <button onClick={() => navigate('/dashboard/connected_with')} className={linkStyle2}><FaUsers /> See People</button>
+                            <button onClick={() => navigate('/dashboard/connect_people')} className={linkStyle2}><FaPlus /> Add People</button>
+                            <button onClick={() => {
+                                setEdit(true)
+                                setShowMenu(false)
+                            }} className='transition-all duration-300 p-1 bg-white text-black rounded text-sm font-medium flex justify-center items-center hover:bg-blue-700 hover:text-white hover:rounded-md  active:scale-90'><FaRegPenToSquare />Edit Profile</button>
+                        </div>
                     </div>
                 </div>
-                <div className='w-[100%] max-w-[300px] sm:max-w-full mx-auto flex flex-col justify-start items-start gap-[10px]  sm:px-5 mt-16'>
-                    <button onClick={()=> navigate('/dashboard/set_goal')} className={linkStyle}><GoGoal /> Create Goal</button>
-                    <button onClick={()=> navigate('/dashboard/goal_tracking')} className={linkStyle}><MdOutlineDoneAll /> Complete Goal</button>
-                    <button onClick={()=> navigate('/dashboard/connected_with')} className={linkStyle}><FaUsers /> See People</button>
-                    <button onClick={()=> navigate('/dashboard/connect_people')} className={linkStyle}><FaPlus /> Add People</button>
+                <div className='w-[100%] max-w-[300px] sm:max-w-full mx-auto sm:flex flex-col justify-start items-start gap-[10px]  sm:px-5 mt-16 hidden'>
+                    <button onClick={() => navigate('/dashboard/set_goal')} className={linkStyle}><GoGoal /> Create Goal</button>
+                    <button onClick={() => navigate('/dashboard/goal_tracking')} className={linkStyle}><MdOutlineDoneAll /> Complete Goal</button>
+                    <button onClick={() => navigate('/dashboard/connected_with')} className={linkStyle}><FaUsers /> See People</button>
+                    <button onClick={() => navigate('/dashboard/connect_people')} className={linkStyle}><FaPlus /> Add People</button>
                 </div>
                 <div className='w-full  flex justify-center items-center sm:col-span-2 px-4 md:px-10 mt-10'>
                     <div className=' font-medium w-[100%]   grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-5 my-auto text-sm md:text-xs lg:text-sm'>
