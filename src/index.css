@@ -24,4 +24,201 @@ body, .bg {
     font-family: 'Poppins', sans-serif;
 }
 
+/* team cards Design */
+.card0 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(Sajid-removebg-preview.png);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card0:hover {
+    background-image: url(Sajid-removebg-preview.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 700px;
+}
+.card0 .name, .card0 .degi{
+    opacity: 0;
+}
+.card0:hover .name, .card0:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+.card1 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(ohee2-removebg-preview.png);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card1:hover {
+    background-image: url(ohee2-removebg-preview.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+.card1 .name, .card1 .degi{
+    opacity: 0;
+}
+.card1:hover .name, .card1:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+.card2 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(junayet-removebg-preview.png);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card2:hover {
+    background-image: url(junayet-removebg-preview.png);
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+.card2 .name, .card2 .degi{
+    opacity: 0;
+}
+.card2:hover .name, .card2:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+.card3 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(barkat-removebg-preview.png);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card3:hover {
+    background-image: url(barkat-removebg-preview.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+.card3 .name, .card3 .degi{
+    opacity: 0;
+}
+.card3:hover .name, .card3:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+.card4 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(Fakhruddin-removebg-preview.png);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card4:hover {
+    background-image: url(Fakhruddin-removebg-preview.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+.card4 .name, .card4 .degi{
+    opacity: 0;
+}
+.card4:hover .name, .card4:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+.card5 {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    justify-items: end;
+    background-image: url(arman.jpg);
+    background-position: center top;
+    /* height: 400px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background 0.8s ease-out;
+    padding: 10px;
+}
+
+.card5:hover {
+    background-image: url(arman.jpg);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 800px;
+}
+.card5 .name, .card5 .degi{
+    opacity: 0;
+}
+.card5:hover .name, .card5:hover .degi{
+    opacity: 1;
+    color: white;
+    font-weight: 600;
+}
+
+@media (max-width:768px) {
+    .card0:hover {
+        background-size: 500px;
+    }
+    .card1:hover {
+        background-size: 550px;
+    }
+    .card2:hover {
+        background-size: 550px;
+    }
+    .card3:hover {
+        background-size: 550px;
+    }
+    .card4:hover {
+        background-size: 550px;
+    }
+    .card5:hover {
+        background-size: 450px;
+    }
+}
+
+
 
