@@ -9,11 +9,8 @@ import Select from "react-select";
 const Endurance = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [activityTypeselectedValue, setActivityTypeSelectedValue] =
-    useState("");
-  const [workoutPreferenceValue, setworkoutPreferenceValue] = useState("");
-  const [activityTypeErr, settargetLifterror] = useState(false);
-  const [workoutErr, settworkoutErr] = useState(false);
+  const [activityTypeSelectedValue, setActivityTypeSelectedValue] = useState("");
+  const [activityTypeErr, setTargetLiftError] = useState(false);
   // running, cycling, swimming, triathlon,
   const ActivityType = [
     { value: "running", label: "Running" },
@@ -31,17 +28,12 @@ const Endurance = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    settargetLifterror(false);
-    settworkoutErr(false);
-    // console.log(workOutPreferences);
-    if (!activityTypeselectedValue) {
-      settargetLifterror(true);
+    setTargetLiftError(false);
+    if (!activityTypeSelectedValue) {
+      setTargetLiftError(true);
       return;
     }
-    if (!workoutPreferenceValue) {
-      settworkoutErr(true);
-      return;
-    }
+   
     Swal.fire({
       title: "Are you sure?",
       text: "Do you create goals?",
@@ -60,8 +52,7 @@ const Endurance = () => {
           distance: data.distance,
           goalTime: data.goalTime,
           timeline: data.timeline,
-          activityTypes: activityTypeselectedValue,
-          workOutPreferences: workoutPreferenceValue,
+          activityTypes: activityTypeSelectedValue,
           tracking_goal: "Endurance",
         };
         console.log(goalInfo);
@@ -98,7 +89,7 @@ const Endurance = () => {
                     <div>
                       <div className="relative h-11 py-2">
                         <Select
-                          value={activityTypeselectedValue}
+                          value={activityTypeSelectedValue}
                           onChange={(selectedOption) =>
                             setActivityTypeSelectedValue(selectedOption)
                           }
@@ -196,30 +187,7 @@ const Endurance = () => {
                   )}
                 </div>
                 {/* 5 */}
-                <div className="bg-slate-100  p-5 rounded-t-xl rounded-b-md">
-                  <div className="flex items-center justify-between">
-                    <h1 className="font-semibold">Workout Preferences</h1>
-                    <div>
-                      <div className="relative h-11 py-2">
-                        <Select
-                          value={workoutPreferenceValue}
-                          onChange={(selectedOption) =>
-                            setworkoutPreferenceValue(selectedOption)
-                          }
-                          options={ActivityType}
-                        />
-                        <label className="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                          Weekly
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  {workoutErr && (
-                    <span className="text-red-400 text-xs ">
-                      This field is required
-                    </span>
-                  )}
-                </div>
+
               </div>
             </div>
             <button
