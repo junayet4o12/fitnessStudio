@@ -24,7 +24,6 @@ const WeightTrack = () => {
     (category) => category.tracking_goal === "Weight_Management"
   );
 
-
   if (!specificWeight) {
     return (
       <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
@@ -48,14 +47,28 @@ const WeightTrack = () => {
   const formattedDate = parseInt(
     originalDate.getDate().toString().padStart(2, 0)
   );
-  const day = dayOfMonth - formattedDate;
+
+  let day;
+  if (dayOfMonth >= formattedDate) {
+    // If the target day is in the current month or later
+    day = dayOfMonth - formattedDate;
+    console.log("current month day", day);
+  } else {
+    // If the target day is in the next month
+    const daysInCurrentMonth = new Date(
+      originalDate.getFullYear(),
+      originalDate.getMonth() + 1,
+      0
+    ).getDate();
+    day = daysInCurrentMonth - formattedDate + dayOfMonth;
+    console.log("next month day", day);
+  }
 
   const oldKg = calculateWeight?.user_current_weight;
 
   const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
   const currentKg = calculateWeight?.current_weight;
   const percentTargeWeight = targetKg - oldKg;
-  
 
   const lossPercent = oldKg - targetKg;
 
@@ -123,11 +136,11 @@ const WeightTrack = () => {
 
   const percant = (previusWeight, currentWeight, need) => {
     console.log(currentWeight, previusWeight);
-    const kg = currentWeight - previusWeight || 0
-    const realPercant = Math.ceil((100 / need) * kg)
+    const kg = currentWeight - previusWeight || 0;
+    const realPercant = Math.ceil((100 / need) * kg);
 
-    return realPercant
-  }
+    return realPercant;
+  };
   const kg = percant(oldKg, currentKg, percentTargeWeight);
   const lossKg = percant(currentKg, oldKg, lossPercent);
   return (

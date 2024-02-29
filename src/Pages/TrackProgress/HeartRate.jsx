@@ -37,9 +37,19 @@ const HeartRate = () => {
   );
   console.log(specificWeight);
 
+  const bmiWeight =
+    specificWeight && specificWeight.current_weight !== undefined
+      ? specificWeight.current_weight
+      : specificWeight?.user_current_weight;
+  console.log(bmiWeight);
 
-
-
+  const bmiHeightInInches = specificWeight?.user_current_height;
+  console.log(bmiHeightInInches);
+  // Convert height from inches to meters
+  const bmiHeightInMeters = bmiHeightInInches / 39.37;
+  // Calculate BMI
+  const bmi = bmiWeight / (bmiHeightInMeters * bmiHeightInMeters);
+  console.log(bmi);
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
@@ -52,9 +62,7 @@ const HeartRate = () => {
               </div>
               <div className="text-black">
                 <p className="text-xl font-semibold">Current Bmi</p>
-                <span className="text-xl font-semibold bmiNumber">
-                  23.4
-                </span>
+                <span className="text-xl font-semibold bmiNumber">{bmi.toFixed(2)}</span>
               </div>
             </div>
           </div>
@@ -88,7 +96,7 @@ const HeartRate = () => {
             <CircularProgressbar
               value={
                 specificWeight && specificWeight.current_weight !== undefined
-                  ? specificWeight.current_weight
+                  ? specificWeight?.current_weight
                   : specificWeight?.user_current_weight
               }
               text={
