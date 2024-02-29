@@ -13,6 +13,7 @@ import Loading from '../Loading';
 import { FaPen, FaRegPenToSquare } from "react-icons/fa6";
 const Profile = () => {
     const dispatch = useDispatch()
+    const [showMenu, setShowMenu] = useState(false)
     const { user, changeRefetch, setChangeRefetch } = useAuth()
     const axiosPublic = useAxiosSecure()
     const { user: userDetails, isLoading } = useSelector(state => state.user)
@@ -108,15 +109,15 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10 '
+        <div  className='p-5 lg:p-10 '
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <div className={`${!edit ? 'block' : 'hidden'} my-5 relative `}>
-                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
+                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails} showMenu={showMenu} setShowMenu={setShowMenu} edit={edit} setEdit={setEdit}></ProfileMain>
                 <div className={`${edit && 'hidden'} absolute top-4 right-4`}>
                         <button
                             onClick={() => setEdit(true)}
-                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-sm '><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
+                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl hidden sm:flex justify-center items-center gap-1 text-sm'><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
                     </div>
             </div>
             <div className={`${edit ? 'block' : 'hidden'}`}>

@@ -9,12 +9,14 @@ import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useAuth from "../Hooks/useAuth";
 
-const WeightTrack = () => {
+const WeightTrack = ({completedGoalsrefetch}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const [weight, isLoading, refetch] = useDailyActivities();
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth()
 
   if (isLoading) {
     return <Loading />;
@@ -48,14 +50,15 @@ const WeightTrack = () => {
   const formattedDate = parseInt(
     originalDate.getDate().toString().padStart(2, 0)
   );
-  const day = dayOfMonth - formattedDate;
-
+  const day = Math.ceil((new Date(calculateWeight?.timeline).getTime() - new Date().getTime()) / 86400000);
+  const days = new Date().getTime() - new Date(calculateWeight?.timeline).getTime();
+  console.log(days, calculateWeight?.timeline);
   const oldKg = calculateWeight?.user_current_weight;
 
   const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
   const currentKg = calculateWeight?.current_weight;
   const percentTargeWeight = targetKg - oldKg;
-  
+
 
   const lossPercent = oldKg - targetKg;
 
@@ -64,6 +67,9 @@ const WeightTrack = () => {
     const updatedData = {
       current_weight: parseInt(data?.user_current_weight),
       bodyFat: data?.bodyFat,
+      goalType: calculateWeight?.goalType,
+      targetWeight: calculateWeight?.targetWeight,
+      email: user?.email
     };
     // console.log(updatedData);
     const res = await axiosPublic?.put(
@@ -72,6 +78,7 @@ const WeightTrack = () => {
     );
 
     if (res.data.modifiedCount > 0) {
+      completedGoalsrefetch()
       Swal.fire({
         title: "Success!",
         text: "Goal details successfully Updated",
@@ -112,7 +119,7 @@ const WeightTrack = () => {
   const form =
     "block bmiNumber w-full px-4 py-3 text-sm text-gray-800 bg-white border border-primary rounded-md focus:border-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 ";
 
-  if (day <= 0) {
+  if (days > 0) {
     Swal.fire({
       title: "Alert!",
       text: "Your goal timeline has ended!",
@@ -130,6 +137,7 @@ const WeightTrack = () => {
   }
   const kg = percant(oldKg, currentKg, percentTargeWeight);
   const lossKg = percant(currentKg, oldKg, lossPercent);
+  console.log(calculateWeight.completed);
   return (
     <div className="my-4 ml-0 lg:ml-28">
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
@@ -188,9 +196,8 @@ const WeightTrack = () => {
             <button
               disabled={currentKg >= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${
-                calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
-              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
@@ -198,9 +205,8 @@ const WeightTrack = () => {
             <button
               disabled={currentKg <= targetKg}
               onClick={() => setIsOpen(true)}
-              className={`${
-                calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
-              } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
+              className={`${calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+                } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
