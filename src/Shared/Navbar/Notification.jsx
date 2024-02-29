@@ -60,25 +60,31 @@ export function NotificationsMenu() {
   // Get the current time in milliseconds
   const currentTime = new Date().getTime();
   const storedTime = blogsNotify?.map(item => item?.time);
-  // const storedTime = blogsNotify?.map(item => (item?.time)) || (data?.followedMembers)?.map(item => (item?.followedTime?.map(follow => follow?.time)))
+
+  // Calculate the time differences
   const differenceTime = storedTime?.map(value => currentTime - new Date(value).getTime());
 
-  // console.log(differenceTime);
-
+  // Convert differences to minutes, hours, and days
   const minutesArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60)));
   const hoursArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60)));
   const daysArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60 * 24)));
 
   // Determine the appropriate time unit based on the difference
-  let timeAgo;
-  if (daysArray > 0) {
-    timeAgo = `${daysArray} day${daysArray > 1 ? 's' : ''} ago`;
-  } else if (hoursArray > 0) {
-    timeAgo = `${hoursArray} hour${hoursArray > 1 ? 's' : ''} ago`;
-  } else {
-    timeAgo = `${minutesArray} minute${minutesArray > 1 ? 's' : ''} ago`;
-  }
+  let timeAgo = [];
+
+  // Check for days elapsed
+  daysArray.forEach((days, index) => {
+    if (days > 0) {
+      timeAgo.push(`${days} day${days > 1 ? 's' : ''} ago`);
+    } else if (hoursArray[index] > 0) {
+      timeAgo.push(`${hoursArray[index]} hour${hoursArray[index] > 1 ? 's' : ''} ago`);
+    } else {
+      timeAgo.push(`${minutesArray[index]} minute${minutesArray[index] > 1 ? 's' : ''} ago`);
+    }
+  });
+
   console.log(timeAgo);
+
 
   return (
     <Menu>
@@ -104,11 +110,19 @@ export function NotificationsMenu() {
                 <Typography variant="small" color="gray" className="font-semibold">
                   {item?.name || item?.userName} {item?.name ? 'has followed you' : item?.userName ? 'posted a blog' : ''}
                 </Typography>
-                <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                  <ClockIcon />
-                  {item?.time ? timeAgo : 'a few minutes ago'}
-                  {/* {item?.time ? timeAgo || item?.followedTime?.map(follow => follow.time ? timeAgo : '') : '' } */}
-                </Typography>
+                {item?.time ? (
+                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+                    <ClockIcon />
+                    {timeAgo.map((time, i) => (
+                      <span key={i}>{time}</span>
+                    ))}
+                  </Typography>
+                ) : (
+                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+                    <ClockIcon />
+                    a few minutes ago
+                  </Typography>
+                )}
               </div>
             </MenuItem>
           ))
