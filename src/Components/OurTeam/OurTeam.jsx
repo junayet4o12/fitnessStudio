@@ -47,7 +47,7 @@ const OurTeam = () => {
               <div className="my-[20px] h-[300px] md:h-[400px] hover:ease-out duration-[0.5s] flex flex-col items-start justify-start text-secondary shadow-xl w-[90%] lg:w-[30%] rounded-md cursor-pointer p-[20px] card5">
               <div className='h-full bg-transparent hover:border-2 hover:border-secondary rounded-md p-[10px] w-full'>
                 <h1 className="font-[500] text-xl name">Md Shahriar Salam Arman</h1>
-                <h1 className="font-[500] text-secondary degi">Developer</h1>
+                <h1 className="font-[500] text-secondary degi">Developer</h1> 
                 <p className='degi mt-[10px]'><a href="https://portfolio-ten-dun-17.vercel.app" target='_blank'><span className='bg-secondary p-[10px] rounded-md bg-opacity-50 '>Portfolio</span></a></p>
                 </div>
               </div>
