@@ -20,11 +20,11 @@ const DynamicProductPage = () => {
        </div> 
         :
         <div 
-    className='p-[10px] flex flex-col md:flex-row gap-3 items-center justify-center min-h-[100vh] md:h-[100vh] pt-[100px] pb-[100px]'>
+    className='p-[10px] flex flex-col md:flex-row gap-3 items-start justify-evenly min-h-[100vh] md:min-h-[100vh] pt-[100px] pb-[100px]'>
       <img
       className='md:w-[40%] md:h-[70vh] object-contain'
       src={product?.imgUrl} alt={product?.Pname} />
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 md:w-[45%]'>
         <h1 className='bmiNumber font-bold text-xl'>৳ {product?.Pprice}</h1>
         <h1 className='text-3xl font-bold'>{product?.Pname}</h1>
         <h1 className='font-[600] text-left'>Seller: {product?.sellerName}</h1>

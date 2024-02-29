@@ -34,7 +34,8 @@ function ClockIcon() {
   );
 }
 
-export function NotificationsMenu() {
+
+export function NotificationsMenu({navbarColor}) {
 
   const axiosPublic = useAxiosPublic()
   const { user } = useAuth()
@@ -89,7 +90,7 @@ export function NotificationsMenu() {
   return (
     <Menu>
       <MenuHandler>
-        <IconButton variant="text" className="text-xl md:text-2xl mt-2 text-white/90">
+        <IconButton variant="text" className={`text-xl md:text-2xl mt-2 ${!navbarColor ? 'text-black/90' : 'text-white/90'}`}>
           <Badge color="amber"><FaBell /></Badge>
         </IconButton>
       </MenuHandler>

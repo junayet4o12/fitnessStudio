@@ -18,7 +18,7 @@ const Notification2 = () => {
   const { user } = useAuth()
 
   useEffect(() => {
-    setSocket(io("http://localhost:5000"));
+    setSocket(io("wss://green-aquamarine-pint.glitch.me"));
   }, [])
 
   useEffect(() => {
