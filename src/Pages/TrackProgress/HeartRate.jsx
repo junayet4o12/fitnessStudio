@@ -40,7 +40,7 @@ const HeartRate = () => {
   const bmiWeight =
     specificWeight && specificWeight.current_weight !== undefined
       ? specificWeight.current_weight
-      : specificWeight?.user_current_weight;
+      : specificWeight?.user_current_weight ;
   console.log(bmiWeight);
 
   const bmiHeightInInches = specificWeight?.user_current_height;
@@ -48,7 +48,7 @@ const HeartRate = () => {
   // Convert height from inches to meters
   const bmiHeightInMeters = bmiHeightInInches / 39.37;
   // Calculate BMI
-  const bmi = bmiWeight / (bmiHeightInMeters * bmiHeightInMeters);
+  const bmi = bmiWeight / (bmiHeightInMeters * bmiHeightInMeters) || 0;
   console.log(bmi);
 
   return (
@@ -62,7 +62,9 @@ const HeartRate = () => {
               </div>
               <div className="text-black">
                 <p className="text-xl font-semibold">Current Bmi</p>
-                <span className="text-xl font-semibold bmiNumber">{bmi.toFixed(2)}</span>
+                <span className="text-xl font-semibold bmiNumber">
+                  {bmi.toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
@@ -97,7 +99,7 @@ const HeartRate = () => {
               value={
                 specificWeight && specificWeight.current_weight !== undefined
                   ? specificWeight?.current_weight
-                  : specificWeight?.user_current_weight
+                  : specificWeight?.user_current_weight 
               }
               text={
                 specificWeight && specificWeight.current_weight !== undefined
