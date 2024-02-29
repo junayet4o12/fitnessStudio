@@ -35,11 +35,11 @@ const StrengthTraining = () => {
     const getExerciseName = (muscleGroup) => {
         switch (muscleGroup?.value) {
             case 'shoulders':
-               return setExerciseName('Overhead Press Focus');
+               return 'Overhead Press Focus';
             case 'arms':
-                return setExerciseName('Bicep Curl & Tricep Extension Focus');
+                return 'Bicep Curl & Tricep Extension Focus';
             case 'core':
-                return setExerciseName ('Plank & Russian Twist Focus');
+                return 'Plank & Russian Twist Focus';
             default:
                 return '';
         }
@@ -55,6 +55,28 @@ const StrengthTraining = () => {
 
 
     const onSubmit = (data) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(data?.timeline);
+        if(data?.current1Rm >= data?.target1Rm){
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Target 1rm value must be greater than current1rm`,
+                footer:
+                  '<a href="#">Set the target1rm correctly and try again!!</a>',
+              });  
+        }
+        else if (currentDate > selectedDate) {
+          return Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `Set the timeline Correctly`,
+            footer:
+              '<a href="#">Set the timeline correctly and try again!!</a>',
+          });
+        }
+
+
 
         Swal.fire({
             title: "Are you sure?",
@@ -75,10 +97,10 @@ const StrengthTraining = () => {
                     current1Rm:data?.current1Rm,
                     target1Rm:data?.target1Rm,
                     timeline:data?.timeline,
-                    exerciseName:exerciseName?.value ?? undefined,
+                    exerciseName:exerciseName?.value || data?.exerciseNames || undefined,
                     frequency:data?.frequency,
                     muscleGroup:muscleGroup?.value ?? undefined,
-                    exerciseNames: data?.exerciseNames ?? undefined
+                    // exerciseNames: data?.exerciseNames ?? undefined
 
                     
                 };
@@ -89,6 +111,10 @@ const StrengthTraining = () => {
                 axiosSecure.post("user_goal", goalInfo).then((res) => {
                     if (res?.data?.insertedId) {
                         reset();
+                        setExerciseName(null)
+                        setMuscleGroup(null)
+                        setGoalType(null)
+                        
                         toast.success("Goal Created Successfully!", { id: toastId });
                     }
                 });
@@ -122,7 +148,7 @@ const StrengthTraining = () => {
                                
                                 <div className="bg-slate-100 p-4 w-full text-black rounded-xl rounded-b-md">
                                     <div className="flex items-center justify-between">
-                                        <h1 className="text-white">Goal Type</h1>
+                                        <h1>Goal Type</h1>
                                         <div className="min-w-40 relative h-11 py-2">
                                             <Select
                                                 defaultValue={goalType}

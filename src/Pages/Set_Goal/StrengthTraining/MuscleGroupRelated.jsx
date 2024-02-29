@@ -16,7 +16,7 @@ const MuscleGroupRelated = ({
         <>
             <div className="bg-slate-100 p-4 w-full text-black rounded-xl rounded-b-md">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-white">Muscle Group Focus</h1>
+                    <h1>Muscle Group Focus</h1>
                     <div className="min-w-40 relative h-11 py-2">
                         <Select
                             defaultValue={muscleGroup}
