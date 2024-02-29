@@ -97,6 +97,7 @@ const ManageWeight = () => {
           user_image: user?.photoURL,
           goalType: selectedValue?.value,
           targetWeight: data?.targetWeight,
+          completed: false,
           bodyFat: data?.bodyFat,
           timeline: data?.timeline,
           tracking_goal: "Weight_Management",

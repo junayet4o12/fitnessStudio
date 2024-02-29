@@ -6,4 +6,4 @@ export const makeVisibleTime = (time) => {
     const formattedDate = date.toLocaleDateString("en-US", { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
     console.log(time);
     return formattedDate;
-}
+} 
