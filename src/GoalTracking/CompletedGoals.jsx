@@ -14,7 +14,7 @@ const CompletedGoals = ({completedGoals}) => {
 
     return (
         <div>
-            {
+            { 
                 completedGoals.map(completedGoal => <CompletedGoalsCard key={completedGoal?._id} completedGoal={completedGoal}></CompletedGoalsCard>)
             }
             <div className={`card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content ${!completedGoals.length <1 ? 'hidden' : 'block'} `}>
