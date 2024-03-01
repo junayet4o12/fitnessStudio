@@ -18,22 +18,22 @@ const GoalTrackingPage = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["user_goal", user?.email],
+    queryKey: ["user_goal_incomplete", user?.email],
     queryFn: async () => {
       const res = await axiosPublic.get(`/user_completed_goal/${user?.email}`);
-      return res.data;
+      return res?.data;
     },
   });
   if (isLoading) {
     return <Loading></Loading>
   }
   return (
-    <div>
+    <div className="">
       <Helmet>
         <title>Goal Tracking - FitnessStudio</title>
       </Helmet>
-      <div className="">
-        <div className="flex flex-col justify-center items-center mt-4 px-4">
+      <div className="space-y-4">
+        <div className="flex flex-col justify-center items-center mt-4 pt-4">
           <h2 className="font-bold text-3xl md:text-left md:text-5xl">
             Goal <span className="text-primary">Tracking</span>
           </h2>
@@ -45,12 +45,12 @@ const GoalTrackingPage = () => {
           </p>
         </div>
 
-        <ul className="flex justify-center items-center gap-5 flex-wrap">
-          <li onClick={() => setIncomplete(true)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2   ${incomplete ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}>Incomplete <span className="bmiNumber text-xs font-normal">
+        <ul className="flex justify-center items-center gap-5 flex-wrap  ">
+          <li onClick={() => setIncomplete(true)} className={`transition-all duration-500 cursor-pointer text-base font-semibold border-b-2   ${incomplete ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}>Incomplete <span className="bmiNumber text-xs font-normal">
             {/* ({data.followedMembers ? data.followedMembers?.length : '0'}) */}
           </span></li>
           {/* bmiNumber */}
-          <li onClick={() => setIncomplete(false)} className={`transition-all duration-500 cursor-pointer text-sm font-semibold border-b-2  ${!incomplete ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}> Completed <span className="bmiNumber text-xs font-normal">
+          <li onClick={() => setIncomplete(false)} className={`transition-all duration-500 cursor-pointer text-base font-semibold border-b-2  ${!incomplete ? ' border-primary/70' : "border-transparent"}  hover:border-primary`}> Completed <span className="bmiNumber text-xs font-normal">
             {/* ({data.followingMembers ? data.followingMembers?.length : '0'}) */}
           </span></li>
         </ul>
