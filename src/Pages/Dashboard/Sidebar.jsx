@@ -64,7 +64,7 @@ const Sidebar = () => {
   return (
     <div className="scroolBar min-w-56  min-h-screen max-h-screen  hidden md:block sticky top-0 text-white overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       <div id="checkScroll" className="scroolBar min-w-56  min-h-screen max-h-screen  
-     hidden md:block sticky top-0 overflow-y-auto scroll-smooth  "  style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1', background: `url(${sidebarBG})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' }}>
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth  "  style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1', background: `url(${sidebarBG})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
         {/* Sidebar logo or Title */}
 
         {/* sidebar content here */}
@@ -169,19 +169,6 @@ const Sidebar = () => {
           ) : (
             // user Routs
             <>
-             <li>
-                <NavLink
-                  to="/dashboard/connected_with"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "bg-primary text-white"
-                      : ""
-                  }>
-                  <MdOutlineConnectWithoutContact /> Connected With
-                </NavLink>
-              </li>
               <li>
                 <NavLink
                   to="/dashboard/connected_with"
