@@ -199,6 +199,16 @@ body, .bg {
     font-weight: 600;
 }
 
+/* Donate Banner bg */
+.bonateBanner{
+    background-image: url(https://i.ibb.co/ySvQKxz/full-illustration-desktop-20220802-2x.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 500px;
+}
+
 @media (max-width:768px) {
     .card0:hover {
         background-size: 500px;
@@ -217,6 +227,13 @@ body, .bg {
     }
     .card5:hover {
         background-size: 450px;
+    }
+    .bonateBanner{
+        /* background-attachment: scroll; */
+        background-image: url(https://i.ibb.co/N2rkz7w/illustration-mobile-20220610-2x.jpg);
+        min-height: 600px;
+        background-position: right center;
+        /* background-size: cover; */
     }
 }
 

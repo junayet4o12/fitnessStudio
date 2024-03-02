@@ -54,6 +54,8 @@ import ManageEvents from "../Pages/Event/ManageEvents";
 import StrengthTraining from "../Pages/Set_Goal/StrengthTraining/StrengthTraining";
 import Endurance from "../Pages/Set_Goal/Endurance/Endurance";
 import ManageWeight from '../Pages/Set_Goal/ManageWeight/ManageWeight'
+import Donatepage from "../Pages/Donate/Donatepage";
+import HelpForm from "../Pages/HelpForm/HelpForm";
 
 const axiosPublic = useAxiosPublic();
 
@@ -100,6 +102,10 @@ const MyRouts = createBrowserRouter([
       {
         path: "/shop/:id",
         element: <DynamicProductPage />,
+      },
+      {
+        path: "/Donate",
+        element: <Donatepage />,
       },
       {
         path: "/chat",
@@ -197,6 +203,14 @@ const MyRouts = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BmiCalculator />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "helpForm",
+        element: (
+          <PrivateRoute>
+            <HelpForm />{" "}
           </PrivateRoute>
         ),
       },
