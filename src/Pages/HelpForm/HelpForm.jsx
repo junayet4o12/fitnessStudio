@@ -13,7 +13,7 @@ const HelpForm = () => {
     const amount = e.target.amount.value
     const bankName = e.target.bankName.value
     const AcNo = e.target.AcNo.value
-    const deadLine = e.target.deadLine.value
+    const deadLine = e.target.deadLine.value 
     const story = e.target.story.value
     const Data = new Date().toLocaleDateString()
     const host = user.reloadUserInfo.displayName
