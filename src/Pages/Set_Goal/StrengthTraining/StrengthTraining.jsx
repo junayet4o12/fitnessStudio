@@ -90,6 +90,7 @@ const StrengthTraining = () => {
             if (result.isConfirmed) {
                 const toastId = toast.loading("Goal Creating...");
                 const goalInfo = {
+                    tracking_goal: "Strength_training",
                     user_name: user?.displayName,
                     user_email: user?.email,
                     user_image: user?.photoURL,
@@ -97,6 +98,7 @@ const StrengthTraining = () => {
                     current1Rm:data?.current1Rm,
                     target1Rm:data?.target1Rm,
                     timeline:data?.timeline,
+                    completed: false,
                     exerciseName:exerciseName?.value || data?.exerciseNames || undefined,
                     frequency:data?.frequency,
                     muscleGroup:muscleGroup?.value ?? undefined,
