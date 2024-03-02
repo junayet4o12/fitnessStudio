@@ -19,6 +19,8 @@ import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import useAuth from "../../Hooks/useAuth";
 import { MdFeedback } from "react-icons/md";
+import { FaHandsHelping } from "react-icons/fa";
+
 
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../../Hooks/useAdmin";
@@ -180,6 +182,19 @@ const DashboardNavbar = () => {
                       : ""
                   }>
                   <FaCalculator /> BMI Calculator
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/helpForm"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <FaHandsHelping  /> Ask for Help
                 </NavLink>
               </li>
               <li>
