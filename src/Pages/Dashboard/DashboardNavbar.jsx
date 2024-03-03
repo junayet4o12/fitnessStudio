@@ -111,7 +111,7 @@ const DashboardNavbar = () => {
                       ? "bg-primary text-white"
                       : ""
                   }>
-                  <FaHandsHelping /> Manage Users
+                  <MdOutlineManageAccounts /> Manage Users
                 </NavLink>
                 </li>
                 <li>
@@ -124,7 +124,7 @@ const DashboardNavbar = () => {
                       ? "bg-primary text-white"
                       : ""
                   }>
-                  <MdOutlineManageAccounts /> Help request
+                  <FaHandsHelping /> Help request
                 </NavLink>
               </li>
               <li>

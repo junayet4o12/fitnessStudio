@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 
 const HelpRequestPage = () => {
     const Axois = useAxiosPublic()
@@ -23,7 +24,9 @@ const HelpRequestPage = () => {
         <div key={data._id} className='flex flex-col md:flex-row justify-between gap-2 w-full rounded-md items-center shadow-md'>
             <img className='h-[200px] rounded-md' src={data.imageUrl}/>
             <div className="data text-left w-full flex flex-col gap-2 p-[10px]">
-            <h1 className='text-xl font-bold'>{data.caption}</h1>
+            <Link to={data._id}>
+                <h1 className='text-xl font-bold'>{data.caption}</h1>
+            </Link>
             <h1 className='bmiNumber'>Target: {data.amount} ৳</h1>
             <h1 className='bmiNumber'>Deadlinke: {data.deadLine} </h1>
             <h1 className='bmiNumber flex items-center gap-2 flex-wrap'>

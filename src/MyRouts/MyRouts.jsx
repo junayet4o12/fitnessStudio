@@ -57,6 +57,7 @@ import ManageWeight from '../Pages/Set_Goal/ManageWeight/ManageWeight'
 import Donatepage from "../Pages/Donate/Donatepage";
 import HelpForm from "../Pages/HelpForm/HelpForm";
 import HelpRequestPage from "../Pages/HelpRequestPage/HelpRequestPage";
+import SingleDonationPage from "../Pages/SingleDonationPage/SingleDonationPage";
 
 const axiosPublic = useAxiosPublic();
 
@@ -401,6 +402,15 @@ const MyRouts = createBrowserRouter([
           <AdminRouts>
             {" "}
             <HelpRequestPage />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "requests/:id",
+        loader: ({ params }) => axiosPublic(`/help/${params.id}`),
+        element: (
+          <AdminRouts>
+            <SingleDonationPage />
           </AdminRouts>
         ),
       },
