@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { AuthContext } from '../../Authentication/AuthProvider/AuthProviders'
+import useAxiosPublic from '../../Hooks/useAxiosPublic'
+import Swal from 'sweetalert2'
+import axios from 'axios'
 
 const HelpForm = () => {
   const {user} = useContext(AuthContext)
-  console.log(user.reloadUserInfo);
+  const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOSTING_KEY}`
+  const Axios = useAxiosPublic()
 
   const fromFunction =(e)=> {
     e.preventDefault()
@@ -16,12 +20,42 @@ const HelpForm = () => {
     const deadLine = e.target.deadLine.value 
     const story = e.target.story.value
     const Data = new Date().toLocaleDateString()
+    const verify = "notVerified"
     const host = user.reloadUserInfo.displayName
     const hostEmail = user.reloadUserInfo.email
     const hostImage = user.reloadUserInfo.photoUrl
+    const form = new FormData()
+    let imageUrl = ""
+    form.append("image", image)
 
-    const HelpData = {image, caption, amount, bankName, AcNo, deadLine, story, deadLine, Data, host, hostEmail, hostImage}
-    console.log(HelpData);
+    axios.post(imageUploadUrl, form, {
+      headers: {
+        "content-type": "multipart/form-data",
+      }
+    })
+    .then(res=>{
+      if (res?.data?.data?.display_url){
+        imageUrl = res?.data?.data?.display_url
+        const HelpData = {imageUrl, caption, amount, bankName, AcNo, deadLine, story, deadLine, Data, host, hostEmail, hostImage, verify}
+
+        Axios.post('/help', HelpData)
+        .then(res=>{
+          Swal.fire({
+            title: "Request submitted successfully",
+            text:"our admin panel will soon check everything and publish your request.",
+            icon:"success"
+          })
+          const image = e.target.image.files[0]
+            e.target.caption.value = ""
+            e.target.amount.value = ""
+            e.target.bankName.value = ""
+            e.target.AcNo.value = ""
+            e.target.deadLine.value = "" 
+            e.target.story.value = ""
+        })
+      }
+    })
+
   }
   return (
     <div className='p-[10px] flex flex-col gap-4 mt-[25px] mb-[50px]'>

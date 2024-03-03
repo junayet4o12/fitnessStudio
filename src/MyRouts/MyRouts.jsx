@@ -56,6 +56,7 @@ import Endurance from "../Pages/Set_Goal/Endurance/Endurance";
 import ManageWeight from '../Pages/Set_Goal/ManageWeight/ManageWeight'
 import Donatepage from "../Pages/Donate/Donatepage";
 import HelpForm from "../Pages/HelpForm/HelpForm";
+import HelpRequestPage from "../Pages/HelpRequestPage/HelpRequestPage";
 
 const axiosPublic = useAxiosPublic();
 
@@ -391,6 +392,15 @@ const MyRouts = createBrowserRouter([
           <AdminRouts>
             {" "}
             <ProductsForAdmin />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "requests",
+        element: (
+          <AdminRouts>
+            {" "}
+            <HelpRequestPage />{" "}
           </AdminRouts>
         ),
       },

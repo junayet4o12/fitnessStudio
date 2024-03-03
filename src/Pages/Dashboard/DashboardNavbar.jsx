@@ -111,7 +111,20 @@ const DashboardNavbar = () => {
                       ? "bg-primary text-white"
                       : ""
                   }>
-                  <MdOutlineManageAccounts /> Manage Users
+                  <FaHandsHelping /> Manage Users
+                </NavLink>
+                </li>
+                <li>
+                <NavLink
+                  to="/dashboard/requests"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <MdOutlineManageAccounts /> Help request
                 </NavLink>
               </li>
               <li>
