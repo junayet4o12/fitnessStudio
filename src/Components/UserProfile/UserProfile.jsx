@@ -139,7 +139,7 @@ const UserProfile = () => {
                 <h1  className="text-xl md:text-2xl font-[600]">{userData.name}</h1>
                 <h1 className="font-[500] break-words text-sm">{userData.email}</h1>
                 <h1 className="font-[500]">{userData.following?.length === undefined ? "0 following" : `${userData.following?.length} following`}, {userData.followed?.length === undefined ? "0 following" : `${userData.followed?.length} followed`}</h1>
-                <div className={`${logedInUser._id === userData._id ? "hidden":"Followbuttons block"}`}>
+                <div className={`${logedInUser?._id === userData?._id ? "hidden":"Followbuttons block"}`}>
                     <button
                     onClick={handleFollow}
                     className={`${checkingFollowing?.length>0? "hidden":"bg-secondary text-white p-[10px] rounded-full text-xl"}`}>Follow</button>
@@ -147,7 +147,7 @@ const UserProfile = () => {
                     onClick={unfollow}
                     className={`${checkingFollowing?.length>0?"bg-primary text-white p-[10px] rounded-full text-xl":"hidden"}`}>Unfollow</button>
                 </div>
-                <div className={`${logedInUser._id !== userData._id ? "hidden":"profileButtons flex gap-2"}`}>
+                <div className={`${logedInUser?._id !== userData?._id ? "hidden":"profileButtons flex gap-2"}`}>
                     <button
                     onClick={copyLink}
                     className="bg-primary text-white p-[10px] rounded-full md:only:text-xl">Shere</button>

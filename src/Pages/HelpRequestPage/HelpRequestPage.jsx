@@ -2,14 +2,51 @@ import React, { useEffect, useState } from 'react'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const HelpRequestPage = () => {
     const Axois = useAxiosPublic()
     const [Requests, setRequests] = useState([])
+    const [reload, setReload] = useState(false)
     useEffect(()=>{
         Axois("/help")
         .then(res=> setRequests(res.data)) 
-    },[])
+    },[reload])
+
+    const ApproveFunction = (id)=>{
+      Axois.post(`/help/${id}`)
+      .then(res=>{
+        Swal.fire({
+          title:"Request Approved!",
+          icon:"success"
+        })
+        setReload(!reload)
+      })
+    }
+
+    const DeleteFunction = (id)=>{
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this product!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Axois.get(`/DeleteHelp/${id}`)
+            .then(res=>
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success"
+                }),
+                setReload(!reload)
+                )
+        }
+      });
+    }
   return (
     <div className='p-[10px]'>
         <div className='pt-[50px] pb-[50px]'>
@@ -33,8 +70,11 @@ const HelpRequestPage = () => {
             <img className='w-[30px] rounded-full' src={data.hostImage} alt="" /> {data.host} </h1>
             </div>
             <div className="controllers flex flex-col md:flex-row gap-2 w-full p-[10px]">
-                <button className='text-xl rounded-md p-[10px] w-full bg-green-600 text-white'>Approve</button>
-                <button className='text-xl rounded-md p-[10px] w-full bg-red-500 text-white'>Delete</button>
+                <button onClick={()=>ApproveFunction(data._id)} 
+                className={data?.verify == "verified" ? "hidden" :'text-xl rounded-md p-[10px] w-full bg-green-600 text-white'}>Approve</button>
+                <button
+                onClick={()=>DeleteFunction(data._id)}
+                className='text-xl rounded-md p-[10px] w-full bg-red-500 text-white'>Delete</button>
             </div>
         </div>    
         )}
