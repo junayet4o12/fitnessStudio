@@ -75,7 +75,9 @@ const specificEndurance = weight?.find(
             <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
               <div className="card-body justify-center">
                 <h2 className="card-title text-center"> You did set any goal yet!!!</h2>
+
                 <p>{quote}</p>
+                
                 <div className="card-actions justify-center">
                   <Link to="/dashboard/set_goal">
                     <button className="btn">Set Goal</button>

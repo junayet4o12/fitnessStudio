@@ -47,7 +47,7 @@ export function NotificationsMenu({navbarColor}) {
       return res?.data
     }
   })
-  // console.log(data);
+  console.log(data);
 
   const { data: blogsNoti = [] } = useQuery({
     queryKey: ['blogsNoti'],
