@@ -6,18 +6,16 @@ import Loading from "../Components/Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "react-circular-progressbar/dist/styles.css";
-import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
 
-const EnduranceTrack = ({ completedGoalsRefetch }) => {
+const EnduranceTrack = ({ completedGoalsRefetch,specificEndurance }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm();
-  const [weight, isLoading, refetch] = useDailyActivities();
-  console.log('weight is', weight)
+  const [, isLoading, refetch] = useDailyActivities();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth()
 
@@ -25,25 +23,9 @@ const EnduranceTrack = ({ completedGoalsRefetch }) => {
     return <Loading />;
   }
 
-  const specificEndurance = weight?.find(
-    (category) => category.tracking_goal === "Endurance"
-  );
+ 
 
-  if (!specificEndurance) {
-    return (
-      <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
-        <div className="card-body justify-center">
-          <h2 className="card-title text-center">No Endurance goal you have !!!</h2>
-          <div className="card-actions justify-center">
-            <Link to="/dashboard/set_goal">
-              <button className="btn">Set Goal</button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+ 
   const calculateEndurance = specificEndurance;
   console.log(calculateEndurance);
 
@@ -123,9 +105,11 @@ const EnduranceTrack = ({ completedGoalsRefetch }) => {
 
 
   const completedPercentage = Math.ceil((currentDistance / targetDistance) * 100) || 0;
-  console.log(calculateEndurance.completed);
   return (
     <div className="my-4 ml-0 lg:ml-28">
+      {
+        specificEndurance && (
+
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
@@ -277,11 +261,14 @@ const EnduranceTrack = ({ completedGoalsRefetch }) => {
           </div>
         </div>
       </div>
+        )
+      }
     </div>
   );
 };
 EnduranceTrack.propTypes = {
-  completedGoalsRefetch : PropTypes.func
+  completedGoalsRefetch : PropTypes.func,
+  specificEndurance: PropTypes.object
 }
 
 export default EnduranceTrack;

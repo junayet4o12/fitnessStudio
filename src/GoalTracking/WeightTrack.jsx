@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unknown-property */
 
 import ProgressBar from "@ramonak/react-progress-bar";
 import { useState } from "react";
@@ -7,17 +5,16 @@ import Loading from "../Components/Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "react-circular-progressbar/dist/styles.css";
-import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
 
-const WeightTrack = ({ completedGoalsRefetch }) => {
+const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm();
-  const [weight, isLoading, refetch] = useDailyActivities();
+  const [, isLoading, refetch] = useDailyActivities();
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth()
 
@@ -25,24 +22,9 @@ const WeightTrack = ({ completedGoalsRefetch }) => {
     return <Loading />;
   }
 
-  const trackingGoal = weight?.find(
-    (category) => category.tracking_goal === "Weight_Management"
-  );
+ 
 
-  if (!trackingGoal) {
-    return (
-      <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
-        <div className="card-body justify-center">
-          <h2 className="card-title text-center">No goal you have !!!</h2>
-          <div className="card-actions justify-center">
-            <Link to="/dashboard/set_goal">
-              <button className="btn">Set Goal</button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
+ 
 
 
   console.log(trackingGoal);
@@ -132,9 +114,13 @@ const WeightTrack = ({ completedGoalsRefetch }) => {
   };
   const gainKgInPercent = percent(previousWeight, currentWeight, weightDifferentForGainWeight);
   const lossKgInPercent = percent(currentWeight, previousWeight, weightDifferentForLossWeight);
-  console.log(trackingGoal.completed);
   return (
+
+  
     <div className="my-4 ml-0 lg:ml-28">
+        {
+      trackingGoal && (
+        
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
@@ -302,11 +288,14 @@ const WeightTrack = ({ completedGoalsRefetch }) => {
           </div>
         </div>
       </div>
+      )
+    }
     </div>
   );
 };
 WeightTrack.propTypes = {
-  completedGoalsRefetch : PropTypes.func
+  completedGoalsRefetch : PropTypes.func,
+  trackingGoal: PropTypes.object
 }
 
 export default WeightTrack;
