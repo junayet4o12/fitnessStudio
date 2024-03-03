@@ -15,7 +15,7 @@ const StrengthTraining = () => {
     const axiosSecure = useAxiosSecure();
     const [goalType, setGoalType] = useState(null)
     const [exerciseName, setExerciseName] = useState(null)
-    const [muscleGroup,setMuscleGroup]= useState(null)
+    const [muscleGroup, setMuscleGroup] = useState(null)
     const [buttonStyle, labelStyle] = useStyleProperty()
     const options = [
         { value: 'specificExercise', label: 'Specific Exercise Focus' },
@@ -27,15 +27,15 @@ const StrengthTraining = () => {
         { value: 'squat', label: 'Squat' },
     ];
     const muscleGroupOptions = [
-        {value: 'shoulders', label: 'Shoulder'},
-        {value: 'arms', label: 'Arms'},
-        {value: 'core', label: 'Core'},
+        { value: 'shoulders', label: 'Shoulder' },
+        { value: 'arms', label: 'Arms' },
+        { value: 'core', label: 'Core' },
     ]
 
     const getExerciseName = (muscleGroup) => {
         switch (muscleGroup?.value) {
             case 'shoulders':
-               return 'Overhead Press Focus';
+                return 'Overhead Press Focus';
             case 'arms':
                 return 'Bicep Curl & Tricep Extension Focus';
             case 'core':
@@ -57,23 +57,23 @@ const StrengthTraining = () => {
     const onSubmit = (data) => {
         const currentDate = new Date();
         const selectedDate = new Date(data?.timeline);
-        if(data?.current1Rm >= data?.target1Rm){
+        if (data?.current1Rm >= data?.target1Rm) {
             return Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: `Target 1rm value must be greater than current1rm`,
                 footer:
-                  '<a href="#">Set the target1rm correctly and try again!!</a>',
-              });  
+                    '<a href="#">Set the target1rm correctly and try again!!</a>',
+            });
         }
         else if (currentDate > selectedDate) {
-          return Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: `Set the timeline Correctly`,
-            footer:
-              '<a href="#">Set the timeline correctly and try again!!</a>',
-          });
+            return Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Set the timeline Correctly`,
+                footer:
+                    '<a href="#">Set the timeline correctly and try again!!</a>',
+            });
         }
 
 
@@ -90,19 +90,21 @@ const StrengthTraining = () => {
             if (result.isConfirmed) {
                 const toastId = toast.loading("Goal Creating...");
                 const goalInfo = {
+                    tracking_goal: "Strength_training",
                     user_name: user?.displayName,
                     user_email: user?.email,
                     user_image: user?.photoURL,
                     goalType: goalType?.value,
-                    current1Rm:data?.current1Rm,
-                    target1Rm:data?.target1Rm,
-                    timeline:data?.timeline,
-                    exerciseName:exerciseName?.value || data?.exerciseNames || undefined,
-                    frequency:data?.frequency,
-                    muscleGroup:muscleGroup?.value ?? undefined,
+                    current1Rm: data?.current1Rm,
+                    target1Rm: data?.target1Rm,
+                    timeline: data?.timeline,
+                    completed: false,
+                    exerciseName: exerciseName?.value || data?.exerciseNames,
+                    frequency: data?.frequency,
+                    muscleGroup: muscleGroup?.value ?? undefined,
                     // exerciseNames: data?.exerciseNames ?? undefined
 
-                    
+
                 };
                 const filteredGoalInfo = Object.fromEntries(
                     Object.entries(goalInfo).filter(([, value]) => value !== undefined)
@@ -114,7 +116,7 @@ const StrengthTraining = () => {
                         setExerciseName(null)
                         setMuscleGroup(null)
                         setGoalType(null)
-                        
+
                         toast.success("Goal Created Successfully!", { id: toastId });
                     }
                 });
@@ -123,7 +125,7 @@ const StrengthTraining = () => {
     };
 
 
-    
+
     return (
         <div className="md:flex md:items-center md:justify-center min-h-screen px-5 lg:px-10 py-20">
             <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-5 md:gap-10 lg:gap-20">
@@ -145,7 +147,7 @@ const StrengthTraining = () => {
 
                             {/* Main form starts here */}
                             <div>
-                               
+
                                 <div className="bg-slate-100 p-4 w-full text-black rounded-xl rounded-b-md">
                                     <div className="flex items-center justify-between">
                                         <h1>Goal Type</h1>
@@ -168,26 +170,26 @@ const StrengthTraining = () => {
                                 {/* Specific exercise related */}
                                 {goalType?.value === 'specificExercise' && (
                                     <SpecificExercise
-                                    exerciseName={exerciseName}
-                                    setExerciseName={setExerciseName}
-                                    exerciseOptions={exerciseOptions}
-                                    errors={errors}
-                                    labelStyle={labelStyle}
-                                    register={register}
+                                        exerciseName={exerciseName}
+                                        setExerciseName={setExerciseName}
+                                        exerciseOptions={exerciseOptions}
+                                        errors={errors}
+                                        labelStyle={labelStyle}
+                                        register={register}
                                     ></SpecificExercise>
                                 )}
                                 {/* Specific muscles building */}
-                                
-                                {goalType?.value === 'muscleGroup' && (
-                                   <MuscleGroupRelated
-                                   getExerciseName={getExerciseName}
-                                   errors={errors}
-                                   register={register}
-                                   muscleGroup={muscleGroup}
-                                   setMuscleGroup={setMuscleGroup}
-                                   muscleGroupOptions={muscleGroupOptions}>
 
-                               </MuscleGroupRelated>
+                                {goalType?.value === 'muscleGroup' && (
+                                    <MuscleGroupRelated
+                                        getExerciseName={getExerciseName}
+                                        errors={errors}
+                                        register={register}
+                                        muscleGroup={muscleGroup}
+                                        setMuscleGroup={setMuscleGroup}
+                                        muscleGroupOptions={muscleGroupOptions}>
+
+                                    </MuscleGroupRelated>
                                 )}
 
                             </div>

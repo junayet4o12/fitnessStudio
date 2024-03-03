@@ -5,9 +5,10 @@ import CompletedGoals from "./CompletedGoals";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import EnduranceTrack from "./EnduranceTracking";
 import Loading from "../Components/Loading";
+import StrengthTrainingTracking from "./StrengthTrainingTracking";
 // import Title from "../Components/Title/Title";
-// import EnduranceTracking from "./EnduranceTracking";
 
 const GoalTrackingPage = () => {
   const [incomplete, setIncomplete] = useState(true)
@@ -56,6 +57,9 @@ const GoalTrackingPage = () => {
         </ul>
         <div className={`${incomplete ? 'block' : 'hidden'}`}>
           <WeightTrack completedGoalsRefetch={refetch} />
+          <EnduranceTrack completedGoalsRefetch={refetch}></EnduranceTrack>
+          <StrengthTrainingTracking completedGoalsRefetch={refetch}></StrengthTrainingTracking>
+          
         </div>
         <div className={`${incomplete ? 'hidden' : 'block'}`}>
           <CompletedGoals completedGoals={completedGoals}></CompletedGoals>

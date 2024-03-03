@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
+import PropTypes from 'prop-types'
+
 
 const WeightTrack = ({ completedGoalsRefetch }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -303,5 +305,8 @@ const WeightTrack = ({ completedGoalsRefetch }) => {
     </div>
   );
 };
+WeightTrack.propTypes = {
+  completedGoalsRefetch : PropTypes.func
+}
 
 export default WeightTrack;
