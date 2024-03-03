@@ -27,16 +27,23 @@ const CompletedGoalsCard = ({ completedGoal }) => {
 
 
                 <div className="mt-2">
-                    <h2 className="text-xl font-bold text-gray-700 hover:text-gray-600 ">
-                        Tracked by Weight Management
+                    <h2 className="text-xl font-bold  hover:text-gray-600 ">
+                        {completedGoal?.tracking_goal} Goal
                     </h2>
                     <h2 className="text-sm font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
-                        Target Weight{" "}
-                        <span className="text-primary">
-                            {completedGoal?.targetWeight}
-                        </span>{" "}
-                        kg
-                    </h2>
+                        {completedGoal?.tracking_goal === 'Weight_Management' && (
+                            <>
+                                Weight Management Target Weight{" "}
+                                    <span className="text-primary">{completedGoal?.targetWeight}</span> kg
+                                </>
+                    )}
+                        {completedGoal?.tracking_goal === 'Endurance' && (
+                            <>
+                                Distance covered {" "}
+                                    <span className="text-primary">{completedGoal?.distance}</span> km
+                                </>
+                    )}
+                            </h2>
 
                 </div>
 
