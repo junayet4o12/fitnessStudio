@@ -21,6 +21,7 @@ const HelpForm = () => {
     const story = e.target.story.value
     const Data = new Date().toLocaleDateString()
     const verify = "notVerified"
+    const Raised = 0
     const host = user.reloadUserInfo.displayName
     const hostEmail = user.reloadUserInfo.email
     const hostImage = user.reloadUserInfo.photoUrl
@@ -36,7 +37,7 @@ const HelpForm = () => {
     .then(res=>{
       if (res?.data?.data?.display_url){
         imageUrl = res?.data?.data?.display_url
-        const HelpData = {imageUrl, caption, amount, bankName, AcNo, deadLine, story, deadLine, Data, host, hostEmail, hostImage, verify}
+        const HelpData = {imageUrl, caption, amount, Raised, bankName, AcNo, deadLine, story, deadLine, Data, host, hostEmail, hostImage, verify}
 
         Axios.post('/help', HelpData)
         .then(res=>{
