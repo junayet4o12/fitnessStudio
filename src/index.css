@@ -30,17 +30,17 @@ body, .bg {
     flex-direction: column;
     background-color: black;
     justify-items: end;
-    background-image: url(https://i.ibb.co/FbW1d8b/Sajid-removebg-preview.png);
-    background-position: center top;
+    background-image: url(https://i.ibb.co/FsQvBZV/Sajid-01.jpg);
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
 }
 
 .card0:hover {
-    background-image: url(https://i.ibb.co/FbW1d8b/Sajid-removebg-preview.png);
+    background-image: url(https://i.ibb.co/FsQvBZV/Sajid-01.jpg);
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 700px;
@@ -59,17 +59,17 @@ body, .bg {
     flex-direction: column;
     background-color: black;
     justify-items: end;
-    background-image: url(https://i.ibb.co/Kmkb7j3/ohee2-removebg-preview.png);
-    background-position: center top;
+    background-image: url(https://i.ibb.co/72LCQj3/Ohee-01.jpg);
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 400px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
 }
 
 .card1:hover {
-    background-image: url(https://i.ibb.co/Kmkb7j3/ohee2-removebg-preview.png);
+    background-image: url(https://i.ibb.co/72LCQj3/Ohee-01.jpg);
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 800px;
@@ -88,18 +88,18 @@ body, .bg {
     flex-direction: column;
     background-color: black;
     justify-items: end;
-    background-image: url(https://i.ibb.co/dGgnH9Q/junayet-removebg-preview.png);
-    background-position: center top;
+    background-image: url(https://i.ibb.co/rHvqzRy/marin-01.jpg);
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
 }
 
 .card2:hover {
-    background-image: url(https://i.ibb.co/dGgnH9Q/junayet-removebg-preview.png);
-    background-position: left top;
+    background-image: url(https://i.ibb.co/rHvqzRy/marin-01.jpg);
+    background-position: left center;
     background-repeat: no-repeat;
     background-size: 800px;
 }
@@ -117,17 +117,17 @@ body, .bg {
     flex-direction: column;
     background-color: black;
     justify-items: end;
-    background-image: url(https://i.ibb.co/ZNCJFgP/barkat-removebg-preview.png);
-    background-position: center top;
+    background-image: url(https://i.ibb.co/bFy73v4/barkat-01.jpg);
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
 }
 
 .card3:hover {
-    background-image: url(https://i.ibb.co/ZNCJFgP/barkat-removebg-preview.png);
+    background-image: url(https://i.ibb.co/bFy73v4/barkat-01.jpg);
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 800px;
@@ -146,17 +146,17 @@ body, .bg {
     flex-direction: column;
     background-color: black;
     justify-items: end;
-    background-image: url(https://i.ibb.co/5r0ZFJR/Fakhruddin-removebg-preview.png);
-    background-position: center top;
+    background-image: url(https://i.ibb.co/tHH0Qmk/Fakhruddin-01.jpg);
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
 }
 
 .card4:hover {
-    background-image: url(https://i.ibb.co/5r0ZFJR/Fakhruddin-removebg-preview.png);
+    background-image: url(https://i.ibb.co/tHH0Qmk/Fakhruddin-01.jpg);
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 800px;
@@ -176,9 +176,9 @@ body, .bg {
     background-color: black;
     justify-items: end;
     background-image: url(https://i.ibb.co/0tbZg9J/arman.jpg);
-    background-position: center top;
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
@@ -199,6 +199,16 @@ body, .bg {
     font-weight: 600;
 }
 
+/* Donate Banner bg */
+.bonateBanner{
+    background-image: url(https://i.ibb.co/ySvQKxz/full-illustration-desktop-20220802-2x.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 500px;
+}
+
 @media (max-width:768px) {
     .card0:hover {
         background-size: 500px;
@@ -217,6 +227,13 @@ body, .bg {
     }
     .card5:hover {
         background-size: 450px;
+    }
+    .bonateBanner{
+        /* background-attachment: scroll; */
+        background-image: url(https://i.ibb.co/N2rkz7w/illustration-mobile-20220610-2x.jpg);
+        min-height: 600px;
+        background-position: right center;
+        /* background-size: cover; */
     }
 }
 

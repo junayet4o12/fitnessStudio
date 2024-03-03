@@ -12,7 +12,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
-const StrengthTrainingTracking = ({ completedGoalsrefetch }) => {
+const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm();
     const [weight, isLoading, refetch] = useDailyActivities();
@@ -77,7 +77,7 @@ const StrengthTrainingTracking = ({ completedGoalsrefetch }) => {
         );
 
         if (res.data.modifiedCount > 0) {
-            completedGoalsrefetch()
+            completedGoalsRefetch()
             Swal.fire({
                 title: "Success!",
                 text: "Goal details successfully Updated",
@@ -304,7 +304,7 @@ const StrengthTrainingTracking = ({ completedGoalsrefetch }) => {
     );
 };
 StrengthTrainingTracking.propTypes = {
-    completedGoalsrefetch: PropTypes.func
+    completedGoalsRefetch: PropTypes.func
 }
 
 export default StrengthTrainingTracking;

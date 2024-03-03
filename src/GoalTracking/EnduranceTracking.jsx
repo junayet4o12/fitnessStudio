@@ -13,7 +13,7 @@ import useAuth from "../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
 
-const EnduranceTrack = ({ completedGoalsrefetch }) => {
+const EnduranceTrack = ({ completedGoalsRefetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const [weight, isLoading, refetch] = useDailyActivities();
@@ -71,7 +71,7 @@ const EnduranceTrack = ({ completedGoalsrefetch }) => {
     );
 
     if (res.data.modifiedCount > 0) {
-      completedGoalsrefetch()
+      completedGoalsRefetch()
       Swal.fire({
         title: "Success!",
         text: "Goal details successfully Updated",
@@ -281,7 +281,7 @@ const EnduranceTrack = ({ completedGoalsrefetch }) => {
   );
 };
 EnduranceTrack.propTypes = {
-  completedGoalsrefetch : PropTypes.func
+  completedGoalsRefetch : PropTypes.func
 }
 
 export default EnduranceTrack;

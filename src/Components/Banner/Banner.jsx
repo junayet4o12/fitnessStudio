@@ -37,7 +37,7 @@ const Banner = () => {
 
                     <Swiper
                         modules={[EffectCreative, Navigation, Scrollbar, A11y, Autoplay, Pagination]}
-                        className="mySwiper "
+                        className="mySwiper"
                         speed={2000}
                         autoplay={{
                             delay: 5500,
@@ -53,14 +53,14 @@ const Banner = () => {
                         </SwiperSlide>
                         <SwiperSlide> <div className={swiperTextStyle}>
                             <h2 >Get Your Body <br />
-                                <span className={textColor}>in Shap</span></h2>
+                                <span className={textColor}>in Shape</span></h2>
                         </div></SwiperSlide>
                         <SwiperSlide> <div className={swiperTextStyle}>
                             <h2>Reach to your <br />
                                 <span className={textColor}>own goals </span></h2>
                         </div></SwiperSlide>
                         <SwiperSlide> <div className={swiperTextStyle}>
-                            <h2 >Achive   <br />
+                            <h2 >Achieve   <br />
                                 <span className={textColor}>your dreams</span></h2>
                         </div></SwiperSlide>
 
@@ -71,7 +71,7 @@ const Banner = () => {
                     <div className="flex flex-wrap  gap-5   z-20 w-full   px-10 sm:px-20 ">
                         <Link to={"/contact_us"}>
                             <button
-                                className={`${buttonStyle} bg-primary hover:bg-primary/70  border-transparent hover:border-secondarybg-primary `}>
+                                className={`${buttonStyle} bg-primary hover:bg-primary/70  border-transparent hover:border-secondary `}>
                                 Contact us
                             </button>
                         </Link>

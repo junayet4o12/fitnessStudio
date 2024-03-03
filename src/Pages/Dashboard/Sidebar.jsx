@@ -20,6 +20,7 @@ import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
 import { FaPenNib, FaStrava } from "react-icons/fa";
 import { SlBookOpen } from "react-icons/sl";
+import { FaHandsHelping } from "react-icons/fa";
 import "./Sidebar.css";
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineManageAccounts } from "react-icons/md";
@@ -45,9 +46,7 @@ const Sidebar = () => {
     selectedId?.addEventListener("scroll", handleTransition)
   })
   // logOut function
-  if (isAdminPanding) {
-    return "";
-  }
+  
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -124,6 +123,19 @@ const Sidebar = () => {
                         : ""
                   }>
                   <MdOutlineManageAccounts className="text-2xl" /> Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/requests"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <MdOutlineManageAccounts /> Help request
                 </NavLink>
               </li>
               <li>
@@ -206,6 +218,19 @@ const Sidebar = () => {
                         : ""
                   }>
                   <FaCalculator /> BMI Calculator
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/helpForm"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? `${sidebarLinkStyle}`
+                        : ""
+                  }>
+                  <FaHandsHelping  /> Ask for Help
                 </NavLink>
               </li>
               <li>
