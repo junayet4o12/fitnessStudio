@@ -55,7 +55,7 @@ const GoalTrackingPage = () => {
           </span></li>
         </ul>
         <div className={`${incomplete ? 'block' : 'hidden'}`}>
-          <WeightTrack completedGoalsrefetch={refetch} />
+          <WeightTrack completedGoalsRefetch={refetch} />
         </div>
         <div className={`${incomplete ? 'hidden' : 'block'}`}>
           <CompletedGoals completedGoals={completedGoals}></CompletedGoals>

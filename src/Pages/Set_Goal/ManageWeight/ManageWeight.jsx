@@ -92,7 +92,7 @@ const ManageWeight = () => {
         const goalInfo = {
           user_name: user?.displayName,
           user_email: user?.email,
-          user_current_weight: userCurrentWeight,
+          previous_weight: userCurrentWeight,
           user_current_height: userDetails.height,
           user_image: user?.photoURL,
           goalType: selectedValue?.value,
