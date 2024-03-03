@@ -19,6 +19,8 @@ import { FaBoxesPacking } from "react-icons/fa6";
 import { CiBoxes } from "react-icons/ci";
 import useAuth from "../../Hooks/useAuth";
 import { MdFeedback } from "react-icons/md";
+import { FaHandsHelping } from "react-icons/fa";
+
 
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../../Hooks/useAdmin";
@@ -71,8 +73,8 @@ const DashboardNavbar = () => {
       {/* {isOpen && ( */}
       <div
         className={`mt-4 transition-all duration-300 scroolBar overflow-y-auto scroll-smooth ${isOpen
-            ? "opacity-100 max-h-screen"
-            : "opacity-0 max-h-0 overflow-hidden"
+          ? "opacity-100 max-h-screen"
+          : "opacity-0 max-h-0 overflow-hidden"
           }`}>
         <ul className="menu font-semibold text-sm text-black pb-4 scroolBar">
           <li>
@@ -113,6 +115,19 @@ const DashboardNavbar = () => {
                         : ""
                   }>
                   <MdOutlineManageAccounts /> Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/requests"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? "bg-primary text-white"
+                        : ""
+                  }>
+                  <FaHandsHelping /> Help request
                 </NavLink>
               </li>
               <li>
@@ -188,6 +203,20 @@ const DashboardNavbar = () => {
                         : ""
                   }>
                   <FaCalculator /> BMI Calculator
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  onClick={toggleNavbar}
+                  to="/dashboard/helpForm"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? "bg-primary text-white"
+                        : ""
+                  }>
+                  <FaHandsHelping /> Ask for Help
                 </NavLink>
               </li>
               <li>

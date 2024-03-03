@@ -16,7 +16,7 @@ import { NotificationsMenu } from "./Notification";
 function NavList({navbarColor}) {
   const { user } = useAuth()
   return (
-    <ul className={`my-2 flex flex-col  ${!navbarColor ? 'text-black' : 'text-white'}`}>
+    <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
         as="li"
         variant="small"
@@ -107,6 +107,24 @@ function NavList({navbarColor}) {
                 : "text-sm font-bold    "
             }>
             Shop
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+            
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
+          <NavLink
+            to="/Donate"
+            className={({ isActive }) =>
+              isActive
+                ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold    "
+            }>
+            Donate
           </NavLink>
         </div>
       </Typography>
@@ -227,9 +245,12 @@ export function NavbarSimple({navbarColor}) {
           </Link>
         </Typography>
         <div className="flex gap-7 xs:gap-5 items-center">
+          <div className="hidden lg:block">
+            <NavList navbarColor={navbarColor} />
+          </div>
           <IconButton
             variant="text"
-            className={`ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent  ${navbarColor ? 'text-white' : 'text-black'}`}
+            className={`ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden ${navbarColor ? 'text-white' : 'text-black'}`}
             ripple={false}
             onClick={() => setOpenNav(!openNav)}>
             {openNav ? (

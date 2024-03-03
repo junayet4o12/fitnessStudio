@@ -20,6 +20,7 @@ import { GiProgression } from "react-icons/gi";
 import { PiSignOutBold } from "react-icons/pi";
 import { FaPenNib, FaStrava } from "react-icons/fa";
 import { SlBookOpen } from "react-icons/sl";
+import { FaHandsHelping } from "react-icons/fa";
 import "./Sidebar.css";
 import useAdmin from "../../Hooks/useAdmin";
 import { MdOutlineManageAccounts } from "react-icons/md";
@@ -45,9 +46,7 @@ const Sidebar = () => {
     selectedId?.addEventListener("scroll", handleTransition)
   })
   // logOut function
-  if (isAdminPanding) {
-    return "";
-  }
+  
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -64,7 +63,7 @@ const Sidebar = () => {
   return (
     <div className="scroolBar min-w-56  min-h-screen max-h-screen  hidden md:block sticky top-0 text-white overflow-y-auto scroll-smooth" style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1' }}>
       <div id="checkScroll" className="scroolBar min-w-56  min-h-screen max-h-screen  
-     hidden md:block sticky top-0 overflow-y-auto scroll-smooth  "  style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1', background: `url(${sidebarBG})`, backgroundRepeat:'no-repeat', backgroundSize:'cover' }}>
+     hidden md:block sticky top-0 overflow-y-auto scroll-smooth  "  style={{ scrollbarWidth: 'thin', scrollbarColor: '#888 #f1f1f1', background: `url(${sidebarBG})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
         {/* Sidebar logo or Title */}
 
         {/* sidebar content here */}
@@ -128,6 +127,19 @@ const Sidebar = () => {
               </li>
               <li>
                 <NavLink
+                  to="/dashboard/requests"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                      ? "bg-primary text-white"
+                      : ""
+                  }>
+                  <FaHandsHelping /> Help request
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/dashboard/manage_Products"
                   className={({ isActive, isPending }) =>
                     isPending
@@ -169,19 +181,6 @@ const Sidebar = () => {
           ) : (
             // user Routs
             <>
-             <li>
-                <NavLink
-                  to="/dashboard/connected_with"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "bg-primary text-white"
-                      : ""
-                  }>
-                  <MdOutlineConnectWithoutContact /> Connected With
-                </NavLink>
-              </li>
               <li>
                 <NavLink
                   to="/dashboard/connected_with"
@@ -219,6 +218,19 @@ const Sidebar = () => {
                         : ""
                   }>
                   <FaCalculator /> BMI Calculator
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/helpForm"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending"
+                      : isActive
+                        ? `${sidebarLinkStyle}`
+                        : ""
+                  }>
+                  <FaHandsHelping  /> Ask for Help
                 </NavLink>
               </li>
               <li>

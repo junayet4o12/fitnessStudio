@@ -14,8 +14,8 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.request.use(
     function (config) {
         const tokenCookie = document.cookie.split(';').find(cookie => cookie.trim());
-        console.log(tokenCookie)
-        console.log('request stopped by the interceptor')
+        // console.log(tokenCookie)
+        // console.log('request stopped by the interceptor')
       return config;
     }, 
     function (error) {

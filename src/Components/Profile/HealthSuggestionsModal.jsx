@@ -11,7 +11,7 @@ const HealthSuggestionsModal = ({ open, setOpen, suggestions }) => {
                 size={'xxl'}
                 className=' bg-[#00000062]  flex justify-center items-center p-5 text-white'
             >
-                <div className='w-full rounded max-w-[600px] overflow-y-scroll max-h-[90%] relative  bg-no-repeat bg-cover  bg-center border-2 border-white' style={{ backgroundImage: `url(${ModalBG2})` }}>
+                <div className='w-full rounded max-w-[600px] overflow-y-scroll max-h-[75%] md:max-h-[90%] relative  bg-no-repeat bg-cover  bg-center border-2 border-white' style={{ backgroundImage: `url(${ModalBG2})` }}>
                     <div className='w-full max-w-[600px] bg-[#000000c0] text-white rounded shadow-xl  relative'>
                         <div className='text-end px-6 pt-3 sticky top-0 '>
                             <button

@@ -1,8 +1,8 @@
 import Title from "../../Components/Title/Title";
 // import Activity from "./Activity";
-import ExercisePlan from "./ExercisePlan";
 // import WeightGain from "./ManageWeight";
 import { Helmet } from "react-helmet-async";
+import ExercisePlane from '../../Components/ExercisePlan'
 import GoalCard from "../../Components/GoalCard/GoalCard";
 const SetGoal = () => {
  
@@ -12,7 +12,7 @@ const SetGoal = () => {
       <Helmet>
         <title>Set Goal - FitnessStudio</title>
       </Helmet>
-      <ExercisePlan></ExercisePlan>
+      <ExercisePlane></ExercisePlane>
       {/* <WeightGain></WeightGain>
       <Activity></Activity> */}
       <div>
