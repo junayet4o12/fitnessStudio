@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
+import PropTypes from 'prop-types'
+
 
 const WeightTrack = ({completedGoalsrefetch}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,12 +45,7 @@ const WeightTrack = ({completedGoalsrefetch}) => {
 
   const calculateWeight = specificWeight;
   console.log(calculateWeight);
-  const dayOfMonth = parseInt(calculateWeight?.timeline?.slice(-2));
-
-  const originalDate = new Date();
-  const formattedDate = parseInt(
-    originalDate.getDate().toString().padStart(2, 0)
-  );
+ 
   const day = Math.ceil((new Date(calculateWeight?.timeline).getTime() - new Date().getTime()) / 86400000);
   const days = new Date().getTime() - new Date(calculateWeight?.timeline).getTime();
   console.log(days, calculateWeight?.timeline);
@@ -308,5 +305,8 @@ const WeightTrack = ({completedGoalsrefetch}) => {
     </div>
   );
 };
+WeightTrack.propTypes = {
+  completedGoalsrefetch : PropTypes.func
+}
 
 export default WeightTrack;

@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types */
 // import React from 'react';
 
-import { ProgressBar } from "react-loader-spinner";
 import { makeVisibleTime } from "../Hooks/makeVisibleTime";
 
 const CompletedGoalsCard = ({ completedGoal }) => {
-    const day = Math.ceil((new Date(completedGoal?.timeline).getTime() - new Date().getTime()) / 86400000);
-    const currentKg = completedGoal?.current_weight;
-    const oldKg = completedGoal?.user_current_weight;
+
     return (
         <div className="my-4 ml-0 lg:ml-28">
             <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
@@ -41,6 +38,12 @@ const CompletedGoalsCard = ({ completedGoal }) => {
                             <>
                                 Distance covered {" "}
                                     <span className="text-primary">{completedGoal?.distance}</span> km
+                                </>
+                    )}
+                        { completedGoal?.tracking_goal === "Strength_training" && (
+                            <>
+                                Target 1rm Achieved {" "}
+                                    <span className="text-primary">{completedGoal?.target1Rm}</span> km
                                 </>
                     )}
                             </h2>

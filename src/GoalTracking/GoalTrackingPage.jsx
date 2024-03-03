@@ -7,8 +7,8 @@ import useAuth from "../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import EnduranceTrack from "./EnduranceTracking";
 import Loading from "../Components/Loading";
+import StrengthTrainingTracking from "./StrengthTrainingTracking";
 // import Title from "../Components/Title/Title";
-// import EnduranceTracking from "./EnduranceTracking";
 
 const GoalTrackingPage = () => {
   const [incomplete, setIncomplete] = useState(true)
@@ -58,6 +58,7 @@ const GoalTrackingPage = () => {
         <div className={`${incomplete ? 'block' : 'hidden'}`}>
           <WeightTrack completedGoalsrefetch={refetch} />
           <EnduranceTrack completedGoalsrefetch={refetch}></EnduranceTrack>
+          <StrengthTrainingTracking completedGoalsrefetch={refetch}></StrengthTrainingTracking>
           
         </div>
         <div className={`${incomplete ? 'hidden' : 'block'}`}>

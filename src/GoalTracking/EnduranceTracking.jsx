@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
+import PropTypes from 'prop-types'
+
 
 const EnduranceTrack = ({ completedGoalsrefetch }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -278,5 +280,8 @@ const EnduranceTrack = ({ completedGoalsrefetch }) => {
     </div>
   );
 };
+EnduranceTrack.propTypes = {
+  completedGoalsrefetch : PropTypes.func
+}
 
 export default EnduranceTrack;
