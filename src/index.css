@@ -176,9 +176,9 @@ body, .bg {
     background-color: black;
     justify-items: end;
     background-image: url(https://i.ibb.co/0tbZg9J/arman.jpg);
-    background-position: center top;
+    background-position: center center;
     /* height: 400px; */
-    background-size: cover;
+    background-size: 500px;
     background-repeat: no-repeat;
     transition: background 0.8s ease-out;
     padding: 10px;
