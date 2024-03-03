@@ -6,17 +6,15 @@ import Loading from "../Components/Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "react-circular-progressbar/dist/styles.css";
-import { Link } from "react-router-dom";
 import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
-const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
+const StrengthTrainingTracking = ({ completedGoalsRefetch,specificStrengthTraining }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit } = useForm();
-    const [weight, isLoading, refetch] = useDailyActivities();
-    console.log('weight is', weight)
+    const [, isLoading, refetch] = useDailyActivities();
     const axiosPublic = useAxiosPublic();
 
 
@@ -26,37 +24,21 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
         return <Loading />;
     }
 
-    const specificEndurance = weight?.find(
-        (category) => category.tracking_goal === "Strength_training"
-    );
+   
 
-    if (!specificEndurance) {
-        return (
-            <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
-                <div className="card-body justify-center">
-                    <h2 className="card-title text-center"> You do not have any strength training g!!!</h2>
-                    <div className="card-actions justify-center">
-                        <Link to="/dashboard/set_goal">
-                            <button className="btn">Set Goal</button>
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+  
 
-    const calculateEndurance = specificEndurance;
-    console.log(calculateEndurance);
+    // console.log(specificStrengthTraining);
 
 
-    const day = Math.ceil((new Date(calculateEndurance?.timeline).getTime() - new Date().getTime()) / 86400000);
-    const days = new Date().getTime() - new Date(calculateEndurance?.timeline).getTime();
-    console.log(days, calculateEndurance?.timeline);
+    const day = Math.ceil((new Date(specificStrengthTraining?.timeline).getTime() - new Date().getTime()) / 86400000);
+    const days = new Date().getTime() - new Date(specificStrengthTraining?.timeline).getTime();
+    // console.log(days, specificStrengthTraining?.timeline);
 
-    const target1Rm = parseInt(calculateEndurance?.target1Rm) || 0;
-    const startingCurrent1Rm = calculateEndurance?.current1Rm;
+    const target1Rm = parseInt(specificStrengthTraining?.target1Rm) || 0;
+    const startingCurrent1Rm = specificStrengthTraining?.current1Rm;
     const strengthToGain = target1Rm - startingCurrent1Rm
-    const current1rm = calculateEndurance?.new_current1rm || startingCurrent1Rm
+    const current1rm = specificStrengthTraining?.new_current1rm || startingCurrent1Rm
     const strengthGained = current1rm - startingCurrent1Rm
 
 
@@ -66,13 +48,13 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
         console.log(data?.current1Rm);
         const updatedData = {
             new_current1rm: parseInt(data?.new_current1rm),
-            target1Rm: calculateEndurance?.target1Rm,
+            target1Rm: specificStrengthTraining?.target1Rm,
             email: user?.email,
-            tracking_goal: specificEndurance?.tracking_goal
+            tracking_goal: specificStrengthTraining?.tracking_goal
         };
         // console.log(updatedData);
         const res = await axiosPublic?.put(
-            `/user_goal/${calculateEndurance?._id}`,
+            `/user_goal/${specificStrengthTraining?._id}`,
             updatedData
         );
 
@@ -129,16 +111,18 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
 
 
     const completedPercentage = Math.ceil((strengthGained / strengthToGain) * 100) || 0;
-    console.log(calculateEndurance.completed);
     return (
         <div className="my-4 ml-0 lg:ml-28">
+            {
+                specificStrengthTraining && (
+
             <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
                 <div className="flex items-center justify-between">
                     <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
                         Total time {day ? day : "0"} days
                     </span>
                     <button
-                        onClick={() => handleDeleteGoal(calculateEndurance?._id)}
+                        onClick={() => handleDeleteGoal(specificStrengthTraining?._id)}
                         className="px-3 py-1 text-sm font-bold  text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500"
                     >
                         Stop Goal
@@ -166,12 +150,12 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
                             <span className="text-primary">
                                 {target1Rm}
                             </span>{" "}
-                            Kg
+                            {specificStrengthTraining?.muscleGroup === "core" ? "minutes" : 'kg'}
                         </h2>
                         <h2 className="text-sm w-1/2 font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
                             Exercise Name: {" "}
                             <span className="text-primary">
-                                {specificEndurance?.exerciseName}
+                                {specificStrengthTraining?.exerciseName}
                             </span>{" "}
 
                         </h2>
@@ -184,13 +168,13 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
                             <span className="text-primary">
                                 {current1rm}
                             </span>{" "}
-                            Km
+                            {specificStrengthTraining?.muscleGroup === "core" ? "minutes" : 'kg'}  
                         </h2>
-                        {specificEndurance?.muscleGroup && (
+                        {specificStrengthTraining?.muscleGroup && (
                             <h2 className="text-sm w-1/2 font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
                                 Muscle Group: {" "}
                                 <span className="text-primary">
-                                    {specificEndurance?.muscleGroup}
+                                    {specificStrengthTraining?.muscleGroup}
                                 </span>
                             </h2>
                         )}
@@ -229,10 +213,10 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
                                             className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white"
                                             id="modal-title"
                                         >
-                                            {specificEndurance?.activityTypes?.label} Goal
+                                            {specificStrengthTraining?.activityTypes?.label} Goal
                                         </h3>
                                         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                                            Here updated your total covered distance by<span className="font-bold text-black">{specificEndurance?.activityTypes?.label}</span> after setting up the goal.
+                                            Here update your total current 1rm ability of <span className="font-bold text-black">{specificStrengthTraining?.exerciseName}</span> after setting up the goal.
                                         </p>
 
                                         <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
@@ -252,18 +236,7 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
                                                 />
                                             </label>
 
-                                            {/* <label className="text-sm text-gray-700 mt-2">Fat</label>
-                      <label className="block mt-2">
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          {...register("bodyFat", {
-                            required: true,
-                          })}
-                          defaultValue={calculateEndurance?.bodyFat}
-                          className={`${form}`}
-                        />
-                      </label> */}
+                
 
                                             <div className="mt-4 sm:flex sm:items-center sm:-mx-2">
                                                 <button
@@ -291,20 +264,23 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch }) => {
                     <div className="flex items-center ml-1">
                         <img
                             className="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"
-                            src={calculateEndurance?.user_image}
+                            src={specificStrengthTraining?.user_image}
                             alt="avatar"
                         />
                         <a className="font-bold text-gray-700 cursor-pointer dark:text-gray-200">
-                            {calculateEndurance?.user_name}
+                            {specificStrengthTraining?.user_name}
                         </a>
                     </div>
                 </div>
             </div>
+                )
+            }
         </div>
     );
 };
 StrengthTrainingTracking.propTypes = {
-    completedGoalsRefetch: PropTypes.func
+    completedGoalsRefetch: PropTypes.func,
+    specificStrengthTraining: PropTypes.object
 }
 
 export default StrengthTrainingTracking;
