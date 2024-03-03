@@ -46,9 +46,7 @@ const Sidebar = () => {
     selectedId?.addEventListener("scroll", handleTransition)
   })
   // logOut function
-  if (isAdminPanding) {
-    return "";
-  }
+  
   const handleLogout = () => {
     logOut()
       .then(() => {

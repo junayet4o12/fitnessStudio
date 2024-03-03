@@ -55,7 +55,7 @@ const UserProfile = () => {
         return <Loading></Loading>
     }
 
-    const checkingFollowing = logedInUser?.following?.filter(data => data === userData._id)
+    const checkingFollowing = logedInUser?.following?.filter(data => data === userData?._id)
 
     console.log(userProducts);
 

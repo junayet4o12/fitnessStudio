@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -11,7 +12,7 @@ import useDailyActivities from "../Hooks/useDailyActivities";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 
-const WeightTrack = ({completedGoalsrefetch}) => {
+const WeightTrack = ({ completedGoalsRefetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const [weight, isLoading, refetch] = useDailyActivities();
@@ -22,11 +23,11 @@ const WeightTrack = ({completedGoalsrefetch}) => {
     return <Loading />;
   }
 
-  const specificWeight = weight?.find(
+  const trackingGoal = weight?.find(
     (category) => category.tracking_goal === "Weight_Management"
   );
 
-  if (!specificWeight) {
+  if (!trackingGoal) {
     return (
       <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
         <div className="card-body justify-center">
@@ -41,42 +42,36 @@ const WeightTrack = ({completedGoalsrefetch}) => {
     );
   }
 
-  const calculateWeight = specificWeight;
-  console.log(calculateWeight);
-  const dayOfMonth = parseInt(calculateWeight?.timeline?.slice(-2));
 
-  const originalDate = new Date();
-  const formattedDate = parseInt(
-    originalDate.getDate().toString().padStart(2, 0)
-  );
-  const day = Math.ceil((new Date(calculateWeight?.timeline).getTime() - new Date().getTime()) / 86400000);
-  const days = new Date().getTime() - new Date(calculateWeight?.timeline).getTime();
-  console.log(days, calculateWeight?.timeline);
-  const oldKg = calculateWeight?.user_current_weight;
+  console.log(trackingGoal);
+  const duration = Math.ceil((new Date(trackingGoal?.timeline).getTime() - new Date().getTime()) / 86400000);
+  const isTimesUp = new Date().getTime() - new Date(trackingGoal?.timeline).getTime();
+  console.log(isTimesUp, trackingGoal?.timeline);
+  const previousWeight = trackingGoal?.previous_weight;
+  const currentWeight = trackingGoal?.current_weight;
+  const targetWeight = parseInt(trackingGoal?.targetWeight) || 0;
 
-  const targetKg = parseInt(calculateWeight?.targetWeight) || 0;
-  const currentKg = calculateWeight?.current_weight;
-  const percentTargeWeight = targetKg - oldKg;
+  const weightDifferentForGainWeight = targetWeight - previousWeight;
+  const weightDifferentForLossWeight = previousWeight - targetWeight;
 
-  const lossPercent = oldKg - targetKg;
-
+  console.log(previousWeight, currentWeight);
   const onSubmit = async (data) => {
-    console.log(data?.user_current_weight);
+    console.log(data?.previous_weight);
     const updatedData = {
-      current_weight: parseInt(data?.user_current_weight),
+      current_weight: parseInt(data?.previous_weight),
       bodyFat: data?.bodyFat,
-      goalType: calculateWeight?.goalType,
-      targetWeight: calculateWeight?.targetWeight,
+      goalType: trackingGoal?.goalType,
+      targetWeight: trackingGoal?.targetWeight,
       email: user?.email
     };
     // console.log(updatedData);
     const res = await axiosPublic?.put(
-      `/user_goal/${calculateWeight?._id}`,
+      `/user_goal/${trackingGoal?._id}`,
       updatedData
     );
 
     if (res.data.modifiedCount > 0) {
-      completedGoalsrefetch()
+      completedGoalsRefetch()
       Swal.fire({
         title: "Success!",
         text: "Goal details successfully Updated",
@@ -105,7 +100,7 @@ const WeightTrack = ({completedGoalsrefetch}) => {
             refetch();
             Swal.fire({
               title: "stop!",
-              text: "Your file has been stoped.",
+              text: "Your file has been stopped.",
               icon: "success",
             });
           }
@@ -117,7 +112,7 @@ const WeightTrack = ({completedGoalsrefetch}) => {
   const form =
     "block bmiNumber w-full px-4 py-3 text-sm text-gray-800 bg-white border border-primary rounded-md focus:border-primary focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 ";
 
-  if (days > 0) {
+  if (isTimesUp > 0) {
     Swal.fire({
       title: "Alert!",
       text: "Your goal timeline has ended!",
@@ -126,25 +121,25 @@ const WeightTrack = ({completedGoalsrefetch}) => {
     });
   }
 
-  const percant = (previusWeight, currentWeight, need) => {
-    console.log(currentWeight, previusWeight);
-    const kg = currentWeight - previusWeight || 0;
-    const realPercant = Math.ceil((100 / need) * kg);
+  const percent = (inputKg1, inputKg2, need) => {
+    console.log(inputKg2, inputKg1);
+    const kg = inputKg2 - inputKg1 || 0;
+    const realPercent = Math.ceil((100 / need) * kg);
 
-    return realPercant;
+    return realPercent;
   };
-  const kg = percant(oldKg, currentKg, percentTargeWeight);
-  const lossKg = percant(currentKg, oldKg, lossPercent);
-  console.log(calculateWeight.completed);
+  const gainKgInPercent = percent(previousWeight, currentWeight, weightDifferentForGainWeight);
+  const lossKgInPercent = percent(currentWeight, previousWeight, weightDifferentForLossWeight);
+  console.log(trackingGoal.completed);
   return (
     <div className="my-4 ml-0 lg:ml-28">
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium bmiNumber text-gray-600 dark:text-gray-400">
-            Total time {day ? day : "0"} days
+            Total time {duration ? duration : "0"} days
           </span>
           <button
-            onClick={() => handleDeleteGoal(calculateWeight?._id)}
+            onClick={() => handleDeleteGoal(trackingGoal?._id)}
             className="px-3 py-1 text-sm font-bold  text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded animate-bounce cursor-pointer hover:bg-gray-500"
           >
             Stop Goal
@@ -152,18 +147,18 @@ const WeightTrack = ({completedGoalsrefetch}) => {
         </div>
 
         <div className="w-40 my-2">
-          {calculateWeight?.goalType !== "gainWeight" ? (
+          {trackingGoal?.goalType !== "gainWeight" ? (
             <ProgressBar
               width="350px"
               bgColor="#000000"
-              completed={lossKg}
+              completed={lossKgInPercent}
               maxCompleted={100}
             />
           ) : (
             <ProgressBar
               width="350px"
               bgColor="#0c0c0c"
-              completed={kg}
+              completed={gainKgInPercent}
               maxCompleted={100}
             />
           )}
@@ -176,14 +171,14 @@ const WeightTrack = ({completedGoalsrefetch}) => {
           <h2 className="text-sm font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
             Target Weight{" "}
             <span className="text-primary">
-              {calculateWeight?.targetWeight}
+              {trackingGoal?.targetWeight}
             </span>{" "}
             kg
           </h2>
           <h2 className="text-sm font-bold text-gray-700 hover:text-gray-600 mt-1 bmiNumber ">
             current Weight{" "}
             <span className="text-primary">
-              {currentKg ? currentKg : oldKg}
+              {currentWeight ? currentWeight : previousWeight}
             </span>{" "}
             kg
           </h2>
@@ -192,18 +187,18 @@ const WeightTrack = ({completedGoalsrefetch}) => {
         <div className="flex items-center justify-between mt-4">
           <div className="relative flex justify-center">
             <button
-              disabled={currentKg >= targetKg}
+              disabled={currentWeight >= targetWeight}
               onClick={() => setIsOpen(true)}
-              className={`${calculateWeight?.goalType === "gainWeight" ? "block" : "hidden"
+              className={`${trackingGoal?.goalType === "gainWeight" ? "block" : "hidden"
                 } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
             </button>
 
             <button
-              disabled={currentKg <= targetKg}
+              disabled={currentWeight <= targetWeight}
               onClick={() => setIsOpen(true)}
-              className={`${calculateWeight?.goalType === "lossWeight" ? "block" : "hidden"
+              className={`${trackingGoal?.goalType === "lossWeight" ? "block" : "hidden"
                 } px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded-md  font-semibold `}
             >
               Update
@@ -245,13 +240,13 @@ const WeightTrack = ({completedGoalsrefetch}) => {
                         <input
                           type="text"
                           placeholder="Type here"
-                          {...register("user_current_weight", {
+                          {...register("previous_weight", {
                             required: true,
                           })}
                           defaultValue={
-                            calculateWeight?.current_weight
-                              ? calculateWeight.current_weight
-                              : calculateWeight.user_current_weight
+                            trackingGoal?.current_weight
+                              ? trackingGoal.current_weight
+                              : trackingGoal.previous_weight
                           }
                           className={`${form}`}
                         />
@@ -265,7 +260,7 @@ const WeightTrack = ({completedGoalsrefetch}) => {
                           {...register("bodyFat", {
                             required: true,
                           })}
-                          defaultValue={calculateWeight?.bodyFat}
+                          defaultValue={trackingGoal?.bodyFat}
                           className={`${form}`}
                         />
                       </label>
@@ -296,11 +291,11 @@ const WeightTrack = ({completedGoalsrefetch}) => {
           <div className="flex items-center ml-1">
             <img
               className="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"
-              src={calculateWeight?.user_image}
+              src={trackingGoal?.user_image}
               alt="avatar"
             />
             <a className="font-bold text-gray-700 cursor-pointer dark:text-gray-200">
-              {calculateWeight?.user_name}
+              {trackingGoal?.user_name}
             </a>
           </div>
         </div>
