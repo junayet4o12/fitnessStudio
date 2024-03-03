@@ -1,9 +1,18 @@
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const SingleDonationPage = () => {
     const data = useLoaderData().data
-    console.log(data);
+
+    const shareFunction = ()=>{
+      navigator.clipboard.writeText(window.location.href)
+      Swal.fire({
+          title:"Copyed the link",
+          icon:"success"
+      })
+    }
+
   return (
     <div className='p-[10px] container'>
         <h1 className='text-4xl font-bold pt-[50px] pb-[25px]'>{data[0].caption}</h1>
@@ -13,7 +22,9 @@ const SingleDonationPage = () => {
         </div>
         <div className='rounded-md shadow-md w-full md:w-[35vw] p-[20px] bmiNumber flex flex-col items-center gap-4 sticky top-20'>
             <h1> <span className='text-4xl font-[500]'>{data[0].Raised}৳</span> raised out of {data[0].amount}৳ Goal</h1>
-            <button className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>Share</button>
+            <button 
+            onClick={shareFunction}
+            className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>Share</button>
             <button className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>Donate</button>
         </div>
       </div>
