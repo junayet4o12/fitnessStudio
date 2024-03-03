@@ -49,15 +49,43 @@ export function NotificationsMenu({navbarColor}) {
   })
   // console.log(data);
 
-  const { data: blogsNoti = [] } = useQuery({
-    queryKey: ['blogsNoti'],
+  const { data: blogsNotify = [] } = useQuery({
+    queryKey: ['blogsNotify'],
     queryFn: async () => {
-      const response = await axiosPublic.get('/blogs');
+      const response = await axiosPublic.get(`/following_users_blog/${user?.email}`);
       return response.data;
     }
   })
+  // console.log(blogsNotify);
 
-  // console.log(blogsNoti);
+  // Get the current time in milliseconds
+  const currentTime = new Date().getTime();
+  const storedTime = blogsNotify?.map(item => item?.time);
+
+  // Calculate the time differences
+  const differenceTime = storedTime?.map(value => currentTime - new Date(value).getTime());
+
+  // Convert differences to minutes, hours, and days
+  const minutesArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60)));
+  const hoursArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60)));
+  const daysArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60 * 24)));
+
+  // Determine the appropriate time unit based on the difference
+  let timeAgo = [];
+
+  // Check for days elapsed
+  daysArray.forEach((days, index) => {
+    if (days > 0) {
+      timeAgo.push(`${days} day${days > 1 ? 's' : ''} ago`);
+    } else if (hoursArray[index] > 0) {
+      timeAgo.push(`${hoursArray[index]} hour${hoursArray[index] > 1 ? 's' : ''} ago`);
+    } else {
+      timeAgo.push(`${minutesArray[index]} minute${minutesArray[index] > 1 ? 's' : ''} ago`);
+    }
+  });
+
+  console.log(timeAgo);
+
 
   return (
     <Menu>
@@ -67,58 +95,39 @@ export function NotificationsMenu({navbarColor}) {
         </IconButton>
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
-        {
-          data?.followedMembers?.length && blogsNoti === 0 ? <MenuItem><h1 className="text-lg text-gray-400">No Notification Here</h1></MenuItem>
-            :
-            (data?.followedMembers)?.map((follower) => <MenuItem key={follower?._id} className="flex items-center gap-4 py-2 pl-2 pr-8">
+        {(data?.followedMembers || []).length === 0 && blogsNotify.length === 0 ? (
+          <MenuItem>
+            <h1 className="text-lg text-gray-400">No Notifications Here</h1>
+          </MenuItem>
+        ) : (
+          [...(data?.followedMembers || []), ...(blogsNotify || [])].map((item) => (
+            <MenuItem key={item?._id} className="flex items-center gap-4 py-2 pl-2 pr-8">
               <Avatar
                 variant="circular"
-                alt="tania andrew"
-                src={follower?.image}
+                alt="User Image"
+                src={item?.image || item?.userImg}
               />
               <div className="flex flex-col gap-1">
                 <Typography variant="small" color="gray" className="font-semibold">
-                  {follower?.name} has follow you
+                  {item?.name || item?.userName} {item?.name ? 'has followed you' : item?.userName ? 'posted a blog' : ''}
                 </Typography>
-                <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                  <ClockIcon />
-                  3 minutes ago
-                </Typography>
+                {item?.time ? (
+                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+                    <ClockIcon />
+                    {timeAgo.map((time, i) => (
+                      <span key={i}>{time}</span>
+                    ))}
+                  </Typography>
+                ) : (
+                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+                    <ClockIcon />
+                    a few minutes ago
+                  </Typography>
+                )}
               </div>
             </MenuItem>
-            )}
-
-        {blogsNoti?.map(usersBlog => <MenuItem key={usersBlog?._id} className="flex items-center gap-4 py-2 pl-2 pr-8">
-          <Avatar
-            variant="circular"
-            alt="natali craig"
-            src={usersBlog?.userImg}
-          />
-          <div className="flex flex-col gap-1">
-            <Typography variant="small" color="gray" className="font-semibold">
-              {usersBlog?.userName} Posted a blog
-            </Typography>
-            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-              <ClockIcon />{usersBlog?.time}
-            </Typography>
-          </div>
-        </MenuItem>
+          ))
         )}
-        {/* <MenuItem className="flex items-center gap-4 py-2 pl-2 pr-8">
-            <Avatar
-              variant="circular"
-              alt="paypal"
-              src="https://dwglogo.com/wp-content/uploads/2016/08/PayPal_Logo_Icon.png"
-            />
-            <div className="flex flex-col gap-1">
-              <Typography variant="small" color="gray" className="font-semibold">
-                You&apos;ve received a payment.
-              </Typography>
-              <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                <ClockIcon />5 hours ago
-              </Typography>
-            </div>
-          </MenuItem>  */}
       </MenuList>
     </Menu>
   );
