@@ -6,34 +6,46 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { backendUrl } from "../../BackendUrl/backendUrl";
 import { useNavigate } from "react-router";
 import { socket } from "../../socketIo/socket";
-import { io } from "socket.io-client";
 const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop }) => {
+
     const axiosPublic = useAxiosPublic()
+
     const navigate = useNavigate()
     const [message, setMessage] = useState('')
     const [smoothScroll, setSmoothScroll] = useState(false)
     const chatContainerRef = useRef(null);
     const [isMessageLoading, setIsMessageLoading] = useState(false)
     useEffect(() => {
-        setSmoothScroll(true)
+
         socket.on('refetch', (message) => {
             refetch()
 
         })
 
-        // return () => {
-        //     socket.disconnect();
-        // }
-
     }, [])
     useEffect(() => {
-        scrollToBottom();
+        setSmoothScroll(false)
+        const addDelay = () => {
+            scrollToBottom();
+        }
+        setTimeout(addDelay, 1);
+    }, [friendData])
+    useEffect(() => {
+        const addDelay = () => {
+            setSmoothScroll(true)
+            scrollToBottom();
+        }
+        setTimeout(addDelay, 10);
     }, [messages, scrollToTop]);
+
+
+    
     useEffect(() => {
 
         axiosPublic.put(`/read_message?you=${userData?._id}&friend=${friendData?._id}`)
             .then(res => {
                 console.log(res?.data);
+                socket.emit('read_unread_message', { done: 'done' })
 
             })
             .catch(err => {
@@ -104,14 +116,15 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
         return `${formattedTime.split(' ')[0]} ${formattedDate.split('/')[1]}.${formattedDate.split('/')[0]}.${`${formattedDate.split('/')[2].split('')[2]}${formattedDate.split('/')[2].split('')[3]}`}`
     }
     const handleBack = () => {
-        navigate(-1)
+        navigate('/dashboard/connected_with')
     }
     const handleProfile = () => {
         navigate(`/userProfile/${friendData?.email}`)
     }
+
     return (
-        <div className="p-5 h-[80vh] md:h-screen flex justify-center items-center text-black">
-            <div className={`text-white w-full max-w-[450px] min-h-[75vh] max-h-[75vh] xl:min-h-[550px] xl:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-scroll  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
+        <div className="p-5  flex justify-center items-center text-black">
+            <div className={`text-white w-full max-h-[500px] min-h-[500px]  max-w-[450px] md:min-h-[75vh] md:max-h-[75vh] xl:min-h-[550px] xl:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-auto  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
                 <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-primary">
                     <div className="flex gap-2   px-2 items-center h-10 justify-between">
 
@@ -125,8 +138,8 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                         </div>
                     </div>
                 </div>
-                <div className={`p-2 space-y-2`} style={{ minHeight: `calc(75vh - 83px)` }}>
-                    {
+                <div className={`p-2 space-y-2 messageBox`}>
+                    { messages?.length<1 ? <div className="text-lg text-center h-[200px] flex justify-center items-center">You haven&apos;t engaged in <br/> any conversation yet!</div> :
                         messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender !== userData?._id ? 'chat chat-start' : 'chat chat-end'}`}>
                             <span className={`text-xs bmiNumber  ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}`}>
                                 {makeTime(sms?.time)}

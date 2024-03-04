@@ -9,7 +9,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import UnreadMessage from './UnreadMessage';
-const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
+const FollowingMembers = ({ following, idx, userDetails, refetch,setMessageWith }) => {
     const navigate = useNavigate();
     const [unFollowLoading, setUnfollowLoading] = useState(false)
     const axiosPublic = useAxiosPublic()
@@ -38,7 +38,8 @@ const FollowingMembers = ({ following, idx, userDetails, refetch }) => {
             })
     }
     const handleMessage = () => {
-        navigate(`/dashboard/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
+        setMessageWith(following?._id)
+        navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
     }
     return (
         <motion.div
