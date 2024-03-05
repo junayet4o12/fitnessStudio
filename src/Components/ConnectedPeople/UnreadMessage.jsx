@@ -4,17 +4,24 @@
 import { useEffect } from "react";
 import { socket } from "../../socketIo/socket";
 
-const UnreadMessage = ({ unreadMessage, refetch, isLoading }) => {
+const UnreadMessage = ({ unreadMessage, refetch, isLoading, userId }) => {
     useEffect(() => {
         socket.on('unread_refetch', (message) => {
-            refetch()
+            if (message?.receiver === userId) {
+                console.log(message);
+                refetch()
+            }
+
         })
-        socket.on('read_unread_message', (message) => {
-            refetch()
-        })
+
         // return () => {
         //     socket.disconnect();
         // }
+    }, [])
+    useEffect(() => {
+        socket.on('read_unread_message', (message) => {
+            refetch()
+        })
     }, [])
 
     if (isLoading) {

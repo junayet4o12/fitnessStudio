@@ -3,40 +3,9 @@
 
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
-import { RiUserUnfollowLine } from "react-icons/ri";
-import { BiMessageDetail } from "react-icons/bi";
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import UnreadMessage from './UnreadMessage';
 const FollowingMembersCircle = ({ following, idx, userDetails, refetch,  messageWith }) => {
-    const navigate = useNavigate();
-    const [unFollowLoading, setUnfollowLoading] = useState(false)
-    const axiosPublic = useAxiosPublic()
-    const { data: unreadMessage, isLoading: unreadMessageDataIsLoading, refetch: unreadMessageRefetch } = useQuery({
-        queryKey: [following?._id, userDetails?._id],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/unread_message?you=${userDetails?._id}&friend=${following?._id}`)
-            return res?.data
-        }
-    })
-    const handleProfile = () => {
-        navigate(`/userProfile/${following?.email}`)
-    }
-    const handleUnfollow = () => {
-        setUnfollowLoading(true)
-        console.log(userDetails);
-        axiosPublic.put(`/unfollowing/${userDetails?._id}`, following)
-            .then(res => {
-                console.log(res.data);
-                refetch()
-                setUnfollowLoading(false)
-            })
-            .catch(err => {
-                console.log(err);
-                setUnfollowLoading(false)
-            })
-    }
+    const navigate = useNavigate()
+   
     const handleMessage = () => {
         navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
     }

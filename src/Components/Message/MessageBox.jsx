@@ -6,7 +6,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { backendUrl } from "../../BackendUrl/backendUrl";
 import { useNavigate } from "react-router";
 import { socket } from "../../socketIo/socket";
-const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop, friendId }) => {
+const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop, friendId, userId }) => {
 
     const axiosPublic = useAxiosPublic()
 
@@ -48,7 +48,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
 
     useEffect(() => {
 
-        axiosPublic.put(`/read_message?you=${userData?._id}&friend=${friendData?._id}`)
+        axiosPublic.put(`/read_message?you=${userId}&friend=${friendId}`)
             .then(res => {
                 console.log(res?.data);
                 socket.emit('read_unread_message', { done: 'done' })
@@ -70,8 +70,8 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        const sender = userData?._id;
-        const receiver = friendData?._id;
+        const sender = userId;
+        const receiver = friendId;
         const time = new Date().getTime();
         const seen = false
         const messageData = {
@@ -89,16 +89,21 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
             .then(res => {
                 console.log(res.data);
                 if (res?.data?.insertedId) {
+                    console.log('done', messageData);
                     setMessage('')
                     socket.emit('refetch', {
                         message,
-                        time: new Date()
+                        time: new Date(),
+                        sender: userId,
+                        receiver: friendId
                     })
                     socket.emit('unread_refetch', {
                         message,
-                        time: new Date()
+                        time: new Date(),
+                        sender: userId,
+                        receiver: friendId
                     })
-
+                    refetch()
 
 
                 }
@@ -146,19 +151,19 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
                     ${messages?.length < 1 ? 'flex' : 'hidden'}
                     `}>You haven&apos;t engaged in <br /> any conversation yet!</div>
                     {
-                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender == userData?._id ? 'chat chat-end' : 'chat chat-start'} `}>
+                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender == userId ? 'chat chat-end' : 'chat chat-start'} `}>
                             <span className={`text-xs bmiNumber  
-                            ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}
+                            ${sms?.sender == userId ? 'ml-auto pr-3' : 'mr-auto pl-3'}
                             `}>
                                 {makeTime(sms?.time)}
                             </span>
-                            <span className={`flex  items-end  gap-2 ${sms?.sender == userData?._id ? 'ml-auto pl-12 flex-row-reverse chat-end' : 'mr-auto pr-12'} chat `}>
+                            <span className={`flex  items-end  gap-2 ${sms?.sender == userId ? 'ml-auto pl-12 flex-row-reverse chat-end' : 'mr-auto pr-12'} chat `}>
                                 <img className="w-8 h-8 object-cover rounded-full"
-                                    src={sms?.sender == userData?._id ? userData?.image : friendData?.image}
+                                    src={sms?.sender == userId ? userData?.image : friendData?.image}
                                     alt="" />
                                 <span className={`chat-bubble 
-                                ${sms?.sender == userData?._id && 'chat-bubble-info bg-white/90'}
-                                ${sms?.receiver == userData?._id && 'chat-bubble-error bg-black/80 text-white'}
+                                ${sms?.sender == userId && 'chat-bubble-info bg-white/90'}
+                                ${sms?.receiver == userId && 'chat-bubble-error bg-black/80 text-white'}
                                  font-medium transformSingleMessage`}>
                                     {sms.message}
                                 </span>

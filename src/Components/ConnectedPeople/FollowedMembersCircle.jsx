@@ -1,28 +1,11 @@
 /* eslint-disable react/prop-types */
 // import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion'
-import { BiMessageDetail } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import UnreadMessage from './UnreadMessage';
 const FollowedMembersCircle = ({ follower, idx, userDetails,messageWith }) => {
     console.log(idx +1);
-    const navigate = useNavigate();
-    const axiosPublic = useAxiosPublic()
-    const { data: unreadMessage, isLoading: unreadMessageDataIsLoading, refetch } = useQuery({
-        queryKey: [follower?._id, userDetails?._id],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/unread_message?you=${userDetails?._id}&friend=${follower?._id}`)
-            return res?.data
-        }
-    })
-
-    console.log(unreadMessage);
-    const handleProfile = () => {
-        navigate(`/userProfile/${follower?.email}`)
-
-    }
+    const navigate = useNavigate()
+    
     const handleMessage = () => {
         navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${follower?._id}`)
     }

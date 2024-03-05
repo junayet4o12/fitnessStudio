@@ -54,7 +54,7 @@ const FollowingMembers = ({ following, idx, userDetails, refetch,  messageWith }
                 <div className='flex items-center gap-2'>
                     <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600'>Profile</p>
                     <p onClick={handleMessage} title='Chat with him' className=' cursor-pointer text-gray-200 w-12 h-12 rounded-full  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl  active:scale-90 hover:text-white hover:bg-primary/60  relative'><BiMessageDetail />
-                        <UnreadMessage unreadMessage={unreadMessage} refetch={unreadMessageRefetch} isLoading={unreadMessageDataIsLoading}></UnreadMessage>
+                        <UnreadMessage unreadMessage={unreadMessage} refetch={unreadMessageRefetch} isLoading={unreadMessageDataIsLoading} userId={userDetails?._id}></UnreadMessage>
                     </p>
                     {unFollowLoading ? <p className=' text-gray-800 w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full'><span className="loading loading-spinner loading-sm"></span></p> : <p onClick={handleUnfollow} title='unfollow him' className=' cursor-pointer  w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 text-gray-200 hover:text-white hover:bg-primary/60'><RiUserUnfollowLine /></p>}
 

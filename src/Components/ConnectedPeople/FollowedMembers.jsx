@@ -40,7 +40,7 @@ const FollowedMembers = ({ follower, idx, userDetails,messageWith }) => {
                 <div className='flex items-center gap-2'>
                     <p onClick={handleProfile} className='btn btn-sm bg-blue-500 text-white hover:bg-blue-600 border-nones' >Profile</p>
                     <p title="Chat with him" onClick={handleMessage} className=' cursor-pointer  w-12 h-12 rounded-full  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl  active:scale-90 text-gray-200 hover:text-white hover:bg-primary/60  relative '><BiMessageDetail />
-                        <UnreadMessage unreadMessage={unreadMessage} refetch={refetch} isLoading={unreadMessageDataIsLoading}></UnreadMessage>
+                        <UnreadMessage unreadMessage={unreadMessage} refetch={refetch} isLoading={unreadMessageDataIsLoading} userId={userDetails?._id}></UnreadMessage>
                     </p>
                 </div>
             </div>
