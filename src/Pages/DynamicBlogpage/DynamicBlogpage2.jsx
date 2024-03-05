@@ -99,7 +99,7 @@ console.log(blog);
         <Link to={`/blogs/${param}/${blog.userEmail}`}>
         <h1 className='text-xl font-[600]'>{blog.userName}</h1>
         </Link>
-        <p>Published at: <span className='bmiNumber'>{blog.time}</span></p>
+        <p>Published at: <span className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</span></p>
         <button 
         onClick={checking && checking.length > 0 ? unfollow : handleFollow}
         className="bg-primary p-[10px] text-xl text-white rounded-md">

@@ -135,7 +135,7 @@ const Sidebar = () => {
                       ? "bg-primary text-white"
                       : ""
                   }>
-                  <MdOutlineManageAccounts /> Help request
+                  <FaHandsHelping /> Help request
                 </NavLink>
               </li>
               <li>

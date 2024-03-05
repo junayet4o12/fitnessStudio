@@ -57,6 +57,7 @@ import ManageWeight from '../Pages/Set_Goal/ManageWeight/ManageWeight'
 import Donatepage from "../Pages/Donate/Donatepage";
 import HelpForm from "../Pages/HelpForm/HelpForm";
 import HelpRequestPage from "../Pages/HelpRequestPage/HelpRequestPage";
+import SingleDonationPage from "../Pages/SingleDonationPage/SingleDonationPage";
 
 const axiosPublic = useAxiosPublic();
 
@@ -107,6 +108,11 @@ const MyRouts = createBrowserRouter([
       {
         path: "/Donate",
         element: <Donatepage />,
+      },
+      {
+        path: "/Donate/:id",
+        loader: ({ params }) => axiosPublic(`/help/${params.id}`),
+        element: <SingleDonationPage />,
       },
       {
         path: "/chat",
@@ -371,6 +377,12 @@ const MyRouts = createBrowserRouter([
       {
         path: "connected_with",
         element: <ConnectedPeople></ConnectedPeople>,
+        children: [
+          {
+            path: "message",
+            element: <Message></Message>
+          }
+        ]
       },
       {
         path: "message",
@@ -401,6 +413,15 @@ const MyRouts = createBrowserRouter([
           <AdminRouts>
             {" "}
             <HelpRequestPage />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "requests/:id",
+        loader: ({ params }) => axiosPublic(`/help/${params.id}`),
+        element: (
+          <AdminRouts>
+            <SingleDonationPage />
           </AdminRouts>
         ),
       },

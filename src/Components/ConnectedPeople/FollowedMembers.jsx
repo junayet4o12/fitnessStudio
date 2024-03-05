@@ -6,7 +6,7 @@ import { BiMessageDetail } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import UnreadMessage from './UnreadMessage';
-const FollowedMembers = ({ follower, idx, userDetails }) => {
+const FollowedMembers = ({ follower, idx, userDetails,setMessageWith }) => {
     console.log(idx +1);
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic()
@@ -24,7 +24,8 @@ const FollowedMembers = ({ follower, idx, userDetails }) => {
 
     }
     const handleMessage = () => {
-        navigate(`/dashboard/message?userId1=${userDetails?._id}&userId2=${follower?._id}`)
+        setMessageWith(follower?._id)
+        navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${follower?._id}`)
     }
     return (
         <motion.div
