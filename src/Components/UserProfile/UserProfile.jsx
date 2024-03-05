@@ -128,14 +128,13 @@ const UserProfile = () => {
         setProductsState("")
         setBlogsState("border-b-[3px] border-primary")
     }
-    console.log(userData.following?.length);
 
     return (
         <div className='p-5 lg:p-10 '
         >
 
             <div className="ProfileSection flex flex-col items-center justify-center gap-3 bmiNumber  p-[20px]">
-                <img className="w-[150px] object-cover rounded-full" src={userData.image} alt="" />
+                <img className="w-[150px] h-[150px] object-cover rounded-full" src={userData.image} alt="" />
                 <h1  className="text-xl md:text-2xl font-[600]">{userData.name}</h1>
                 <h1 className="font-[500] break-words text-sm">{userData.email}</h1>
                 <h1 className="font-[500]">{userData.following?.length === undefined ? "0 following" : `${userData.following?.length} following`}, {userData.followed?.length === undefined ? "0 following" : `${userData.followed?.length} followed`}</h1>

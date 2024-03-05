@@ -37,7 +37,7 @@ const HelpForm = () => {
     .then(res=>{
       if (res?.data?.data?.display_url){
         imageUrl = res?.data?.data?.display_url
-        const HelpData = {imageUrl, caption, amount, Raised, bankName, AcNo, deadLine, story, deadLine, Data, host, hostEmail, hostImage, verify}
+        const HelpData = {imageUrl, caption, amount, Raised, bankName, AcNo, story, deadLine, Data, host, hostEmail, hostImage, verify}
 
         Axios.post('/help', HelpData)
         .then(res=>{
@@ -46,7 +46,7 @@ const HelpForm = () => {
             text:"our admin panel will soon check everything and publish your request.",
             icon:"success"
           })
-          const image = e.target.image.files[0]
+            e.target.image.value = ""
             e.target.caption.value = ""
             e.target.amount.value = ""
             e.target.bankName.value = ""

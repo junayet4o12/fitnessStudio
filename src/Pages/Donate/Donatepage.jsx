@@ -2,6 +2,7 @@ import React from 'react'
 import DonateBanner from '../../Components/DonateBanner/DonateBanner'
 import { Helmet } from 'react-helmet-async'
 import DonateWorks from '../../Components/DonateWorks/DonateWorks'
+import DonateCards from '../../Components/DonateCards/DonateCards'
 
 const Donatepage = () => {
   return (
@@ -11,6 +12,7 @@ const Donatepage = () => {
         </Helmet>
       <DonateBanner/>
       <DonateWorks/>
+      <DonateCards/>
     </div>
   )
 }
