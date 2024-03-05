@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 const SingleDonationPage = () => {
-    const data = useLoaderData().data
+    const [data, setData] = useState(useLoaderData().data)
+    const [load, setloader] = useState(false)
 
     const shareFunction = ()=>{
       navigator.clipboard.writeText(window.location.href)
