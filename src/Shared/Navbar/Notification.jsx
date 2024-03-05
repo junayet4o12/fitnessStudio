@@ -46,7 +46,7 @@ export function NotificationsMenu({navbarColor}) {
   const [sender, setSender] = useState('')
   const [particularTime,setParticularTime] =useState('')
   const [timeDef,setTimeDef] = useState('')
-  console.log(user)
+  // console.log(user)
 
   const { data } = useQuery({
     queryKey: [user],
@@ -55,7 +55,7 @@ export function NotificationsMenu({navbarColor}) {
       return res?.data
     }
   })
-  console.log(data);
+  // console.log(data);
   const { data: userData, isLoading: userDataIsLoading } = useQuery({
     queryKey: ['userId'],
     queryFn: async () => {
@@ -64,7 +64,7 @@ export function NotificationsMenu({navbarColor}) {
     }
 })
 const usersId = userData?._id
-console.log("user data is",usersId)
+// console.log("user data is",usersId)
 
 useEffect(() => {
   // Emit the 'user_connected' event when the component mounts
@@ -88,7 +88,7 @@ useEffect(() => {
     socket.on('notification', (data) => {
         // Handle the received notification data here
         const { senderName, info, time } = data;
-        console.log(`Received notification from ${senderName}: ${info}, ${time}`);
+        // console.log(`Received notification from ${senderName}: ${info}, ${time}`);
         setParticularTime(time);
         setSender(senderName);
 
@@ -100,7 +100,7 @@ useEffect(() => {
         setTimeDef(differenceMinutes)
 
         // Update your application state or perform other actions with differenceMinutes
-        console.log(differenceMinutes);
+        // console.log(differenceMinutes);
     });
 
     // Clean up event listener when component unmounts
@@ -140,7 +140,7 @@ useEffect(() => {
     }
   });
 
-  console.log(timeAgo);
+  // console.log(timeAgo);
 
 
   return (

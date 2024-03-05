@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title";
 import useAuth from "../../Hooks/useAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
