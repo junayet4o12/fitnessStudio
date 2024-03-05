@@ -9,13 +9,15 @@ const UnreadMessage = ({ unreadMessage, refetch, isLoading }) => {
         socket.on('unread_refetch', (message) => {
             refetch()
         })
-
+        socket.on('read_unread_message', (message) => {
+            refetch()
+        })
         // return () => {
         //     socket.disconnect();
         // }
     }, [])
 
-    if(isLoading) {
+    if (isLoading) {
         return <span className='absolute top-0 right-[-7px] p-0 text-xs font-bold  flex justify-center items-center w-5 h-5 bmiNumber border-[1.5px] border-gray-200  rounded-full text-white'><span className="loading loading-spinner loading-xs"></span></span>
     }
     return (

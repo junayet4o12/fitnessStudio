@@ -372,6 +372,12 @@ const MyRouts = createBrowserRouter([
       {
         path: "connected_with",
         element: <ConnectedPeople></ConnectedPeople>,
+        children: [
+          {
+            path: "message",
+            element: <Message></Message>
+          }
+        ]
       },
       {
         path: "message",

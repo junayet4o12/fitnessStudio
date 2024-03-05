@@ -9,18 +9,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body, .bg {
+body,
+.bg {
     font-family: 'Raleway', sans-serif;
 }
 
-.specialFont{
+.specialFont {
     font-family: 'Playfair Display', serif;
-} 
+}
 
 .with-shadow {
     text-shadow: 2px 2px 4px rgba(227, 91, 91, 0.5);
-  }
-.bmiNumber{
+}
+
+.bmiNumber {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -45,10 +47,14 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 700px;
 }
-.card0 .name, .card0 .degi{
+
+.card0 .name,
+.card0 .degi {
     opacity: 0;
 }
-.card0:hover .name, .card0:hover .degi{
+
+.card0:hover .name,
+.card0:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
@@ -74,10 +80,14 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 800px;
 }
-.card1 .name, .card1 .degi{
+
+.card1 .name,
+.card1 .degi {
     opacity: 0;
 }
-.card1:hover .name, .card1:hover .degi{
+
+.card1:hover .name,
+.card1:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
@@ -103,10 +113,14 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 800px;
 }
-.card2 .name, .card2 .degi{
+
+.card2 .name,
+.card2 .degi {
     opacity: 0;
 }
-.card2:hover .name, .card2:hover .degi{
+
+.card2:hover .name,
+.card2:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
@@ -132,10 +146,14 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 800px;
 }
-.card3 .name, .card3 .degi{
+
+.card3 .name,
+.card3 .degi {
     opacity: 0;
 }
-.card3:hover .name, .card3:hover .degi{
+
+.card3:hover .name,
+.card3:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
@@ -161,10 +179,14 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 800px;
 }
-.card4 .name, .card4 .degi{
+
+.card4 .name,
+.card4 .degi {
     opacity: 0;
 }
-.card4:hover .name, .card4:hover .degi{
+
+.card4:hover .name,
+.card4:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
@@ -190,17 +212,21 @@ body, .bg {
     background-repeat: no-repeat;
     background-size: 800px;
 }
-.card5 .name, .card5 .degi{
+
+.card5 .name,
+.card5 .degi {
     opacity: 0;
 }
-.card5:hover .name, .card5:hover .degi{
+
+.card5:hover .name,
+.card5:hover .degi {
     opacity: 1;
     color: white;
     font-weight: 600;
 }
 
 /* Donate Banner bg */
-.bonateBanner{
+.bonateBanner {
     background-image: url(https://i.ibb.co/ySvQKxz/full-illustration-desktop-20220802-2x.jpg);
     background-position: center center;
     background-size: cover;
@@ -213,22 +239,28 @@ body, .bg {
     .card0:hover {
         background-size: 500px;
     }
+
     .card1:hover {
         background-size: 550px;
     }
+
     .card2:hover {
         background-size: 550px;
     }
+
     .card3:hover {
         background-size: 550px;
     }
+
     .card4:hover {
         background-size: 550px;
     }
+
     .card5:hover {
         background-size: 450px;
     }
-    .bonateBanner{
+
+    .bonateBanner {
         /* background-attachment: scroll; */
         background-image: url(https://i.ibb.co/N2rkz7w/illustration-mobile-20220610-2x.jpg);
         min-height: 600px;
@@ -237,5 +269,39 @@ body, .bg {
     }
 }
 
+.messageButton {
 
+    animation: moveUpAndDown 1s infinite;
+}
 
+@keyframes moveUpAndDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+.messageBox {
+}
+
+@media screen and (min-width: 0) {
+    .messageBox {
+        min-height: 417px;
+    }
+}
+@media screen and (min-width: 976) {
+    .messageBox {
+        min-height: calc(75vh - 83px);
+    }
+}
+
+@media screen and (min-width: 1441px) {
+    .messageBox {
+        min-height: 467px;
+    }
+}
