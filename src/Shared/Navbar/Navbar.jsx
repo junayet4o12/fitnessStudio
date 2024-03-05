@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -13,14 +13,14 @@ import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
 
-function NavList({navbarColor}) {
+function NavList({ navbarColor }) {
   const { user } = useAuth()
   return (
     <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Home
@@ -41,7 +41,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -59,7 +59,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -77,7 +77,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -95,7 +95,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -113,7 +113,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -131,7 +131,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -149,7 +149,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           About Us
@@ -170,7 +170,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Contact
@@ -191,7 +191,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Login
@@ -213,8 +213,8 @@ function NavList({navbarColor}) {
   );
 }
 
-export function NavbarSimple({navbarColor}) {
-  console.log(navbarColor);
+export function NavbarSimple({ navbarColor }) {
+  // console.log(navbarColor);
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
   const handleWindowResize = () =>
@@ -244,7 +244,7 @@ export function NavbarSimple({navbarColor}) {
             </h1>
           </Link>
         </Typography>
-        <div className="flex gap-7 xs:gap-5 items-center">
+        <div className="flex flex-row-reverse lg:flex-row gap-4 items-center">
           <div className="hidden lg:block">
             <NavList navbarColor={navbarColor} />
           </div>
@@ -261,10 +261,6 @@ export function NavbarSimple({navbarColor}) {
           </IconButton>
 
           <span className="flex  items-center gap-2   ">
-            {/* <span className="text-lg relative py-4 px-2 cursor-pointer active:scale-90 transition-all dura">
-              <FaBell/>
-              <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
-            </span> */}
 
             {/* Bell icon with notification button */}
             {user && <NotificationsMenu navbarColor={navbarColor} />}
@@ -279,7 +275,7 @@ export function NavbarSimple({navbarColor}) {
         </div>
       </div>
 
-      <Collapse open={openNav} className="w-fit">
+      <Collapse onClick={() => setOpenNav(!openNav)} open={openNav} className="w-fit">
         <NavList navbarColor={navbarColor} />
       </Collapse>
     </Navbar>
