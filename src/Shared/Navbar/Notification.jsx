@@ -13,10 +13,13 @@ import { FaBell } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import '../../Pages/Dashboard/Sidebar.css'
+import { useEffect, useState } from "react";
+import { socket } from "../../socketIo/socket";
+
 
 
 function ClockIcon() {
-  return (
+  return (  
     <svg
       width="16"
       height="17"
@@ -37,8 +40,13 @@ function ClockIcon() {
 
 export function NotificationsMenu({navbarColor}) {
 
+
   const axiosPublic = useAxiosPublic()
   const { user } = useAuth()
+  const [sender, setSender] = useState('')
+  const [particularTime,setParticularTime] =useState('')
+  const [timeDef,setTimeDef] = useState('')
+  console.log(user)
 
   const { data } = useQuery({
     queryKey: [user],
@@ -48,6 +56,25 @@ export function NotificationsMenu({navbarColor}) {
     }
   })
   console.log(data);
+  const { data: userData, isLoading: userDataIsLoading } = useQuery({
+    queryKey: ['userId'],
+    queryFn: async () => {
+        const res = await axiosPublic.get(`/users/${user?.email}`)
+        return res?.data
+    }
+})
+const usersId = userData?._id
+console.log("user data is",usersId)
+
+useEffect(() => {
+  // Emit the 'user_connected' event when the component mounts
+  socket.emit('user_connected', {userId: usersId});
+
+  // Cleanup function to disconnect the socket when the component unmounts
+  // return () => {
+  //   socket.disconnect();
+  // };
+}, [usersId]);
 
   const { data: blogsNoti = [] } = useQuery({
     queryKey: ['blogsNoti'],
@@ -56,6 +83,35 @@ export function NotificationsMenu({navbarColor}) {
       return response.data;
     }
   })
+  useEffect(() => {
+    // Listen for the 'notification' event
+    socket.on('notification', (data) => {
+        // Handle the received notification data here
+        const { senderName, info, time } = data;
+        console.log(`Received notification from ${senderName}: ${info}, ${time}`);
+        setParticularTime(time);
+        setSender(senderName);
+
+        // Calculate the difference in minutes
+        const dateObject = new Date(time);
+        const currentDate = new Date();
+        const difference = currentDate - dateObject;
+        const differenceMinutes = Math.floor(difference / (1000 * 60));
+        setTimeDef(differenceMinutes)
+
+        // Update your application state or perform other actions with differenceMinutes
+        console.log(differenceMinutes);
+    });
+
+    // Clean up event listener when component unmounts
+    // return () => {
+    //     socket.off('notification'); // Remove the event listener
+    // };
+}, [setSender, setParticularTime]);
+
+
+
+
 
   // console.log(blogsNoti);
 
@@ -78,11 +134,12 @@ export function NotificationsMenu({navbarColor}) {
               />
               <div className="flex flex-col gap-1">
                 <Typography variant="small" color="gray" className="font-semibold">
-                  {follower?.name} has follow you
+                  {/* {follower?.name}  */}
+                 {sender} has follow you
                 </Typography>
                 <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
                   <ClockIcon />
-                  3 minutes ago
+                  {timeDef} minutes ago
                 </Typography>
               </div>
             </MenuItem>

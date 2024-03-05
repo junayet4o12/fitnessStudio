@@ -8,13 +8,15 @@ import toast from 'react-hot-toast';
 import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
+import { socket } from '../../socketIo/socket';
 
-const UploadBlogs = () => {
+const UploadBlogs = () => { 
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
     const { user: userDetails } = useSelector(state => state.user)
-    console.log(userDetails?._id);
+    console.log(userDetails);
+    const follower = userDetails.followed
     const [tinyData, setTinyData] = useState("what's on your mind?")
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
@@ -55,7 +57,9 @@ const UploadBlogs = () => {
                     if (res?.data?.insertedId) {
                         reset()
                         toast.success("Published Successfully !", { id: toastId });
+                       
                     }
+
                 })
                 .catch((err) => {
                     toast.error(err?.code, { id: toastId });
@@ -67,7 +71,16 @@ const UploadBlogs = () => {
 
 
     }
+const handleClick =()=>{
+    socket.emit('blog_notifications', {
+        senderName:user?.displayName,
+        info: 'blogName',
+        receiverName: follower,
+        time: new Date()
+    })
 
+}
+   
     const haldelChange = (content, editor) => {
         setTinyData(content)
         console.log(content);
@@ -141,6 +154,7 @@ const UploadBlogs = () => {
                     type='submit'>
                     Publish
                 </button>
+                <button onClick={handleClick} className='bg-secondary text-white font-[600] p-[10px] text-xl rounded-mdz'>Click here</button>
 
             </form>
         </div>

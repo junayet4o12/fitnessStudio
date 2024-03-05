@@ -18,8 +18,8 @@ const GoalTrackingPage = () => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const [weight] = useDailyActivities();
-  const {quote} = useRandomQuotes()
-  console.log(useRandomQuotes)
+  const [quotes] = useRandomQuotes();
+  const {author,quote} = quotes
   const trackingGoal = weight?.find(
     (category) => category.tracking_goal === "Weight_Management"
   );
@@ -73,11 +73,13 @@ const specificEndurance = weight?.find(
         <div className={`${incomplete ? 'block' : 'hidden'}`}>
           {!weight.length && (
             <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
-              <div className="card-body justify-center">
+              <div className="card-body text-center justify-center">
                 <h2 className="card-title text-center"> You did set any goal yet!!!</h2>
 
                 <p>{quote}</p>
-                
+                <blockquote className="text-end">{author !== "Unknown" && (
+                 `- ${author}`
+                  )}</blockquote>
                 <div className="card-actions justify-center">
                   <Link to="/dashboard/set_goal">
                     <button className="btn">Set Goal</button>

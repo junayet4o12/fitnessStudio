@@ -3,8 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -57,7 +56,7 @@ const ConnectedPeople = () => {
                 {
                     data.followedMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-3 mt-5 font-medium">
                         Opps!!
-                        <span>You aren't followed by anyone!!</span>
+                        <span>You are not followed by anyone!!</span>
                         <span>
                             {addButton}
                         </span>

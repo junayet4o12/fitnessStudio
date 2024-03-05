@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useAxiosPublic from './useAxiosPublic';
 
 const useRandomQuotes = () => {
-    const [quote, setQuote] = useState('')
+    const [quotes, setQuote] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const axiosPublic = useAxiosPublic()
 
@@ -13,15 +13,15 @@ const useRandomQuotes = () => {
             console.log(fetchQuoteData)
             const fetchQuote = fetchQuoteData.data
             const randomIndex = Math.floor(Math.random() * fetchQuote.length);
-            setQuote(fetchQuote[randomIndex].quote)
+            setQuote(fetchQuote[randomIndex])
             setIsLoading(false)
     
         }
         randomQuote();
         const interval = setInterval(randomQuote, 15000);
         return () => clearInterval(interval);
-    }, [])
-    return { quote, isLoading };
+    }, [axiosPublic])
+    return [quotes, isLoading];
 
 };
 
