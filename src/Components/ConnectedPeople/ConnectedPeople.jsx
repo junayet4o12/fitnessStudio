@@ -18,13 +18,22 @@ import FollowingMembersCircle from "./FollowingMembersCircle";
 
 const ConnectedPeople = ({ children }) => {
     const dispatch = useDispatch()
-    const { pathname } = useLocation();
-    console.log(pathname);
+    const { pathname, search } = useLocation();
+    const searchQueries = new URLSearchParams(search)
+    const queries = {};
+    for (const [key, value] of searchQueries.entries()) {
+        queries[key] = value;
+    }
+    console.log(queries?.userId2);
+
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { user, followFollowingActive, setfollowFollowingActive } = useAuth()
-    const [messageWith, setMessageWith] = useState('')
+    const [messageWith, setMessageWith] = useState(queries?.userId2 || '')
     const { user: userDetails } = useSelector(state => state.user)
+    useEffect(()=> {
+        setMessageWith(queries?.userId2)
+    },[queries])
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
@@ -57,10 +66,10 @@ const ConnectedPeople = ({ children }) => {
                         <div className={`${pathname === '/dashboard/connected_with/message' ? 'hidden lg:block lg:w-1/2' : 'block w-full'} duration-300 transition-all max-h-[75vh] overflow-y-auto overflow-hidden mt-8`}>
                             {/* followedMembers  */}
                             <div className={`${!followFollowingActive && 'hidden'}`}>
-                                
+
 
                                 {
-                                    (data.followedMembers).map((follower, idx) => <FollowedMembers key={follower?._id} follower={follower} idx={idx} userDetails={userDetails} setMessageWith={setMessageWith}></FollowedMembers>)
+                                    (data.followedMembers).map((follower, idx) => <FollowedMembers key={follower?._id} follower={follower} idx={idx} userDetails={userDetails}    messageWith={messageWith}></FollowedMembers>)
                                 }
 
                                 {
@@ -75,10 +84,10 @@ const ConnectedPeople = ({ children }) => {
                             </div>
                             {/* followingMembers  */}
                             <div className={`${followFollowingActive && 'hidden'}`}>
-                               
+
 
                                 {
-                                    (data.followingMembers).map((following, idx) => <FollowingMembers key={following?._id} following={following} idx={idx} userDetails={userDetails} refetch={refetch} setMessageWith={setMessageWith}></FollowingMembers>)
+                                    (data.followingMembers).map((following, idx) => <FollowingMembers key={following?._id} following={following} idx={idx} userDetails={userDetails} refetch={refetch}    messageWith={messageWith}></FollowingMembers>)
                                 }
 
                                 {
@@ -95,10 +104,10 @@ const ConnectedPeople = ({ children }) => {
                         <div className={`${pathname === '/dashboard/connected_with/message' ? 'block lg:hidden lg:w-1/2' : 'hidden w-full'} duration-300 transition-all mt-8`}>
                             {/* followedMembers  */}
                             <div className={`${!followFollowingActive && 'hidden'} flex  gap-2 overflow-hidden overflow-x-auto py-1`}>
-                                
+
 
                                 {
-                                    (data.followedMembers).map((follower, idx) => <FollowedMembersCircle key={follower?._id} follower={follower} idx={idx} userDetails={userDetails} setMessageWith={setMessageWith} messageWith={messageWith}></FollowedMembersCircle>)
+                                    (data.followedMembers).map((follower, idx) => <FollowedMembersCircle key={follower?._id} follower={follower} idx={idx} userDetails={userDetails}    messageWith={messageWith}></FollowedMembersCircle>)
                                 }
 
                                 {
@@ -113,10 +122,10 @@ const ConnectedPeople = ({ children }) => {
                             </div>
                             {/* followingMembers  */}
                             <div className={`${followFollowingActive && 'hidden'} flex gap-2   overflow-x-auto py-1`}>
-                               
+
 
                                 {
-                                    (data.followingMembers).map((following, idx) => <FollowingMembersCircle key={following?._id} following={following} idx={idx} userDetails={userDetails} refetch={refetch} setMessageWith={setMessageWith} messageWith={messageWith}></FollowingMembersCircle>)
+                                    (data.followingMembers).map((following, idx) => <FollowingMembersCircle key={following?._id} following={following} idx={idx} userDetails={userDetails} refetch={refetch}    messageWith={messageWith}></FollowingMembersCircle>)
                                 }
 
                                 {

@@ -6,7 +6,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { backendUrl } from "../../BackendUrl/backendUrl";
 import { useNavigate } from "react-router";
 import { socket } from "../../socketIo/socket";
-const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop }) => {
+const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop, friendId }) => {
 
     const axiosPublic = useAxiosPublic()
 
@@ -19,27 +19,33 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
 
         socket.on('refetch', (message) => {
             refetch()
-
+            setIsMessageLoading(false)
         })
 
     }, [])
     useEffect(() => {
         setSmoothScroll(false)
+        // scrollToBottom();
         const addDelay = () => {
+
             scrollToBottom();
         }
         setTimeout(addDelay, 1);
-    }, [friendData])
+        // console.log('hello');
+    }, [friendId])
     useEffect(() => {
+        // setSmoothScroll(true)
+        // scrollToBottom();
         const addDelay = () => {
             setSmoothScroll(true)
             scrollToBottom();
         }
         setTimeout(addDelay, 10);
+        // console.log('hello');
     }, [messages, scrollToTop]);
 
+    console.log(smoothScroll);
 
-    
     useEffect(() => {
 
         axiosPublic.put(`/read_message?you=${userData?._id}&friend=${friendData?._id}`)
@@ -93,9 +99,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                         time: new Date()
                     })
                     refetch()
-                        .then(() => {
-                            setIsMessageLoading(false)
-                        })
+
 
 
                 }
@@ -139,26 +143,36 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop 
                     </div>
                 </div>
                 <div className={`p-2 space-y-2 messageBox`}>
-                    { messages?.length<1 ? <div className="text-lg text-center h-[200px] flex justify-center items-center">You haven&apos;t engaged in <br/> any conversation yet!</div> :
-                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender !== userData?._id ? 'chat chat-start' : 'chat chat-end'}`}>
-                            <span className={`text-xs bmiNumber  ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}`}>
+                    <div className={`text-lg text-center h-[200px]  justify-center items-center 
+                    ${messages?.length < 1 ? 'flex' : 'hidden'}
+                    `}>You haven&apos;t engaged in <br /> any conversation yet!</div>
+                    {
+                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender == userData?._id ? 'chat chat-end' : 'chat chat-start'}`}>
+                            <span className={`text-xs bmiNumber  
+                            ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}
+                            `}>
                                 {makeTime(sms?.time)}
                             </span>
                             <span className={`flex  items-end  gap-2 ${sms?.sender == userData?._id ? 'ml-auto pl-12 flex-row-reverse chat-end' : 'mr-auto pr-12'} chat `}>
-                                <img className="w-8 h-8 object-cover rounded-full" src={sms?.sender == userData?._id ? userData?.image : friendData?.image} alt="" />
-                                <span className={`chat-bubble ${sms?.sender == userData?._id ? 'chat-bubble-info bg-white/90' : 'chat-bubble-error bg-black/80 text-white'} font-medium`}>
+                                <img className="w-8 h-8 object-cover rounded-full"
+                                    src={sms?.sender == userData?._id ? userData?.image : friendData?.image}
+                                    alt="" />
+                                <span className={`chat-bubble 
+                                ${sms?.sender == userData?._id && 'chat-bubble-info bg-white/90'}
+                                ${sms?.receiver == userData?._id && 'chat-bubble-error bg-black/80 text-white'}
+                                 font-medium`}>
                                     {sms.message}
                                 </span>
                             </span>
                         </p>)
                     }
                 </div>
-                <div className="sticky bottom-0 w-full bg-primary">
-                    <form onSubmit={handleSubmit} className="w-full relative">
+                <div className="sticky bottom-0  bg-primary w-full ">
+                    <form onSubmit={handleSubmit} className="w-full flex items-center">
                         <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."
-                            className="input  w-full h-10 border-white rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-primary/50" />
-                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'} absolute  right-1 text-xl active:scale-90 duration-200 transition-all hover:text-white   px-1.5 py-1 top-[5px]`}>
+                            className="input  w-full h-10 border-white rounded-none border-b-0 border-r-0 border-l-0 text-sm font-medium bg-primary/50 px-1" />
+                        <button disabled={!message} className={`${!message && 'cursor-not-allowed text-gray-400'}   right-1 text-xl active:scale-90 duration-200 transition-all hover:text-white   px-1.5 py-1 top-[5px] bg-primary h-10 border-t border-l-[1.5px]`}>
                             {
                                 isMessageLoading ? <span className="loading loading-spinner loading-xs"></span> : <IoSendSharp></IoSendSharp>
                             }

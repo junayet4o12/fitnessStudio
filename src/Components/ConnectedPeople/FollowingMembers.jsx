@@ -9,7 +9,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import UnreadMessage from './UnreadMessage';
-const FollowingMembers = ({ following, idx, userDetails, refetch,setMessageWith }) => {
+const FollowingMembers = ({ following, idx, userDetails, refetch,  messageWith }) => {
     const navigate = useNavigate();
     const [unFollowLoading, setUnfollowLoading] = useState(false)
     const axiosPublic = useAxiosPublic()
@@ -38,7 +38,6 @@ const FollowingMembers = ({ following, idx, userDetails, refetch,setMessageWith 
             })
     }
     const handleMessage = () => {
-        setMessageWith(following?._id)
         navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
     }
     return (
@@ -47,7 +46,7 @@ const FollowingMembers = ({ following, idx, userDetails, refetch,setMessageWith 
             whileInView={{ scale: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.01 * idx }}
         >
-            <div className="relative flex w-full max-w-[35rem] mx-auto my-4 border-b border-l-[1.5px] border-gray-700 p-[6px] rounded shadow-md shadow-primary/20 justify-between items-center  bg-primary/80 text-white">
+            <div className={`relative flex w-full max-w-[35rem] mx-auto my-4 border-b border-l-[1.5px] border-gray-700 p-[6px] rounded shadow-md shadow-primary/20 justify-between items-center   text-white ${messageWith === following?._id ? 'bg-black' : 'bg-primary/80'}`}>
                 <div className='flex gap-3 items-center'>
                     <img className='h-9 w-9 rounded-full object-cover' src={following?.image} alt="" />
                     <h2 className="text-sm font-bold">{following?.name}</h2>

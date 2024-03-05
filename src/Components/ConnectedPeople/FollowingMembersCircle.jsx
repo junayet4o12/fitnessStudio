@@ -9,7 +9,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import UnreadMessage from './UnreadMessage';
-const FollowingMembersCircle = ({ following, idx, userDetails, refetch, setMessageWith, messageWith }) => {
+const FollowingMembersCircle = ({ following, idx, userDetails, refetch,  messageWith }) => {
     const navigate = useNavigate();
     const [unFollowLoading, setUnfollowLoading] = useState(false)
     const axiosPublic = useAxiosPublic()
@@ -38,7 +38,6 @@ const FollowingMembersCircle = ({ following, idx, userDetails, refetch, setMessa
             })
     }
     const handleMessage = () => {
-        setMessageWith(following?._id)
         navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
     }
     console.log(following?._id == messageWith);

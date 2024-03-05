@@ -19,6 +19,7 @@ const Message = () => {
     const friendId = queries?.userId2
     const { data: userData, isLoading: userDataIsLoading } = useQuery({
         queryKey: [userId],
+        enabled: !!userId ,
         queryFn: async () => {
             const res = await axiosPublic.get(`/single_user/${userId}`)
             return res?.data
@@ -26,6 +27,7 @@ const Message = () => {
     })
     const { data: friendData, isLoading: friendDataIsLoading } = useQuery({
         queryKey: [friendId],
+        enabled: !!friendId,
         queryFn: async () => {
             const res = await axiosPublic.get(`/single_user/${friendId}`)
             setScrollToTop(scrollToTop + 1)
@@ -34,6 +36,7 @@ const Message = () => {
     })
     const { data: messages=[], isLoading: messageDataIsLoading, refetch } = useQuery({
         queryKey: [userId, friendId],
+        enabled: !!userId,
         queryFn: async () => {
             const res = await axiosPublic.get(`/message_with_friend?you=${userId}&friend=${friendId}`)
             return res?.data
@@ -47,7 +50,7 @@ const Message = () => {
         <div>
             {/* <Title title={`Chat With ${friendData?.name.split(' ')[0]}`}></Title> */}
             <div>
-                <MessageBox userData={userData} friendData={friendData} messages={messages} refetch={refetch} scrollToTop={scrollToTop}></MessageBox>
+                <MessageBox userData={userData} friendData={friendData} messages={messages} refetch={refetch} scrollToTop={scrollToTop} friendId={friendId}></MessageBox>
             </div>
         </div>
     );
