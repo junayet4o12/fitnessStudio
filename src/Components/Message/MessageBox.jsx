@@ -98,7 +98,6 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
                         message,
                         time: new Date()
                     })
-                    refetch()
 
 
 
@@ -128,7 +127,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
 
     return (
         <div className="p-5  flex justify-center items-center text-black">
-            <div className={`text-white w-full max-h-[500px] min-h-[500px]  max-w-[450px] md:min-h-[75vh] md:max-h-[75vh] xl:min-h-[550px] xl:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-auto  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
+            <div className={`text-white w-full max-h-[465px] min-h-[465px] max-w-[400px]  sm:max-w-[450px] sm:min-h-[550px] sm:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-auto  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
                 <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-primary">
                     <div className="flex gap-2   px-2 items-center h-10 justify-between">
 
@@ -147,7 +146,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
                     ${messages?.length < 1 ? 'flex' : 'hidden'}
                     `}>You haven&apos;t engaged in <br /> any conversation yet!</div>
                     {
-                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender == userData?._id ? 'chat chat-end' : 'chat chat-start'}`}>
+                        messages?.map(sms => <p key={sms?._id} className={`w-full flex flex-col   ${sms?.sender == userData?._id ? 'chat chat-end' : 'chat chat-start'} `}>
                             <span className={`text-xs bmiNumber  
                             ${sms?.sender == userData?._id ? 'ml-auto pr-3' : 'mr-auto pl-3'}
                             `}>
@@ -160,14 +159,14 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
                                 <span className={`chat-bubble 
                                 ${sms?.sender == userData?._id && 'chat-bubble-info bg-white/90'}
                                 ${sms?.receiver == userData?._id && 'chat-bubble-error bg-black/80 text-white'}
-                                 font-medium`}>
+                                 font-medium transformSingleMessage`}>
                                     {sms.message}
                                 </span>
                             </span>
                         </p>)
                     }
                 </div>
-                <div className="sticky bottom-0  bg-primary w-full ">
+                <div className="sticky bottom-0  bg-primary w-full">
                     <form onSubmit={handleSubmit} className="w-full flex items-center">
                         <input value={message} onChange={handleChange} type="text"
                             placeholder="Message..."

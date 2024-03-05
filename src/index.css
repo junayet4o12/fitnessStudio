@@ -287,21 +287,28 @@ body,
 }
 
 .messageBox {
+    min-height: 382px;
 }
 
-@media screen and (min-width: 0) {
-    .messageBox {
-        min-height: 417px;
-    }
-}
-@media screen and (min-width: 976) {
-    .messageBox {
-        min-height: calc(75vh - 83px);
-    }
-}
 
-@media screen and (min-width: 1441px) {
+@media screen and (min-width: 768px) {
     .messageBox {
         min-height: 467px;
+    }
+}
+
+
+.transformSingleMessage {
+    animation: scaleAnimation 0.7s forwards;
+    transform: scale(0);
+}
+
+@keyframes scaleAnimation {
+    from {
+        transform: scale(0.3);
+    }
+
+    to {
+        transform: scale(1);
     }
 }
