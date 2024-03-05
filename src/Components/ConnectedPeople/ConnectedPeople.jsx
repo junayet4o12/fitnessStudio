@@ -3,7 +3,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../Title/Title";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { useQuery } from "@tanstack/react-query";
@@ -27,7 +26,7 @@ const ConnectedPeople = ({ children }) => {
     console.log(queries?.userId2);
 
     const axiosPublic = useAxiosPublic()
-    const navigate = useNavigate()
+    const navigate = useNavigate()  
     const { user, followFollowingActive, setfollowFollowingActive } = useAuth()
     const [messageWith, setMessageWith] = useState(queries?.userId2 || '')
     const { user: userDetails } = useSelector(state => state.user)

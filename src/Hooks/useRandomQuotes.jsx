@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react';
 import useAxiosPublic from './useAxiosPublic';
-import axios from 'axios';
 
 const useRandomQuotes = () => {
-    const [quote, setQuote] = useState('')
+    const [quotes, setQuote] = useState('')
     const [isLoading, setIsLoading] = useState(true)
+    const axiosPublic = useAxiosPublic()
 
    
     useEffect(() => {
         const randomQuote = async () => {
-            const fetchQuoteData = await axios.get('https://type.fit/api/quotes')
+            const fetchQuoteData = await axiosPublic('/quotes')
             console.log(fetchQuoteData)
             const fetchQuote = fetchQuoteData.data
             const randomIndex = Math.floor(Math.random() * fetchQuote.length);
-            setQuote(fetchQuote[randomIndex].text)
+            setQuote(fetchQuote[randomIndex])
             setIsLoading(false)
     
         }
         randomQuote();
-        const interval = setInterval(randomQuote, 60000);
+        const interval = setInterval(randomQuote, 15000);
         return () => clearInterval(interval);
-    }, [])
-    return { quote, isLoading };
+    }, [axiosPublic])
+    return [quotes, isLoading];
 
 };
 
 export default useRandomQuotes;
+
+
