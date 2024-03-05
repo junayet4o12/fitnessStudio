@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { makeVisibleTime } from '../../Hooks/makeVisibleTime'
@@ -89,6 +89,10 @@ const BlogCards = ({ blogs }) => {
                                             <div className='p-[10px] flex gap-2 items-center justify-start'>
                                                 <img className='w-[50px] h-[50px] object-cover object-top rounded-full' src={blog.userImg} />
                                                 <div>
+                                                    <Link to={`blogs/${blog.userEmail}`}>
+                                                        <h1 className='font-bold'>{blog.userName}</h1>
+                                                    </Link>
+                                                    <h1 className='bmiNumber'>{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</h1>
                                                     <Link to={`/userProfile/${blog.userEmail}`}>
                                                         <h1 className='font-bold'>{blog.userName}</h1>
                                                     </Link>

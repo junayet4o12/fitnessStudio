@@ -1,12 +1,6 @@
 /* eslint-disable react/prop-types */
-// import React from 'react';
 
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../Hooks/useAuth";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { ProgressBar } from "react-loader-spinner";
 import CompletedGoalsCard from "./CompletedGoalsCard";
-import Loading from "../Components/Loading";
 
 const CompletedGoals = ({completedGoals=[]}) => {
     

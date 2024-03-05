@@ -51,6 +51,8 @@ const Endurance = () => {
           user_image: user?.photoURL,
           distance: data.distance,
           goalTime: data.goalTime,
+          completed: false,
+          current_distance: 0,
           timeline: data.timeline,
           activityTypes: activityTypeSelectedValue,
           tracking_goal: "Endurance",

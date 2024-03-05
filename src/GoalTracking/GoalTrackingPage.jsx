@@ -5,14 +5,30 @@ import CompletedGoals from "./CompletedGoals";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import EnduranceTrack from "./EnduranceTracking";
 import Loading from "../Components/Loading";
+import StrengthTrainingTracking from "./StrengthTrainingTracking";
+import useDailyActivities from "../Hooks/useDailyActivities";
+import { Link } from "react-router-dom";
+import useRandomQuotes from "../Hooks/useRandomQuotes";
 // import Title from "../Components/Title/Title";
-// import EnduranceTracking from "./EnduranceTracking";
 
 const GoalTrackingPage = () => {
   const [incomplete, setIncomplete] = useState(true)
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
+  const [weight] = useDailyActivities();
+  const {quote} = useRandomQuotes()
+  console.log(useRandomQuotes)
+  const trackingGoal = weight?.find(
+    (category) => category.tracking_goal === "Weight_Management"
+  );
+  const specificStrengthTraining = weight?.find(
+    (category) => category.tracking_goal === "Strength_training"
+);
+const specificEndurance = weight?.find(
+  (category) => category.tracking_goal === "Endurance"
+);
   const {
     data: completedGoals = [],
     isLoading,
@@ -55,7 +71,45 @@ const GoalTrackingPage = () => {
           </span></li>
         </ul>
         <div className={`${incomplete ? 'block' : 'hidden'}`}>
-          <WeightTrack completedGoalsRefetch={refetch} />
+          {!weight.length && (
+            <div className="card my-4 ml-0 lg:ml-28 w-full max-w-2xl bg-teal-500 text-primary-content">
+              <div className="card-body justify-center">
+                <h2 className="card-title text-center"> You did set any goal yet!!!</h2>
+                <p>{quote}</p>
+                <div className="card-actions justify-center">
+                  <Link to="/dashboard/set_goal">
+                    <button className="btn">Set Goal</button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+          {
+            weight.length && (
+              <div>
+                {
+                  trackingGoal && (
+
+                    <WeightTrack completedGoalsRefetch={refetch} trackingGoal={trackingGoal}/>
+                  )
+                }
+                {
+                  specificEndurance && (
+
+                    <EnduranceTrack completedGoalsRefetch={refetch} specificEndurance={specificEndurance}></EnduranceTrack>
+                  )
+                }
+                {
+                  specificStrengthTraining && (
+
+                    <StrengthTrainingTracking completedGoalsRefetch={refetch} specificStrengthTraining={specificStrengthTraining}></StrengthTrainingTracking>
+                  )
+                }
+              </div>
+            )
+          }
+
+
         </div>
         <div className={`${incomplete ? 'hidden' : 'block'}`}>
           <CompletedGoals completedGoals={completedGoals}></CompletedGoals>

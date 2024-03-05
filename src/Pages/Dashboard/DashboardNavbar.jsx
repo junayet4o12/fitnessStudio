@@ -29,6 +29,7 @@ import {
   MdOutlineManageAccounts,
 } from "react-icons/md";
 import { SlBookOpen } from "react-icons/sl";
+import "./Sidebar.css";
 
 const DashboardNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,14 +72,14 @@ const DashboardNavbar = () => {
       {/* Responsive Navbar for small device */}
       {/* {isOpen && ( */}
       <div
-        className={`mt-4 transition-all duration-300 ${
-          isOpen
-            ? "opacity-100 max-h-screen"
-            : "opacity-0 max-h-0 overflow-hidden"
-        }`}>
-        <ul className="menu font-semibold text-sm text-black">
+        className={`mt-4 transition-all duration-300 scroolBar overflow-y-auto scroll-smooth ${isOpen
+          ? "opacity-100 max-h-screen"
+          : "opacity-0 max-h-0 overflow-hidden"
+          }`}>
+        <ul className="menu font-semibold text-sm text-black pb-4 scroolBar">
           <li>
             <NavLink
+              onClick={toggleNavbar}
               to="/dashboard/profile"
               className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "bg-primary text-white" : ""
@@ -88,97 +89,103 @@ const DashboardNavbar = () => {
           </li>
           {isAdmin ? (
             <>
-            <li>
+              <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/add_event"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd className="text-xl" /> Add Event
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/manage_users"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <MdOutlineManageAccounts /> Manage Users
                 </NavLink>
-                </li>
-                <li>
+              </li>
+              <li>
                 <NavLink
                   to="/dashboard/requests"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaHandsHelping /> Help request
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/manage_blogs"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <SlBookOpen /> Manage Blogs
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/manage_events"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <MdOutlineManageHistory /> Manage Events
                 </NavLink>
               </li>
-              
+
             </>
           ) : (
             <>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/connected_with"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <MdOutlineConnectWithoutContact /> Connected With
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/connect_people"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaUserFriends /> Connect People
                 </NavLink>
@@ -186,169 +193,182 @@ const DashboardNavbar = () => {
 
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/bmi_calculator"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaCalculator /> BMI Calculator
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/helpForm"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
-                  <FaHandsHelping  /> Ask for Help
+                  <FaHandsHelping /> Ask for Help
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/connect_app"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <BiSolidMessageSquareAdd /> Connected app
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/set_goal"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <AiFillClockCircle /> Set goals
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/goal_tracking"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <AiFillClockCircle /> Goal Tracking
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/daily_activity"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <GiProgression /> Daily Activities
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/strava_activities"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaStrava /> Strava Activities
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/productForm"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaBoxesPacking /> List a product
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/yourProducts"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <CiBoxes /> Your Products
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/BlogFrom"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaPenNib /> Write a Blog
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/my_blogs"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaBookAtlas /> My Blogs
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/my_bookings"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <FaBookmark /> My Bookings
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  onClick={toggleNavbar}
                   to="/dashboard/feedback"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
                       : isActive
-                      ? "bg-primary text-white"
-                      : ""
+                        ? "bg-primary text-white"
+                        : ""
                   }>
                   <MdFeedback /> Feedback
                 </NavLink>
