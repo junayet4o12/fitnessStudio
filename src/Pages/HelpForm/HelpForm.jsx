@@ -34,30 +34,6 @@ const HelpForm = () => {
         "content-type": "multipart/form-data",
       }
     })
-<<<<<<< HEAD
-      .then(res => {
-        if (res?.data?.data?.display_url) {
-          imageUrl = res?.data?.data?.display_url
-          const HelpData = { imageUrl, caption, amount, bankName, AcNo, deadLine, story, Data, host, hostEmail, hostImage, verify }
-
-          Axios.post('/help', HelpData)
-            .then(() => {
-              Swal.fire({
-                title: "Request submitted successfully",
-                text: "our admin panel will soon check everything and publish your request.",
-                icon: "success"
-              })
-              e.target.image.value = ""
-              e.target.caption.value = ""
-              e.target.amount.value = ""
-              e.target.bankName.value = ""
-              e.target.AcNo.value = ""
-              e.target.deadLine.value = ""
-              e.target.story.value = ""
-            })
-        }
-      })
-=======
     .then(res=>{
       if (res?.data?.data?.display_url){
         imageUrl = res?.data?.data?.display_url
@@ -80,7 +56,6 @@ const HelpForm = () => {
         })
       }
     })
->>>>>>> b5a760bd9d905ddf2a1a06d75f0aec2dfd77a23a
 
   }
   return (

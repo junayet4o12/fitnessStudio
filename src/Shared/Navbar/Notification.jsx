@@ -83,7 +83,6 @@ useEffect(() => {
       return response.data;
     }
   })
-<<<<<<< HEAD
   useEffect(() => {
     // Listen for the 'notification' event
     socket.on('notification', (data) => {
@@ -113,7 +112,6 @@ useEffect(() => {
 
 
 
-=======
   // console.log(blogsNotify);
 
   // Get the current time in milliseconds
@@ -143,7 +141,6 @@ useEffect(() => {
   });
 
   console.log(timeAgo);
->>>>>>> b5a760bd9d905ddf2a1a06d75f0aec2dfd77a23a
 
 
   return (
@@ -168,16 +165,13 @@ useEffect(() => {
               />
               <div className="flex flex-col gap-1">
                 <Typography variant="small" color="gray" className="font-semibold">
-<<<<<<< HEAD
                   {/* {follower?.name}  */}
                  {sender} has follow you
                 </Typography>
                 <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
                   <ClockIcon />
                   {timeDef} minutes ago
-=======
                   {item?.name || item?.userName} {item?.name ? 'has followed you' : item?.userName ? 'posted a blog' : ''}
->>>>>>> b5a760bd9d905ddf2a1a06d75f0aec2dfd77a23a
                 </Typography>
                 {item?.time ? (
                   <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">

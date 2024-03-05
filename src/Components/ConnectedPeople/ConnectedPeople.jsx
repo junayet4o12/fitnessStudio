@@ -20,7 +20,7 @@ const ConnectedPeople = ({ children }) => {
     const { pathname } = useLocation();
     console.log(pathname);
     const axiosPublic = useAxiosPublic()
-    const navigate = useNavigate()
+    const navigate = useNavigate()  
     const { user, followFollowingActive, setfollowFollowingActive } = useAuth()
     const [messageWith, setMessageWith] = useState('')
     const { user: userDetails } = useSelector(state => state.user)
@@ -62,15 +62,6 @@ const ConnectedPeople = ({ children }) => {
                                     (data.followedMembers).map((follower, idx) => <FollowedMembers key={follower?._id} follower={follower} idx={idx} userDetails={userDetails} setMessageWith={setMessageWith}></FollowedMembers>)
                                 }
 
-<<<<<<< HEAD
-                {
-                    data.followedMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-3 mt-5 font-medium">
-                        Opps!!
-                        <span>You are not followed by anyone!!</span>
-                        <span>
-                            {addButton}
-                        </span>
-=======
                                 {
                                     data.followedMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-3 mt-5 font-medium">
                                         Oops!!
@@ -141,7 +132,6 @@ const ConnectedPeople = ({ children }) => {
                         <div className="duration-300 transition-all flex-1 sticky top-20 md:mt-8">
                             <Outlet />
                         </div>
->>>>>>> b5a760bd9d905ddf2a1a06d75f0aec2dfd77a23a
                     </div>
                 </div>
 
