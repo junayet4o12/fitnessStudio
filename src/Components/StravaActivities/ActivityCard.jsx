@@ -98,8 +98,8 @@ const ActivityCard = ({ activity,  handleGivingCompareDate, comparingCard }) => 
     // showing distance text end
     return (
         <div className=''>
-            <Card className="mt-6 w-72 xs:w-96 bg-primary/20 shadow-xl shadow-primary/30 ">
-                <CardHeader color="blue-gray" className="relative h-56 m-0 rounded-br-none rounded-bl-none">
+            <Card className="mt-6 w-full xs:w-96 bg-primary/20 shadow-xl shadow-primary/30 ">
+                <CardHeader color="blue-gray" className="relative xs:h-56 m-0 rounded-br-none rounded-bl-none">
                     <img
                         src={cardImg}
                     />
@@ -117,10 +117,10 @@ const ActivityCard = ({ activity,  handleGivingCompareDate, comparingCard }) => 
                         <br />
                     </Typography>
                 </CardBody>
-                <CardFooter className="pt-0">
-                    <Button onClick={handleOpenActivityChartModal} className='text-white bg-primary hover:bg-primary/70 transition-all duration-500'>Details</Button>
+                <CardFooter className="pt-0 flex gap-5 flex-wrap">
+                    <Button onClick={handleOpenActivityChartModal} className='text-white bg-primary hover:bg-primary/70 transition-all duration-500 px-2'>Details</Button>
 
-                    <Button onClick={() => handleGivingCompareDate({ id, name })} className='text-white bg-secondaryDeep/90 hover:bg-secondaryDeep transition-all duration-500 ml-5'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
+                    <Button onClick={() => handleGivingCompareDate({ id, name })} className='text-white bg-secondaryDeep/90 hover:bg-secondaryDeep transition-all duration-500  px-2'>{(comparingCard[0]?.id === id || comparingCard[1]?.id === id) ? 'Comparing' : 'Compare'}</Button>
                 </CardFooter>
             </Card>
             <ActivityChartModal open={openActivityModal} handleOpen={handleOpenActivityChartModal} handleClose={handleCloseActivityChartModal} activity={activity}></ActivityChartModal>
