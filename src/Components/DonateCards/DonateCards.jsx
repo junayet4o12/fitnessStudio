@@ -16,7 +16,7 @@ const DonateCards = () => {
     console.log(formattedDate);
 
     useEffect(()=>{
-        Axios('/help?varify=Verified')
+        Axios('/help?verify=verified')
         .then(res=> setRequest(res.data))
     },[])
   return (
@@ -38,6 +38,12 @@ const DonateCards = () => {
                     <Link to={`/Donate/${data?._id}`}>
                         <h1 className="text-md font-[600] bmiNumber">Expires at: {data?.deadLine}</h1>
                     </Link>
+                    <div className="w-full bg-gray-300">
+                          <div
+                          style={{ width: `${((data?.Raised / data?.amount) * 100).toFixed(0)}%` }}
+                            className={` h-[4px] rounded-lg bg-black items-start ease-in`}
+                          ></div>
+                    </div>
                     <h1 className="md:text-xl font-[600] bmiNumber"> <span className="text-2xl md:text-4xl">{data?.Raised} ৳ </span> raised out of {data?.amount} ৳</h1>
                 </div>
             </div>)
