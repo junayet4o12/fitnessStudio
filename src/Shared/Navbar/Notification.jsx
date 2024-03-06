@@ -19,7 +19,7 @@ import { socket } from "../../socketIo/socket";
 
 
 function ClockIcon() {
-  return (  
+  return (
     <svg
       width="16"
       height="17"
@@ -38,14 +38,14 @@ function ClockIcon() {
 }
 
 
-export function NotificationsMenu({navbarColor}) {
+export function NotificationsMenu({ navbarColor }) {
 
 
   const axiosPublic = useAxiosPublic()
   const { user } = useAuth()
   const [sender, setSender] = useState('')
-  const [particularTime,setParticularTime] =useState('')
-  const [timeDef,setTimeDef] = useState('')
+  const [particularTime, setParticularTime] = useState('')
+  const [timeDef, setTimeDef] = useState('')
   // console.log(user)
 
   const { data } = useQuery({
@@ -59,22 +59,22 @@ export function NotificationsMenu({navbarColor}) {
   const { data: userData, isLoading: userDataIsLoading } = useQuery({
     queryKey: ['userId'],
     queryFn: async () => {
-        const res = await axiosPublic.get(`/users/${user?.email}`)
-        return res?.data
+      const res = await axiosPublic.get(`/users/${user?.email}`)
+      return res?.data
     }
-})
-const usersId = userData?._id
-// console.log("user data is",usersId)
+  })
+  const usersId = userData?._id
+  // console.log("user data is",usersId)
 
-useEffect(() => {
-  // Emit the 'user_connected' event when the component mounts
-  socket.emit('user_connected', {userId: usersId});
+  useEffect(() => {
+    // Emit the 'user_connected' event when the component mounts
+    socket.emit('user_connected', { userId: usersId });
 
-  // Cleanup function to disconnect the socket when the component unmounts
-  // return () => {
-  //   socket.disconnect();
-  // };
-}, [usersId]);
+    // Cleanup function to disconnect the socket when the component unmounts
+    // return () => {
+    //   socket.disconnect();
+    // };
+  }, [usersId]);
 
   const { data: blogsNotify = [] } = useQuery({
     queryKey: ['blogsNotify'],
@@ -86,28 +86,28 @@ useEffect(() => {
   useEffect(() => {
     // Listen for the 'notification' event
     socket.on('notification', (data) => {
-        // Handle the received notification data here
-        const { senderName, info, time } = data;
-        // console.log(`Received notification from ${senderName}: ${info}, ${time}`);
-        setParticularTime(time);
-        setSender(senderName);
+      // Handle the received notification data here
+      const { senderName, info, time } = data;
+      // console.log(`Received notification from ${senderName}: ${info}, ${time}`);
+      setParticularTime(time);
+      setSender(senderName);
 
-        // Calculate the difference in minutes
-        const dateObject = new Date(time);
-        const currentDate = new Date();
-        const difference = currentDate - dateObject;
-        const differenceMinutes = Math.floor(difference / (1000 * 60));
-        setTimeDef(differenceMinutes)
+      // Calculate the difference in minutes
+      const dateObject = new Date(time);
+      const currentDate = new Date();
+      const difference = currentDate - dateObject;
+      const differenceMinutes = Math.floor(difference / (1000 * 60));
+      setTimeDef(differenceMinutes)
 
-        // Update your application state or perform other actions with differenceMinutes
-        // console.log(differenceMinutes);
+      // Update your application state or perform other actions with differenceMinutes
+      // console.log(differenceMinutes);
     });
 
     // Clean up event listener when component unmounts
     // return () => {
     //     socket.off('notification'); // Remove the event listener
     // };
-}, [setSender, setParticularTime]);
+  }, [setSender, setParticularTime]);
 
 
 
@@ -150,7 +150,7 @@ useEffect(() => {
           <Badge color="amber"><FaBell /></Badge>
         </IconButton>
       </MenuHandler>
-      <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
+      <MenuList className="flex flex-col gap-2 max-h-80 w-[80%] md:w-[50%] lg:w-[30%] scroolBar">
         {(data?.followedMembers || []).length === 0 && blogsNotify.length === 0 ? (
           <MenuItem>
             <h1 className="text-lg text-gray-400">No Notifications Here</h1>
@@ -166,7 +166,7 @@ useEffect(() => {
               <div className="flex flex-col gap-1">
                 <Typography variant="small" color="gray" className="font-semibold">
                   {/* {follower?.name}  */}
-                 {sender} has follow you
+                  {sender} has follow you
                 </Typography>
                 <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
                   <ClockIcon />

@@ -52,8 +52,8 @@ const DashboardNavbar = () => {
         </Helmet>
         <Link to={"/"}>
           <h1 className="flex text-2xl font-extrabold text-black">
-            <CgGym className="text-3xl text-primary mr-1" /> Fitness
-            <span className="text-primary text-[31px]">Studio</span>
+            <CgGym className="text-3xl text-secondary mr-1" /> Fitness
+            <span className="text-secondary text-[31px]">Studio</span>
           </h1>
         </Link>
         <div className="flex gap-2">

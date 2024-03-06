@@ -15,7 +15,7 @@ const ContactQuick = () => {
                     <div className="bg-orange-100 p-3 md:p-6 rounded-md w-36 md:w-96 md:h-44">
                         <FaLocationDot className="text-2xl md:text-4xl text-blue-600 md:mb-3" />
                         <p className="text-md md:text-lg font-bold">Address</p>
-                        <p className="text-xs md:text-base">12 No. Road Dhanmondi, Dhaka Bangladesh</p>
+                        <p className="text-xs md:text-base bmiNumber">12 No. Road Dhanmondi, Dhaka Bangladesh</p>
                     </div>
                     <div className="bg-lime-100 p-3 md:p-6 rounded-md w-36 md:w-96 md:h-44">
                         <IoMail className="text-2xl md:text-4xl text-red-600 md:mb-3" />
@@ -39,7 +39,7 @@ const ContactQuick = () => {
                 referrerPolicy="no-referrer-when-downgrade">
             </iframe>
         </>
-   
+
     );
 };
 
