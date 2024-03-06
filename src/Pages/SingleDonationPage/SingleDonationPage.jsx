@@ -39,17 +39,21 @@ const SingleDonationPage = () => {
           <img className='rounded-md w-full' src={donationData[0]?.imageUrl} alt="" />
         </div>
         <div className='rounded-md shadow-md w-full md:w-[35vw] p-[20px] bmiNumber flex flex-col items-center gap-4 sticky top-40'>
-          <h1> <span className='text-4xl font-[500]'>{donationData[0]?.donated_amount}৳</span> raised out of {donationData[0]?.amount}৳ Goal</h1>
+          <h1> <span className='text-4xl font-[500]'>{donationData[0]?.Raised}৳</span> raised out of {donationData[0]?.amount}৳ Goal</h1>
           <h1> <span className='text-xl font-[500]'>Expires in: {donationData[0]?.deadLine}</span></h1>
+          <div className='w-full bg-gray-300'>
           <div
-            className={`w-[${(donationData[0]?.amount / 100) * donationData[0]?.Raised}%] h-[4px] rounded-lg bg-black items-start`}
+          style={{ width: `${((donationData[0]?.Raised / donationData[0]?.amount) * 100).toFixed(0)}%` }}
+            className={`w-[${((donationData[0]?.Raised / donationData[0]?.amount) * 100).toFixed(0)}%] h-[4px] rounded-lg bg-black items-start`}
           ></div>
+          </div>
           <button
             onClick={shareFunction}
             className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>Share</button>
 
           {/* <button className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>Donate</button> */}
-          <Button disabled={donationData[0]?.amount <= donationData[0]?.donated_amount} onClick={handleOpen} className="mb-8 text-center ml-4 hover:bg-[#4CAF8d] bg-[#4CAF41] text-white">
+          <Button disabled={donationData[0]?.amount <= donationData[0]?.donated_amount} onClick={handleOpen} 
+          className='bg-secondary text-white text-xl rounded-md p-[10px] w-full'>
             Donate Now
           </Button>
 
