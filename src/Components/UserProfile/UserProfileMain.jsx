@@ -35,10 +35,11 @@ console.log(userDetails)
                 toast.success("Followed Successfully !", { id: toastId });
                 const notificationInfo = {
                     userName: user?.displayName,
-                    senderAvatar:user?.photoUR,
+                    senderAvatar:user?.photoURL,
                     senderId: personalInfo?._id,
                     receiverName:[userDetails?._id],
-                    type:'followed',
+                    type:'followed', 
+senderMail: user?.email,
                     time:new Date()
             
                 }

@@ -71,7 +71,7 @@ const ProductUploadForm = () => {
                     })
                     const notificationInfo = {
                         userName: user?.displayName,
-                        senderAvatar:user?.photoUR,
+                        senderAvatar:user?.photoURL,
                         senderId: userDetails?._id,
                         receiverName:follower,
                         type:'productUpload',

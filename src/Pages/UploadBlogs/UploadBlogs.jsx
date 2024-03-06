@@ -59,7 +59,7 @@ const UploadBlogs = () => {
                         toast.success("Published Successfully !", { id: toastId });
                         const notificationInfo = {
                             userName: user?.displayName,
-                            senderAvatar:user?.photoUR,
+                            senderAvatar:user?.photoURL,
                             senderId: userDetails?._id,
                             receiverName:follower,
                             type:'blogUpload',

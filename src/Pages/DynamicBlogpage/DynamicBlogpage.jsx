@@ -21,13 +21,13 @@ const DynamicBlogpage = () => {
   // console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
-    .then(data=> setblog(data.data))
-  },[param,axiosPublic])
+      .then(data => setblog(data.data))
+  }, [param, axiosPublic])
 
   useEffect(() => {
     axiosPublic(`/user?email=${blog.userEmail}`)
-    .then(data=> setmyblog(data.data))
-  },[blog,axiosPublic])
+      .then(data => setmyblog(data.data))
+  }, [blog, axiosPublic])
 
   console.log(myblog);
 
@@ -46,16 +46,17 @@ const DynamicBlogpage = () => {
           })
           const notificationInfo = {
             userName: user?.displayName,
-            senderAvatar:user?.photoUR,
+            senderAvatar: user?.photoURL,
             senderId: userDetails?._id,
-            receiverName:[myblog?._id],
-            type:'followed',
-            time:new Date()
-    
-        }
-        axiosPublic.post('/notifications',notificationInfo)
-        .then(() =>{
-        })
+            receiverName: [myblog?._id],
+            type: 'followed',
+            senderMail: user?.email,
+            time: new Date()
+
+          }
+          axiosPublic.post('/notifications', notificationInfo)
+            .then(() => {
+            })
         }
       })
       .catch(err => {
@@ -118,14 +119,14 @@ const DynamicBlogpage = () => {
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
         <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
-        
-          <>
-              <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
-                {isFollowing ? "Unfollow" : "Follow Now"}
-              </button>
 
-            </>
-        
+        <>
+          <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
+            {isFollowing ? "Unfollow" : "Follow Now"}
+          </button>
+
+        </>
+
       </div>
     </div>
   )

@@ -65,10 +65,11 @@ const UsersBlog = () => {
           })
           const notificationInfo = {
             userName: user?.displayName,
-            senderAvatar:user?.photoUR,
+            senderAvatar:user?.photoURL,
             senderId: userDetails?._id,
             receiverName:[write?._id],
-            type:'followed',
+            type:'followed', 
+senderMail: user?.email,
             time:new Date()
     
         }

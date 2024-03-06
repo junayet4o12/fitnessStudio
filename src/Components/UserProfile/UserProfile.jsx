@@ -75,10 +75,11 @@ const UserProfile = () => {
               })
               const notificationInfo = {
                 userName: user?.displayName,
-                senderAvatar:user?.photoUR,
+                senderAvatar:user?.photoURL,
                 senderId: logedInUser?._id,
                 receiverName:[userData?._id],
-                type:'followed',
+                type:'followed', 
+senderMail: user?.email,
                 time:new Date()
         
             }

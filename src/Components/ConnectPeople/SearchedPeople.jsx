@@ -27,16 +27,17 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
                 setUpdateLoading(false)
                 const notificationInfo = {
                     userName: user?.displayName,
-                    senderAvatar:user?.photoUR,
+                    senderAvatar: user?.photoURL,
                     senderId: userDetails?._id,
-                    receiverName:[info._id],
-                    type:'followed',
-                    time:new Date()
-            
+                    receiverName: [info._id],
+                    type: 'followed',
+                    senderMail: user?.email,
+                    time: new Date()
+
                 }
-                axiosPublic.post('/notifications',notificationInfo)
-                .then(() =>{
-                })
+                axiosPublic.post('/notifications', notificationInfo)
+                    .then(() => {
+                    })
             })
             .catch(err => {
                 console.log(err);
@@ -64,9 +65,9 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
                     followBtnLoading ? <span className="loading loading-dots loading-sm"></span> : (isFollow ? <p className={`${followFollowingFollowerBtnStyle} cursor-default`}>Following</p> : (isFollower ? <p className={followFollowingFollowerBtnStyle}>Follower</p> : (!updateLoading ? <p onClick={handleFollow} className={followFollowingFollowerBtnStyle}>Follow</p> : <span className="loading loading-spinner loading-sm mr-4"></span>)))
                 }
                 <p
-                title='Go to User profile'
-                 onClick={handleProfile}
-                  className=' cursor-pointer  w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><CgProfile/></p>
+                    title='Go to User profile'
+                    onClick={handleProfile}
+                    className=' cursor-pointer  w-9 h-9  flex justify-center items-center   transition-all duration-500 ml-2 text-2xl rounded-full active:scale-90 hover:text-black hover:bg-gray-200'><CgProfile /></p>
             </div>
         </div>
     );

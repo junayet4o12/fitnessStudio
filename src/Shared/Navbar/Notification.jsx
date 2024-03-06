@@ -2,7 +2,6 @@ import {
   Menu,
   MenuHandler,
   MenuList,
-  MenuItem,
   IconButton,
   Avatar,
   Typography,
@@ -15,6 +14,7 @@ import '../../Pages/Dashboard/Sidebar.css'
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -56,7 +56,7 @@ export function NotificationsMenu({ navbarColor }) {
         setNotificationDetails(res?.data)
       })
 
-  }, [axiosPublic, setNotificationDetails])
+  }, [axiosPublic, notificationDetails])
 
 
 
@@ -64,83 +64,114 @@ export function NotificationsMenu({ navbarColor }) {
   return (
     <Menu>
       <MenuHandler>
-        <IconButton variant="text" className={`text-xl md:text-2xl mt-2 ${!navbarColor ? 'text-black/90' : 'text-white/90'}`}>
+        <IconButton variant="text" className={`text-xl md:text-2xl mt-2 ${!navbarColor ? ' ' : 'text-white/90'}`}>
           <Badge color="amber"><FaBell /></Badge>
         </IconButton>
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
 
-        <MenuItem>
-          <h1 className="text-lg text-gray-400">No Notifications Here</h1>
-        </MenuItem>
+       
 
-
-        <MenuItem className="flex items-center gap-4 py-2 pl-2 pr-8">
-          <Avatar
-            variant="circular"
-            alt="User Image"
-            src="https://www.freepik.com/free-photos-vectors/female-avatar"
-
-          />
           <div className="flex flex-col gap-1">
-            <Typography variant="small" color="gray" className="font-semibold">
               <div className="flex flex-col gap-1">
+            <Typography variant="small" className="font-semibold">
                 {
-                notificationDetails?.map(notification => {
-                  const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
+                  notificationDetails?.map(notification => {
+                    const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
 
-                  if (isCurrentUserReceiver) {
+                    if (isCurrentUserReceiver) {
 
-                    // Calculate the time difference
-                    const notificationTime = new Date(notification.time);
-                    const currentTime = new Date();
-                    const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
+                      // Calculate the time difference
+                      const notificationTime = new Date(notification.time);
+                      const currentTime = new Date();
+                      const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
 
-                    // Generate the time string
-                    let timeAgoString;
-                    if (timeDifference < 1) {
-                      timeAgoString = "Just now";
-                    } else if (timeDifference < 60) {
-                      timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
-                    } else {
-                      const hoursDifference = Math.floor(timeDifference / 60);
-                      timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
-                    }
-                    return (
-                      <div key={notification.id}>
-                        <p>{notification.userName} has followed you</p>
-                        <div className="flex gap-3">
-                          <ClockIcon />
-                          <p>{timeAgoString}</p>
+                      // Generate the time string
+                      let timeAgoString;
+                      if (timeDifference < 1) {
+                        timeAgoString = "Just now";
+                      } else if (timeDifference < 60) {
+                        timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 1440) { // 1440 minutes = 1 day
+                        const hoursDifference = Math.floor(timeDifference / 60);
+                        timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 8640) { // 6 days * 24 hours = 144 hours
+                        const daysDifference = Math.floor(timeDifference / 1440);
+                        timeAgoString = `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 10080) { // 7 days * 24 hours = 168 hours
+                        timeAgoString = "1 week ago";
+                      } else {
+                        const notificationTime = new Date(notification.time);
+                        const options = { month: 'short', day: 'numeric' };
+                        timeAgoString = notificationTime.toLocaleDateString('en-US', options);
+                      }
+                      
+                      return (
+                        <div className="p-2" key={notification.id}>
+
+
+                          {
+                            notification?.type === "followed" && (
+                              <Link to={`/userProfile/${notification?.senderMail}`} className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
+
+                                />
+                                <div>
+
+                                  <p>{notification.userName} has followed you</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
+                                </div>
+                              </Link>
+
+                            )
+                          }
+                          {
+                            notification?.type === "productUpload" && (
+                              <Link to='/shop'  className="flex items-center gap-4">
+                                <p>{notification.userName} has uploaded a product</p>
+                                <div className="flex items-center space-y-1 gap-3">
+                                  <ClockIcon />
+                                  <p>{timeAgoString}</p>
+                                </div>
+                              </Link>
+
+                            )
+                          }
+                          {
+                            notification?.type === "blogUpload" && (
+                              <Link to='/blogs'
+                              className="flex items-center gap-4">
+
+                                <p>{notification.userName} has uploaded a blog</p>
+                                <div className="flex items-center space-y-1 gap-3">
+                                  <ClockIcon />
+                                  <p>{timeAgoString}</p>
+                                </div>
+                              </Link>
+
+                            )
+                          }
+
+
+
+
                         </div>
-                      </div>
-                    );
-                  } else {
-                    return null;
-                  }
-                })
+                      );
+                    } 
+                  })
                 }
 
 
-              </div>  
             </Typography>
-            </div>
-
-            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-              <ClockIcon />
-
-            </Typography>
-
-            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-              <ClockIcon />
-
-            </Typography>
-            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-              <ClockIcon />
-              a few minutes ago
-            </Typography>
+              </div>
+          </div>
         
-        </MenuItem>
 
       </MenuList>
     </Menu>
