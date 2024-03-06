@@ -62,7 +62,7 @@ const ConnectedPeople = ({ children }) => {
                     </ul>
                     <div className={`flex flex-col lg:flex-row `}>
                         {/* ${pathname === '/dashboard/connected_with/message' ? 'grid-cols-2' : 'grid-cols-1'} */}
-                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'hidden lg:block lg:w-1/2' : 'block w-full'} duration-300 transition-all max-h-[75vh] overflow-y-auto overflow-hidden mt-8`}>
+                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'hidden lg:block  lg:w-[47%]' : 'block w-full'} duration-300 transition-all max-h-[75vh] overflow-y-auto overflow-hidden mt-8`}>
                             {/* followedMembers  */}
                             <div className={`${!followFollowingActive && 'hidden'}`}>
 
@@ -110,7 +110,7 @@ const ConnectedPeople = ({ children }) => {
                                 }
 
                                 {
-                                    data.followedMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-3 mt-5 font-medium">
+                                    data.followedMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-2 font-medium  mx-auto">
                                         Oops!!
                                         <span>You aren't followed by anyone!!</span>
                                         <span>
@@ -128,7 +128,7 @@ const ConnectedPeople = ({ children }) => {
                                 }
 
                                 {
-                                    data.followingMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-3 mt-5 font-medium">
+                                    data.followingMembers.length < 1 && <div className="flex justify-center items-center flex-col gap-y-2  font-medium mx-auto">
                                         Oops!!
                                         <span>Nobody is followed by You!!</span>
                                         <span>

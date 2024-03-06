@@ -107,7 +107,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails, showMenu, setShowMenu, se
                         <span className='border-2 border-white py-2 px-4 rounded-lg relative bg-primary/85 hover:bg-primary duration-500 transition-all text-white w-[200px] block sm:hidden'>
                             <span className='text-sm font-medium flex justify-between pr-1'>Completed Goal: <span>{completedGoal}</span></span>
                             <hr className='my-1 border-[1.3px]' />
-                            <span className='flex gap-2 items-center justify-between '>Your Badge
+                            <span className='flex gap-2 items-center justify-between '>My Badge
                                 {userBadgeShowingButton}
                             </span>
                             {userBadge}
@@ -146,7 +146,7 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails, showMenu, setShowMenu, se
                     <span className='border-2 border-white py-2 px-4 rounded-lg relative bg-primary/85 hover:bg-primary duration-500 transition-all text-white w-[200px]'>
                         <span className='text-sm font-medium flex justify-between pr-1'>Completed Goal: <span>{completedGoal}</span></span>
                         <hr className='my-1 border-[1.3px]' />
-                        <span className='flex gap-2 items-center justify-between '>Your Badge
+                        <span className='flex gap-2 items-center justify-between '>My Badge
                             {userBadgeShowingButton}
                         </span>
                         {userBadge}
