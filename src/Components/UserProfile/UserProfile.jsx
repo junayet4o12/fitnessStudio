@@ -57,7 +57,7 @@ const UserProfile = () => {
 
     const checkingFollowing = logedInUser?.following?.filter(data => data === userData?._id)
 
-    console.log(userProducts);
+    console.log(logedInUser,userData);
 
 
     const handleFollow = () => {
@@ -70,6 +70,19 @@ const UserProfile = () => {
                 title: "Followed successfully",
                 icon: "success"
               })
+              const notificationInfo = {
+                userName: user?.displayName,
+                senderAvatar:user?.photoUR,
+                senderId: logedInUser?._id,
+                receiverName:[userData?._id],
+                type:'followed',
+                time:new Date()
+        
+            }
+            axiosPublic.post('/notifications',notificationInfo)
+            .then(() =>{
+            })
+              
               refetch()
             }
           })

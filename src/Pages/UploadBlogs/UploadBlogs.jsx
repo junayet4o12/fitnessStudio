@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
@@ -57,6 +57,18 @@ const UploadBlogs = () => {
                     if (res?.data?.insertedId) {
                         reset()
                         toast.success("Published Successfully !", { id: toastId });
+                        const notificationInfo = {
+                            userName: user?.displayName,
+                            senderAvatar:user?.photoUR,
+                            senderId: userDetails?._id,
+                            receiverName:follower,
+                            type:'blogUpload',
+                            time:new Date()
+                    
+                        }
+                        axiosPublic.post('/notifications',notificationInfo)
+                        .then(() =>{
+                        })
                        
                     }
 
@@ -71,6 +83,7 @@ const UploadBlogs = () => {
 
 
     }
+    console.log(follower)
 const handleClick =()=>{
     socket.emit('blog_notifications', {
         senderName:user?.displayName,
@@ -78,8 +91,11 @@ const handleClick =()=>{
         receiverName: follower,
         time: new Date()
     })
+  
+    
 
 }
+
    
     const haldelChange = (content, editor) => {
         setTinyData(content)

@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, followBtnLoading }) => {
     const axiosPublic = useAxiosPublic()
     const [updateLoading, setUpdateLoading] = useState(false)
     const { user } = useAuth()
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const { user: userDetails, isLoading } = useSelector(state => state.user)
+    useEffect(() => {
+        dispatch(fetchSingleUser(user?.email))
+    }, [dispatch, user])
 
     console.log(personalInfo?._id);
     const handleFollow = () => {
@@ -18,6 +25,18 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
                 console.log(res?.data?.followingResult, res?.data?.followedResult);
                 setFollowing(followingSearch + 1)
                 setUpdateLoading(false)
+                const notificationInfo = {
+                    userName: user?.displayName,
+                    senderAvatar:user?.photoUR,
+                    senderId: userDetails?._id,
+                    receiverName:[info._id],
+                    type:'followed',
+                    time:new Date()
+            
+                }
+                axiosPublic.post('/notifications',notificationInfo)
+                .then(() =>{
+                })
             })
             .catch(err => {
                 console.log(err);

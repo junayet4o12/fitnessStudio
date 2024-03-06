@@ -51,6 +51,7 @@ const UsersBlog = () => {
     setchecking(followings?.find(id => write?._id === id))
     setIsFollower(followed?.find(id => write?._id === id))
   }, [followings])
+  console.log(write)
 
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, write)
@@ -62,6 +63,18 @@ const UsersBlog = () => {
             title: "Followed successfully",
             icon: "success"
           })
+          const notificationInfo = {
+            userName: user?.displayName,
+            senderAvatar:user?.photoUR,
+            senderId: userDetails?._id,
+            receiverName:[write?._id],
+            type:'followed',
+            time:new Date()
+    
+        }
+        axiosPublic.post('/notifications',notificationInfo)
+        .then(() =>{
+        })
         }
       })
       .catch(err => {

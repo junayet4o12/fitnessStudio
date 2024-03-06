@@ -8,18 +8,18 @@ import {
   Typography,
   Badge,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import { FaBell } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import '../../Pages/Dashboard/Sidebar.css'
 import { useEffect, useState } from "react";
-import { socket } from "../../socketIo/socket";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 
 
 
 function ClockIcon() {
-  return (  
+  return (
     <svg
       width="16"
       height="17"
@@ -38,109 +38,27 @@ function ClockIcon() {
 }
 
 
-export function NotificationsMenu({navbarColor}) {
-
+export function NotificationsMenu({ navbarColor }) {
 
   const axiosPublic = useAxiosPublic()
   const { user } = useAuth()
-  const [sender, setSender] = useState('')
-  const [particularTime,setParticularTime] =useState('')
-  const [timeDef,setTimeDef] = useState('')
-  console.log(user)
-
-  const { data } = useQuery({
-    queryKey: [user],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/get_following_and_follower/${user?.email}`)
-      return res?.data
-    }
-  })
-  console.log(data);
-  const { data: userData, isLoading: userDataIsLoading } = useQuery({
-    queryKey: ['userId'],
-    queryFn: async () => {
-        const res = await axiosPublic.get(`/users/${user?.email}`)
-        return res?.data
-    }
-})
-const usersId = userData?._id
-console.log("user data is",usersId)
-
-useEffect(() => {
-  // Emit the 'user_connected' event when the component mounts
-  socket.emit('user_connected', {userId: usersId});
-
-  // Cleanup function to disconnect the socket when the component unmounts
-  // return () => {
-  //   socket.disconnect();
-  // };
-}, [usersId]);
-
-  const { data: blogsNotify = [] } = useQuery({
-    queryKey: ['blogsNotify'],
-    queryFn: async () => {
-      const response = await axiosPublic.get(`/following_users_blog/${user?.email}`);
-      return response.data;
-    }
-  })
+  const dispatch = useDispatch()
+  const [notificationDetails, setNotificationDetails] = useState([])
+  const { user: userDetails } = useSelector(state => state.user)
+  console.log(userDetails)
   useEffect(() => {
-    // Listen for the 'notification' event
-    socket.on('notification', (data) => {
-        // Handle the received notification data here
-        const { senderName, info, time } = data;
-        console.log(`Received notification from ${senderName}: ${info}, ${time}`);
-        setParticularTime(time);
-        setSender(senderName);
+    dispatch(fetchSingleUser(user?.email))
+  }, [user, dispatch])
 
-        // Calculate the difference in minutes
-        const dateObject = new Date(time);
-        const currentDate = new Date();
-        const difference = currentDate - dateObject;
-        const differenceMinutes = Math.floor(difference / (1000 * 60));
-        setTimeDef(differenceMinutes)
+  useEffect(() => {
+    axiosPublic.get('/notifications')
+      .then(res => {
+        setNotificationDetails(res?.data)
+      })
 
-        // Update your application state or perform other actions with differenceMinutes
-        console.log(differenceMinutes);
-    });
-
-    // Clean up event listener when component unmounts
-    // return () => {
-    //     socket.off('notification'); // Remove the event listener
-    // };
-}, [setSender, setParticularTime]);
+  }, [axiosPublic, setNotificationDetails])
 
 
-
-
-  // console.log(blogsNotify);
-
-  // Get the current time in milliseconds
-  const currentTime = new Date().getTime();
-  const storedTime = blogsNotify?.map(item => item?.time);
-
-  // Calculate the time differences
-  const differenceTime = storedTime?.map(value => currentTime - new Date(value).getTime());
-
-  // Convert differences to minutes, hours, and days
-  const minutesArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60)));
-  const hoursArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60)));
-  const daysArray = differenceTime.map(diff => Math.floor(diff / (1000 * 60 * 60 * 24)));
-
-  // Determine the appropriate time unit based on the difference
-  let timeAgo = [];
-
-  // Check for days elapsed
-  daysArray.forEach((days, index) => {
-    if (days > 0) {
-      timeAgo.push(`${days} day${days > 1 ? 's' : ''} ago`);
-    } else if (hoursArray[index] > 0) {
-      timeAgo.push(`${hoursArray[index]} hour${hoursArray[index] > 1 ? 's' : ''} ago`);
-    } else {
-      timeAgo.push(`${minutesArray[index]} minute${minutesArray[index] > 1 ? 's' : ''} ago`);
-    }
-  });
-
-  console.log(timeAgo);
 
 
   return (
@@ -151,45 +69,79 @@ useEffect(() => {
         </IconButton>
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
-        {(data?.followedMembers || []).length === 0 && blogsNotify.length === 0 ? (
-          <MenuItem>
-            <h1 className="text-lg text-gray-400">No Notifications Here</h1>
-          </MenuItem>
-        ) : (
-          [...(data?.followedMembers || []), ...(blogsNotify || [])].map((item) => (
-            <MenuItem key={item?._id} className="flex items-center gap-4 py-2 pl-2 pr-8">
-              <Avatar
-                variant="circular"
-                alt="User Image"
-                src={item?.image || item?.userImg}
-              />
+
+        <MenuItem>
+          <h1 className="text-lg text-gray-400">No Notifications Here</h1>
+        </MenuItem>
+
+
+        <MenuItem className="flex items-center gap-4 py-2 pl-2 pr-8">
+          <Avatar
+            variant="circular"
+            alt="User Image"
+            src="https://www.freepik.com/free-photos-vectors/female-avatar"
+
+          />
+          <div className="flex flex-col gap-1">
+            <Typography variant="small" color="gray" className="font-semibold">
               <div className="flex flex-col gap-1">
-                <Typography variant="small" color="gray" className="font-semibold">
-                  {/* {follower?.name}  */}
-                 {sender} has follow you
-                </Typography>
-                <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                  <ClockIcon />
-                  {timeDef} minutes ago
-                  {item?.name || item?.userName} {item?.name ? 'has followed you' : item?.userName ? 'posted a blog' : ''}
-                </Typography>
-                {item?.time ? (
-                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                    <ClockIcon />
-                    {timeAgo.map((time, i) => (
-                      <span key={i}>{time}</span>
-                    ))}
-                  </Typography>
-                ) : (
-                  <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
-                    <ClockIcon />
-                    a few minutes ago
-                  </Typography>
-                )}
-              </div>
-            </MenuItem>
-          ))
-        )}
+                {
+                notificationDetails?.map(notification => {
+                  const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
+
+                  if (isCurrentUserReceiver) {
+
+                    // Calculate the time difference
+                    const notificationTime = new Date(notification.time);
+                    const currentTime = new Date();
+                    const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
+
+                    // Generate the time string
+                    let timeAgoString;
+                    if (timeDifference < 1) {
+                      timeAgoString = "Just now";
+                    } else if (timeDifference < 60) {
+                      timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
+                    } else {
+                      const hoursDifference = Math.floor(timeDifference / 60);
+                      timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
+                    }
+                    return (
+                      <div key={notification.id}>
+                        <p>{notification.userName} has followed you</p>
+                        <div className="flex gap-3">
+                          <ClockIcon />
+                          <p>{timeAgoString}</p>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+                }
+
+
+              </div>  
+            </Typography>
+            </div>
+
+            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+              <ClockIcon />
+
+            </Typography>
+
+            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+              <ClockIcon />
+
+            </Typography>
+            <Typography className="flex items-center gap-1 text-sm font-medium text-blue-gray-500">
+              <ClockIcon />
+              a few minutes ago
+            </Typography>
+        
+        </MenuItem>
+
       </MenuList>
     </Menu>
   );
