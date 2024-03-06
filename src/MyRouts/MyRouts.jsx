@@ -111,7 +111,6 @@ const MyRouts = createBrowserRouter([
       },
       {
         path: "/Donate/:id",
-        loader: ({ params }) => axiosPublic(`/help/${params.id}`),
         element: <SingleDonationPage />,
       },
       {

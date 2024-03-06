@@ -6,11 +6,16 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import logInImg from '../../../assets/images/LogInRegistration/login.png'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 const LogIn = () => {
+
   const [disable, setDisable] = useState(true);
+  const [showPassword, setShowPassword] = useState(false)
   const { loginUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation()
+
   const {
     register,
     handleSubmit,
@@ -25,12 +30,12 @@ const LogIn = () => {
       .then((res) => {
         toast.success("Logged in successfully", { id: toastId });
         console.log(res);
-       
-        navigate( '/')
+
+        navigate('/')
       })
       .catch((error) => {
         console.log(error)
-        toast.error(error.code , { id: toastId });
+        toast.error(error.code, { id: toastId });
       });
   };
 
@@ -61,34 +66,41 @@ const LogIn = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
-                    <h1 className="text-start text-sm font-medium mb-1">
-                      Email <span className="text-primary text-xl">*</span>
+                    <h1 className="text-start text-secondary text-sm font-medium mb-1">
+                      Email <span className="text-red-500 text-xl">*</span>
                     </h1>
                     <input
                       {...register("email", { required: true })}
                       placeholder="Enter your email address"
-                      className="input input-bordered w-full text-black"
+                      className="input input-bordered focus:outline-secondary w-full text-black"
                     />
                     {errors.email && (
-                      <span className="text-primary text-xs">
+                      <span className="text-red-500 text-xs">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
-                    <h1 className="text-start text-sm font-medium mb-1">
-                      Password <span className="text-primary text-xl">*</span>
+                    <h1 className="text-start text-secondary text-sm font-medium mb-1">
+                      Password <span className="text-red-500 text-xl">*</span>
                     </h1>
-                    <input
-                      type="password"
-                      {...register("password", {
-                        required: true,
-                      })}
-                      placeholder="Enter password"
-                      className="input input-bordered w-full text-black"
-                    />
+                    <div className="flex items-center">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        {...register("password", {
+                          required: true,
+                        })}
+                        placeholder="Enter password"
+                        className="relative input input-bordered focus:outline-secondary w-full text-black"
+                      />
+                      <span className="absolute ml-[330px] text-lg cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                        {
+                          showPassword ? <FaEye title="Hide"></FaEye> : <FaEyeSlash title="Show"></FaEyeSlash>
+                        }
+                      </span>
+                    </div>
                     {errors.password?.type === "required" && (
-                      <span className="text-primary text-xs ">
+                      <span className="text-red-500 text-xs ">
                         This field is required
                       </span>
                     )}
@@ -99,15 +111,15 @@ const LogIn = () => {
                         <input
                           type="checkbox"
                           onChange={() => setDisable(!disable)}
-                          className="checkbox checkbox-warning w-5 h-5 border-primary"
+                          className="checkbox checkbox-info w-5 h-5 border-primary"
                         />
-                        <span className="label-text text-sm font-medium ml-2 text-white/80">
+                        <span className="label-text text-sm font-medium ml-2 text-black">
                           Remember me
                         </span>
                       </label>
                     </div>
                     <div>
-                      <h1 className="text-sm font-medium text-primary hover:cursor-pointer">
+                      <h1 className="text-sm font-medium text-primary hover:text-secondary hover:cursor-pointer hover:underline">
                         Forgot your password ?
                       </h1>
                     </div>
@@ -132,7 +144,7 @@ const LogIn = () => {
                   </p>
                   <Link
                     to="/register"
-                    className="block font-medium leading-normal text-primary antialiased">
+                    className="block font-medium leading-normal text-secondary underline antialiased">
                     Register here
                   </Link>
                 </div>

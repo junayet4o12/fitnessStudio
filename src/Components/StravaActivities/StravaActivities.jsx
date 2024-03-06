@@ -76,7 +76,7 @@ const StravaActivities = () => {
     }
     return (
         <div className="p-5 relative max-w-7xl mx-auto container">
-            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-primary/30 to-primary/80 rounded fixed top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-gray-100`}>
+            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-primary/50 to-primary/80 rounded fixed top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-gray-100`}>
                 <div className="flex  flex-col justify-center items-center w-full relative pb-1">
                     <p className="text-lg font-bold ">Compare</p>
 
@@ -89,7 +89,7 @@ const StravaActivities = () => {
 
                     </p>
 
-                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 rounded hover:bg-primary/9 0 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
+                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 hover:text-black rounded hover:bg-primary/9 0 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
                     <button onClick={() => setComparingCardsData([])} className='absolute top-[2px] right-1 font-bold active:scale-90 transition-all duration-300'>X</button>
                 </div>
             </div>

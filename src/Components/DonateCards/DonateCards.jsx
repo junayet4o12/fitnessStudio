@@ -16,7 +16,7 @@ const DonateCards = () => {
     console.log(formattedDate);
 
     useEffect(()=>{
-        Axios('/help?varify=Verified')
+        Axios('/help?verify=verified')
         .then(res=> setRequest(res.data))
     },[])
   return (
@@ -24,21 +24,27 @@ const DonateCards = () => {
       {
         Request.map(data=> 
             <div 
-            className={data.deadLine < formattedDate ?"hidden":"rounded-md shadow-lg overflow-hidden"}
-            key={data._id}>
+            className={data?.deadLine < formattedDate ?"hidden":"rounded-md shadow-lg overflow-hidden"}
+            key={data?._id}>
                 <div className="h-[250px] w-full overflow-hidden">
-                <Link to={`/Donate/${data._id}`}>
-                    <img className=" rounded-md h-[250px] w-full object-cover mx-auto hover:scale-[1.2] duration-75 ease-out" src={data.imageUrl}/>
+                <Link to={`/Donate/${data?._id}`}>
+                    <img className=" rounded-md h-[250px] w-full object-cover mx-auto hover:scale-[1.2] duration-75 ease-out" src={data?.imageUrl}/>
                 </Link>
                 </div>
                 <div className="p-[10px] flex flex-col gap-3 z-[100]">
-                    <Link to={`/Donate/${data._id}`}>
-                        <h1 className="text-xl font-[600]">{data.caption}</h1>
+                    <Link to={`/Donate/${data?._id}`}>
+                        <h1 className="text-xl font-[600]">{data?.caption}</h1>
                     </Link>
-                    <Link to={`/Donate/${data._id}`}>
-                        <h1 className="text-md font-[600] bmiNumber">Expires at: {data.deadLine}</h1>
+                    <Link to={`/Donate/${data?._id}`}>
+                        <h1 className="text-md font-[600] bmiNumber">Expires at: {data?.deadLine}</h1>
                     </Link>
-                    <h1 className="md:text-xl font-[600] bmiNumber"> <span className="text-2xl md:text-4xl">{data.Raised} ৳ </span> raised out of {data.amount} ৳</h1>
+                    <div className="w-full bg-gray-300">
+                          <div
+                          style={{ width: `${((data?.Raised / data?.amount) * 100).toFixed(0)}%` }}
+                            className={` h-[4px] rounded-lg bg-black items-start ease-in`}
+                          ></div>
+                    </div>
+                    <h1 className="md:text-xl font-[600] bmiNumber"> <span className="text-2xl md:text-4xl">{data?.Raised} ৳ </span> raised out of {data?.amount} ৳</h1>
                 </div>
             </div>)
       }

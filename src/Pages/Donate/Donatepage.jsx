@@ -1,4 +1,3 @@
-import React from 'react'
 import DonateBanner from '../../Components/DonateBanner/DonateBanner'
 import { Helmet } from 'react-helmet-async'
 import DonateWorks from '../../Components/DonateWorks/DonateWorks'
