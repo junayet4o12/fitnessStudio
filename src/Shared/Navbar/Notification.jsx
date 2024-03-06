@@ -56,7 +56,7 @@ export function NotificationsMenu({ navbarColor }) {
         setNotificationDetails(res?.data)
       })
 
-  }, [axiosPublic, notificationDetails])
+  }, [axiosPublic])
 
 
 

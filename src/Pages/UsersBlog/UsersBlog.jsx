@@ -65,17 +65,17 @@ const UsersBlog = () => {
           })
           const notificationInfo = {
             userName: user?.displayName,
-            senderAvatar:user?.photoURL,
+            senderAvatar: user?.photoURL,
             senderId: userDetails?._id,
-            receiverName:[write?._id],
-            type:'followed', 
-senderMail: user?.email,
-            time:new Date()
-    
-        }
-        axiosPublic.post('/notifications',notificationInfo)
-        .then(() =>{
-        })
+            receiverName: [write?._id],
+            type: 'followed',
+            senderMail: user?.email,
+            time: new Date()
+
+          }
+          axiosPublic.post('/notifications', notificationInfo)
+            .then(() => {
+            })
         }
       })
       .catch(err => {
