@@ -65,22 +65,35 @@ const UserProfile = () => {
 
     const handleFollow = () => {
         axiosPublic.put(`/following/${logedInUser?._id}`, userData)
-            .then(res => {
-                refetch()
-                loggedinRefetch()
-                if (res.data.followingResult.matchedCount > 0) {
-                    Swal.fire({
-                        title: "Followed successfully",
-                        icon: "success"
-                    })
-                    refetch()
-                }
+          .then(res => {
+            refetch()
+            loggedinRefetch()
+            if (res.data.followingResult.matchedCount > 0) {
+              Swal.fire({
+                title: "Followed successfully",
+                icon: "success"
+              })
+              const notificationInfo = {
+                userName: user?.displayName,
+                senderAvatar:user?.photoURL,
+                senderId: logedInUser?._id,
+                receiverName:[userData?._id],
+                type:'followed', 
+senderMail: user?.email,
+                time:new Date()
+        
+            }
+            axiosPublic.post('/notifications',notificationInfo)
+            .then(() =>{
             })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
+              
+              refetch()
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }
     const unfollow = () => {
         Swal.fire({
             title: "Are you sure?",

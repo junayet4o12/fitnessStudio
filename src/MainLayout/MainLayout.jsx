@@ -3,9 +3,9 @@ import { NavbarSimple } from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import { useEffect, useState } from "react";
 import GlobalMessageBox from "../Components/GlobalMessageBox/GlobalMessageBox";
-import useAuth from "../Hooks/useAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../Hooks/useAuth";
 
 const MainLayout = () => {
   const [navbar, setNavbar] = useState(false)
