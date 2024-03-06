@@ -23,7 +23,6 @@ const ManageUsers = () => {
     const pages = Math.ceil(totalUsers / size)
     const pageArray = [...Array(pages).keys()]
 
-    console.log(Currentpage);
 
 
     const { data: users = [], refetch } = useQuery({
@@ -69,7 +68,6 @@ const ManageUsers = () => {
             toast.error("Something went wrong");
         }
         refetch();
-        // console.log("I am clicked");
     };
 
     // user delete with confirmatin

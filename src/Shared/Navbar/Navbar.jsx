@@ -214,7 +214,6 @@ function NavList({ navbarColor }) {
 }
 
 export function NavbarSimple({ navbarColor }) {
-  // console.log(navbarColor);
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
   const handleWindowResize = () =>
