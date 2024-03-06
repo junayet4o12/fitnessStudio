@@ -132,7 +132,7 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
 
     return (
         <div className="p-5  flex justify-center items-center text-black">
-            <div className={`text-white w-full max-h-[465px] min-h-[465px] max-w-[400px]  sm:max-w-[450px] sm:min-h-[550px] sm:max-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-auto  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
+            <div className={`text-white w-full max-h-[465px] min-h-[465px] max-w-[400px]  sm:max-w-[450px] sm:min-h-[465px] sm:max-h-[465px] xl:max-h-[550px] xl:min-h-[550px] mx-auto  border-[1.5px] border-white/90 rounded-md shadow-xl relative overflow-hidden overflow-y-auto  bg-primary/50 ${smoothScroll ? 'scroll-smooth' : ''} shadow-2xl shadow-white/30`} ref={chatContainerRef}>
                 <div className="w-full h-10 border-b-[1px] border-white/90 sticky top-0 z-10 bg-primary">
                     <div className="flex gap-2   px-2 items-center h-10 justify-between">
 

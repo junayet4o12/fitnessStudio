@@ -290,8 +290,7 @@ body,
     min-height: 382px;
 }
 
-
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1441px) {
     .messageBox {
         min-height: 467px;
     }
@@ -310,5 +309,42 @@ body,
 
     to {
         transform: scale(1);
+    }
+}
+
+.searchPeople {
+
+    animation: animatedBg 10s infinite;
+}
+
+@keyframes animatedBg {
+
+    0%,
+    100% {
+        background: #caddeb;
+        color: black;
+    }
+
+    50% {
+        background: #a7a1a1;
+        color: black;
+    }
+}
+.searchPeople2 {
+
+    animation: animatedBg2 10s infinite;
+}
+
+@keyframes animatedBg2 {
+
+    0%,
+    100% {
+        background: #4b5b66;
+        color: white;
+    }
+
+    50% {
+        background: #2a2e4c;
+        color: white;
     }
 }

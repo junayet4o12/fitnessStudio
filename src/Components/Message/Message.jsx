@@ -46,7 +46,7 @@ const Message = () => {
     }
 
     return (
-        <div className="pb-10">
+        <div className="pb-10 md:pb-0">
             {/* <Title title={`Chat With ${friendData?.name.split(' ')[0]}`}></Title> */}
             <div>
                 <MessageBox userData={userData} friendData={friendData} messages={messages} refetch={refetch} scrollToTop={scrollToTop} friendId={friendId} userId={userId}></MessageBox>
