@@ -10,6 +10,7 @@ import { BiMessageDetail } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { socket } from "../../socketIo/socket";
 
 const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
     const navigate = useNavigate()
@@ -44,8 +45,9 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
 
                 }
                 axiosPublic.post('/notifications', notificationInfo)
-                    .then(() => {
-                    })
+                if(res?.data){
+                    socket.emit('notifications', notificationInfo)
+                }
                 refetch()
             })
             .catch(err => {

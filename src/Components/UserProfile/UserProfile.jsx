@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { BiMessageDetail } from "react-icons/bi";
+import { socket } from "../../socketIo/socket";
 
 const UserProfile = () => {
     const { email } = useParams();
@@ -84,8 +85,9 @@ const UserProfile = () => {
 
                     }
                     axiosPublic.post('/notifications', notificationInfo)
-                        .then(() => {
-                        })
+                    if(res?.data){
+                        socket.emit('notifications', notificationInfo)
+                    }
 
                     refetch()
                 }

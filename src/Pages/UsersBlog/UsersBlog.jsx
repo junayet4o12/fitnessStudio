@@ -8,6 +8,7 @@ import { useContext } from "react"
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice"
 import { AuthContext } from "../../Authentication/AuthProvider/AuthProviders"
 import { BiMessageDetail } from "react-icons/bi";
+import { socket } from "../../socketIo/socket"
 
 const UsersBlog = () => {
   const axiosPublic = useAxiosPublic()
@@ -74,8 +75,9 @@ const UsersBlog = () => {
 
           }
           axiosPublic.post('/notifications', notificationInfo)
-            .then(() => {
-            })
+          if(res?.data){
+            socket.emit('notifications', notificationInfo)
+        }
         }
       })
       .catch(err => {

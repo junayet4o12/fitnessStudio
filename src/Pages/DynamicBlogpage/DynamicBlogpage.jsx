@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import Swal from 'sweetalert2';
 import { makeVisibleTime } from '../../Hooks/makeVisibleTime';
+import { socket } from '../../socketIo/socket';
 
 const DynamicBlogpage = () => {
   const param = useParams().id
@@ -55,8 +56,9 @@ const DynamicBlogpage = () => {
 
           }
           axiosPublic.post('/notifications', notificationInfo)
-            .then(() => {
-            })
+          if(res?.data){
+            socket.emit('notifications', notificationInfo)
+        }
         }
       })
       .catch(err => {

@@ -67,7 +67,10 @@ const UploadBlogs = () => {
                     
                         }
                         axiosPublic.post('/notifications',notificationInfo)
-                        .then(() =>{
+                        .then((res) =>{
+                            if(res?.data){
+                                socket.emit('notifications', notificationInfo)
+                            }
                         })
                        
                     }
@@ -84,17 +87,6 @@ const UploadBlogs = () => {
 
     }
     console.log(follower)
-const handleClick =()=>{
-    socket.emit('blog_notifications', {
-        senderName:user?.displayName,
-        info: 'blogName',
-        receiverName: follower,
-        time: new Date()
-    })
-  
-    
-
-}
 
    
     const haldelChange = (content, editor) => {
@@ -170,7 +162,7 @@ const handleClick =()=>{
                     type='submit'>
                     Publish
                 </button>
-                <button onClick={handleClick} className='bg-secondary text-white font-[600] p-[10px] text-xl rounded-mdz'>Click here</button>
+               
 
             </form>
         </div>

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { Link } from "react-router-dom";
+import { socket } from "../../socketIo/socket";
 
 
 
@@ -39,24 +40,49 @@ function ClockIcon() {
 
 
 export function NotificationsMenu({ navbarColor }) {
-
   const axiosPublic = useAxiosPublic()
   const { user } = useAuth()
   const dispatch = useDispatch()
   const [notificationDetails, setNotificationDetails] = useState([])
   const { user: userDetails } = useSelector(state => state.user)
-  console.log(userDetails)
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
   }, [user, dispatch])
 
+
+
+
+
+
+
+
   useEffect(() => {
+
+
+
     axiosPublic.get('/notifications')
       .then(res => {
         setNotificationDetails(res?.data)
+
       })
 
   }, [axiosPublic])
+
+  useEffect(() => {
+    socket.on('notifications', () => {
+      ('New notification received!');
+      const fetchNotifications = async () => {
+        axiosPublic.get('/notifications')
+          .then(res => {
+            setNotificationDetails(res?.data)
+          })
+      };
+      fetchNotifications();
+    });
+
+  }, [axiosPublic]);
+
+
 
 
 
@@ -70,108 +96,108 @@ export function NotificationsMenu({ navbarColor }) {
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
 
-       
 
+
+        <div className="flex flex-col gap-1">
           <div className="flex flex-col gap-1">
-              <div className="flex flex-col gap-1">
             <Typography variant="small" className="font-semibold">
-                {
-                  notificationDetails?.map(notification => {
-                    const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
+              {
+                notificationDetails?.map(notification => {
+                  const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
 
-                    if (isCurrentUserReceiver) {
+                  if (isCurrentUserReceiver) {
 
-                      // Calculate the time difference
+                    // Calculate the time difference
+                    const notificationTime = new Date(notification.time);
+                    const currentTime = new Date();
+                    const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
+
+                    // Generate the time string
+                    let timeAgoString;
+                    if (timeDifference < 1) {
+                      timeAgoString = "Just now";
+                    } else if (timeDifference < 60) {
+                      timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
+                    } else if (timeDifference < 1440) { // 1440 minutes = 1 day
+                      const hoursDifference = Math.floor(timeDifference / 60);
+                      timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
+                    } else if (timeDifference < 8640) { // 6 days * 24 hours = 144 hours
+                      const daysDifference = Math.floor(timeDifference / 1440);
+                      timeAgoString = `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
+                    } else if (timeDifference < 10080) { // 7 days * 24 hours = 168 hours
+                      timeAgoString = "1 week ago";
+                    } else {
                       const notificationTime = new Date(notification.time);
-                      const currentTime = new Date();
-                      const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
+                      const options = { month: 'short', day: 'numeric' };
+                      timeAgoString = notificationTime.toLocaleDateString('en-US', options);
+                    }
 
-                      // Generate the time string
-                      let timeAgoString;
-                      if (timeDifference < 1) {
-                        timeAgoString = "Just now";
-                      } else if (timeDifference < 60) {
-                        timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
-                      } else if (timeDifference < 1440) { // 1440 minutes = 1 day
-                        const hoursDifference = Math.floor(timeDifference / 60);
-                        timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
-                      } else if (timeDifference < 8640) { // 6 days * 24 hours = 144 hours
-                        const daysDifference = Math.floor(timeDifference / 1440);
-                        timeAgoString = `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
-                      } else if (timeDifference < 10080) { // 7 days * 24 hours = 168 hours
-                        timeAgoString = "1 week ago";
-                      } else {
-                        const notificationTime = new Date(notification.time);
-                        const options = { month: 'short', day: 'numeric' };
-                        timeAgoString = notificationTime.toLocaleDateString('en-US', options);
-                      }
-                      
-                      return (
-                        <div className="p-2" key={notification.id}>
+                    return (
+                      <div className="p-2" key={notification.id}>
 
 
-                          {
-                            notification?.type === "followed" && (
-                              <Link to={`/userProfile/${notification?.senderMail}`} className="flex items-center gap-4">
-                                <Avatar
-                                  variant="circular"
-                                  alt="User Image"
-                                  src={notification?.senderAvatar}
+                        {
+                          notification?.type === "followed" && (
+                            <Link to={`/userProfile/${notification?.senderMail}`} className="flex items-center gap-4">
+                              <Avatar
+                                variant="circular"
+                                alt="User Image"
+                                src={notification?.senderAvatar}
 
-                                />
-                                <div>
+                              />
+                              <div>
 
-                                  <p>{notification.userName} has followed you</p>
-                                  <div className="flex items-center space-y-1 gap-3">
-                                    <ClockIcon />
-                                    <p>{timeAgoString}</p>
-                                  </div>
-                                </div>
-                              </Link>
-
-                            )
-                          }
-                          {
-                            notification?.type === "productUpload" && (
-                              <Link to='/shop'  className="flex items-center gap-4">
-                                <p>{notification.userName} has uploaded a product</p>
+                                <p>{notification.userName} has followed you</p>
                                 <div className="flex items-center space-y-1 gap-3">
                                   <ClockIcon />
                                   <p>{timeAgoString}</p>
                                 </div>
-                              </Link>
+                              </div>
+                            </Link>
 
-                            )
-                          }
-                          {
-                            notification?.type === "blogUpload" && (
-                              <Link to='/blogs'
+                          )
+                        }
+                        {
+                          notification?.type === "productUpload" && (
+                            <Link to='/shop' className="flex items-center gap-4">
+                              <p>{notification.userName} has uploaded a product</p>
+                              <div className="flex items-center space-y-1 gap-3">
+                                <ClockIcon />
+                                <p>{timeAgoString}</p>
+                              </div>
+                            </Link>
+
+                          )
+                        }
+                        {
+                          notification?.type === "blogUpload" && (
+                            <Link to='/blogs'
                               className="flex items-center gap-4">
 
-                                <p>{notification.userName} has uploaded a blog</p>
-                                <div className="flex items-center space-y-1 gap-3">
-                                  <ClockIcon />
-                                  <p>{timeAgoString}</p>
-                                </div>
-                              </Link>
+                              <p>{notification.userName} has uploaded a blog</p>
+                              <div className="flex items-center space-y-1 gap-3">
+                                <ClockIcon />
+                                <p>{timeAgoString}</p>
+                              </div>
+                            </Link>
 
-                            )
-                          }
-
-
+                          )
+                        }
 
 
-                        </div>
-                      );
-                    } 
-                  })
-                }
+
+
+                      </div>
+                    );
+                  }
+                })
+              }
 
 
             </Typography>
-              </div>
           </div>
-        
+        </div>
+
 
       </MenuList>
     </Menu>

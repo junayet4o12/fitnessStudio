@@ -7,6 +7,7 @@ import axios from 'axios'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice'
+import { socket } from '../../socketIo/socket'
 
 const ProductUploadForm = () => {
     const {user} = useContext(AuthContext)
@@ -79,8 +80,9 @@ const ProductUploadForm = () => {
                 
                     }
                     Axios.post('/notifications',notificationInfo)
-                    .then(() =>{
-                    })
+                    if(res?.data){
+                        socket.emit('notifications', notificationInfo)
+                    }
 
                     e.target.name.value= ""
                     e.target.Price.value= ""

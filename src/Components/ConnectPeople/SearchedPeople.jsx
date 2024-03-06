@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { CgProfile } from "react-icons/cg";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
+import { socket } from '../../socketIo/socket';
 const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, followBtnLoading }) => {
     const axiosPublic = useAxiosPublic()
     const [updateLoading, setUpdateLoading] = useState(false)
@@ -36,8 +37,9 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
 
                 }
                 axiosPublic.post('/notifications', notificationInfo)
-                    .then(() => {
-                    })
+                if(res?.data){
+                    socket.emit('notifications', notificationInfo)
+                }
             })
             .catch(err => {
                 console.log(err);
