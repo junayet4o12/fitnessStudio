@@ -5,7 +5,6 @@ import { socket } from "../../socketIo/socket";
 
 
 const AllUnreadMessage = ({ allUnreadMessage, allUnreadMessageDataIsLoading, allUnreadMessageRefetch }) => {
-    console.log(allUnreadMessage?.count);
     useEffect(() => {
         socket.on('unread_refetch', (message) => {
             allUnreadMessageRefetch()

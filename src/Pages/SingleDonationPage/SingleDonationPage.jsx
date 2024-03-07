@@ -15,12 +15,10 @@ import CheckOut from './Checkout';
 const SingleDonationPage = () => {
   const [open, setOpen] = React.useState(false);
   let id = useParams();
-  console.log("user id is", id)
 
 
   const [donationData] = useSingleDonationData(id?.id)
 
-  console.log("Donation data is ", donationData)
   const handleOpen = () => setOpen(!open);
   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY)
   const shareFunction = () => {

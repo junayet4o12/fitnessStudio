@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import UnreadMessage from './UnreadMessage';
 const FollowedMembers = ({ follower, idx, userDetails,messageWith }) => {
-    console.log(idx +1);
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic()
     const { data: unreadMessage, isLoading: unreadMessageDataIsLoading, refetch } = useQuery({
@@ -18,7 +17,6 @@ const FollowedMembers = ({ follower, idx, userDetails,messageWith }) => {
         }
     })
 
-    console.log(unreadMessage);
     const handleProfile = () => {
         navigate(`/userProfile/${follower?.email}`)
 

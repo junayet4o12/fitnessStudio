@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import Swal from 'sweetalert2';
 import { makeVisibleTime } from '../../Hooks/makeVisibleTime';
+import { socket } from '../../socketIo/socket';
 
 const DynamicBlogpage = () => {
   const param = useParams().id
@@ -16,9 +17,7 @@ const DynamicBlogpage = () => {
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
   const { user } = useAuth()
-  // console.log(user);
   const { user: userDetails } = useSelector(state => state.user)
-  // console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
       .then(data => setblog(data.data))
@@ -29,7 +28,6 @@ const DynamicBlogpage = () => {
       .then(data => setmyblog(data.data))
   }, [blog, axiosPublic])
 
-  console.log(myblog);
 
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
@@ -37,7 +35,6 @@ const DynamicBlogpage = () => {
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, myblog)
       .then(res => {
-        console.log(res?.data?.followingResult);
         if (res.data.followingResult.matchedCount > 0) {
           setloading(!loading)
           Swal.fire({
@@ -55,8 +52,9 @@ const DynamicBlogpage = () => {
 
           }
           axiosPublic.post('/notifications', notificationInfo)
-            .then(() => {
-            })
+          if(res?.data){
+            socket.emit('notifications', notificationInfo)
+        }
         }
       })
       .catch(err => {
@@ -78,7 +76,6 @@ const DynamicBlogpage = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
           .then(res => {
             setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",

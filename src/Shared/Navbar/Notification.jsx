@@ -8,13 +8,15 @@ import {
   Badge,
 } from "@material-tailwind/react";
 import { FaBell } from "react-icons/fa";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import '../../Pages/Dashboard/Sidebar.css'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { Link } from "react-router-dom";
+// import { socket } from "../../socketIo/socket";
+import PropTypes from 'prop-types'
 
 
 
@@ -38,25 +40,57 @@ function ClockIcon() {
 }
 
 
-export function NotificationsMenu({ navbarColor }) {
-
-  const axiosPublic = useAxiosPublic()
+export function NotificationsMenu({ navbarColor, notificationDetails }) {
+  NotificationsMenu.propTypes = {
+    navbarColor: PropTypes.bool,
+    notificationDetails: PropTypes.array
+  }
+  // const axiosPublic = useAxiosPublic()
+  let noNotification = 0;
   const { user } = useAuth()
   const dispatch = useDispatch()
-  const [notificationDetails, setNotificationDetails] = useState([])
+  // const [notificationDetails, setNotificationDetails] = useState([])
   const { user: userDetails } = useSelector(state => state.user)
-  console.log(userDetails)
   useEffect(() => {
-    dispatch(fetchSingleUser(user?.email))
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
   }, [user, dispatch])
 
-  useEffect(() => {
-    axiosPublic.get('/notifications')
-      .then(res => {
-        setNotificationDetails(res?.data)
-      })
 
-  }, [axiosPublic])
+
+
+
+
+
+
+  // useEffect(() => {
+
+
+
+  //   axiosPublic.get('/notifications')
+  //     .then(res => {
+  //       setNotificationDetails(res?.data)
+
+  //     })
+
+  // }, [axiosPublic])
+
+  // useEffect(() => {
+  //   socket.on('notifications', () => {
+  //     ('New notification received!');
+  //     const fetchNotifications = async () => {
+  //       axiosPublic.get('/notifications')
+  //         .then(res => {
+  //           setNotificationDetails(res?.data)
+  //         })
+  //     };
+  //     fetchNotifications();
+  //   });
+
+  // }, [axiosPublic]);
+
+
 
 
 
@@ -70,11 +104,11 @@ export function NotificationsMenu({ navbarColor }) {
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
 
-       
+        {notificationDetails && notificationDetails.length > 0 ? (
 
           <div className="flex flex-col gap-1">
-              <div className="flex flex-col gap-1">
-            <Typography variant="small" className="font-semibold">
+            <div className="flex flex-col gap-1">
+              <Typography variant="small" className="font-semibold">
                 {
                   notificationDetails?.map(notification => {
                     const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
@@ -105,7 +139,7 @@ export function NotificationsMenu({ navbarColor }) {
                         const options = { month: 'short', day: 'numeric' };
                         timeAgoString = notificationTime.toLocaleDateString('en-US', options);
                       }
-                      
+
                       return (
                         <div className="p-2" key={notification.id}>
 
@@ -133,11 +167,20 @@ export function NotificationsMenu({ navbarColor }) {
                           }
                           {
                             notification?.type === "productUpload" && (
-                              <Link to='/shop'  className="flex items-center gap-4">
-                                <p>{notification.userName} has uploaded a product</p>
-                                <div className="flex items-center space-y-1 gap-3">
-                                  <ClockIcon />
-                                  <p>{timeAgoString}</p>
+                              <Link to='/shop' className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
+
+                                />
+                                <div>
+
+                                  <p>{notification.userName} has uploaded a product</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
                                 </div>
                               </Link>
 
@@ -146,12 +189,21 @@ export function NotificationsMenu({ navbarColor }) {
                           {
                             notification?.type === "blogUpload" && (
                               <Link to='/blogs'
-                              className="flex items-center gap-4">
+                                className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
 
-                                <p>{notification.userName} has uploaded a blog</p>
-                                <div className="flex items-center space-y-1 gap-3">
-                                  <ClockIcon />
-                                  <p>{timeAgoString}</p>
+                                />
+                                <div>
+
+                                  <p>{notification.userName} has uploaded a blog</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
+
                                 </div>
                               </Link>
 
@@ -161,18 +213,24 @@ export function NotificationsMenu({ navbarColor }) {
 
 
 
+
                         </div>
                       );
-                    } 
+                    }
+                    else {
+                      noNotification++
+                      if (noNotification >= notificationDetails?.length) {
+                        return 'No New Notifications'
+                      }
+                    }
                   })
                 }
 
-
-            </Typography>
-              </div>
+              </Typography>
+            </div>
           </div>
-        
 
+        ) : <h2>No notification here</h2>}
       </MenuList>
     </Menu>
   );

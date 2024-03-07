@@ -4,7 +4,6 @@ const ProductBanner = ({products}) => {
     const product1 = Math.floor(Math.random()* products.length)
     const product2 = Math.floor(Math.random()* products.length)
     const product3 = Math.floor(Math.random()* products.length)
-    console.log(product1);
   return (
     <div className='flex gap-2'>
         <div 

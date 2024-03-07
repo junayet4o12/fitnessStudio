@@ -27,26 +27,22 @@ const EnduranceTrack = ({ completedGoalsRefetch,specificEndurance }) => {
 
  
   const calculateEndurance = specificEndurance;
-  console.log(calculateEndurance);
 
 
   const day = Math.ceil((new Date(calculateEndurance?.timeline).getTime() - new Date().getTime()) / 86400000);
   const days = new Date().getTime() - new Date(calculateEndurance?.timeline).getTime();
-  console.log(days, calculateEndurance?.timeline);
 
   const targetDistance = parseInt(calculateEndurance?.distance) || 0;
   const currentDistance = calculateEndurance?.current_distance;
 
 
   const onSubmit = async (data) => {
-    console.log(data?.currentDistance);
     const updatedData = {
       current_distance: parseInt(data?.currentDistance),
       distance: calculateEndurance?.distance,
       email: user?.email,
       tracking_goal: specificEndurance?.tracking_goal
     };
-    // console.log(updatedData);
     const res = await axiosPublic?.put(
       `/user_goal/${calculateEndurance?._id}`,
       updatedData
@@ -65,7 +61,6 @@ const EnduranceTrack = ({ completedGoalsRefetch,specificEndurance }) => {
     setIsOpen(false);
   };
   const handleDeleteGoal = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -77,7 +72,6 @@ const EnduranceTrack = ({ completedGoalsRefetch,specificEndurance }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/user_goal/${id}`).then((res) => {
-          // console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({

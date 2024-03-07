@@ -38,7 +38,6 @@ const ActivityCard = ({ activity,  handleGivingCompareDate, comparingCard }) => 
     const handleOpenActivityChartModal = () => setOpenActivityModal(true);
     const handleCloseActivityChartModal = () => setOpenActivityModal(false);
     const { name, max_speed, average_speed, distance, moving_time, sport_type, start_date, type, elapsed_time, id } = activity
-    // console.log(type);
 
     // for using img according to type start
     const typeToImgMap = {

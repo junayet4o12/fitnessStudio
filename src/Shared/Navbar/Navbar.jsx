@@ -12,6 +12,10 @@ import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { socket } from "../../socketIo/socket";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 
 function NavList({ navbarColor }) {
   const { user } = useAuth()
@@ -214,9 +218,19 @@ function NavList({ navbarColor }) {
 }
 
 export function NavbarSimple({ navbarColor }) {
-  // console.log(navbarColor);
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
+  const axiosPublic = useAxiosPublic()
+  const [notificationDetails, setNotificationDetails] = useState([])
+  const dispatch = useDispatch()
+
+  const { user: userDetails } = useSelector(state => state.user)
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
+  }, [dispatch, user])
+
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
@@ -227,6 +241,32 @@ export function NavbarSimple({ navbarColor }) {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+  useEffect(() => {
+
+
+
+    axiosPublic.get('/notifications')
+      .then(res => {
+        setNotificationDetails(res?.data)
+
+      })
+
+  }, [axiosPublic])
+
+  useEffect(() => {
+    socket.on('notifications', () => {
+      ('New notification received!');
+      const fetchNotifications = async () => {
+        axiosPublic.get('/notifications')
+          .then(res => {
+            setNotificationDetails(res?.data)
+          })
+      };
+      fetchNotifications();
+    });
+
+  }, [axiosPublic])
 
   return (
     <Navbar className={`mx-auto min-w-[100vw] rounded-none px-4 sm:px-6 lg:px-3 xl:px-6 py-3 sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0 ${!navbarColor ? 'bg-white' : 'bg-black'} transition-all duration-500`}>
@@ -263,7 +303,7 @@ export function NavbarSimple({ navbarColor }) {
           <span className="flex  items-center gap-2   ">
 
             {/* Bell icon with notification button */}
-            {user && <NotificationsMenu navbarColor={navbarColor} />}
+            {user && <NotificationsMenu notificationDetails={notificationDetails} navbarColor={navbarColor} />}
 
             {/* User Profile component */}
             <span className="">

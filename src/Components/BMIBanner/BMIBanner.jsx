@@ -50,7 +50,6 @@ const BMIBanner = () => {
     }
   }, [height, weight]);
 
-  console.log(minWeightBMI, maxWeightBMI);
   return (
     <div className="flex flex-col gap-0 lg:flex-row justify-around items-center  ">
       <div className="lg:w-[65%] h-[80vh] md:mb-[0px] flex flex-col justify-center p-[25px] bg-secondary bg-opacity-[0.4] rounded-md ">

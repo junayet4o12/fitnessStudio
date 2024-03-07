@@ -31,7 +31,6 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
             scrollToBottom();
         }
         setTimeout(addDelay, 1);
-        // console.log('hello');
     }, [friendId])
     useEffect(() => {
         // setSmoothScroll(true)
@@ -41,16 +40,13 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
             scrollToBottom();
         }
         setTimeout(addDelay, 10);
-        // console.log('hello');
     }, [messages, scrollToTop]);
 
-    console.log(smoothScroll);
 
     useEffect(() => {
 
         axiosPublic.put(`/read_message?you=${userId}&friend=${friendId}`)
             .then(res => {
-                console.log(res?.data);
                 socket.emit('read_unread_message', { done: 'done' })
 
             })
@@ -83,13 +79,10 @@ const MessageBox = ({ userData, friendData, messages = [], refetch, scrollToTop,
         }
 
         // ?sender=${userData?._id}&receiver=${friendData?._id}
-        console.log(messageData);
         setIsMessageLoading(true)
         axiosPublic.post(`/send_message`, messageData)
             .then(res => {
-                console.log(res.data);
                 if (res?.data?.insertedId) {
-                    console.log('done', messageData);
                     setMessage('')
                     socket.emit('refetch', {
                         message,

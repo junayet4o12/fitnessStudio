@@ -49,10 +49,8 @@ const AuthProviders = ({ children }) => {
         const userInfo = { email: currentUser?.email };
         axiosPublic.post('/jwt', userInfo)
           .then(res => {
-            console.log(res.data)
 
           });
-        console.log(userInfo);
       }
 
       setLoading(false);

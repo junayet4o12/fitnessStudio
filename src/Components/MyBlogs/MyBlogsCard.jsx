@@ -30,7 +30,6 @@ const MyBlogsCard = ({ blog, refetch }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosPublic.delete(`/delete_blog/${blog?._id}`);
-                // console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     refetch()
                     Swal.fire({

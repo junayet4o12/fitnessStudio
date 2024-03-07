@@ -29,7 +29,6 @@ const LogIn = () => {
     loginUser(email, password)
       .then((res) => {
         toast.success("Logged in successfully", { id: toastId });
-        console.log(res);
 
         navigate('/')
       })

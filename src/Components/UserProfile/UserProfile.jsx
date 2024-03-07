@@ -8,6 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { BiMessageDetail } from "react-icons/bi";
+import { socket } from "../../socketIo/socket";
 
 const UserProfile = () => {
     const { email } = useParams();
@@ -59,41 +60,40 @@ const UserProfile = () => {
 
     const checkingFollowing = logedInUser?.following?.filter(data => data === userData?._id)
     const checkingFollower = logedInUser?.followed?.filter(data => data === userData?._id)
-    console.log(checkingFollower);
-    console.log(userProducts);
 
 
     const handleFollow = () => {
         axiosPublic.put(`/following/${logedInUser?._id}`, userData)
-          .then(res => {
-            refetch()
-            loggedinRefetch()
-            if (res.data.followingResult.matchedCount > 0) {
-              Swal.fire({
-                title: "Followed successfully",
-                icon: "success"
-              })
-              const notificationInfo = {
-                userName: user?.displayName,
-                senderAvatar:user?.photoURL,
-                senderId: logedInUser?._id,
-                receiverName:[userData?._id],
-                type:'followed', 
-senderMail: user?.email,
-                time:new Date()
-        
-            }
-            axiosPublic.post('/notifications',notificationInfo)
-            .then(() =>{
+            .then(res => {
+                refetch()
+                loggedinRefetch()
+                if (res.data.followingResult.matchedCount > 0) {
+                    Swal.fire({
+                        title: "Followed successfully",
+                        icon: "success"
+                    })
+                    const notificationInfo = {
+                        userName: user?.displayName,
+                        senderAvatar: user?.photoURL,
+                        senderId: logedInUser?._id,
+                        receiverName: [userData?._id],
+                        type: 'followed',
+                        senderMail: user?.email,
+                        time: new Date()
+
+                    }
+                    axiosPublic.post('/notifications', notificationInfo)
+                    if(res?.data){
+                        socket.emit('notifications', notificationInfo)
+                    }
+
+                    refetch()
+                }
             })
-              
-              refetch()
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      }
+            .catch(err => {
+                console.log(err);
+            })
+    }
     const unfollow = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -167,12 +167,12 @@ senderMail: user?.email,
                         className={`${checkingFollowing?.length > 0 ? "bg-primary text-white p-[10px] rounded-full text-xl" : "hidden"}`}>Unfollow</button>
 
                     {
-                        checkingFollower?.length>0 && <button onClick={handleChat} className="bg-primary p-[10px] px-4 text-2xl text-white rounded-md">
+                        checkingFollower?.length > 0 && <button onClick={handleChat} className="bg-primary p-[10px] px-4 text-2xl text-white rounded-md">
                             <BiMessageDetail />
                         </button>
                     }
                     {
-                        checkingFollowing?.length>0 && <button onClick={handleChat} className="bg-primary p-[10px] px-4 text-2xl text-white rounded-md">
+                        checkingFollowing?.length > 0 && <button onClick={handleChat} className="bg-primary p-[10px] px-4 text-2xl text-white rounded-md">
                             <BiMessageDetail />
                         </button>
                     }

@@ -18,7 +18,6 @@ const ManageWeight = () => {
       setUserDetails({ weight: res.data.weight, height: res.data.height });
     });
   }, [axiosSecure, user]);
-  // console.log(userDetails);
   const options = [
     { value: "gainWeight", label: "Weight Gain" },
     { value: "maintainWeight", label: "Weight Maintain" },
@@ -102,7 +101,6 @@ const ManageWeight = () => {
           timeline: data?.timeline,
           tracking_goal: "Weight_Management",
         };
-        console.log(goalInfo);
         axiosSecure.post("user_goal", goalInfo).then((res) => {
           if (res?.data?.insertedId) {
             reset();

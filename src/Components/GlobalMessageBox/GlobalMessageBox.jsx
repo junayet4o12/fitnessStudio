@@ -16,7 +16,6 @@ const GlobalMessageBox = ({ userId }) => {
             return res?.data
         }
     })
-    console.log(allUnreadMessage, userId, allUnreadMessage?.result);
     return (
         <div className='p-3 text-3xl bg-blue-700 text-white rounded-full hover:bg-blue-900 transition-all duration-300 cursor-pointer active:scale-90 '>
             <div className='messageButton'>
