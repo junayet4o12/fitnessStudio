@@ -20,9 +20,9 @@ const MainLayout = () => {
       return res?.data
     }
   })
-  console.log(userDetails?._id);
+
+
   const changeBackground = () => {
-    // console.log(window.scrollY)
     if (window.scrollY >= 66) {
       setNavbar(true)
     } else {
@@ -33,7 +33,6 @@ const MainLayout = () => {
     changeBackground()
     window.addEventListener("scroll", changeBackground)
   })
-  console.log(navbar);
   return (
     <div className="relative ">
       <ScrollRestoration />

@@ -27,7 +27,6 @@ const ActivityChartModal = ({ handleOpen, handleClose, activity, open }) => {
         { name: 'Avg Speed', value: average_speed === 0 ? 0.00001 : parseFloat((average_speed * 1.60934).toFixed(2)) }
 
     ];
-    // console.log(map);
 
     return (
         <Dialog

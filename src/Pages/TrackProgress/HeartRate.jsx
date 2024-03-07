@@ -9,7 +9,6 @@ import useDailyActivities from "../../Hooks/useDailyActivities";
 
 const HeartRate = () => {
   const [weight] = useDailyActivities();
-  console.log(weight);
 
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
@@ -35,21 +34,17 @@ const HeartRate = () => {
   const specificWeight = weight?.find(
     (category) => category?.tracking_goal === "Weight_Management"
   );
-  console.log(specificWeight);
 
   const bmiWeight =
     specificWeight && specificWeight.current_weight !== undefined
       ? specificWeight.current_weight
       : specificWeight?.user_current_weight ;
-  console.log(bmiWeight);
 
   const bmiHeightInInches = specificWeight?.user_current_height;
-  console.log(bmiHeightInInches);
   // Convert height from inches to meters
   const bmiHeightInMeters = bmiHeightInInches / 39.37;
   // Calculate BMI
   const bmi = bmiWeight / (bmiHeightInMeters * bmiHeightInMeters) || 0;
-  console.log(bmi);
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">

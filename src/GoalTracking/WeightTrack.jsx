@@ -27,10 +27,8 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
  
 
 
-  console.log(trackingGoal);
   const duration = Math.ceil((new Date(trackingGoal?.timeline).getTime() - new Date().getTime()) / 86400000);
   const isTimesUp = new Date().getTime() - new Date(trackingGoal?.timeline).getTime();
-  console.log(isTimesUp, trackingGoal?.timeline);
   const previousWeight = trackingGoal?.previous_weight;
   const currentWeight = trackingGoal?.current_weight;
   const targetWeight = parseInt(trackingGoal?.targetWeight) || 0;
@@ -38,9 +36,7 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
   const weightDifferentForGainWeight = targetWeight - previousWeight;
   const weightDifferentForLossWeight = previousWeight - targetWeight;
 
-  console.log(previousWeight, currentWeight);
   const onSubmit = async (data) => {
-    console.log(data?.previous_weight);
     const updatedData = {
       current_weight: parseInt(data?.previous_weight),
       bodyFat: data?.bodyFat,
@@ -48,7 +44,6 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
       targetWeight: trackingGoal?.targetWeight,
       email: user?.email
     };
-    // console.log(updatedData);
     const res = await axiosPublic?.put(
       `/user_goal/${trackingGoal?._id}`,
       updatedData
@@ -67,7 +62,6 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
     setIsOpen(false);
   };
   const handleDeleteGoal = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -79,7 +73,6 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosPublic.delete(`/user_goal/${id}`).then((res) => {
-          // console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -106,7 +99,6 @@ const WeightTrack = ({ completedGoalsRefetch,trackingGoal }) => {
   }
 
   const percent = (inputKg1, inputKg2, need) => {
-    console.log(inputKg2, inputKg1);
     const kg = inputKg2 - inputKg1 || 0;
     const realPercent = Math.ceil((100 / need) * kg);
 

@@ -28,11 +28,9 @@ const Testimonials = () => {
   useEffect(() => {
     dispatch(fatchFeedback());
   }, [dispatch]);
-  console.log(feedback, error, isLoading);
   if (isLoading) {
     return "";
   }
-  // console.log(testimonials);
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {

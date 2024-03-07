@@ -42,13 +42,11 @@ const Register = () => {
     const password = data?.password;
     createUser(email, password)
       .then((res) => {
-        console.log(res.user);
         updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: imgurl,
         })
           .then(() => {
-            console.log("user progile info updated");
             const userInfo = {
               name: data.name,
               email: data.email,

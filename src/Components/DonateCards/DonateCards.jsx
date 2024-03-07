@@ -13,7 +13,6 @@ const DonateCards = () => {
 
     const formattedDate = `${year}-${month}-${day}`;
 
-    console.log(formattedDate);
 
     useEffect(()=>{
         Axios('/help?verify=verified')

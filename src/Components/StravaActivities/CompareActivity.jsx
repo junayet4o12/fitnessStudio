@@ -31,7 +31,6 @@ import Loading from "../Loading";
 const CompareActivity = () => {
     const { id1, id2 } = useParams();
     const axiosStravaFetch = useAxiosStravaFetch()
-    console.log(id1, id2);
     const { data: data1, isLoading: isLoading1 } = useQuery({
         queryKey: ['compare', id1],
         queryFn: async () => {
@@ -59,7 +58,6 @@ const CompareActivity = () => {
     if (isLoading1 || isLoading2) {
         return <Loading></Loading>
     }
-    console.log(data1, data2);
 
     // Image1 
     let cardImg1 = RunImg;

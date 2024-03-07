@@ -15,10 +15,8 @@ const ContactForm = () => {
             .then(() => {
                 form.current.reset();
                 toast.success("Message send succsessfully!")
-                // console.log(result.text);
             }, (error) => {
                 toast.error(error.text)
-                // console.log(error.text);
             });
     };
     return (

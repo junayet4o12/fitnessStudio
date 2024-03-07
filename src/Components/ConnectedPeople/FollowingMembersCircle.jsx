@@ -9,7 +9,6 @@ const FollowingMembersCircle = ({ following, idx, userDetails, refetch,  message
     const handleMessage = () => {
         navigate(`/dashboard/connected_with/message?userId1=${userDetails?._id}&userId2=${following?._id}`)
     }
-    console.log(following?._id == messageWith);
     return (
         <motion.div
 

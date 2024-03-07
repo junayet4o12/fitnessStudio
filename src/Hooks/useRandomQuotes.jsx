@@ -10,7 +10,6 @@ const useRandomQuotes = () => {
     useEffect(() => {
         const randomQuote = async () => {
             const fetchQuoteData = await axiosPublic('/quotes')
-            console.log(fetchQuoteData)
             const fetchQuote = fetchQuoteData.data
             const randomIndex = Math.floor(Math.random() * fetchQuote.length);
             setQuote(fetchQuote[randomIndex])

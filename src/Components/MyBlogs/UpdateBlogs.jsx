@@ -38,7 +38,6 @@ const UpdateBlogs = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        // console.log(data);
         const toastId = toast.loading("Updating...");
         const image = { image: data?.img[0] };
         let imgUrl = ''
@@ -63,7 +62,6 @@ const UpdateBlogs = () => {
         // Update blog using put method
         axiosPublic.put(`/update_blog/${_id}`, allData)
             .then(res => {
-                console.log(res?.data);
                 if (res?.data?.modifiedCount > 0) {
                     toast.success("Update Successfully !", { id: toastId });
                     Navigate('/dashboard/my_blogs')

@@ -51,7 +51,6 @@ const ProfileMain = ({ age, myBMI, myBMR, userDetails, showMenu, setShowMenu, se
     const linkStyle = ' flex gap-2 items-center underline hover:text-blue-800 active:scale-90 transition-all duration-500 font-medium text-sm'
     const linkStyle2 = ' flex gap-2 items-center underline hover:text-blue-500 active:scale-90 transition-all duration-500 font-medium text-sm'
     const buttonStyle = 'btn transition-all duration-500 font-semibold text-white rounded bg-primary/70 hover:bg-primary '
-    console.log('hello', localStorage.getItem('stravaKey'));
     const boxTitleStyle = 'font-semibold text-primary border-b-[1.5px] border-primary px-2 rounded-sm'
 
     const suggestions = (age && myBMI && myBMR) ? <>

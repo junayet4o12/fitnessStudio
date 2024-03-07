@@ -23,7 +23,6 @@ const ConnectedPeople = ({ children }) => {
     for (const [key, value] of searchQueries.entries()) {
         queries[key] = value;
     }
-    console.log(queries?.userId2);
 
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()  
@@ -46,7 +45,6 @@ const ConnectedPeople = ({ children }) => {
     if (isPeopleListLoading) {
         return <Loading></Loading>
     }
-    console.log(messageWith);
     const handleRedirect = () => {
         navigate('/dashboard/connect_people')
     }

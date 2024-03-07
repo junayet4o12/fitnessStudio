@@ -21,7 +21,6 @@ const Profile = () => {
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-    console.log(userDetails);
     // style Variable start
 
     const inputFieldStyle = ` ${edit ? 'input input-accent border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
@@ -46,7 +45,6 @@ const Profile = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(userDetails?.admin);
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
@@ -65,7 +63,6 @@ const Profile = () => {
         const height = feet * 12 + parseFloat(inch);
         const isPerfectAge = new Date() - new Date(birthDay);
         const ageInYears = Math.floor(isPerfectAge / 31556952000);
-        console.log(bio);
 
         if (ageInYears < 5) {
             setAgeErr('Make sure Your age is more than 5')
@@ -75,7 +72,6 @@ const Profile = () => {
             displayName: name
         })
             .then(res => {
-                console.log(res);
                 const personalData = {
                     name,
                     birthDay,
@@ -86,7 +82,6 @@ const Profile = () => {
                 }
                 axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
-                        console.log(res?.data);
                         if (res?.data.modifiedCount > 0) {
                             Swal.fire({
                                 icon: "success",

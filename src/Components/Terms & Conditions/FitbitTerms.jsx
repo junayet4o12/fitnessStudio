@@ -23,9 +23,7 @@ const FitbitTerms = () => {
 
             axiosFitbitAccess.post('/callbackFitbit', { exchangeCode: exchangeCode })
                 .then(res => {
-                    console.log(res.data.accessToken)
                     const token = res.data.accessToken.access_token
-                    console.log(token)
                     localStorage.setItem('Authorization', token)
                     navigate('/dashboard/connect_app')
                 })

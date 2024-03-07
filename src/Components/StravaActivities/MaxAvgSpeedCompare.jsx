@@ -4,7 +4,6 @@ import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 
 const MaxAvgSpeedCompare = ({ data }) => {
     const CustomTooltip = ({ active, payload, label }) => {
-        console.log(active, payload[0]?.payload['Maximum Speed'], label);
         if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip bg-black text-white p-5 rounded  text-center text-sm">
