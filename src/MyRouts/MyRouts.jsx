@@ -33,7 +33,6 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
-import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
@@ -112,14 +111,6 @@ const MyRouts = createBrowserRouter([
       {
         path: "/Donate/:id",
         element: <SingleDonationPage />,
-      },
-      {
-        path: "/chat",
-        element: (
-          <PrivateRoute>
-            <Chat></Chat>
-          </PrivateRoute>
-        ),
       },
       {
         path: "/blogs/:id",

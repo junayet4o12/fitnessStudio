@@ -46,13 +46,15 @@ export function NotificationsMenu({ navbarColor, notificationDetails }) {
     notificationDetails: PropTypes.array
   }
   // const axiosPublic = useAxiosPublic()
-let noNotification =0;
+  let noNotification = 0;
   const { user } = useAuth()
   const dispatch = useDispatch()
   // const [notificationDetails, setNotificationDetails] = useState([])
   const { user: userDetails } = useSelector(state => state.user)
   useEffect(() => {
-    dispatch(fetchSingleUser(user?.email))
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
   }, [user, dispatch])
 
 
@@ -216,10 +218,10 @@ let noNotification =0;
                       );
                     }
                     else {
-                     noNotification ++
-                     if(noNotification >= notificationDetails?.length){
-                      return 'No New Notifications'
-                     }
+                      noNotification++
+                      if (noNotification >= notificationDetails?.length) {
+                        return 'No New Notifications'
+                      }
                     }
                   })
                 }

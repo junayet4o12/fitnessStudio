@@ -10,13 +10,15 @@ import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import useAuth from "../../Hooks/useAuth";
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const {user } = useAuth
+  const { user } = useAuth()
   const { user: userDetails } = useSelector(state => state.user)
   useEffect(() => {
-    dispatch(fetchSingleUser(user?.email))
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
   }, [user, dispatch])
   useEffect(() => {
-    if(userDetails){
+    if (userDetails) {
 
       socket.emit('user_connected', { userId: userDetails?._id })
     }

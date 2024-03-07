@@ -60,7 +60,7 @@ const ConnectedPeople = ({ children }) => {
                     </ul>
                     <div className={`flex flex-col lg:flex-row `}>
                         {/* ${pathname === '/dashboard/connected_with/message' ? 'grid-cols-2' : 'grid-cols-1'} */}
-                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'hidden lg:block  lg:w-[47%]' : 'block w-full'} duration-300 transition-all max-h-[75vh] overflow-y-auto overflow-hidden mt-8`}>
+                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'hidden lg:block  lg:w-[47%]' : 'block w-full'} duration-300 transition-all max-h-[75vh] overflow-y-auto overflow-hidden mt-3 lg:mt-8`}>
                             {/* followedMembers  */}
                             <div className={`${!followFollowingActive && 'hidden'}`}>
 
@@ -98,7 +98,7 @@ const ConnectedPeople = ({ children }) => {
                                 }
                             </div>
                         </div>
-                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'block lg:hidden lg:w-1/2' : 'hidden w-full'} duration-300 transition-all mt-8`}>
+                        <div className={`${pathname === '/dashboard/connected_with/message' ? 'block lg:hidden lg:w-1/2' : 'hidden w-full'} duration-300 transition-all mt-3 lg:mt-8`}>
                             {/* followedMembers  */}
                             <div className={`${!followFollowingActive && 'hidden'} flex  gap-2 overflow-hidden overflow-x-auto py-1`}>
 

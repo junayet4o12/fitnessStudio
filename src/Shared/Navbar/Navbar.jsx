@@ -221,13 +221,15 @@ export function NavbarSimple({ navbarColor }) {
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
   const axiosPublic = useAxiosPublic()
-  const [notificationDetails,setNotificationDetails]=useState([])
-const dispatch = useDispatch()
+  const [notificationDetails, setNotificationDetails] = useState([])
+  const dispatch = useDispatch()
 
-const { user: userDetails } = useSelector(state => state.user)
-useEffect(() => {
-  dispatch(fetchSingleUser(user?.email))
-}, [dispatch, user])
+  const { user: userDetails } = useSelector(state => state.user)
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
+  }, [dispatch, user])
 
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
