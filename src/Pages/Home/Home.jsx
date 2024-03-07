@@ -15,14 +15,16 @@ import { socket } from "../../socketIo/socket";
 const Home = () => {
   const { user } = useAuth()
   const dispatch = useDispatch()
-  
+
   const { user: userDetails } = useSelector(state => state.user)
 
   useEffect(() => {
-    dispatch(fetchSingleUser(user?.email))
-}, [dispatch, user])
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
+  }, [dispatch, user])
   useEffect(() => {
-    if(userDetails){
+    if (userDetails) {
 
       socket.emit('user_connected', { userId: userDetails?._id })
     }
@@ -32,8 +34,8 @@ const Home = () => {
     <div className="bg-white text-black">
       <Banner></Banner>
       <OurFeatures></OurFeatures>
-      <WhyChooseUs/>
-      <OurTeam/>
+      <WhyChooseUs />
+      <OurTeam />
       <HowItWorks></HowItWorks>
       <Testimonials></Testimonials>
     </div>
