@@ -8,14 +8,15 @@ import {
   Badge,
 } from "@material-tailwind/react";
 import { FaBell } from "react-icons/fa";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import '../../Pages/Dashboard/Sidebar.css'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 import { Link } from "react-router-dom";
-import { socket } from "../../socketIo/socket";
+// import { socket } from "../../socketIo/socket";
+import PropTypes from 'prop-types'
 
 
 
@@ -39,11 +40,16 @@ function ClockIcon() {
 }
 
 
-export function NotificationsMenu({ navbarColor }) {
-  const axiosPublic = useAxiosPublic()
+export function NotificationsMenu({ navbarColor, notificationDetails }) {
+  NotificationsMenu.propTypes = {
+    navbarColor: PropTypes.bool,
+    notificationDetails: PropTypes.array
+  }
+  // const axiosPublic = useAxiosPublic()
+let noNotification =0;
   const { user } = useAuth()
   const dispatch = useDispatch()
-  const [notificationDetails, setNotificationDetails] = useState([])
+  // const [notificationDetails, setNotificationDetails] = useState([])
   const { user: userDetails } = useSelector(state => state.user)
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
@@ -56,31 +62,31 @@ export function NotificationsMenu({ navbarColor }) {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
 
 
-    axiosPublic.get('/notifications')
-      .then(res => {
-        setNotificationDetails(res?.data)
+  //   axiosPublic.get('/notifications')
+  //     .then(res => {
+  //       setNotificationDetails(res?.data)
 
-      })
+  //     })
 
-  }, [axiosPublic])
+  // }, [axiosPublic])
 
-  useEffect(() => {
-    socket.on('notifications', () => {
-      ('New notification received!');
-      const fetchNotifications = async () => {
-        axiosPublic.get('/notifications')
-          .then(res => {
-            setNotificationDetails(res?.data)
-          })
-      };
-      fetchNotifications();
-    });
+  // useEffect(() => {
+  //   socket.on('notifications', () => {
+  //     ('New notification received!');
+  //     const fetchNotifications = async () => {
+  //       axiosPublic.get('/notifications')
+  //         .then(res => {
+  //           setNotificationDetails(res?.data)
+  //         })
+  //     };
+  //     fetchNotifications();
+  //   });
 
-  }, [axiosPublic]);
+  // }, [axiosPublic]);
 
 
 
@@ -96,109 +102,133 @@ export function NotificationsMenu({ navbarColor }) {
       </MenuHandler>
       <MenuList className="flex flex-col gap-2 max-h-80 scroolBar">
 
+        {notificationDetails && notificationDetails.length > 0 ? (
 
-
-        <div className="flex flex-col gap-1">
           <div className="flex flex-col gap-1">
-            <Typography variant="small" className="font-semibold">
-              {
-                notificationDetails?.map(notification => {
-                  const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
+            <div className="flex flex-col gap-1">
+              <Typography variant="small" className="font-semibold">
+                {
+                  notificationDetails?.map(notification => {
+                    const isCurrentUserReceiver = notification?.receiverName?.includes(userDetails?._id);
 
-                  if (isCurrentUserReceiver) {
+                    if (isCurrentUserReceiver) {
 
-                    // Calculate the time difference
-                    const notificationTime = new Date(notification.time);
-                    const currentTime = new Date();
-                    const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
-
-                    // Generate the time string
-                    let timeAgoString;
-                    if (timeDifference < 1) {
-                      timeAgoString = "Just now";
-                    } else if (timeDifference < 60) {
-                      timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
-                    } else if (timeDifference < 1440) { // 1440 minutes = 1 day
-                      const hoursDifference = Math.floor(timeDifference / 60);
-                      timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
-                    } else if (timeDifference < 8640) { // 6 days * 24 hours = 144 hours
-                      const daysDifference = Math.floor(timeDifference / 1440);
-                      timeAgoString = `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
-                    } else if (timeDifference < 10080) { // 7 days * 24 hours = 168 hours
-                      timeAgoString = "1 week ago";
-                    } else {
+                      // Calculate the time difference
                       const notificationTime = new Date(notification.time);
-                      const options = { month: 'short', day: 'numeric' };
-                      timeAgoString = notificationTime.toLocaleDateString('en-US', options);
-                    }
+                      const currentTime = new Date();
+                      const timeDifference = Math.floor((currentTime - notificationTime) / (1000 * 60)); // Difference in minutes
 
-                    return (
-                      <div className="p-2" key={notification.id}>
+                      // Generate the time string
+                      let timeAgoString;
+                      if (timeDifference < 1) {
+                        timeAgoString = "Just now";
+                      } else if (timeDifference < 60) {
+                        timeAgoString = `${timeDifference} minute${timeDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 1440) { // 1440 minutes = 1 day
+                        const hoursDifference = Math.floor(timeDifference / 60);
+                        timeAgoString = `${hoursDifference} hour${hoursDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 8640) { // 6 days * 24 hours = 144 hours
+                        const daysDifference = Math.floor(timeDifference / 1440);
+                        timeAgoString = `${daysDifference} day${daysDifference > 1 ? 's' : ''} ago`;
+                      } else if (timeDifference < 10080) { // 7 days * 24 hours = 168 hours
+                        timeAgoString = "1 week ago";
+                      } else {
+                        const notificationTime = new Date(notification.time);
+                        const options = { month: 'short', day: 'numeric' };
+                        timeAgoString = notificationTime.toLocaleDateString('en-US', options);
+                      }
+
+                      return (
+                        <div className="p-2" key={notification.id}>
 
 
-                        {
-                          notification?.type === "followed" && (
-                            <Link to={`/userProfile/${notification?.senderMail}`} className="flex items-center gap-4">
-                              <Avatar
-                                variant="circular"
-                                alt="User Image"
-                                src={notification?.senderAvatar}
+                          {
+                            notification?.type === "followed" && (
+                              <Link to={`/userProfile/${notification?.senderMail}`} className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
 
-                              />
-                              <div>
+                                />
+                                <div>
 
-                                <p>{notification.userName} has followed you</p>
-                                <div className="flex items-center space-y-1 gap-3">
-                                  <ClockIcon />
-                                  <p>{timeAgoString}</p>
+                                  <p>{notification.userName} has followed you</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
                                 </div>
-                              </div>
-                            </Link>
+                              </Link>
 
-                          )
-                        }
-                        {
-                          notification?.type === "productUpload" && (
-                            <Link to='/shop' className="flex items-center gap-4">
-                              <p>{notification.userName} has uploaded a product</p>
-                              <div className="flex items-center space-y-1 gap-3">
-                                <ClockIcon />
-                                <p>{timeAgoString}</p>
-                              </div>
-                            </Link>
+                            )
+                          }
+                          {
+                            notification?.type === "productUpload" && (
+                              <Link to='/shop' className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
 
-                          )
-                        }
-                        {
-                          notification?.type === "blogUpload" && (
-                            <Link to='/blogs'
-                              className="flex items-center gap-4">
+                                />
+                                <div>
 
-                              <p>{notification.userName} has uploaded a blog</p>
-                              <div className="flex items-center space-y-1 gap-3">
-                                <ClockIcon />
-                                <p>{timeAgoString}</p>
-                              </div>
-                            </Link>
+                                  <p>{notification.userName} has uploaded a product</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
+                                </div>
+                              </Link>
 
-                          )
-                        }
+                            )
+                          }
+                          {
+                            notification?.type === "blogUpload" && (
+                              <Link to='/blogs'
+                                className="flex items-center gap-4">
+                                <Avatar
+                                  variant="circular"
+                                  alt="User Image"
+                                  src={notification?.senderAvatar}
+
+                                />
+                                <div>
+
+                                  <p>{notification.userName} has uploaded a blog</p>
+                                  <div className="flex items-center space-y-1 gap-3">
+                                    <ClockIcon />
+                                    <p>{timeAgoString}</p>
+                                  </div>
+
+                                </div>
+                              </Link>
+
+                            )
+                          }
 
 
 
 
-                      </div>
-                    );
-                  }
-                })
-              }
 
+                        </div>
+                      );
+                    }
+                    else {
+                     noNotification ++
+                     if(noNotification >= notificationDetails?.length){
+                      return 'No New Notifications'
+                     }
+                    }
+                  })
+                }
 
-            </Typography>
+              </Typography>
+            </div>
           </div>
-        </div>
 
-
+        ) : <h2>No notification here</h2>}
       </MenuList>
     </Menu>
   );

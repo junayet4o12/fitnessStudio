@@ -1,5 +1,5 @@
 import axios from 'axios';
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import { socket } from '../../socketIo/socket';
 
-const UploadBlogs = () => { 
+const UploadBlogs = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
@@ -55,25 +55,20 @@ const UploadBlogs = () => {
                         toast.success("Published Successfully !", { id: toastId });
                         const notificationInfo = {
                             userName: user?.displayName,
-                            senderAvatar:user?.photoURL,
+                            senderAvatar: user?.photoURL,
                             senderId: userDetails?._id,
-                            receiverName:follower,
-                            type:'blogUpload',
-                            time:new Date()
-                    
+                            receiverName: follower,
+                            type: 'blogUpload',
+                            time: new Date()
+
                         }
-                        axiosPublic.post('/notifications',notificationInfo)
-<<<<<<< HEAD
-                        .then((res) =>{
-                            if(res?.data){
-                                socket.emit('notifications', notificationInfo)
-                            }
-=======
-                        .then(() =>{
-                            
->>>>>>> f844d434f9c6ff0c9fd58508e2248575c1ef2cb4
-                        })
-                       
+                        axiosPublic.post('/notifications', notificationInfo)
+                            .then((res) => {
+                                if (res?.data) {
+                                    socket.emit('notifications', notificationInfo)
+                                }
+                            })
+
                     }
 
                 })
@@ -88,10 +83,10 @@ const UploadBlogs = () => {
 
     }
 
-   
+
     const haldelChange = (content, editor) => {
         setTinyData(content)
-    
+
     }
     return (
         <div className='p-[10px] my-[50px]'>
@@ -161,7 +156,7 @@ const UploadBlogs = () => {
                     type='submit'>
                     Publish
                 </button>
-               
+
 
             </form>
         </div>

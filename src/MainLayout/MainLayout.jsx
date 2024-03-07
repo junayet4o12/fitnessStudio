@@ -6,7 +6,6 @@ import GlobalMessageBox from "../Components/GlobalMessageBox/GlobalMessageBox";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../Hooks/useAuth";
-import { socket } from "../socketIo/socket";
 
 const MainLayout = () => {
   const [navbar, setNavbar] = useState(false)
@@ -21,13 +20,7 @@ const MainLayout = () => {
       return res?.data
     }
   })
-  useEffect(() => {
-    if(userDetails){
 
-      socket.emit('user_connected', { userId: userDetails?._id })
-    }
-
-  }, [userDetails])
 
   const changeBackground = () => {
     if (window.scrollY >= 66) {
