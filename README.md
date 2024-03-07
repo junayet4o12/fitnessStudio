@@ -5,45 +5,52 @@ Welcome to Fitness Studio, your ultimate fitness tracking platform! This React p
 ## Features
 
 ### Goal Setting and Tracking
+
 Set personalized fitness goals and effortlessly track your progress within the app.
 
 ### Daily Activity Tracking
+
 Record your daily activities and monitor your performance towards achieving your fitness objectives.
 
 ### Integration with Fitbit and Strava
+
 Sync your Fitbit or Strava accounts to seamlessly import activity data into the app.
 
 ### Blog Posting
+
 Share your fitness insights, experiences, and tips by creating and publishing blog posts.
 
 ### Social Features
+
 - **Follow Other Users:** Stay connected with fellow fitness enthusiasts by following their profiles.
 - **Chat Functionality:** Engage in real-time conversations with other users to share advice, motivation, and more.
 
 ### Marketplace
+
 - **Fitness Gear Marketplace:** Sell your used fitness gear within the app.
 - **Paid Offline Events:** Join exclusive offline events organized by the community for a fee.
 
 ### Admin Control
+
 Admin role offers full control over all content within the app, ensuring a safe and enjoyable experience for all users.
 
 ## Environment Variables
 
 To run the app locally or in a production environment, ensure the following environment variables are set:
 
-- **Firebase Environment Variables:** 
-VITE_apiKey
-VITE_authDomain
-VITE_projectId
-VITE_storagebucket
-VITE_messagingSenderId
-VITE_appId
+- **Firebase Environment Variables:**
+  VITE_apiKey
+  VITE_authDomain
+  VITE_projectId
+  VITE_storagebucket
+  VITE_messagingSenderId
+  VITE_appId
 
 - **Imagebb hosting api:** Provide credentials or URLs for image hosting services used within the app.
-VITE_IMG_HOSTING_KEY
+  VITE_IMG_HOSTING_KEY
 
 - **Stripe publishable key:**
-VITE_PAYMENT_KEY
+  VITE_PAYMENT_KEY
 
 ## Getting Started
 
@@ -59,15 +66,11 @@ Alternatively, you can visit [Fitness Studio](https://fitness-studio.surge.sh) t
 
 - [Jobayer Ahmed Sajid](https://github.com/Jubayer-Ahmed-Sajid)
 - [ Barkat Ullah Rakib](https://github.com/Barkat-Ullah)
-- [Jobayer Rahman Ohee ]( https://github.com/JubayerRahman)
-- [](https://github.com/Shovon96)
-- [Md Arman ]( https://github.com/Md-Arman01)
+- [Jobayer Rahman Ohee ](https://github.com/JubayerRahman)
+- [Fakhruddin Ahmed](https://github.com/Shovon96)
+- [Md Arman ](https://github.com/Md-Arman01)
 - [Junayet Alam ](https://github.com/junayet4o12)
 
 ## Feedback and Support
 
 We welcome any feedback or suggestions for improvement. If you encounter any issues, please open an issue on our GitHub repository.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
