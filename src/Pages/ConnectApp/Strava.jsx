@@ -22,9 +22,7 @@ const Strava = () => {
 
                 if (response.status === 200) {
                     const authurl = response.data.auth
-                    console.log(authurl)
                     navigate(`//${authurl}`)
-                    console.log('Redirecting to Fitbit for authorization');
                 } else {
                     console.error('Authorization failed');
                 }
@@ -40,11 +38,9 @@ const Strava = () => {
         if (!exchangeCode) {
             if (code) {
 
-                console.log('Received authorization code:', code);
                 setExchangeCode(code)
                 axiosStrava.post(`${backendUrl}/callbackstrava`, { exchangeCode: code })
                     .then(res => {
-                        console.log(res.data.accessToken)
                         const token = res.data.accessToken
                         localStorage.setItem('stravaKey', token)
                         setIsRegister(token)
@@ -59,22 +55,8 @@ const Strava = () => {
         }
     }, [exchangeCode,axiosStrava]);
    
-    // const handleGetData = () => {
-    //     console.log('hello', localStorage.getItem('stravaKey'));
-    //     axiosStravaFetch.get('/athlete/activities', {
-    //         headers: {
-    //             'Authorization': `Bearer ${localStorage.getItem('stravaKey')}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }) 
-    //     .then(res=> {
-    //         console.log(res?.data);
-    //     })
-    //     .catch(err=> {
-    //         console.log(err?.message);
-    //         localStorage.removeItem('stravaKey')
-    //     })
-    // }
+    
+    
     return (
 
         <div id="connect_app" className="lg:flex space-y-2 justify-between w-full lg:w-3/4 py-6 rounded-md shadow-lg px-4 text-gray-600 font-semibold bg-white">

@@ -8,11 +8,11 @@ import { useContext } from "react"
 import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice"
 import { AuthContext } from "../../Authentication/AuthProvider/AuthProviders"
 import { BiMessageDetail } from "react-icons/bi";
+import { socket } from "../../socketIo/socket"
 
 const UsersBlog = () => {
   const axiosPublic = useAxiosPublic()
   const { user } = useContext(AuthContext)
-  console.log(user);
   // const { user } = useAuth()
   const [blogs, setblogs] = useState([])
   const [write, setWriter] = useState([])
@@ -38,7 +38,6 @@ const UsersBlog = () => {
 
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
-    console.log(user?.email);
 
   }, [dispatch, user, loading])
 
@@ -55,13 +54,26 @@ const UsersBlog = () => {
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, write)
       .then(res => {
-        console.log(res?.data?.followingResult);
         if (res.data.followingResult.matchedCount > 0) {
           setloading(!loading)
           Swal.fire({
             title: "Followed successfully",
             icon: "success"
           })
+          const notificationInfo = {
+            userName: user?.displayName,
+            senderAvatar: user?.photoURL,
+            senderId: userDetails?._id,
+            receiverName: [write?._id],
+            type: 'followed',
+            senderMail: user?.email,
+            time: new Date()
+
+          }
+          axiosPublic.post('/notifications', notificationInfo)
+          if(res?.data){
+            socket.emit('notifications', notificationInfo)
+        }
         }
       })
       .catch(err => {
@@ -83,7 +95,6 @@ const UsersBlog = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, write)
           .then(res => {
             setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",
@@ -168,8 +179,8 @@ const UsersBlog = () => {
                 <Link to={`/blogs/${paramid}/${param}/${blog._id}`}>
                   <h1 className="text-2xl font-[600]">{blog.blogName}</h1>
                 </Link>
-                <p>published at: <span className="bmiNumber">{blog.time}</span></p>
-                <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}}` }} />
+                <p>published at: <span className="bmiNumber">{(new Date(blog?.time)).toLocaleDateString().split('/').reverse().join('-')}</span></p>
+                <div dangerouslySetInnerHTML={{ __html: `${blog.blogDes.slice(0 - 350)}` }} />
               </div>
             </div>)
         }

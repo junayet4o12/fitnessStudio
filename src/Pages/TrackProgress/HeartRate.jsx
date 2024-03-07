@@ -9,7 +9,6 @@ import useDailyActivities from "../../Hooks/useDailyActivities";
 
 const HeartRate = () => {
   const [weight] = useDailyActivities();
-  console.log(weight);
 
   const cardStyle =
     "mx-auto my-2 px-5 text-center bg-teal-50 bmiNumber flex flex-col justify-center items-center py-2 rounded-xl shadow-xl";
@@ -35,11 +34,17 @@ const HeartRate = () => {
   const specificWeight = weight?.find(
     (category) => category?.tracking_goal === "Weight_Management"
   );
-  console.log(specificWeight);
 
+  const bmiWeight =
+    specificWeight && specificWeight.current_weight !== undefined
+      ? specificWeight.current_weight
+      : specificWeight?.user_current_weight ;
 
-
-
+  const bmiHeightInInches = specificWeight?.user_current_height;
+  // Convert height from inches to meters
+  const bmiHeightInMeters = bmiHeightInInches / 39.37;
+  // Calculate BMI
+  const bmi = bmiWeight / (bmiHeightInMeters * bmiHeightInMeters) || 0;
 
   return (
     <div className="flex flex-col lg:flex-row justify-around gap-2">
@@ -53,7 +58,7 @@ const HeartRate = () => {
               <div className="text-black">
                 <p className="text-xl font-semibold">Current Bmi</p>
                 <span className="text-xl font-semibold bmiNumber">
-                  23.4
+                  {bmi.toFixed(2)}
                 </span>
               </div>
             </div>
@@ -88,8 +93,8 @@ const HeartRate = () => {
             <CircularProgressbar
               value={
                 specificWeight && specificWeight.current_weight !== undefined
-                  ? specificWeight.current_weight
-                  : specificWeight?.user_current_weight
+                  ? specificWeight?.current_weight
+                  : specificWeight?.user_current_weight 
               }
               text={
                 specificWeight && specificWeight.current_weight !== undefined

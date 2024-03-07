@@ -22,7 +22,6 @@ const GoogleSignIn = () => {
           image: res?.user?.photoURL,
         };
         axiosPublic.post("/users", userInfo).then((res) => {
-          console.log(res?.data)
         
         })
        

@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
 import Swal from 'sweetalert2';
 import { makeVisibleTime } from '../../Hooks/makeVisibleTime';
+import { socket } from '../../socketIo/socket';
 
 const DynamicBlogpage = () => {
   const param = useParams().id
@@ -16,35 +17,44 @@ const DynamicBlogpage = () => {
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
   const { user } = useAuth()
-  // console.log(user);
   const { user: userDetails } = useSelector(state => state.user)
-  // console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
-    .then(data=> setblog(data.data))
-  },[param,axiosPublic])
+      .then(data => setblog(data.data))
+  }, [param, axiosPublic])
 
   useEffect(() => {
     axiosPublic(`/user?email=${blog.userEmail}`)
-    .then(data=> setmyblog(data.data))
-  },[blog,axiosPublic])
+      .then(data => setmyblog(data.data))
+  }, [blog, axiosPublic])
 
-  console.log(myblog);
 
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
   }, [dispatch, user, loading])
-
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, myblog)
       .then(res => {
-        console.log(res?.data?.followingResult);
         if (res.data.followingResult.matchedCount > 0) {
           setloading(!loading)
           Swal.fire({
             title: "Followed successfully",
             icon: "success"
           })
+          const notificationInfo = {
+            userName: user?.displayName,
+            senderAvatar: user?.photoURL,
+            senderId: userDetails?._id,
+            receiverName: [myblog?._id],
+            type: 'followed',
+            senderMail: user?.email,
+            time: new Date()
+
+          }
+          axiosPublic.post('/notifications', notificationInfo)
+          if(res?.data){
+            socket.emit('notifications', notificationInfo)
+        }
         }
       })
       .catch(err => {
@@ -66,7 +76,6 @@ const DynamicBlogpage = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
           .then(res => {
             setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",
@@ -107,14 +116,20 @@ const DynamicBlogpage = () => {
         {/* <p>Total <span className='bmiNumber'> {myblog.length} posts</span></p> */}
         <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
-        
-          <>
-              <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
-                {isFollowing ? "Unfollow" : "Follow Now"}
-              </button>
 
-            </>
-        
+        <span className={`${userDetails?._id === myblog?._id && 'hidden'}`}>
+          <button onClick={handleFollow} className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollower && 'hidden'} ${isFollowing && 'hidden'}`}>
+            Follow Now
+          </button>
+          <button onClick={ unfollow } className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollowing ? 'block' : "hidden"}`}>
+            Unfollow
+          </button>
+          <button  className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollower ? 'block' : "hidden"}`}>
+            Follower
+          </button>
+
+        </span>
+
       </div>
     </div>
   )

@@ -17,7 +17,6 @@ const CaloryAct = ({type, moving_time}) => {
 
 
 
-    console.log(userDetails);
     let MET = 1;
     if (type === 'Walk') {
         MET = 3.5

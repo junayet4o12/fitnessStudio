@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -12,15 +12,19 @@ import NavProfile from "./NavProfile";
 import useAuth from "../../Hooks/useAuth";
 import { CgGym } from "react-icons/cg";
 import { NotificationsMenu } from "./Notification";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { socket } from "../../socketIo/socket";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSingleUser } from "../../Redux/SingleUserSlice/singleUserSlice";
 
-function NavList({navbarColor}) {
+function NavList({ navbarColor }) {
   const { user } = useAuth()
   return (
-    <ul className={`my-2 flex flex-col  ${!navbarColor ? 'text-black' : 'text-white'}`}>
+    <ul className={`my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-1 ${!navbarColor ? 'text-black' : 'text-white'}`}>
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Home
@@ -41,7 +45,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -59,7 +63,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -77,7 +81,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -95,7 +99,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -113,7 +117,25 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
+        className="p-1 font-medium">
+        <div className="relative group tracking-[1px] w-fit">
+          <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
+          <NavLink
+            to="/Donate"
+            className={({ isActive }) =>
+              isActive
+                ? "text-secondary   underline underline-offset-8 text-sm  font-bold"
+                : "text-sm font-bold    "
+            }>
+            Donate
+          </NavLink>
+        </div>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+
         className="p-1 font-medium">
         <div className="relative group tracking-[1px] w-fit">
           <p className="absolute -bottom-1 left-0 w-[0%] group-hover:w-[100%] duration-500 border-b-2 border-secondary"></p>
@@ -131,7 +153,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           About Us
@@ -152,7 +174,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Contact
@@ -173,7 +195,7 @@ function NavList({navbarColor}) {
       <Typography
         as="li"
         variant="small"
-            
+
         className="p-1 font-medium">
         {/* <a href="#" className="flex items-center md:text-lg hover:underline transition-colors">
           Login
@@ -195,10 +217,20 @@ function NavList({navbarColor}) {
   );
 }
 
-export function NavbarSimple({navbarColor}) {
-  console.log(navbarColor);
+export function NavbarSimple({ navbarColor }) {
   const [openNav, setOpenNav] = useState(false);
   const { user } = useAuth()
+  const axiosPublic = useAxiosPublic()
+  const [notificationDetails, setNotificationDetails] = useState([])
+  const dispatch = useDispatch()
+
+  const { user: userDetails } = useSelector(state => state.user)
+  useEffect(() => {
+    if (user?.email) {
+      dispatch(fetchSingleUser(user?.email))
+    }
+  }, [dispatch, user])
+
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
 
@@ -209,6 +241,32 @@ export function NavbarSimple({navbarColor}) {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+  useEffect(() => {
+
+
+
+    axiosPublic.get('/notifications')
+      .then(res => {
+        setNotificationDetails(res?.data)
+
+      })
+
+  }, [axiosPublic])
+
+  useEffect(() => {
+    socket.on('notifications', () => {
+      ('New notification received!');
+      const fetchNotifications = async () => {
+        axiosPublic.get('/notifications')
+          .then(res => {
+            setNotificationDetails(res?.data)
+          })
+      };
+      fetchNotifications();
+    });
+
+  }, [axiosPublic])
 
   return (
     <Navbar className={`mx-auto min-w-[100vw] rounded-none px-4 sm:px-6 lg:px-3 xl:px-6 py-3 sticky top-0 z-20 bg-opacity-80 backdrop-blur-2xl border-none  backdrop-saturate-200 inset-0 ${!navbarColor ? 'bg-white' : 'bg-black'} transition-all duration-500`}>
@@ -226,10 +284,13 @@ export function NavbarSimple({navbarColor}) {
             </h1>
           </Link>
         </Typography>
-        <div className="flex gap-7 xs:gap-5 items-center">
+        <div className="flex flex-row-reverse lg:flex-row gap-4 items-center">
+          <div className="hidden lg:block">
+            <NavList navbarColor={navbarColor} />
+          </div>
           <IconButton
             variant="text"
-            className={`ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent  ${navbarColor ? 'text-white' : 'text-black'}`}
+            className={`ml-auto h-6 w-6 hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden ${navbarColor ? 'text-white' : 'text-black'}`}
             ripple={false}
             onClick={() => setOpenNav(!openNav)}>
             {openNav ? (
@@ -240,13 +301,9 @@ export function NavbarSimple({navbarColor}) {
           </IconButton>
 
           <span className="flex  items-center gap-2   ">
-            {/* <span className="text-lg relative py-4 px-2 cursor-pointer active:scale-90 transition-all dura">
-              <FaBell/>
-              <span className="absolute top-0 right-0 bg-primary w-[17px] h-[17px] flex justify-center items-center rounded-full text-white text-sm font-medium">1</span>
-            </span> */}
 
             {/* Bell icon with notification button */}
-            {user && <NotificationsMenu navbarColor={navbarColor} />}
+            {user && <NotificationsMenu notificationDetails={notificationDetails} navbarColor={navbarColor} />}
 
             {/* User Profile component */}
             <span className="">
@@ -258,7 +315,7 @@ export function NavbarSimple({navbarColor}) {
         </div>
       </div>
 
-      <Collapse open={openNav} className="w-fit">
+      <Collapse onClick={() => setOpenNav(!openNav)} open={openNav} className="w-fit">
         <NavList navbarColor={navbarColor} />
       </Collapse>
     </Navbar>

@@ -26,11 +26,9 @@ const StravaCondition = () => {
         if (!exchangeCode) {
             if (code) {
                 setLoading(true)
-                console.log('Received authorization code:', code);
                 setExchangeCode(code)
                 axiosStrava.post(`${backendUrl}/callbackstrava`, { exchangeCode: code })
                     .then(res => {
-                        console.log(res.data.accessToken)
                         const token = res.data.accessToken
                         localStorage.setItem('stravaKey', token)
                         toast.success("Strava Connected Successfully !");

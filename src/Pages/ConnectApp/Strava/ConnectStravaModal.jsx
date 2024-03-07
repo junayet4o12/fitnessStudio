@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from '@material-tailwind/react';
 // import React from 'react';
-import ModalBG2 from '../../../assets/images/strava.jpeg'
+import ModalBg2 from '../../../assets/images/strava.jpeg'
 import { useNavigate } from 'react-router';
 import useAxiosStrava from '../../../Hooks/useAxiosStrava';
 const ConnectStravaModal = ({ open, setOpen }) => {
@@ -16,10 +16,8 @@ const ConnectStravaModal = ({ open, setOpen }) => {
 
             if (response.status === 200) {
                 const authurl = response.data.auth
-                console.log(authurl)
                 setOpen(false)
                 navigate(`//${authurl}`)
-                console.log('Redirecting to Fitbit for authorization');
             } else {
                 console.error('Authorization failed');
             }
@@ -35,7 +33,7 @@ const ConnectStravaModal = ({ open, setOpen }) => {
             size={'xxl'}
                 className=' bg-[#00000062]  flex justify-center items-center p-5 text-white'
         >
-            <div className='w-full rounded max-w-[600px] overflow-y-scroll max-h-[90%] relative bg-gray-200 ' >
+            <div className='w-full rounded max-w-[600px] overflow-y-scroll max-h-[75%] md:max-h-[90%] relative bg-gray-200 ' >
                 <div className='w-full max-w-[600px]   rounded shadow-xl  relative text-black font-medium'>
                     <div className='text-end px-6 pt-3 sticky top-0 z-10'>
                         <button

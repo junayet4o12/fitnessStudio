@@ -13,6 +13,7 @@ import Loading from '../Loading';
 import { FaPen, FaRegPenToSquare } from "react-icons/fa6";
 const Profile = () => {
     const dispatch = useDispatch()
+    const [showMenu, setShowMenu] = useState(false)
     const { user, changeRefetch, setChangeRefetch } = useAuth()
     const axiosPublic = useAxiosSecure()
     const { user: userDetails, isLoading } = useSelector(state => state.user)
@@ -20,7 +21,6 @@ const Profile = () => {
     const [ageErr, setAgeErr] = useState('')
     const [myPersonalInfo, setMyPersonalInfo] = useState({})
     const { register, handleSubmit, reset, formState: { errors }, } = useForm()
-    console.log(userDetails?.followedTime);
     // style Variable start
 
     const inputFieldStyle = ` ${edit ? 'input input-accent border-[1.4px] bg-white' : 'border-[1px] cursor-not-allowed bg-white/70'}  w-full  p-3  border-primary rounded font-semibold  text-black`
@@ -45,7 +45,6 @@ const Profile = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(userDetails?.admin);
     const { age, myBMI, myBMR } = myPersonalInfo;
 
     const handleCancel = () => {
@@ -64,7 +63,6 @@ const Profile = () => {
         const height = feet * 12 + parseFloat(inch);
         const isPerfectAge = new Date() - new Date(birthDay);
         const ageInYears = Math.floor(isPerfectAge / 31556952000);
-        console.log(bio);
 
         if (ageInYears < 5) {
             setAgeErr('Make sure Your age is more than 5')
@@ -74,7 +72,6 @@ const Profile = () => {
             displayName: name
         })
             .then(res => {
-                console.log(res);
                 const personalData = {
                     name,
                     birthDay,
@@ -85,7 +82,6 @@ const Profile = () => {
                 }
                 axiosPublic.put(`/update_user_data/${user?.email}`, personalData)
                     .then(res => {
-                        console.log(res?.data);
                         if (res?.data.modifiedCount > 0) {
                             Swal.fire({
                                 icon: "success",
@@ -108,15 +104,15 @@ const Profile = () => {
 
 
     return (
-        <div className='p-5 lg:p-10 '
+        <div  className='p-5 lg:p-10 '
         // style={{ background: `url(${pageBg})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundAttachment: 'fixed', backgroundSize: 'cover' }}
         >
             <div className={`${!edit ? 'block' : 'hidden'} my-5 relative `}>
-                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails}></ProfileMain>
+                <ProfileMain age={age} myBMI={myBMI} myBMR={myBMR} userDetails={userDetails} showMenu={showMenu} setShowMenu={setShowMenu} edit={edit} setEdit={setEdit}></ProfileMain>
                 <div className={`${edit && 'hidden'} absolute top-4 right-4`}>
                         <button
                             onClick={() => setEdit(true)}
-                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl flex justify-center items-center gap-1 text-sm '><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
+                            className=' border-[1.5px] border-primary py-[5px] px-2 font-bold  transition-all rounded hover:rounded-md bg-white/90  hover:bg-primary/90 hover:text-white duration-300 active:scale-90 active:rounded-xl hidden sm:flex justify-center items-center gap-1 text-sm'><span className='text-sm font-bold'><FaRegPenToSquare /></span>Edit Profile</button>
                     </div>
             </div>
             <div className={`${edit ? 'block' : 'hidden'}`}>

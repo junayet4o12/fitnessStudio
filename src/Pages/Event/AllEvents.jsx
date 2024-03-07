@@ -14,7 +14,6 @@ const AllEvents = () => {
       return res?.data;
     },
   });
-  console.log(allEvents)
 
   return (
     <div className="min-h-screen">

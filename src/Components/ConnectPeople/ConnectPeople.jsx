@@ -12,7 +12,6 @@ const ConnectPeople = () => {
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
     const { user } = useAuth()
-    console.log(user);
     const [searchedName, setSearchedName] = useState("");
     const [people, setPeople] = useState([])
     const [loading, setLoading] = useState(false)
@@ -22,13 +21,11 @@ const ConnectPeople = () => {
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
-    console.log(userDetails);
     useEffect(() => {
         if (!searchedName) {
             setFollowBtnLoading(true)
             axiosPublic.get(`/random_people`)
                 .then(res => {
-                    console.log(res?.data);
                     setPeople(res?.data)
                     setFollowBtnLoading(false)
                 })
@@ -42,7 +39,6 @@ const ConnectPeople = () => {
             setFollowBtnLoading(true)
             axiosPublic.get(`/search_people/${searchedName}`)
                 .then(res => {
-                    console.log(res?.data);
                     setPeople(res?.data)
                     setFollowBtnLoading(false)
                 })
@@ -54,7 +50,6 @@ const ConnectPeople = () => {
     }, [following])
     const onChange = (e) => {
         e.preventDefault()
-        console.log(e.target.value);
         setSearchedName(e.target.value)
         if (!e.target.value) {
             return setPeople([])
@@ -64,13 +59,11 @@ const ConnectPeople = () => {
             setLoading(true)
             axiosPublic.get(`/search_people/${e.target.value}`)
                 .then(res => {
-                    console.log(res?.data);
                     setPeople(res?.data)
                     setLoading(false)
                     setFollowBtnLoading(false)
                 })
                 .catch(err => {
-                    console.log(err?.message);
                     setLoading(false)
                     setFollowBtnLoading(false)
                 })
@@ -82,12 +75,10 @@ const ConnectPeople = () => {
         setFollowBtnLoading(true)
         axiosPublic.get(`/search_people/${searchedName === '' ? 'aTa Gachke tOtOOa PPakhi dalim' : searchedName}`)
             .then(res => {
-                console.log(res?.data);
                 setPeople(res?.data)
                 setFollowBtnLoading(false)
             })
             .catch(err => {
-                console.log(err?.message);
                 setFollowBtnLoading(false)
             })
     }

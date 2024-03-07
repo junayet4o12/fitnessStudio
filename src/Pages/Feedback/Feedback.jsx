@@ -43,7 +43,6 @@ const Feedback = () => {
       }
     });
 
-    console.log(feedbackInfo);
   };
 
   const buttonStyle =

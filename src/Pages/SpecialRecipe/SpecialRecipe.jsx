@@ -22,7 +22,6 @@ const SpecialRecipe = () => {
             .then(data => setRecipe(data.meals))
         },[newRecipe])
 
-        console.log(recipe);
 
 
   return (

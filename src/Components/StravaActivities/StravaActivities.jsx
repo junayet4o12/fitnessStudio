@@ -39,33 +39,27 @@ const StravaActivities = () => {
         toast.error('Please Connect Strava, First')
         navigate('/dashboard/strava_connect')
     }
-    console.log(activityData, isError);
     // functionality for showing and setting comparing activities data in compare form (start) 
     const handleGivingCompareDate = (data) => {
         // for checking that the clicked card is available in state. if available it will remove from the state 
         if (comparingCardsData[0]?.id === data?.id || comparingCardsData[1]?.id === data?.id) {
-            console.log('removed');
             const filteredData = comparingCardsData?.filter(datum => datum.id !== data.id);
-            console.log(filteredData);
             setComparingCardsData(filteredData)
             return
         }
         // if state have 2 data in array the second one will replace by the clicked one 
         else if (comparingCardsData?.length > 1) {
-            console.log('remove second and add it');
             setComparingCardsData([comparingCardsData[0], data])
             return
         }
         // if state have one data the clicked one will be stored in state 
         else if (comparingCardsData?.length == 1) {
-            console.log('comparable');
             setComparingCardsData([...comparingCardsData, data])
 
             return
         }
         // if state dont have any data it will stored in state 
         else {
-            console.log('set');
             setComparingCardsData([data])
 
         }
@@ -76,7 +70,7 @@ const StravaActivities = () => {
     }
     return (
         <div className="p-5 relative max-w-7xl mx-auto container">
-            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-primary/30 to-primary/80 rounded fixed top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-gray-100`}>
+            <div className={`${comparingCardsData.length === 0 ? ' opacity-0 scale-0' : ' opacity-100 scale-100'} w-36 h-[180px] flex justify-center items-center   bg-gradient-to-r from-primary/50 to-primary/80 rounded fixed top-24 md:top-10 right-10 ml-auto px-1  z-10 transition-all duration-500 border-[1.3px]  border-primary shadow-2xl shadow-primary/50 text-gray-100`}>
                 <div className="flex  flex-col justify-center items-center w-full relative pb-1">
                     <p className="text-lg font-bold ">Compare</p>
 
@@ -89,7 +83,7 @@ const StravaActivities = () => {
 
                     </p>
 
-                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 rounded hover:bg-primary/9 0 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
+                    <button onClick={handleNavigateToComparingPage} disabled={comparingCardsData.length !== 2} className="btn btn-sm bg-primary/70 text-gray-200 hover:text-black rounded hover:bg-primary/9 0 transition-all duration-500 shadow-xl border-none font-bold   mt-1">Compare</button>
                     <button onClick={() => setComparingCardsData([])} className='absolute top-[2px] right-1 font-bold active:scale-90 transition-all duration-300'>X</button>
                 </div>
             </div>

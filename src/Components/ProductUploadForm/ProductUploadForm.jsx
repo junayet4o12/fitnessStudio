@@ -1,22 +1,31 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import defImage from "/default-image.jpg"
 import Swal from 'sweetalert2'
 import { AuthContext } from '../../Authentication/AuthProvider/AuthProviders'
 import axios from 'axios'
 import useAxiosPublic from '../../Hooks/useAxiosPublic'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice'
+import { socket } from '../../socketIo/socket'
 
 const ProductUploadForm = () => {
     const {user} = useContext(AuthContext)
     const [PImagePlaceholder, setPImagePlaceholder] = useState(defImage)
     const [Pname, setPname] = useState('')
     const [Pprice, setPprice] = useState('')
+    const dispatch = useDispatch()
     const [Pquantity, setPquantity] = useState('')
     const [Pdescription, setPdescription] = useState('')
     const [Pimage, setPimage] = useState('')
     const [PPhone, setPPhone] = useState('')
     const [PEmail, setPEmail] = useState('')
     const Axios = useAxiosPublic()
+    const { user: userDetails, isLoading } = useSelector(state => state.user)
+    useEffect(() => {
+        dispatch(fetchSingleUser(user?.email))
+    }, [dispatch, user])
+    const follower = userDetails?.followed
 
     const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOSTING_KEY}`
     const productsSubmit = (e) => {
@@ -55,12 +64,25 @@ const ProductUploadForm = () => {
                     const productData = {Pname, Pprice, Pquantity, Pdescription,imgUrl, data, PPhone, PEmail, sellerName, sellerEmail,  verify}
 
                     Axios.post("/products", productData)
-                    .then(res=> console.log(res))
+                    .then()
                     Swal.fire({
                         title:"Request submitted!",
                         text: "Your product publishing request is under consideration our admin panel will soon review your product and take necessary actions. Thank you for your cooperation.",
                         icon:"success"
                     })
+                    const notificationInfo = {
+                        userName: user?.displayName,
+                        senderAvatar:user?.photoURL,
+                        senderId: userDetails?._id,
+                        receiverName:follower,
+                        type:'productUpload',
+                        time:new Date()
+                
+                    }
+                    Axios.post('/notifications',notificationInfo)
+                    if(res?.data){
+                        socket.emit('notifications', notificationInfo)
+                    }
 
                     e.target.name.value= ""
                     e.target.Price.value= ""
@@ -73,7 +95,6 @@ const ProductUploadForm = () => {
 
                 }
               })
-            // console.log(productData);
         }
     }
 
@@ -85,7 +106,6 @@ const ProductUploadForm = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        console.log('Selected file:', file);
         const reader = new FileReader();
         reader.onload = (event) => {
             setPImagePlaceholder(event.target.result);

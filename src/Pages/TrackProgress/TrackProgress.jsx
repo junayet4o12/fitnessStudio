@@ -28,25 +28,20 @@ const TrackProgress = () => {
       fontSize: "20px",
     },
   };
-  console.log(progressBarStyles);
 
   const {
     data: track,
     isLoading: isTrackLoading,
     isError: isTrackError,
   } = useGetTrackProQuery();
-  console.log("tracking", track);
-  // // console.log(track);
   const {
     data: sleep,
     isError: isSleepError,
     isLoading: isSleepLoading,
   } = useGetTrackSleepProQuery();
-  console.log("sleeping", sleep);
 
   const sleepDuration = sleep?.summary?.totalMinutesAsleep;
   const totalSleep = Math.floor(sleepDuration / 60);
-  // // console.log(totalSleep);
   const caloriesOut = track?.summary.caloriesBMR;
   const caloBurned = track?.summary.caloriesOut;
 

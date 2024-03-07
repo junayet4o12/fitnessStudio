@@ -13,7 +13,6 @@ import Profile from "../Components/Profile/Profile";
 
 import BmiCalculator from "../Pages/BMI_Calculator/BmiCalculator";
 import SetGoal from "../Pages/Set_Goal/SetGoal";
-import CreateGoal from "../Pages/Set_Goal/CreateGoal";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Blogpage from "../Pages/BlogPage/Blogpage";
 import PrivateRoute from "./PrivateRoute";
@@ -34,10 +33,6 @@ import MangeBlogPage from "../Pages/ManageBlogPage/MangeBlogPage";
 import ConnectPeople from "../Components/ConnectPeople/ConnectPeople";
 import ConnectedPeople from "../Components/ConnectedPeople/ConnectedPeople";
 import WorkoutLibrary from "../Pages/Workout Library/WorkoutLibrary";
-import ManageWeight from "../Pages/Set_Goal/ManageWeight";
-import StrengthTraining from "../Pages/Set_Goal/StrengthTraining";
-import Endurance from "../Pages/Set_Goal/Endurance";
-import Chat from "../Components/Chat";
 import TrackProgress from "../Pages/TrackProgress/TrackProgress";
 import GoalTrackingPage from "../GoalTracking/GoalTrackingPage";
 import Message from "../Components/Message/Message";
@@ -55,6 +50,13 @@ import AddEvent from "../Pages/Event/AddEvent";
 import AllEvents from "../Pages/Event/AllEvents";
 import MyBooking from "../Pages/Event/MyBooking";
 import ManageEvents from "../Pages/Event/ManageEvents";
+import StrengthTraining from "../Pages/Set_Goal/StrengthTraining/StrengthTraining";
+import Endurance from "../Pages/Set_Goal/Endurance/Endurance";
+import ManageWeight from '../Pages/Set_Goal/ManageWeight/ManageWeight'
+import Donatepage from "../Pages/Donate/Donatepage";
+import HelpForm from "../Pages/HelpForm/HelpForm";
+import HelpRequestPage from "../Pages/HelpRequestPage/HelpRequestPage";
+import SingleDonationPage from "../Pages/SingleDonationPage/SingleDonationPage";
 
 const axiosPublic = useAxiosPublic();
 
@@ -103,12 +105,12 @@ const MyRouts = createBrowserRouter([
         element: <DynamicProductPage />,
       },
       {
-        path: "/chat",
-        element: (
-          <PrivateRoute>
-            <Chat></Chat>
-          </PrivateRoute>
-        ),
+        path: "/Donate",
+        element: <Donatepage />,
+      },
+      {
+        path: "/Donate/:id",
+        element: <SingleDonationPage />,
       },
       {
         path: "/blogs/:id",
@@ -198,6 +200,14 @@ const MyRouts = createBrowserRouter([
         element: (
           <PrivateRoute>
             <BmiCalculator />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "helpForm",
+        element: (
+          <PrivateRoute>
+            <HelpForm />{" "}
           </PrivateRoute>
         ),
       },
@@ -325,15 +335,7 @@ const MyRouts = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "set_goal/create_goal",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <CreateGoal></CreateGoal>
-          </PrivateRoute>
-        ),
-      },
+      
       {
         path: "my_blogs",
         element: (
@@ -365,6 +367,12 @@ const MyRouts = createBrowserRouter([
       {
         path: "connected_with",
         element: <ConnectedPeople></ConnectedPeople>,
+        children: [
+          {
+            path: "message",
+            element: <Message></Message>
+          }
+        ]
       },
       {
         path: "message",
@@ -386,6 +394,24 @@ const MyRouts = createBrowserRouter([
           <AdminRouts>
             {" "}
             <ProductsForAdmin />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "requests",
+        element: (
+          <AdminRouts>
+            {" "}
+            <HelpRequestPage />{" "}
+          </AdminRouts>
+        ),
+      },
+      {
+        path: "requests/:id",
+        loader: ({ params }) => axiosPublic(`/help/${params.id}`),
+        element: (
+          <AdminRouts>
+            <SingleDonationPage />
           </AdminRouts>
         ),
       },

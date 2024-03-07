@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form';
 import useAuth from '../../Hooks/useAuth';
@@ -8,13 +8,14 @@ import toast from 'react-hot-toast';
 import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleUser } from '../../Redux/SingleUserSlice/singleUserSlice';
+import { socket } from '../../socketIo/socket';
 
 const UploadBlogs = () => {
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
     const { user: userDetails } = useSelector(state => state.user)
-    console.log(userDetails?._id);
+    const follower = userDetails.followed
     const [tinyData, setTinyData] = useState("what's on your mind?")
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
@@ -29,7 +30,6 @@ const UploadBlogs = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        // console.log(data);
         const toastId = toast.loading("Publishing...");
         const image = { image: data?.img[0] };
         try {
@@ -46,16 +46,31 @@ const UploadBlogs = () => {
             const userImg = user?.photoURL;
             const blogName = data?.blogname;
             const blogDes = tinyData;
-            const time = (new Date()).toLocaleDateString().split('/').reverse().join('-');
+            const time = new Date().getTime();
             const allData = { time, userEmail, userName, userId, userImg, blogImg, blogName, blogDes }
-            console.log(allData);
             axiosPublic.post('/post_blog', allData)
                 .then(res => {
-                    console.log(res?.data);
                     if (res?.data?.insertedId) {
                         reset()
                         toast.success("Published Successfully !", { id: toastId });
+                        const notificationInfo = {
+                            userName: user?.displayName,
+                            senderAvatar: user?.photoURL,
+                            senderId: userDetails?._id,
+                            receiverName: follower,
+                            type: 'blogUpload',
+                            time: new Date()
+
+                        }
+                        axiosPublic.post('/notifications', notificationInfo)
+                            .then((res) => {
+                                if (res?.data) {
+                                    socket.emit('notifications', notificationInfo)
+                                }
+                            })
+
                     }
+
                 })
                 .catch((err) => {
                     toast.error(err?.code, { id: toastId });
@@ -68,10 +83,10 @@ const UploadBlogs = () => {
 
     }
 
+
     const haldelChange = (content, editor) => {
         setTinyData(content)
-        console.log(content);
-        console.log(tinyData);
+
     }
     return (
         <div className='p-[10px] my-[50px]'>
@@ -141,6 +156,7 @@ const UploadBlogs = () => {
                     type='submit'>
                     Publish
                 </button>
+
 
             </form>
         </div>

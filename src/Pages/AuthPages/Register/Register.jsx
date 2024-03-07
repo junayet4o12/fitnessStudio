@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSignIn from "../../../Components/GoogleSignIn/GoogleSignIn";
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { FaCloudUploadAlt, FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../../Hooks/useAuth";
 import { updateProfile } from "@firebase/auth";
@@ -10,10 +10,14 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import axios from "axios";
 import toast from "react-hot-toast";
 import registerImg from '../../../assets/images/LogInRegistration/register.png'
+import { useState } from "react";
+
 const Register = () => {
+
   const { createUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation()
+  const [showPassword, setShowPassword] = useState(false)
   const axiosPublic = useAxiosPublic();
   const imgHostingKey = import.meta.env.VITE_IMG_HOSTING_KEY;
   const imgHostingApi = `https://api.imgbb.com/1/upload?key=${imgHostingKey}`;
@@ -38,13 +42,11 @@ const Register = () => {
     const password = data?.password;
     createUser(email, password)
       .then((res) => {
-        console.log(res.user);
         updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: imgurl,
         })
           .then(() => {
-            console.log("user progile info updated");
             const userInfo = {
               name: data.name,
               email: data.email,
@@ -56,8 +58,8 @@ const Register = () => {
               }
             });
             toast.success("Register Successfully !", { id: toastId });
-           
-            navigate(location?.state? location?.state : '/')
+
+            navigate(location?.state ? location?.state : '/')
           })
           .catch((err) => {
             toast.error(err?.code, { id: toastId });
@@ -88,24 +90,24 @@ const Register = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col gap-2 mt-5">
                   <div>
-                    <h1 className="text-start text-sm font-medium mb-1">
-                      Name <span className="text-primary text-xl">*</span>
+                    <h1 className="text-start text-secondary text-sm font-medium mb-1">
+                      Name <span className="text-red-500 text-xl">*</span>
                     </h1>
                     <input
                       type="text"
                       {...register("name", { required: true })}
                       placeholder="Enter your name"
-                      className="input input-bordered w-full"
+                      className="input input-bordered focus:outline-secondary w-full"
                     />
                     {errors.name && (
-                      <span className="text-primary text-xs">
+                      <span className="text-red-500 text-xs">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
-                    <h1 className="text-start text-sm font-medium mb-1">
-                      Email <span className="text-primary text-xl">*</span>
+                    <h1 className="text-start text-sm text-secondary font-medium mb-1">
+                      Email <span className="text-red-500 text-xl">*</span>
                     </h1>
                     <input
                       type="email"
@@ -113,35 +115,42 @@ const Register = () => {
                         required: true,
                       })}
                       placeholder="Enter your email address"
-                      className="input input-bordered w-full"
+                      className="input input-bordered focus:outline-secondary w-full"
                     />
                     {errors.email?.type === "required" && (
-                      <span className="text-primary text-xs ">
+                      <span className="text-red-500 text-xs ">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div>
-                    <h1 className="text-start text-sm font-medium mb-1">
-                      Password <span className="text-primary text-xl">*</span>
+                    <h1 className="text-start text-sm text-secondary font-medium mb-1">
+                      Password <span className="text-red-500 text-xl">*</span>
                     </h1>
-                    <input
-                      type="password"
-                      {...register("password", {
-                        required: true,
-                      })}
-                      placeholder="Enter your password"
-                      className="input input-bordered w-full"
-                    />
+                    <div className="flex items-center">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        {...register("password", {
+                          required: true,
+                        })}
+                        placeholder="Enter your password"
+                        className="input input-bordered focus:outline-secondary w-full"
+                      />
+                      <span className="absolute ml-[330px] text-lg cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                        {
+                          showPassword ? <FaEye title="Hide"></FaEye> : <FaEyeSlash title="Show"></FaEyeSlash>
+                        }
+                      </span>
+                    </div>
                     {errors.password?.type === "required" && (
-                      <span className="text-primary text-xs ">
+                      <span className="text-red-500 text-xs ">
                         This field is required
                       </span>
                     )}
                   </div>
                   <div className="relative group border-2 border-dashed rounded-lg py-2 my-2">
                     <div className="flex items-center justify-center gap-5 absolute left-28  group-hover:cursor-pointer">
-                      <FaCloudUploadAlt className="text-2xl"></FaCloudUploadAlt>
+                      <FaCloudUploadAlt className="text-2xl text-secondary"></FaCloudUploadAlt>
                       <h1 className="text-lg font-medium">Upload Photo</h1>
                     </div>
                     <input
@@ -151,7 +160,7 @@ const Register = () => {
                     />
                   </div>
                   {errors.image?.type === "required" && (
-                    <span className="text-primary text-xs ">
+                    <span className="text-red-500 text-xs ">
                       This field is required
                     </span>
                   )}
@@ -168,11 +177,11 @@ const Register = () => {
                 <GoogleSignIn></GoogleSignIn>
                 <div className="flex justify-center items-center gap-2">
                   <p className="text-gray-800 font-medium my-4 flex justify-center font-sans text-sm  leading-normal text-inherit antialiased">
-                    {"Don't have an account?"}
+                    Already have an account go?
                   </p>
                   <Link
                     to="/login"
-                    className="block font-medium leading-normal text-primary antialiased">
+                    className="block font-medium leading-normal text-secondary underline antialiased">
                     Login
                   </Link>
                 </div>

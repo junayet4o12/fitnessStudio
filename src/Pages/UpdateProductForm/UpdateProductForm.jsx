@@ -65,7 +65,7 @@ const UpdateProductForm = () => {
                     const productData = {Pname, Pprice, Pquantity, Pdescription,imgUrl, data, PPhone, PEmail, sellerName, sellerEmail,  verify}
 
                     Axios.post(`/updateProduct/${id}`, productData)
-                    .then(res=> console.log(res))
+                    .then( )
                     Swal.fire({
                         title:"product modified Successfully!",
                         text: "Your product is modified.",
@@ -83,7 +83,6 @@ const UpdateProductForm = () => {
 
                 }
               })
-            // console.log(productData);
         }
     }
 
@@ -95,7 +94,6 @@ const UpdateProductForm = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        console.log('Selected file:', file);
         const reader = new FileReader();
         reader.onload = (event) => {
             setPImagePlaceholder(event.target.result);

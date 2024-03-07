@@ -1,4 +1,11 @@
+import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+
 const ContactBanner = () => {
+
+  const { user } = useAuth()
+  // const navigate = useNavigate()
+
   return (
     <div
       className="hero bg-no-repeat bg-fixed h-[380px]"
@@ -15,12 +22,14 @@ const ContactBanner = () => {
             is your gateway to personalized guidance, expert advice, and
             tailored support on your path to a healthier, stronger you.
           </p>
-          <button className="font-semibold border-b border-primary px-3 uppercase hover:text-primary">
+          <Link to={user ? '/dashboard/bmi_calculator' : '/login'}
+            className="font-semibold border-b border-secondary px-3 uppercase hover:text-secondary"
+          >
             Get Started today
-          </button>
+          </Link>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

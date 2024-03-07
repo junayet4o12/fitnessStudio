@@ -14,8 +14,7 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.request.use(
     function (config) {
         const tokenCookie = document.cookie.split(';').find(cookie => cookie.trim());
-        console.log(tokenCookie)
-        console.log('request stopped by the interceptor')
+        
       return config;
     }, 
     function (error) {
@@ -30,7 +29,6 @@ const useAxiosSecure = () => {
     },
     async (error) => {
       const status = error?.response?.status;
-      console.log(status);
       if (status === 401 || status === 403) {
         logOut();
         navigate('/login');
