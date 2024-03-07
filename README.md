@@ -2,6 +2,8 @@
 
 Welcome to Fitness Studio, your ultimate fitness tracking platform! This React project, powered by Vite, is designed to help you achieve your fitness goals efficiently. Leveraging Firebase for backend services and image hosting, Fitness Studio integrates a plethora of features to enhance your fitness journey. Our site is based on community as well.
 
+[Fitness Studio](https://fitness-studio.surge.sh)
+
 ## Features
 
 ### Goal Setting and Tracking
@@ -58,7 +60,7 @@ To run the app locally or in a production environment, ensure the following envi
 2. Install dependencies using `npm install` or `yarn install`.
 3. Set up your environment variables.
 4. Run the development server using `npm run dev` or `yarn dev`.
-5. Open your browser and navigate to `localhost:3000` to access the app.
+5. Open your browser and navigate to `localhost:5173` to access the app.
 
 Alternatively, you can visit [Fitness Studio](https://fitness-studio.surge.sh) to explore the live version of the app.
 
