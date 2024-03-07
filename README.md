@@ -2,7 +2,7 @@
 
 Welcome to Fitness Studio, your ultimate fitness tracking platform! This React project, powered by Vite, is designed to help you achieve your fitness goals efficiently. Leveraging Firebase for backend services and image hosting, Fitness Studio integrates a plethora of features to enhance your fitness journey. Our site is based on community as well.
 
-[Fitness Studio](https://fitness-studio.surge.sh)
+## Live Preview: [Fitness Studio](https://fitness-studio.surge.sh)
 
 ## Features
 
