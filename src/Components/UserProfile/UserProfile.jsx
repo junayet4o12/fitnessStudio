@@ -60,8 +60,6 @@ const UserProfile = () => {
 
     const checkingFollowing = logedInUser?.following?.filter(data => data === userData?._id)
     const checkingFollower = logedInUser?.followed?.filter(data => data === userData?._id)
-    console.log(checkingFollower);
-    console.log(userProducts);
 
 
     const handleFollow = () => {

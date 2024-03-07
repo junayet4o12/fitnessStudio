@@ -8,7 +8,6 @@ const UnreadMessage = ({ unreadMessage, refetch, isLoading, userId }) => {
     useEffect(() => {
         socket.on('unread_refetch', (message) => {
             if (message?.receiver === userId) {
-                console.log(message);
                 refetch()
             }
 

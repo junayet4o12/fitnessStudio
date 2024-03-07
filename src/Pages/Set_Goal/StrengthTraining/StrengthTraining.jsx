@@ -109,7 +109,6 @@ const StrengthTraining = () => {
                 const filteredGoalInfo = Object.fromEntries(
                     Object.entries(goalInfo).filter(([, value]) => value !== undefined)
                 )
-                console.log(filteredGoalInfo)
                 axiosSecure.post("user_goal", goalInfo).then((res) => {
                     if (res?.data?.insertedId) {
                         reset();

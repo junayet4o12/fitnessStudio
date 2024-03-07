@@ -16,7 +16,10 @@ const Dashboard = () => {
     dispatch(fetchSingleUser(user?.email))
   }, [user, dispatch])
   useEffect(() => {
-    socket.emit('user_connected', { userId: userDetails?._id })
+    if(userDetails){
+
+      socket.emit('user_connected', { userId: userDetails?._id })
+    }
 
   }, [userDetails])
   return (

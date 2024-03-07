@@ -18,7 +18,6 @@ const CheckOut = ({id}) => {
     const [donationData,refetch] = useSingleDonationData(id)
     const [transactionId,setTransactionId] = useState()
     const elements = useElements()
-    console.log(donationData)
    
     const handleAmount = (e) => {
         e.preventDefault()
@@ -40,7 +39,6 @@ const CheckOut = ({id}) => {
 
             axiosPublic.post('/create-payment-intent', { price: totalAmount })
                 .then(res => {
-                    console.log(res.data)
                     setClientSecret(res.data.clientSecret)
                 })
         }
@@ -64,7 +62,6 @@ const CheckOut = ({id}) => {
         if (error) {
             setError(error.message)
         } else {
-            console.log('Payment Method is', paymentMethod);
             setError('')
         }
         const {error: confirmError, paymentIntent  } = await stripe.confirmCardPayment(
@@ -87,7 +84,6 @@ const CheckOut = ({id}) => {
            
         }
        else if (paymentIntent.status === 'succeeded') {
-            console.log('payment intent is', paymentIntent)
             setError('')
             setTransactionId(paymentIntent.id)
             const donationInfo = {
@@ -97,10 +93,7 @@ const CheckOut = ({id}) => {
 
             }
             const donationRes = await axiosPublic.post('/payments',  donationInfo)
-            console.log(donationRes.data)
-            console.log(totalAmount)
             const donationUpdate = await axiosPublic.put(`/help/update/${donationData[0]?._id}`,{donatedAmount: totalAmount})
-            console.log(donationUpdate.data)
             refetch()
             
         }

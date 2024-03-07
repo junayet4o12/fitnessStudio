@@ -13,7 +13,6 @@ import { socket } from "../../socketIo/socket"
 const UsersBlog = () => {
   const axiosPublic = useAxiosPublic()
   const { user } = useContext(AuthContext)
-  console.log(user);
   // const { user } = useAuth()
   const [blogs, setblogs] = useState([])
   const [write, setWriter] = useState([])
@@ -39,7 +38,6 @@ const UsersBlog = () => {
 
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
-    console.log(user?.email);
 
   }, [dispatch, user, loading])
 
@@ -52,12 +50,10 @@ const UsersBlog = () => {
     setchecking(followings?.find(id => write?._id === id))
     setIsFollower(followed?.find(id => write?._id === id))
   }, [followings])
-  console.log(write)
 
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, write)
       .then(res => {
-        console.log(res?.data?.followingResult);
         if (res.data.followingResult.matchedCount > 0) {
           setloading(!loading)
           Swal.fire({
@@ -99,7 +95,6 @@ const UsersBlog = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, write)
           .then(res => {
             setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",

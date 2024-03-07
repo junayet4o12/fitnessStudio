@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 const FollowedMembersCircle = ({ follower, idx, userDetails,messageWith }) => {
-    console.log(idx +1);
     const navigate = useNavigate()
     
     const handleMessage = () => {

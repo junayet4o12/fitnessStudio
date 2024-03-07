@@ -5,7 +5,6 @@ const formattedDate = `${originalDate.getFullYear()}-${(
 )
   .toString()
   .padStart(2, "0")}-${originalDate.getDate().toString().padStart(2, "0")}`;
-// console.log(formattedDate);
 
 const baseApi = createApi({
   reducerPath: "api",
@@ -13,7 +12,6 @@ const baseApi = createApi({
     baseUrl: "https://api.fitbit.com",
     prepareHeaders: async (headers) => {
       const token = localStorage.getItem("Authorization");
-      console.log("Token in prepareHeaders:", token);
 
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);

@@ -57,7 +57,6 @@ const Endurance = () => {
           activityTypes: activityTypeSelectedValue,
           tracking_goal: "Endurance",
         };
-        console.log(goalInfo);
         axiosSecure.post("user_goal", goalInfo).then((res) => {
           if (res?.data?.insertedId) {
             reset();

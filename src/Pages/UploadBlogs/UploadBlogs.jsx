@@ -15,7 +15,6 @@ const UploadBlogs = () => {
     const axiosPublic = useAxiosPublic()
     const dispatch = useDispatch()
     const { user: userDetails } = useSelector(state => state.user)
-    console.log(userDetails);
     const follower = userDetails.followed
     const [tinyData, setTinyData] = useState("what's on your mind?")
     useEffect(() => {
@@ -31,7 +30,6 @@ const UploadBlogs = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        // console.log(data);
         const toastId = toast.loading("Publishing...");
         const image = { image: data?.img[0] };
         try {
@@ -50,10 +48,8 @@ const UploadBlogs = () => {
             const blogDes = tinyData;
             const time = new Date().getTime();
             const allData = { time, userEmail, userName, userId, userImg, blogImg, blogName, blogDes }
-            console.log(allData);
             axiosPublic.post('/post_blog', allData)
                 .then(res => {
-                    console.log(res?.data);
                     if (res?.data?.insertedId) {
                         reset()
                         toast.success("Published Successfully !", { id: toastId });
@@ -86,13 +82,11 @@ const UploadBlogs = () => {
 
 
     }
-    console.log(follower)
 
    
     const haldelChange = (content, editor) => {
         setTinyData(content)
-        console.log(content);
-        console.log(tinyData);
+    
     }
     return (
         <div className='p-[10px] my-[50px]'>

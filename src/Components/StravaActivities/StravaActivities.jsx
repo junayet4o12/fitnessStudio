@@ -39,33 +39,27 @@ const StravaActivities = () => {
         toast.error('Please Connect Strava, First')
         navigate('/dashboard/strava_connect')
     }
-    console.log(activityData, isError);
     // functionality for showing and setting comparing activities data in compare form (start) 
     const handleGivingCompareDate = (data) => {
         // for checking that the clicked card is available in state. if available it will remove from the state 
         if (comparingCardsData[0]?.id === data?.id || comparingCardsData[1]?.id === data?.id) {
-            console.log('removed');
             const filteredData = comparingCardsData?.filter(datum => datum.id !== data.id);
-            console.log(filteredData);
             setComparingCardsData(filteredData)
             return
         }
         // if state have 2 data in array the second one will replace by the clicked one 
         else if (comparingCardsData?.length > 1) {
-            console.log('remove second and add it');
             setComparingCardsData([comparingCardsData[0], data])
             return
         }
         // if state have one data the clicked one will be stored in state 
         else if (comparingCardsData?.length == 1) {
-            console.log('comparable');
             setComparingCardsData([...comparingCardsData, data])
 
             return
         }
         // if state dont have any data it will stored in state 
         else {
-            console.log('set');
             setComparingCardsData([data])
 
         }

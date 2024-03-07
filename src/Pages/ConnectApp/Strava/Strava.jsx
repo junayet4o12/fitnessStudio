@@ -13,22 +13,6 @@ const Strava = () => {
 
 
 
-    // const handleGetData = () => {
-    //     console.log('hello', localStorage.getItem('stravaKey'));
-    //     axiosStravaFetch.get('/athlete/activities', {
-    //         headers: {
-    //             'Authorization': `Bearer ${localStorage.getItem('stravaKey')}`,
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }) 
-    //     .then(res=> {
-    //         console.log(res?.data);
-    //     })
-    //     .catch(err=> {
-    //         console.log(err?.message);
-    //         localStorage.removeItem('stravaKey')
-    //     })
-    // }
     
     const handleNavigate = () => {
         navigate('/dashboard/strava_connect')

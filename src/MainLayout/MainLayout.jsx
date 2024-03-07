@@ -22,7 +22,10 @@ const MainLayout = () => {
     }
   })
   useEffect(() => {
-    socket.emit('user_connected', { userId: userDetails?._id })
+    if(userDetails){
+
+      socket.emit('user_connected', { userId: userDetails?._id })
+    }
 
   }, [userDetails])
 
@@ -37,7 +40,6 @@ const MainLayout = () => {
     changeBackground()
     window.addEventListener("scroll", changeBackground)
   })
-  console.log(navbar);
   return (
     <div className="relative ">
       <ScrollRestoration />

@@ -18,12 +18,10 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
 
-    console.log(personalInfo?._id);
     const handleFollow = () => {
         setUpdateLoading(true)
         axiosPublic.put(`/following/${personalInfo?._id}`, info)
             .then(res => {
-                console.log(res?.data?.followingResult, res?.data?.followedResult);
                 setFollowing(followingSearch + 1)
                 setUpdateLoading(false)
                 const notificationInfo = {
@@ -51,7 +49,6 @@ const SearchedPeople = ({ info, personalInfo, followingSearch, setFollowing, fol
     const follower = info?.following
     const isFollow = followedByMe ? followedByMe.find(data => data === personalInfo?._id) : ''
     const isFollower = follower ? follower.find(data => data === personalInfo?._id) : ''
-    console.log(followedByMe, personalInfo?._id, isFollow);
     const handleProfile = () => {
         navigate(`/userProfile/${info?.email}`)
     }

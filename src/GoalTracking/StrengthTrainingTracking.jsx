@@ -28,12 +28,10 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch,specificStrengthTraini
 
   
 
-    // console.log(specificStrengthTraining);
 
 
     const day = Math.ceil((new Date(specificStrengthTraining?.timeline).getTime() - new Date().getTime()) / 86400000);
     const days = new Date().getTime() - new Date(specificStrengthTraining?.timeline).getTime();
-    // console.log(days, specificStrengthTraining?.timeline);
 
     const target1Rm = parseInt(specificStrengthTraining?.target1Rm) || 0;
     const startingCurrent1Rm = specificStrengthTraining?.current1Rm;
@@ -45,14 +43,12 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch,specificStrengthTraini
 
 
     const onSubmit = async (data) => {
-        console.log(data?.current1Rm);
         const updatedData = {
             new_current1rm: parseInt(data?.new_current1rm),
             target1Rm: specificStrengthTraining?.target1Rm,
             email: user?.email,
             tracking_goal: specificStrengthTraining?.tracking_goal
         };
-        // console.log(updatedData);
         const res = await axiosPublic?.put(
             `/user_goal/${specificStrengthTraining?._id}`,
             updatedData
@@ -71,7 +67,6 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch,specificStrengthTraini
         setIsOpen(false);
     };
     const handleDeleteGoal = (id) => {
-        console.log(id);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -83,7 +78,6 @@ const StrengthTrainingTracking = ({ completedGoalsRefetch,specificStrengthTraini
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosPublic.delete(`/user_goal/${id}`).then((res) => {
-                    // console.log(res.data);
                     if (res.data.deletedCount > 0) {
                         refetch();
                         Swal.fire({

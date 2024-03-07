@@ -12,7 +12,6 @@ const Fitbit = () => {
     if (localStorage.getItem("Authorization")) {
       const decodedToken = jwtDecode(localStorage.getItem("Authorization"));
       setDecoded(decodedToken);
-      console.log(decodedToken);
     }
     
   }, []);

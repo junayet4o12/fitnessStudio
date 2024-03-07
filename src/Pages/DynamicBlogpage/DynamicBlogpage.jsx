@@ -17,9 +17,7 @@ const DynamicBlogpage = () => {
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
   const { user } = useAuth()
-  // console.log(user);
   const { user: userDetails } = useSelector(state => state.user)
-  // console.log(param);
   useEffect(() => {
     axiosPublic(`/blogs/${param}`)
       .then(data => setblog(data.data))
@@ -30,7 +28,6 @@ const DynamicBlogpage = () => {
       .then(data => setmyblog(data.data))
   }, [blog, axiosPublic])
 
-  console.log(myblog);
 
   useEffect(() => {
     dispatch(fetchSingleUser(user?.email))
@@ -38,7 +35,6 @@ const DynamicBlogpage = () => {
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, myblog)
       .then(res => {
-        console.log(res?.data?.followingResult);
         if (res.data.followingResult.matchedCount > 0) {
           setloading(!loading)
           Swal.fire({
@@ -80,7 +76,6 @@ const DynamicBlogpage = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
           .then(res => {
             setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",

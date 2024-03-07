@@ -25,10 +25,8 @@ const FollowingMembers = ({ following, idx, userDetails, refetch,  messageWith }
     }
     const handleUnfollow = () => {
         setUnfollowLoading(true)
-        console.log(userDetails);
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, following)
             .then(res => {
-                console.log(res.data);
                 refetch()
                 setUnfollowLoading(false)
             })

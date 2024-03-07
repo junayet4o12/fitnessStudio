@@ -16,7 +16,6 @@ const DynamicBlogpage2 = () => {
   const { user: userDetails } = useSelector(state => state.user)
   const [loading, setloading] = useState(false)
   const dispatch = useDispatch()
-  console.log(param);
   useEffect(()=>{
     axiosPublic(`/blogs/${param}`)
     .then(data=> setblog(data.data))
@@ -34,7 +33,6 @@ const DynamicBlogpage2 = () => {
   const handleFollow = () => {
     axiosPublic.put(`/following/${userDetails?._id}`, myblog)
         .then(res => {
-            console.log(res?.data?.followingResult);
             if (res.data.followingResult.matchedCount > 0) {
               setloading(!loading)
               Swal.fire({
@@ -62,7 +60,6 @@ const DynamicBlogpage2 = () => {
         axiosPublic.put(`/unfollowing/${userDetails?._id}`, myblog)
         .then(res => {
           setloading(!loading)
-            console.log(res.data);
             Swal.fire({
               title: "Unfollow!",
               text: "unfollowed successfully",
@@ -78,9 +75,7 @@ const DynamicBlogpage2 = () => {
 
   const following = userDetails.following
     const checking = following?.filter(id => myblog?._id === id)
-    console.log(checking);
   
-console.log(blog);
   return (
     <div className='p-[10px] flex flex-col justify-around lg:flex-row my-[50px]'>
       <Helmet>

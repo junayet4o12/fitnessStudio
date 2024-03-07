@@ -15,12 +15,10 @@ const Chat = () => {
 
     const [bold, setBold] = useState(false)
     const { user: userDetails, isLoading } = useSelector(state => state.user)
-    console.log(user?.email);
     const socket = io(backendUrl)
     useEffect(() => {
         dispatch(fetchSingleUser(user?.email))
     }, [dispatch, user])
-    console.log(userDetails);
     useEffect(() => {
         socket.on('message', (message) => {
             setMessages(prevMessages => [...prevMessages, message])

@@ -16,10 +16,8 @@ const ConnectStravaModal = ({ open, setOpen }) => {
 
             if (response.status === 200) {
                 const authurl = response.data.auth
-                console.log(authurl)
                 setOpen(false)
                 navigate(`//${authurl}`)
-                console.log('Redirecting to Fitbit for authorization');
             } else {
                 console.error('Authorization failed');
             }

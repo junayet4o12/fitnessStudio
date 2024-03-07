@@ -64,7 +64,7 @@ const ProductUploadForm = () => {
                     const productData = {Pname, Pprice, Pquantity, Pdescription,imgUrl, data, PPhone, PEmail, sellerName, sellerEmail,  verify}
 
                     Axios.post("/products", productData)
-                    .then(res=> console.log(res))
+                    .then()
                     Swal.fire({
                         title:"Request submitted!",
                         text: "Your product publishing request is under consideration our admin panel will soon review your product and take necessary actions. Thank you for your cooperation.",
@@ -95,7 +95,6 @@ const ProductUploadForm = () => {
 
                 }
               })
-            // console.log(productData);
         }
     }
 
@@ -107,7 +106,6 @@ const ProductUploadForm = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        console.log('Selected file:', file);
         const reader = new FileReader();
         reader.onload = (event) => {
             setPImagePlaceholder(event.target.result);

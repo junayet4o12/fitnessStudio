@@ -27,12 +27,10 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
     }
     const infoStyle = 'text-black w-[100%] flex flex-wrap flex-col items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
     const infoStyle2 = 'text-black w-[100%] flex flex-wrap  items-center gap-2 justify-evenly border-l-2 border-b-2 border-t border-r border-primary  px-2  rounded-lg shadow-md hover:shadow-2xl  py-[6px]  bg-gray-100 transition-all duration-500 hover:bg-white hover:border-primary/90 hover:border-l-[10px] active:scale-90 min-h-[100px] text-center '
-    console.log(userDetails)
     const handleFollow = () => {
         const toastId = toast.loading("Following...");
         axiosPublic.put(`/following/${personalInfo?._id}`, userDetails)
             .then(res => {
-                console.log(res?.data?.followingResult, res?.data?.followedResult);
                 toast.success("Followed Successfully !", { id: toastId });
                 const notificationInfo = {
                     userName: user?.displayName,
@@ -60,7 +58,6 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
     const follower = userDetails?.following
     const isFollow = followedByMe ? followedByMe.find(data => data === personalInfo?._id) : ''
     const isFollower = follower ? follower.find(data => data === personalInfo?._id) : ''
-    console.log(userDetails?.bio);
     const handleChat = () => {
         navigate(`/dashboard/message?userId1=${personalInfo?._id}&userId2=${userDetails?._id}`)
     }
@@ -78,7 +75,6 @@ const UserProfileMain = ({ age, myBMI, userDetails, refetch, userPost }) => {
                 const toastId = toast.loading("Unfollowing...");
                 axiosPublic.put(`/unfollowing/${personalInfo?._id}`, userDetails)
                     .then(res => {
-                        console.log(res.data);
                         refetch()
                         toast.success("Unfollowed Successfully !", { id: toastId });
                     })
