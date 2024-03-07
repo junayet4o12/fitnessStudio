@@ -63,10 +63,15 @@ const UploadBlogs = () => {
                     
                         }
                         axiosPublic.post('/notifications',notificationInfo)
+<<<<<<< HEAD
                         .then((res) =>{
                             if(res?.data){
                                 socket.emit('notifications', notificationInfo)
                             }
+=======
+                        .then(() =>{
+                            
+>>>>>>> f844d434f9c6ff0c9fd58508e2248575c1ef2cb4
                         })
                        
                     }

@@ -117,12 +117,18 @@ const DynamicBlogpage = () => {
         <p>Published at: <span className='bmiNumber'>{makeVisibleTime(blog.time)}</span></p>
 
 
-        <>
-          <button onClick={isFollowing ? unfollow : handleFollow} className="bg-primary p-[10px] text-xl text-white rounded-md">
-            {isFollowing ? "Unfollow" : "Follow Now"}
+        <span className={`${userDetails?._id === myblog?._id && 'hidden'}`}>
+          <button onClick={handleFollow} className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollower && 'hidden'} ${isFollowing && 'hidden'}`}>
+            Follow Now
+          </button>
+          <button onClick={ unfollow } className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollowing ? 'block' : "hidden"}`}>
+            Unfollow
+          </button>
+          <button  className={`bg-primary p-[10px] text-xl text-white rounded-md ${isFollower ? 'block' : "hidden"}`}>
+            Follower
           </button>
 
-        </>
+        </span>
 
       </div>
     </div>
