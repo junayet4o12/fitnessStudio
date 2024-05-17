@@ -9,7 +9,6 @@ const Footer = () => {
   return (
     <>
       <div className="bg-primary/50 rounded-tl-md rounded-tr-md px-5 lg:px-0">
-        <div></div>
 
         <Container>
           <div className=" text-white/90 py-6 grid grid-cols-2 md:grid-cols-4">
